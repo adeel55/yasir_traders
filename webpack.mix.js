@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+require('laravel-mix-alias');
 
 /*
  |--------------------------------------------------------------------------
@@ -13,3 +14,10 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');
+
+
+
+mix.alias({
+    '@': '/resources/js',
+    '@local': 'http://127.0.0.1:8000',
+});
