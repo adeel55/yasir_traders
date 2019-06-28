@@ -14,7 +14,21 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        //
+        $companies = Company::paginate(10);
+        return request()->json(200,$companies);
+    }
+
+      /**
+     * Display a list of searched items.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        $ss = $request->searchString;
+        $companies = Company::where('name','like','%'.$ss.'%')->limit(8)->pluck('name')->toArray();
+        return request()->json(200,$companies);
+        // dd($companies);
     }
 
     /**

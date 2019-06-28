@@ -12,6 +12,7 @@ import DishTable from "./Tables/DishTable.vue";
 import RequestTable from "./Tables/RequestTable.vue";
 import Modal from "./Modal.vue";
 import DialogPrompt from "./Dialogs/DialogPrompt.vue";
+import ProductRow from "./ProductRow.vue";
 
 export {
   ChartCard,
@@ -24,5 +25,6 @@ export {
   DishTable,
   RequestTable,
   Modal,
-  DialogPrompt
+  DialogPrompt,
+  ProductRow
 };

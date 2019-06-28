@@ -2,9 +2,10 @@ import DashboardLayout from '@/pages/Layout/DashboardLayout.vue'
 
 import Dashboard from '@/pages/Dashboard.vue'
 import UserProfile from '@/pages/UserProfile.vue'
+import AddProduct from '@/pages/AddProduct.vue'
 import CreateProfile from '@/pages/CreateVendorProfile.vue'
 import VendorsList from '@/pages/VendorsList.vue'
-import MarriageHallList from '@/pages/MarriageHallsList.vue'
+import CompaniesList from '@/pages/CompaniesList.vue'
 import DishesList from '@/pages/DishesList.vue'
 import RequestsList from '@/pages/RequestsList.vue'
 import Typography from '@/pages/Typography.vue'
@@ -29,6 +30,11 @@ const routes = [
         component: CreateProfile
       },
       {
+        path: 'add_product',
+        name: 'Create Vendor Profile',
+        component: AddProduct
+      },
+      {
         path: 'user',
         name: 'User Profile',
         component: UserProfile
@@ -40,8 +46,8 @@ const routes = [
       },
       {
         path: 'mhallslist',
-        name: 'Marriage Hall List',
-        component: MarriageHallList
+        name: 'CompaniesList List',
+        component: CompaniesList
       },
       {
         path: 'disheslist',

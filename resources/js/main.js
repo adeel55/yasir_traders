@@ -32,6 +32,7 @@ Vue.component('vendor-table', require('./components/Tables/VendorTable.vue').def
 Vue.component('create-profile-form', require('./pages/UserProfile/CreateProfile.vue').default);
 Vue.component('modal', require('./components/Modal.vue').default);
 Vue.component('DialogPrompt', require('./components/Dialogs/DialogPrompt.vue').default);
+Vue.component('product-row', require('./components/ProductRow.vue').default);
 
 
 // Pagination

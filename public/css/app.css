@@ -4687,6 +4687,10 @@ h2.title {
   height: 17px;
 }
 
+.md-button.md-btn-right {
+  float: right;
+}
+
 .md-button.md-wd {
   min-width: 140px;
 }

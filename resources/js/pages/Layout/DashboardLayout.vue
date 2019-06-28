@@ -12,6 +12,10 @@
         <md-icon>person</md-icon>
         <p>Vendor Profile</p>
       </sidebar-link>
+      <sidebar-link to="/add_product">
+        <md-icon>person</md-icon>
+        <p>Add Products</p>
+      </sidebar-link>
       <sidebar-link to="/create_vendore_profile">
         <md-icon>person</md-icon>
         <p>Vreate Vendor Profile</p>

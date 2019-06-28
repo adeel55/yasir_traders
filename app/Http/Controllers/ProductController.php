@@ -14,7 +14,21 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Company::paginate(10);
+        return request()->json(200,$products);
+    }
+
+    /**
+     * Display a list of searched items.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        $ss = $request->searchString;
+        $products = Product::where('name','like','%'.$ss.'%')->limit(8)->pluck('name')->toArray();
+        return request()->json(200,$products);
+        // dd($products);
     }
 
     /**
