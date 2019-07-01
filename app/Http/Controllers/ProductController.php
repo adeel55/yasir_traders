@@ -12,9 +12,17 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Company::paginate(10);
+        $filter = array();
+        foreach($request->input() as $key => $val ) {
+            if(strpos($key, 'filter') === 0){
+                array_push($filter, [ltrim($key,'filter'),'like','%'.$val.'%']);
+            }
+        };
+
+
+        $products = Product::where($filter)->paginate(10);
         return request()->json(200,$products);
     }
 

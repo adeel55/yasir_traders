@@ -16,8 +16,8 @@ class CreateOrderBookersTable extends Migration
         Schema::create('order_bookers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name',100);
-            $table->string('phone',20);
-            $table->decimal('target',15,2);
+            $table->string('phone',20)->nullable();
+            $table->decimal('target',15,2)->nullable();
             $table->timestamps();
         });
     }

@@ -7,12 +7,12 @@ import StatsCard from "./Cards/StatsCard.vue";
 import NavTabsTable from "./Tables/NavTabsTable.vue";
 import OrderedTable from "./Tables/OrderedTable.vue";
 import VendorTable from "./Tables/VendorTable.vue";
-import MarriageHallTable from "./Tables/MarriageHallTable.vue";
 import DishTable from "./Tables/DishTable.vue";
 import RequestTable from "./Tables/RequestTable.vue";
 import Modal from "./Modal.vue";
 import DialogPrompt from "./Dialogs/DialogPrompt.vue";
 import ProductRow from "./ProductRow.vue";
+import InvoiceRow from "./InvoiceRow.vue";
 
 export {
   ChartCard,
@@ -21,10 +21,10 @@ export {
   NavTabsTable,
   OrderedTable,
   VendorTable,
-  MarriageHallTable,
   DishTable,
   RequestTable,
   Modal,
   DialogPrompt,
-  ProductRow
+  ProductRow,
+  InvoiceRow
 };

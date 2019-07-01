@@ -2,28 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\SaleMan;
+use App\Invoice;
 use Illuminate\Http\Request;
 
-class SaleManController extends Controller
+class InvoiceController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $filter = array();
-        foreach($request->input() as $key => $val ) {
-            if(strpos($key, 'filter') === 0){
-                array_push($filter, [ltrim($key,'filter'),'like','%'.$val.'%']);
-            }
-        };
-
-
-        $all = SaleMan::where($filter)->paginate(10);
-        return request()->json('200',$all);
+        //
     }
 
     /**
@@ -44,17 +35,16 @@ class SaleManController extends Controller
      */
     public function store(Request $request)
     {
-        $rec = SaleMan::create($request->all());
-        if($rec) echo "success"; else echo "fail";
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\SaleMan  $saleMan
+     * @param  \App\Invoice  $invoice
      * @return \Illuminate\Http\Response
      */
-    public function show(SaleMan $saleMan)
+    public function show(Invoice $invoice)
     {
         //
     }
@@ -62,10 +52,10 @@ class SaleManController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\SaleMan  $saleMan
+     * @param  \App\Invoice  $invoice
      * @return \Illuminate\Http\Response
      */
-    public function edit(SaleMan $saleMan)
+    public function edit(Invoice $invoice)
     {
         //
     }
@@ -74,10 +64,10 @@ class SaleManController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\SaleMan  $saleMan
+     * @param  \App\Invoice  $invoice
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, SaleMan $saleMan)
+    public function update(Request $request, Invoice $invoice)
     {
         //
     }
@@ -85,10 +75,10 @@ class SaleManController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\SaleMan  $saleMan
+     * @param  \App\Invoice  $invoice
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SaleMan $saleMan)
+    public function destroy(Invoice $invoice)
     {
         //
     }

@@ -30,9 +30,8 @@ const router = new VueRouter({
 
 Vue.component('vendor-table', require('./components/Tables/VendorTable.vue').default);
 Vue.component('create-profile-form', require('./pages/UserProfile/CreateProfile.vue').default);
-Vue.component('modal', require('./components/Modal.vue').default);
-Vue.component('DialogPrompt', require('./components/Dialogs/DialogPrompt.vue').default);
 Vue.component('product-row', require('./components/ProductRow.vue').default);
+Vue.component('invoice-row', require('./components/InvoiceRow.vue').default);
 
 
 // Pagination

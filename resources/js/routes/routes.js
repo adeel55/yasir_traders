@@ -3,15 +3,14 @@ import DashboardLayout from '@/pages/Layout/DashboardLayout.vue'
 import Dashboard from '@/pages/Dashboard.vue'
 import UserProfile from '@/pages/UserProfile.vue'
 import AddProduct from '@/pages/AddProduct.vue'
-import CreateProfile from '@/pages/CreateVendorProfile.vue'
-import VendorsList from '@/pages/VendorsList.vue'
-import CompaniesList from '@/pages/CompaniesList.vue'
-import DishesList from '@/pages/DishesList.vue'
-import RequestsList from '@/pages/RequestsList.vue'
-import Typography from '@/pages/Typography.vue'
-import Icons from '@/pages/Icons.vue'
-import Maps from '@/pages/Maps.vue'
-import Notifications from '@/pages/Notifications.vue'
+import AddInvoice from '@/pages/AddInvoice.vue'
+import ReceiveInvoice from '@/pages/ReceiveInvoice.vue'
+import AddOrderBooker from '@/pages/AddOrderBooker.vue'
+import AddSaleMan from '@/pages/AddSaleMan.vue'
+import OrderBookerList from '@/pages/OrderBookerList.vue'
+import SaleManList from '@/pages/SaleManList.vue'
+import ProductList from '@/pages/ProductList.vue'
+import CompanyList from '@/pages/CompanyList.vue'
 
 const routes = [
   {
@@ -25,65 +24,50 @@ const routes = [
         component: Dashboard
       },
       {
-        path: 'create_vendore_profile',
-        name: 'Create Vendor Profile',
-        component: CreateProfile
-      },
-      {
         path: 'add_product',
-        name: 'Create Vendor Profile',
+        name: 'Add Products',
         component: AddProduct
       },
       {
-        path: 'user',
-        name: 'User Profile',
-        component: UserProfile
+        path: 'create_invoice',
+        name: 'Create Invoice',
+        component: AddInvoice
       },
       {
-        path: 'vendorslist',
-        name: 'Vendors List',
-        component: VendorsList
+        path: 'receive_invoice',
+        name: 'Receive Invoice',
+        component: ReceiveInvoice
       },
       {
-        path: 'mhallslist',
-        name: 'CompaniesList List',
-        component: CompaniesList
+        path: 'add_order_booker',
+        name: 'Add OrderBooker',
+        component: AddOrderBooker
       },
       {
-        path: 'disheslist',
-        name: 'Dishes List',
-        component: DishesList
+        path: 'add_sale_man',
+        name: 'Add SaleMan',
+        component: AddSaleMan
       },
       {
-        path: 'requestslist',
-        name: 'Requests List',
-        component: RequestsList
+        path: 'order_booker_list',
+        name: 'OrderBooker List',
+        component: OrderBookerList
       },
       {
-        path: 'typography',
-        name: 'Typography',
-        component: Typography
+        path: 'sale_man_list',
+        name: 'SaleMan List',
+        component: SaleManList
       },
       {
-        path: 'icons',
-        name: 'Icons',
-        component: Icons
+        path: 'product_list',
+        name: 'Product List',
+        component: ProductList
       },
       {
-        path: 'maps',
-        name: 'Maps',
-        meta: {
-          hideFooter: true
-        },
-        component: Maps
-
-      },
-      {
-        path: 'notifications',
-        name: 'Notifications',
-        component: Notifications
-      }
-    ]
+        path: 'company_list',
+        name: 'Companies List',
+        component: CompanyList
+      }    ]
   }
 ]
 

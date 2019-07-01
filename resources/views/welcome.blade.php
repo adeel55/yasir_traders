@@ -6,7 +6,7 @@
         
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>Laravel</title>
+        <title>Yasir Traders</title>
 
         <!-- Fonts -->
          <!-- Fonts -->
@@ -14,6 +14,7 @@
          <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
         <link rel="stylesheet" href="{{ asset('fonts/material_fonts/icon.css') }}">
         <link href="{{ asset('fontawesome-free-5.9.0/css/all.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
     <body>
         <div id="app"></div>

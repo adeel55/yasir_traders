@@ -14,7 +14,16 @@ class OrderBookerController extends Controller
      */
     public function index()
     {
-        //
+        $filter = array();
+        foreach($request->input() as $key => $val ) {
+            if(strpos($key, 'filter') === 0){
+                array_push($filter, [ltrim($key,'filter'),'like','%'.$val.'%']);
+            }
+        };
+
+
+        $all = OrderBooker::where($filter)->paginate(10);
+        return request()->json('200',$all);
     }
 
     /**
@@ -35,7 +44,9 @@ class OrderBookerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+          $rec = OrderBooker::create($request->all());
+         if($rec) echo "success"; else echo "fail";
     }
 
     /**

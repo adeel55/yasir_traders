@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Inventory;
+use App\Company;
+use App\Product;
 use Illuminate\Http\Request;
 
 class InventoryController extends Controller
@@ -35,7 +37,30 @@ class InventoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+            
+        $rows = $request->productrows;
+
+        foreach ($rows as $key => $val) {
+
+            $company_id = $this->findOrSaveCompany($val);
+            $product_id = $this->findOrSaveProduct($val);
+
+            $rec = [
+                'company_id' => $company_id,
+                'product_id' => $product_id,
+                'qty' => $val['qty'],
+                'carton' => $val['carton'],
+                'expire' => $val['expire'],
+                'unit_purchse_price' => $val['unit_purchse_price'],
+                'unit_sale_price' => $val['unit_sale_price']
+            ];
+
+            Inventory::create($rec);
+
+        }
+
+        echo "success";
+
     }
 
     /**
@@ -81,5 +106,16 @@ class InventoryController extends Controller
     public function destroy(Inventory $inventory)
     {
         //
+    }
+
+    function findOrSaveProduct($val){
+        $pro = Product::firstOrCreate(['name' => $val['product']]);
+        $pro->increment('qty',intval($val['qty']));
+        $pro->save();
+        return $pro->id;
+    }
+    function findOrSaveCompany($val){
+        $company = Company::firstOrCreate(['name' => $val['company']]);
+        return $company->id;
     }
 }

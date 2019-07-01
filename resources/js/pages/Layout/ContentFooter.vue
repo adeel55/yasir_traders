@@ -4,7 +4,7 @@
       <nav>
         <ul>
           <li>
-            <a href="#"><router-link to="/dashboard">Knock-Knock</router-link></a>
+            <a href="#"><router-link to="/dashboard">Yasir Traders</router-link></a>
           </li>
           <li>
             <a href="#">
@@ -24,7 +24,7 @@
         </ul>
       </nav>
       <div class="copyright text-center mt-3"> Copyright
-        &copy; {{ new Date().getFullYear() }} Knock-Knock.Inc | Developed By:
+        &copy; {{ new Date().getFullYear() }} Yasir Traders.Inc | Developed By:
         <a href="https://www.encodersolutions.pk" target="_blank"
           ><u>Encoders Solutions</u></a>
       </div>

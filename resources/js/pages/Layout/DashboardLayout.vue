@@ -8,37 +8,49 @@
         <md-icon>dashboard</md-icon>
         <p>Dashboard</p>
       </sidebar-link>
-      <sidebar-link to="/user">
-        <md-icon>person</md-icon>
-        <p>Vendor Profile</p>
-      </sidebar-link>
       <sidebar-link to="/add_product">
-        <md-icon>person</md-icon>
+        <md-icon>widgets</md-icon>
         <p>Add Products</p>
       </sidebar-link>
-      <sidebar-link to="/create_vendore_profile">
-        <md-icon>person</md-icon>
-        <p>Vreate Vendor Profile</p>
+      <sidebar-link to="/create_invoice">
+        <md-icon>description</md-icon>
+        <p>Create Invoice</p>
       </sidebar-link>
-      <sidebar-link to="/vendorslist">
-        <md-icon>supervisor_account</md-icon>
-        <p>Vendors list</p>
+      <sidebar-link to="/receive_invoice">
+        <md-icon>assignment_returned</md-icon>
+        <p>Receive Invoice</p>
       </sidebar-link>
-      <sidebar-link to="/mhallslist">
-        <md-icon>location_city</md-icon>
-        <p>MarriageHalls list</p>
+      <sidebar-link to="/add_order_booker">
+        <md-icon>directions_walk</md-icon>
+        <p>Add Order Booker</p>
       </sidebar-link>
-      <sidebar-link to="/disheslist">
-        <md-icon>fastfood</md-icon>
-        <p>Dishes list</p>
+      <sidebar-link to="/add_sale_man">
+        <md-icon>local_shipping</md-icon>
+        <p>Add Sale Man</p>
       </sidebar-link>
-      <sidebar-link to="/requestslist">
-        <md-icon>message</md-icon>
-        <p>Requests</p>
+      <sidebar-link to="/order_booker_list">
+        <md-icon>dehaze</md-icon>
+        <p>Order Booker List</p>
       </sidebar-link>
-      <sidebar-link to="/notifications">
-        <md-icon>comment</md-icon>
-        <p>Notifications</p>
+      <sidebar-link to="/sale_man_list">
+        <md-icon>dehaze</md-icon>
+        <p>Sale Man List</p>
+      </sidebar-link>
+      <sidebar-link to="/product_list">
+        <md-icon>dehaze</md-icon>
+        <p>Product List</p>
+      </sidebar-link>
+      <sidebar-link to="/company_list">
+        <md-icon>dehaze</md-icon>
+        <p>Company List</p>
+      </sidebar-link>
+      <sidebar-link to="/expense_report">
+        <md-icon>list_alt</md-icon>
+        <p>Sales Report</p>
+      </sidebar-link>
+      <sidebar-link to="/sales_report">
+        <md-icon>list_alt</md-icon>
+        <p>Expense Report</p>
       </sidebar-link>
       <sidebar-link to="/maps">
         <md-icon>settings</md-icon>

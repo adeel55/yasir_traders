@@ -3,11 +3,11 @@
     
     <md-card>
       <md-card-header data-background-color="green">
-        <h4 class="title">Add Products</h4>
+        <h4 class="title">Create New Invoice</h4>
       </md-card-header>
       <md-card-content>
 
-        <product-row></product-row>
+        <invoice-row></invoice-row>
 
       </md-card-content>
     </md-card>
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { DialogPrompt,ProductRow } from "@/components"
+import { InvoiceRow } from "@/components"
 export default {
   props: {
     tableHeaderColor: {

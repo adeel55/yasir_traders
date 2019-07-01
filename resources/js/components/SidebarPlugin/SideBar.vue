@@ -46,7 +46,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: "Knock-Knock"
+      default: "Yasir-Traders"
     },
     backgroundImage: {
       type: String,

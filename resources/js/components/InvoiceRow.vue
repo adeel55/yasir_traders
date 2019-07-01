@@ -3,18 +3,43 @@
     <md-button @click="addRow" class="md-fab md-btn-fab md-mini md-primary" style="float: right">
       <md-icon>playlist_add</md-icon>
     </md-button>
-    <div class="md-layout" v-for="(row, index) in productrows" :key="index">
-       <div class="md-layout-item md-small-size-100 md-size-40">
+    <div class="md-layout">
+      <div class="md-layout-item md-small-size-100 md-size-33">
         <md-autocomplete
-          v-model="row.company"
-          :md-options="companies"
+          v-model="costomer"
+          :md-options="costomers"
           @md-changed="searchCompanies"
           md-input-max-length="50"
           autocomplete="off"
           md-dense>
-          <label>Company</label>
+          <label>Customer</label>
         </md-autocomplete>
        </div>
+       <div class="md-layout-item md-small-size-100 md-size-33">
+        <md-autocomplete
+          v-model="orderbooker"
+          :md-options="orderbookers"
+          @md-changed="searchProducts"
+          @md-opened="searchProducts"
+          md-input-max-length="50"
+          md-dense>
+          <label>Order Booker</label>
+        </md-autocomplete>
+       </div>
+       <div class="md-layout-item md-small-size-100 md-size-33">
+        <md-autocomplete
+          v-model="saleman"
+          :md-options="salemans"
+          @md-changed="searchProducts"
+          @md-opened="searchProducts"
+          md-input-max-length="50"
+          md-dense>
+          <label>Sale Man</label>
+        </md-autocomplete>
+       </div>
+       <md-divider class="hr-divider-head"></md-divider>
+    </div>
+    <div class="md-layout" v-for="(row, index) in productrows" :key="index">
        <div class="md-layout-item md-small-size-100 md-size-40">
         <md-autocomplete
           v-model="row.product"
@@ -26,35 +51,34 @@
           <label>Product</label>
         </md-autocomplete>
        </div>
-       <div class="md-layout-item md-small-size-100 md-size-20">
+       <div class="md-layout-item md-small-size-100 md-size-10">
+         <md-field>
+           <label>Bonus</label>
+           <md-input v-model="row.bonus" type="number"></md-input>
+         </md-field>
+       </div>
+       <div class="md-layout-item md-small-size-100 md-size-10">
          <md-field>
            <label>Qty</label>
            <md-input v-model="row.qty" type="number"></md-input>
          </md-field>
        </div>
-       <div class="md-layout-item md-small-size-100 md-size-20">
+       <div class="md-layout-item md-small-size-100 md-size-10">
          <md-field>
-           <label>Carton</label>
-           <md-input v-model="row.carton" type="number"></md-input>
+           <label>Total</label>
+           <md-input v-model="row.total" type="number"></md-input>
          </md-field>
        </div>
-       <div class="md-layout-item md-small-size-100 md-size-25">
+       <div class="md-layout-item md-small-size-100 md-size-10">
          <md-field>
-           <label>Purchase</label>
-           <md-input v-model="row.unit_purchse_price" type="number"></md-input>
+           <label>Discount</label>
+           <md-input v-model="row.discount" type="number"></md-input>
          </md-field>
        </div>
-       <div class="md-layout-item md-small-size-100 md-size-25">
+       <div class="md-layout-item md-small-size-100 md-size-10">
          <md-field>
-           <label>Unit Sale</label>
-           <md-input v-model="row.unit_sale_price" type="number"></md-input>
-         </md-field>
-       </div>
-       <div class="md-layout-item md-small-size-100 md-size-20">
-         <md-field>
-           <label>Expire</label>
-           <md-input v-model="row.expire" type="date"></md-input>
-           <!-- <md-datepicker v-model="row.selectedDate"/> -->
+           <label>Disc.Total</label>
+           <md-input v-model="row.disctotal" type="number"></md-input>
          </md-field>
        </div>
        <div class="md-layout-item md-small-size-100 md-size-10">
@@ -62,7 +86,6 @@
            <md-icon>delete</md-icon>
         </md-button>
        </div>
-       <md-divider class="hr-divider"></md-divider>
     </div>
     <md-dialog-confirm
       :md-active.sync="active"
@@ -74,6 +97,7 @@
       @md-confirm="save" />
  
     <md-button @click="active = true" class="md-success">Save</md-button>
+    <md-button @click="window.print()" class="md-info"><md-icon>print</md-icon></md-button>
     <md-dialog-alert
       :md-active.sync="success"
       md-title="Success"
@@ -86,13 +110,19 @@
 </template>
 <script>
   export default {
-    name: "ProductRow",
+    name: "invoice-row",
     prop: {
     },
     data :() => {
       return {
         
-        productrows: [{'company':null,'product':null,'qty':null,'carton':null,'expire':null,'unit_purchse_price':null,'unit_sale_price':null,'expire':null}],
+        productrows: [{'company':null,'product':null,'qty':null,'bonus':null,'total':null,'discount':null,'disctotal':null}],
+        costomer:null,
+        costomers:[],
+        orderbooker:null,
+        orderbookers:[],
+        saleman:null,
+        salemans:[],
         companieslist: [],
         companies: [],
         productlist: [],
@@ -175,6 +205,10 @@
 <style type="scss" scoped>
   .hr-divider{
     border-top: 2px dashed #aaa;
+    width: 100%;
+  }
+  .hr-divider-head{
+    border-top: 2px solid #aaa;
     width: 100%;
   }
 </style>
