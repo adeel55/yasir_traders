@@ -188,7 +188,7 @@
         this.productrows.splice(rowId, 1)
       },
       save () {
-        axios.post('/inventory',{'productrows':this.productrows})
+        axios.post('/inventory',{'productrows':this.productrows,'customer':this.customer,'customer':this.customer,'customer':this.customer})
         .then(d => {})
         .catch(err => console.log(err));
         this.success=true;
