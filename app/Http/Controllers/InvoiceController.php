@@ -10,6 +10,7 @@ use App\Product;
 use App\Invoice;
 use App\Inventory;
 use App\Expense;
+use App\Statement;
 use App\Sale;
 use Illuminate\Http\Request;
 
@@ -31,7 +32,7 @@ class InvoiceController extends Controller
         $all = Invoice::join('customers','customers.id','customer_id')
         ->join('sale_men','sale_men.id','sale_man_id')
         ->join('order_bookers','order_bookers.id','order_booker_id')
-        ->select('invoices.id as invoice_id','customers.name as customer_name','order_bookers.name as orderbooker_name','sale_men.name as saleman_name',DB::raw('(select sum(discount_total_price) from sales where invoice_id=invoices.id) as total'))->where($filter)->limit(100)->get();
+        ->select('invoices.id as invoice_id','customers.name as customer_name','order_bookers.name as orderbooker_name','sale_men.name as saleman_name','total_amount')->where($filter)->limit(100)->get();
         return request()->json('200',$all);
     }
 
@@ -93,6 +94,9 @@ class InvoiceController extends Controller
             Sale::create($record);
             Product::find($product_id)->decrement('qty', $val['qty']);
         }
+
+        $total_amount = $invoice->sales()->sum('discount_total_price');
+        $invoice->total_amount = $total_amount;
 
         echo "success";
     }
@@ -233,7 +237,22 @@ class InvoiceController extends Controller
         if(count($rows)>0){
 
             foreach ($rows as $key => $val) {
-                Invoice::find($val['invoice_id'])->first()->received = 1;
+                $invoice = Invoice::find($val['invoice_id'])->first();
+                $customer = $invoice->customer();
+                $invoice->received = 1;
+                $invoice->received_amount = $val['received'];
+                $change = $invoice->total_amount - $val['received'];
+                if($change > 0){
+                    $customer->increment('balance',$change);
+                    $customer->save();
+                    Statement::create(['customer_id' => $invoice->customer->id,'credit' => $change,'balance' => $customer->balance]);
+                }
+                if($change < 0){
+                    $change = abs($change);
+                    $customer->decrement('balance',$change);
+                    $customer->save();
+                    Statement::create(['customer_id' => $invoice->customer->id,'debit' => $change,'balance' => $customer->balance]);
+                }
             }
             foreach ($expense as $key => $val) {
                 Expense::create(['sale_man_id' => $saleman_id,'amount' => $val['amount'],'description' => $val['desc'],'created_at' => $invoicedate]);

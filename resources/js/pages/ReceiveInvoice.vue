@@ -56,7 +56,7 @@
                     <td><router-link :to="{ name: 'EditInvoice', params: { id: item.invoice_id } }">{{ item.customer_name }}</router-link></td>
                     <td>{{ item.orderbooker_name }}</td>
                     <td>{{ item.saleman_name }}</td>
-                    <td>{{ item.total }}</td>
+                    <td>{{ item.total_amount }}</td>
                     <td><input type="number" v-model="item.received" class="myinp" step="any"></td>
                     <td>
                       <md-icon @click="deleteInvoice(item.invoice_id)" class="myicon md-accent">delete</md-icon>

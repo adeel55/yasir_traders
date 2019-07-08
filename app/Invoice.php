@@ -2,6 +2,9 @@
 
 namespace App;
 
+use app\Customer
+use app\Sale
+
 use Illuminate\Database\Eloquent\Model;
 class Invoice extends Model
 {
@@ -11,6 +14,11 @@ class Invoice extends Model
     public function sales()
     {
     	return $this->hasMany(Sale::class);
+    }
+
+    public function customer()
+    {
+    	return $this->belongsTo(Customer::class);
     }
 
     public function invoice_sum()

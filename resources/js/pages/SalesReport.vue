@@ -44,18 +44,20 @@
                     <th>Product</th>
                     <th>Qty</th>
                     <th>Bonus</th>
-                    <th>Total Purchase</th>
-                    <th>Total Sale</th>
-                    <th>Profit</th>
+                    <th>Avg Price</th>
+                    <th>Purchase</th>
+                    <th>Sale</th>
+                    <th>profit</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr v-for="(item ,index) in datalist" :key="index">
-                    <td>{{ item.product }}</td>
-                    <td>{{ item.qty }}</td>
-                    <td>{{ item.bonus }}</td>
-                    <td>{{ item.purchase }}</td>
-                    <td>{{ item.sale }}</td>
+                    <td>{{ item.product_name }}</td>
+                    <td>{{ item.sum_qty }}</td>
+                    <td>{{ item.sum_bonus }}</td>
+                    <td>{{ item.avg_unit_price }}</td>
+                    <td>{{ item.sum_purchase_amount }}</td>
+                    <td>{{ item.sum_sales_amount }}</td>
                     <td>{{ item.profit }}</td>
                   </tr>
                 </tbody>
@@ -73,22 +75,6 @@
         </md-card>
       </div>
     </div>
-    <md-dialog-confirm
-      :md-active.sync="active"
-      md-title="Confirm"
-      md-content="Are you sure to save this Invoice?"
-      md-confirm-text="Yes"
-      md-cancel-text="Cancel"
-      @md-cancel="onCancel"
-      @md-confirm="save" />
-    <md-dialog-alert
-      :md-active.sync="success"
-      md-title="Success"
-      md-content="Stock saved succesfully." />
-    <md-dialog-alert
-      :md-active.sync="fail"
-      md-title="Failed"
-      md-content="Stock failed to add." />
   </div>
 </template>
 
@@ -110,9 +96,6 @@ export default {
       filterid: null,
       filtercreated_at: '',
       flt_str:'',
-      expense: [{amount:0.0,desc:'Petrol'},{amount:0.0,desc:'Misc.'}],
-      allinvoicestotal: null,
-      allinvoicesreceived: null,
       datalist: [],
       active: false,
       success: false,
@@ -122,14 +105,12 @@ export default {
     };
   },
   mounted() {
-    // Fetch initial results
-    this.getResults();
+    // Fetch initial resu
     this.filtercreated_at = this.getDate();
   },
   watch: {
     // whenever filtercreated_at changes, this function will run
-    filtercreated_at: function (newQuestion, oldQuestion) {
-      console.log(this.filtercreated_at)
+    filtercreated_at: function () {
       this.getResults();
     }
   },
@@ -143,7 +124,7 @@ export default {
       .catch(err => console.log(err));
     },
     filter(){
-      this.flt_str += '&filterdatejoinsales-created_at='+this.filtercreated_at
+      // this.flt_str += '&filterdatejoinsales-created_at='+this.filtercreated_at
     },
     filterlist(){
       this.getResults();
@@ -155,22 +136,6 @@ export default {
       let month = toTwoDigits(today.getMonth() + 1);
       let day = toTwoDigits(today.getDate());
       return `${year}-${month}-${day}`;
-    },
-    deleteInvoice(id,ind){
-      axios.post('/invoice/'+ id, {'id':id, '_method':'DELETE'})
-      .then(d => { this.getResults(); })
-      .catch(err => console.log(err));
-
-    },
-    save(){
-      axios.post('/invoice_received',{'expense':this.expense,'productrows':this.datalist,'customer':this.customer,'orderbooker':this.orderbooker,'saleman':this.saleman,'invoicedate':this.invoicedate})
-        .then(d => { console.log(d.data) })
-        .catch(err => console.log(err));
-        this.success=true;
-
-    },
-    onCancel(){
-
     }
   },
   created(){

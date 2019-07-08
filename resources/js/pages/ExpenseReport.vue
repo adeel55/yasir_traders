@@ -96,15 +96,16 @@ export default {
       pglimit: 5
     };
   },
+  created(){
+  },
   mounted() {
     // Fetch initial results
-    this.getResults();
     this.filtercreated_at = this.getDate();
+    this.getResults();
   },
   watch: {
     // whenever filtercreated_at changes, this function will run
-    filtercreated_at: function (newQuestion, oldQuestion) {
-      console.log(this.filtercreated_at)
+    filtercreated_at: function () {
       this.getResults();
     }
   },
@@ -148,9 +149,6 @@ export default {
     onCancel(){
 
     }
-  },
-  created(){
-    this.getResults();
   }
 };
 </script>

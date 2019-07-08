@@ -4520,16 +4520,17 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
 
+  created() {},
+
   mounted() {
     // Fetch initial results
-    this.getResults();
     this.filtercreated_at = this.getDate();
+    this.getResults();
   },
 
   watch: {
     // whenever filtercreated_at changes, this function will run
-    filtercreated_at: function (newQuestion, oldQuestion) {
-      console.log(this.filtercreated_at);
+    filtercreated_at: function () {
       this.getResults();
     }
   },
@@ -4587,12 +4588,7 @@ __webpack_require__.r(__webpack_exports__);
 
     onCancel() {}
 
-  },
-
-  created() {
-    this.getResults();
   }
-
 });
 
 /***/ }),
@@ -5558,20 +5554,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "SaleManList",
   props: {
@@ -5590,15 +5572,6 @@ __webpack_require__.r(__webpack_exports__);
       filterid: null,
       filtercreated_at: '',
       flt_str: '',
-      expense: [{
-        amount: 0.0,
-        desc: 'Petrol'
-      }, {
-        amount: 0.0,
-        desc: 'Misc.'
-      }],
-      allinvoicestotal: null,
-      allinvoicesreceived: null,
       datalist: [],
       active: false,
       success: false,
@@ -5609,15 +5582,13 @@ __webpack_require__.r(__webpack_exports__);
   },
 
   mounted() {
-    // Fetch initial results
-    this.getResults();
+    // Fetch initial resu
     this.filtercreated_at = this.getDate();
   },
 
   watch: {
     // whenever filtercreated_at changes, this function will run
-    filtercreated_at: function (newQuestion, oldQuestion) {
-      console.log(this.filtercreated_at);
+    filtercreated_at: function () {
       this.getResults();
     }
   },
@@ -5631,8 +5602,7 @@ __webpack_require__.r(__webpack_exports__);
       }).catch(err => console.log(err));
     },
 
-    filter() {
-      this.flt_str += '&filterdatejoinsales-created_at=' + this.filtercreated_at;
+    filter() {// this.flt_str += '&filterdatejoinsales-created_at='+this.filtercreated_at
     },
 
     filterlist() {
@@ -5647,32 +5617,7 @@ __webpack_require__.r(__webpack_exports__);
       let month = toTwoDigits(today.getMonth() + 1);
       let day = toTwoDigits(today.getDate());
       return `${year}-${month}-${day}`;
-    },
-
-    deleteInvoice(id, ind) {
-      axios.post('/invoice/' + id, {
-        'id': id,
-        '_method': 'DELETE'
-      }).then(d => {
-        this.getResults();
-      }).catch(err => console.log(err));
-    },
-
-    save() {
-      axios.post('/invoice_received', {
-        'expense': this.expense,
-        'productrows': this.datalist,
-        'customer': this.customer,
-        'orderbooker': this.orderbooker,
-        'saleman': this.saleman,
-        'invoicedate': this.invoicedate
-      }).then(d => {
-        console.log(d.data);
-      }).catch(err => console.log(err));
-      this.success = true;
-    },
-
-    onCancel() {}
+    }
 
   },
 
@@ -35903,7 +35848,7 @@ var render = function() {
                               _vm._v(" "),
                               _c("td", [_vm._v(_vm._s(item.saleman_name))]),
                               _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(item.total))]),
+                              _c("td", [_vm._v(_vm._s(item.total_amount))]),
                               _vm._v(" "),
                               _c("td", [
                                 _c("input", {
@@ -38431,359 +38376,305 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "content" },
-    [
-      _c("div", { staticClass: "md-layout" }, [
-        _c(
-          "div",
-          {
-            staticClass:
-              "md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
-          },
-          [
-            _c(
-              "md-card",
-              [
-                _c(
-                  "md-card-header",
-                  { attrs: { "data-background-color": "green" } },
-                  [
-                    _c("h4", { staticClass: "title" }, [
-                      _vm._v("Sales Report")
-                    ]),
-                    _vm._v(" "),
-                    _c("a", { attrs: { href: "/" } })
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "md-card-content",
-                  [
-                    _c("div", { staticClass: "md-layout" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-33"
-                        },
-                        [
-                          _c("md-field", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.filtercustomers,
-                                  expression: "filtercustomers"
-                                }
-                              ],
-                              attrs: {
-                                type: "text",
-                                placeholder: "Search By Customer"
-                              },
-                              domProps: { value: _vm.filtercustomers },
-                              on: {
-                                input: [
-                                  function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.filtercustomers = $event.target.value
-                                  },
-                                  _vm.filterlist
-                                ]
+  return _c("div", { staticClass: "content" }, [
+    _c("div", { staticClass: "md-layout" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
+        },
+        [
+          _c(
+            "md-card",
+            [
+              _c(
+                "md-card-header",
+                { attrs: { "data-background-color": "green" } },
+                [
+                  _c("h4", { staticClass: "title" }, [_vm._v("Sales Report")]),
+                  _vm._v(" "),
+                  _c("a", { attrs: { href: "/" } })
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "md-card-content",
+                [
+                  _c("div", { staticClass: "md-layout" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-33"
+                      },
+                      [
+                        _c("md-field", [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.filtercustomers,
+                                expression: "filtercustomers"
                               }
-                            })
-                          ])
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-33"
-                        },
-                        [
-                          _c("md-field", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.filtersale_men,
-                                  expression: "filtersale_men"
-                                }
-                              ],
-                              attrs: {
-                                type: "text",
-                                placeholder: "Search By SaleMan"
-                              },
-                              domProps: { value: _vm.filtersale_men },
-                              on: {
-                                input: [
-                                  function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.filtersale_men = $event.target.value
-                                  },
-                                  _vm.filterlist
-                                ]
-                              }
-                            })
-                          ])
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-33"
-                        },
-                        [
-                          _c("md-field", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.filterorder_bookers,
-                                  expression: "filterorder_bookers"
-                                }
-                              ],
-                              attrs: {
-                                type: "text",
-                                placeholder: "Search By OrderBooker"
-                              },
-                              domProps: { value: _vm.filterorder_bookers },
-                              on: {
-                                input: [
-                                  function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.filterorder_bookers =
-                                      $event.target.value
-                                  },
-                                  _vm.filterlist
-                                ]
-                              }
-                            })
-                          ])
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-33"
-                        },
-                        [
-                          _c("md-field", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.filterid,
-                                  expression: "filterid"
-                                }
-                              ],
-                              attrs: {
-                                type: "string",
-                                placeholder: "Search By Invoice No."
-                              },
-                              domProps: { value: _vm.filterid },
-                              on: {
-                                input: [
-                                  function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.filterid = $event.target.value
-                                  },
-                                  _vm.filterlist
-                                ]
-                              }
-                            })
-                          ])
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-33"
-                        },
-                        [
-                          _c("md-field", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.filtercreated_at,
-                                  expression: "filtercreated_at"
-                                }
-                              ],
-                              attrs: { type: "date" },
-                              domProps: { value: _vm.filtercreated_at },
-                              on: {
-                                input: function($event) {
+                            ],
+                            attrs: {
+                              type: "text",
+                              placeholder: "Search By Customer"
+                            },
+                            domProps: { value: _vm.filtercustomers },
+                            on: {
+                              input: [
+                                function($event) {
                                   if ($event.target.composing) {
                                     return
                                   }
-                                  _vm.filtercreated_at = $event.target.value
-                                }
-                              }
-                            })
-                          ])
-                        ],
-                        1
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("md-divider", { staticClass: "hr-divider" }),
-                    _vm._v(" "),
-                    _c("div", [
-                      _c("table", { staticClass: "mytable" }, [
-                        _c("thead", [
-                          _c("tr", [
-                            _c("th", [_vm._v("Product")]),
-                            _vm._v(" "),
-                            _c("th", [_vm._v("Qty")]),
-                            _vm._v(" "),
-                            _c("th", [_vm._v("Bonus")]),
-                            _vm._v(" "),
-                            _c("th", [_vm._v("Total Purchase")]),
-                            _vm._v(" "),
-                            _c("th", [_vm._v("Total Sale")]),
-                            _vm._v(" "),
-                            _c("th", [_vm._v("Profit")])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "tbody",
-                          _vm._l(_vm.datalist, function(item, index) {
-                            return _c("tr", { key: index }, [
-                              _c("td", [_vm._v(_vm._s(item.product))]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(item.qty))]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(item.bonus))]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(item.purchase))]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(item.sale))]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(item.profit))])
-                            ])
-                          }),
-                          0
-                        )
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("md-divider", { staticClass: "hr-divider" }),
+                                  _vm.filtercustomers = $event.target.value
+                                },
+                                _vm.filterlist
+                              ]
+                            }
+                          })
+                        ])
+                      ],
+                      1
+                    ),
                     _vm._v(" "),
                     _c(
-                      "pagination",
+                      "div",
                       {
-                        attrs: { data: _vm.pgdata, limit: _vm.pglimit },
-                        on: { "pagination-change-page": _vm.getResults }
+                        staticClass:
+                          "md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-33"
                       },
                       [
-                        _c(
-                          "span",
-                          { attrs: { slot: "prev-nav" }, slot: "prev-nav" },
-                          [_vm._v("< Previous")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "span",
-                          { attrs: { slot: "next-nav" }, slot: "next-nav" },
-                          [_vm._v("Next >")]
-                        )
-                      ]
+                        _c("md-field", [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.filtersale_men,
+                                expression: "filtersale_men"
+                              }
+                            ],
+                            attrs: {
+                              type: "text",
+                              placeholder: "Search By SaleMan"
+                            },
+                            domProps: { value: _vm.filtersale_men },
+                            on: {
+                              input: [
+                                function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.filtersale_men = $event.target.value
+                                },
+                                _vm.filterlist
+                              ]
+                            }
+                          })
+                        ])
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-33"
+                      },
+                      [
+                        _c("md-field", [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.filterorder_bookers,
+                                expression: "filterorder_bookers"
+                              }
+                            ],
+                            attrs: {
+                              type: "text",
+                              placeholder: "Search By OrderBooker"
+                            },
+                            domProps: { value: _vm.filterorder_bookers },
+                            on: {
+                              input: [
+                                function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.filterorder_bookers = $event.target.value
+                                },
+                                _vm.filterlist
+                              ]
+                            }
+                          })
+                        ])
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-33"
+                      },
+                      [
+                        _c("md-field", [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.filterid,
+                                expression: "filterid"
+                              }
+                            ],
+                            attrs: {
+                              type: "string",
+                              placeholder: "Search By Invoice No."
+                            },
+                            domProps: { value: _vm.filterid },
+                            on: {
+                              input: [
+                                function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.filterid = $event.target.value
+                                },
+                                _vm.filterlist
+                              ]
+                            }
+                          })
+                        ])
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-33"
+                      },
+                      [
+                        _c("md-field", [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.filtercreated_at,
+                                expression: "filtercreated_at"
+                              }
+                            ],
+                            attrs: { type: "date" },
+                            domProps: { value: _vm.filtercreated_at },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.filtercreated_at = $event.target.value
+                              }
+                            }
+                          })
+                        ])
+                      ],
+                      1
                     )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c("md-divider", { staticClass: "hr-divider" })
-              ],
-              1
-            )
-          ],
-          1
-        )
-      ]),
-      _vm._v(" "),
-      _c("md-dialog-confirm", {
-        attrs: {
-          "md-active": _vm.active,
-          "md-title": "Confirm",
-          "md-content": "Are you sure to save this Invoice?",
-          "md-confirm-text": "Yes",
-          "md-cancel-text": "Cancel"
-        },
-        on: {
-          "update:mdActive": function($event) {
-            _vm.active = $event
-          },
-          "update:md-active": function($event) {
-            _vm.active = $event
-          },
-          "md-cancel": _vm.onCancel,
-          "md-confirm": _vm.save
-        }
-      }),
-      _vm._v(" "),
-      _c("md-dialog-alert", {
-        attrs: {
-          "md-active": _vm.success,
-          "md-title": "Success",
-          "md-content": "Stock saved succesfully."
-        },
-        on: {
-          "update:mdActive": function($event) {
-            _vm.success = $event
-          },
-          "update:md-active": function($event) {
-            _vm.success = $event
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("md-dialog-alert", {
-        attrs: {
-          "md-active": _vm.fail,
-          "md-title": "Failed",
-          "md-content": "Stock failed to add."
-        },
-        on: {
-          "update:mdActive": function($event) {
-            _vm.fail = $event
-          },
-          "update:md-active": function($event) {
-            _vm.fail = $event
-          }
-        }
-      })
-    ],
-    1
-  )
+                  ]),
+                  _vm._v(" "),
+                  _c("md-divider", { staticClass: "hr-divider" }),
+                  _vm._v(" "),
+                  _c("div", [
+                    _c("table", { staticClass: "mytable" }, [
+                      _c("thead", [
+                        _c("tr", [
+                          _c("th", [_vm._v("Product")]),
+                          _vm._v(" "),
+                          _c("th", [_vm._v("Qty")]),
+                          _vm._v(" "),
+                          _c("th", [_vm._v("Bonus")]),
+                          _vm._v(" "),
+                          _c("th", [_vm._v("Avg Price")]),
+                          _vm._v(" "),
+                          _c("th", [_vm._v("Purchase")]),
+                          _vm._v(" "),
+                          _c("th", [_vm._v("Sale")]),
+                          _vm._v(" "),
+                          _c("th", [_vm._v("profit")])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "tbody",
+                        _vm._l(_vm.datalist, function(item, index) {
+                          return _c("tr", { key: index }, [
+                            _c("td", [_vm._v(_vm._s(item.product_name))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(item.sum_qty))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(item.sum_bonus))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(item.avg_unit_price))]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(_vm._s(item.sum_purchase_amount))
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(item.sum_sales_amount))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(item.profit))])
+                          ])
+                        }),
+                        0
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("md-divider", { staticClass: "hr-divider" }),
+                  _vm._v(" "),
+                  _c(
+                    "pagination",
+                    {
+                      attrs: { data: _vm.pgdata, limit: _vm.pglimit },
+                      on: { "pagination-change-page": _vm.getResults }
+                    },
+                    [
+                      _c(
+                        "span",
+                        { attrs: { slot: "prev-nav" }, slot: "prev-nav" },
+                        [_vm._v("< Previous")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "span",
+                        { attrs: { slot: "next-nav" }, slot: "next-nav" },
+                        [_vm._v("Next >")]
+                      )
+                    ]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("md-divider", { staticClass: "hr-divider" })
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -88137,7 +88028,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_SaleManList_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/pages/SaleManList.vue */ "./resources/js/pages/SaleManList.vue");
 /* harmony import */ var _pages_ProductList_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @/pages/ProductList.vue */ "./resources/js/pages/ProductList.vue");
 /* harmony import */ var _pages_CompanyList_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @/pages/CompanyList.vue */ "./resources/js/pages/CompanyList.vue");
-/* harmony import */ var _pages_SalesReport_vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @/pages/SalesReport.vue */ "./resources/js/pages/SalesReport.vue");
+/* harmony import */ var _pages_SalesReport_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @/pages/SalesReport.vue */ "./resources/js/pages/SalesReport.vue");
 /* harmony import */ var _pages_ExpenseReport_vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @/pages/ExpenseReport.vue */ "./resources/js/pages/ExpenseReport.vue");
 
 
@@ -88206,7 +88097,7 @@ var routes = [{
   }, {
     path: 'sales_report',
     name: 'Sales Report',
-    component: _pages_SalesReport_vue__WEBPACK_IMPORTED_MODULE_15__["default"]
+    component: _pages_SalesReport_vue__WEBPACK_IMPORTED_MODULE_13__["default"]
   }, {
     path: 'expense_report',
     name: 'Expenses Report',
