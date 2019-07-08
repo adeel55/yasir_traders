@@ -1,11 +1,45 @@
 
-.pagination>li.active>a:hover,.pagination>li>a:focus{
+// .pagination>li.active>a:hover,.pagination>li>a:focus{
 
-	background-color: #227bff !important;
-	color: white !important;
+// 	background-color: #227bff !important;
+// 	color: white !important;
+// }
+// .pagination>li>a:focus{
+
+// 	/*background-color:  !important;*/
+// 	color: white !important;
+// }
+.md-table-cell {
+    padding: 0px 10px !important;
 }
-.pagination>li>a:focus{
 
-	/*background-color:  !important;*/
-	color: white !important;
+.myinp{
+	border: 1px solid #aaa;
+	outline: none;
+	border-radius: 2px;
+	padding: 5px 10px;
+	margin: 5px;
+}
+.mytable{
+	width: 100%;
+	thead{
+		tr{
+			th{
+				text-align: left;
+			}
+		}
+	}
+
+}
+.myicon{
+	font-size: 20px;
+    height: 31px;
+    min-width: 31px;
+    width: 31px;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    line-height: 31px;
+    border-radius: 50%;
+    cursor: pointer;
 }

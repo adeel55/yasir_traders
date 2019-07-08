@@ -13,6 +13,7 @@ import Modal from "./Modal.vue";
 import DialogPrompt from "./Dialogs/DialogPrompt.vue";
 import ProductRow from "./ProductRow.vue";
 import InvoiceRow from "./InvoiceRow.vue";
+import EditInvoiceRow from "./EditInvoiceRow.vue";
 
 export {
   ChartCard,
@@ -26,5 +27,6 @@ export {
   Modal,
   DialogPrompt,
   ProductRow,
-  InvoiceRow
+  InvoiceRow,
+  EditInvoiceRow
 };

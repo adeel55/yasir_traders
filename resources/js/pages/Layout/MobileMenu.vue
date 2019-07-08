@@ -9,8 +9,8 @@
     <li>
       <a href="#" class="dropdown-toggle" data-toggle="dropdown">
         <i class="material-icons">dashboard</i>
-        <p>Dashboard</p></a
-      >
+        <p>Dashboard</p>
+      </a>
     </li>
     <li>
       <drop-down>

@@ -39,6 +39,15 @@ class ProductController extends Controller
         // dd($products);
     }
 
+    public function getSalePrice(Request $request)
+    {
+       $product = Product::where('name','like',$request->product)->first();
+       if(!is_null($product))
+           echo $product->unit_sale_price;
+       else
+            echo 0.00;
+    }
+
     /**
      * Show the form for creating a new resource.
      *

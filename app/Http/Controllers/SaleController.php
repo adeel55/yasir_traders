@@ -12,9 +12,17 @@ class SaleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        
+
+        // dd(filter($request));
+        $filter = filter($request);
+
+
+        $all = Sale::join('products','products.id','product_id')
+        ->select('products.name as product_name','qty','bonus','sum(discount_total_price) as total_sale')->where($filter)->groupBy('product_id')->paginate(20);
+        return request()->json('200',$all);
     }
 
     /**

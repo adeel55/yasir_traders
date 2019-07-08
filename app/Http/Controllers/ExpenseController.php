@@ -12,9 +12,16 @@ class ExpenseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        
+        // dd(filter($request));
+        $filter = filter($request);
+
+
+        $all = Expense::join('sale_men','sale_men.id','sale_man_id')
+        ->select('expenses.id as expense_id','sale_men.name as saleman_name','amount','description','created_at')->where($filter)->paginate(20);
+        return request()->json('200',$all);
     }
 
     /**

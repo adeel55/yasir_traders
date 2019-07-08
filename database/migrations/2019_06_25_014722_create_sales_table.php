@@ -15,18 +15,20 @@ class CreateSalesTable extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('company_id');
+            $table->unsignedBigInteger('invoice_id');
             $table->unsignedBigInteger('product_id');
-            $table->unsignedBigInteger('sale_man_id');
-            $table->unsignedBigInteger('order_booker_id');
-            $table->unsignedBigInteger('customer_id');
             $table->integer('qty');
             $table->integer('bonus');
             $table->decimal('unit_price',15,2);
             $table->decimal('total_price',15,2);
-            $table->decimal('discount',2,2);
+            $table->decimal('discount',5,2);
             $table->decimal('discount_total_price',15,2);
             $table->timestamps();
+
+
+            $table->foreign('invoice_id')->references('id')->on('invoices')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
+
         });
     }
 

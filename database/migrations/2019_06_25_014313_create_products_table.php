@@ -18,6 +18,8 @@ class CreateProductsTable extends Migration
             $table->string('name',100);
             $table->integer('qty')->default(0);
             $table->integer('pcs_per_carton')->default(0);
+            $table->decimal('unit_purchase_price',15,2)->default(0);
+            $table->decimal('unit_sale_price',15,2)->default(0);
             $table->timestamps();
         });
     }

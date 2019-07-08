@@ -32,6 +32,7 @@ Vue.component('vendor-table', require('./components/Tables/VendorTable.vue').def
 Vue.component('create-profile-form', require('./pages/UserProfile/CreateProfile.vue').default);
 Vue.component('product-row', require('./components/ProductRow.vue').default);
 Vue.component('invoice-row', require('./components/InvoiceRow.vue').default);
+Vue.component('edit-invoice-row', require('./components/EditInvoiceRow.vue').default);
 
 
 // Pagination
@@ -47,6 +48,8 @@ Vue.use(MaterialDashboard);
 Vue.use(GlobalComponents);
 Vue.use(GlobalDirectives);
 Vue.use(Notifications);
+
+
 
 /* eslint-disable no-new */
 new Vue({

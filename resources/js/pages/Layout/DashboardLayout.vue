@@ -10,7 +10,7 @@
       </sidebar-link>
       <sidebar-link to="/add_product">
         <md-icon>widgets</md-icon>
-        <p>Add Products</p>
+        <p>Add Stock</p>
       </sidebar-link>
       <sidebar-link to="/create_invoice">
         <md-icon>description</md-icon>
@@ -44,18 +44,18 @@
         <md-icon>dehaze</md-icon>
         <p>Company List</p>
       </sidebar-link>
-      <sidebar-link to="/expense_report">
+      <sidebar-link to="/sales_report">
         <md-icon>list_alt</md-icon>
         <p>Sales Report</p>
       </sidebar-link>
-      <sidebar-link to="/sales_report">
+      <sidebar-link to="/expense_report">
         <md-icon>list_alt</md-icon>
         <p>Expense Report</p>
       </sidebar-link>
-      <sidebar-link to="/maps">
+<!--       <sidebar-link to="/settings">
         <md-icon>settings</md-icon>
         <p>Settings</p>
-      </sidebar-link>
+      </sidebar-link> -->
     </side-bar>
 
     <div class="main-panel">

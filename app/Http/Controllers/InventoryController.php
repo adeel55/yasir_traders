@@ -37,13 +37,16 @@ class InventoryController extends Controller
      */
     public function store(Request $request)
     {
-            
         $rows = $request->productrows;
+         // dd($request->company);
+        // $rows = array(array('product' => 'candy','qty' => 12,'carton' => 12,'expire' => '2012-12-23','unit_purchase_price' => 12,'unit_sale_price' => 12,'total_purchase' => 500 ));
+
+        $company_id = Company::findOrSaveCompany($request->company);
+        $purchasedate = $request->purchasedate;
 
         foreach ($rows as $key => $val) {
 
-            $company_id = $this->findOrSaveCompany($val);
-            $product_id = $this->findOrSaveProduct($val);
+            $product_id = Product::findOrSaveProduct($val);
 
             $rec = [
                 'company_id' => $company_id,
@@ -51,8 +54,10 @@ class InventoryController extends Controller
                 'qty' => $val['qty'],
                 'carton' => $val['carton'],
                 'expire' => $val['expire'],
-                'unit_purchse_price' => $val['unit_purchse_price'],
-                'unit_sale_price' => $val['unit_sale_price']
+                'unit_purchase_price' => $val['unit_purchase_price'],
+                'unit_sale_price' => $val['unit_sale_price'],
+                'total_purchase' => $val['total_purchase'],
+                'created_at' => $purchasedate
             ];
 
             Inventory::create($rec);
@@ -108,14 +113,4 @@ class InventoryController extends Controller
         //
     }
 
-    function findOrSaveProduct($val){
-        $pro = Product::firstOrCreate(['name' => $val['product']]);
-        $pro->increment('qty',intval($val['qty']));
-        $pro->save();
-        return $pro->id;
-    }
-    function findOrSaveCompany($val){
-        $company = Company::firstOrCreate(['name' => $val['company']]);
-        return $company->id;
-    }
 }

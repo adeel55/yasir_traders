@@ -17,6 +17,20 @@ class CustomerController extends Controller
         //
     }
 
+
+    /**
+     * Display a list of searched items.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        $ss = $request->searchString;
+        $results = Customer::where('name','like','%'.$ss.'%')->limit(8)->pluck('name')->toArray();
+        return request()->json(200,$results);
+        // dd($products);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

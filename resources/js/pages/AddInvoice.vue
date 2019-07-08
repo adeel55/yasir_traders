@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     addRow(){
-      this.$emit('addedRow','Hi');
+      
     }
   },
   created(){

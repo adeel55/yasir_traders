@@ -1,21 +1,26 @@
 <template>
   <div>
-    <md-button @click="addRow" class="md-fab md-btn-fab md-mini md-primary" style="float: right">
-      <md-icon>playlist_add</md-icon>
-    </md-button>
+    <div class="md-layout">
+     <div class="md-layout-item md-small-size-100 md-size-50">
+      <md-autocomplete
+        v-model="company"
+        :md-options="companies"
+        @md-changed="searchCompanies"
+        md-input-max-length="50"
+        autocomplete="off"
+        md-dense>
+        <label>Company</label>
+      </md-autocomplete>
+     </div>
+     <div class="md-layout-item md-small-size-100 md-size-50">
+      <md-field>
+        <label>Purchase On</label>
+        <md-input v-model="purchasedate" type="date"></md-input>
+      </md-field>
+     </div>
+    </div>
     <div class="md-layout" v-for="(row, index) in productrows" :key="index">
-       <div class="md-layout-item md-small-size-100 md-size-40">
-        <md-autocomplete
-          v-model="row.company"
-          :md-options="companies"
-          @md-changed="searchCompanies"
-          md-input-max-length="50"
-          autocomplete="off"
-          md-dense>
-          <label>Company</label>
-        </md-autocomplete>
-       </div>
-       <div class="md-layout-item md-small-size-100 md-size-40">
+       <div class="md-layout-item md-small-size-100 md-size-20">
         <md-autocomplete
           v-model="row.product"
           :md-options="products"
@@ -26,28 +31,34 @@
           <label>Product</label>
         </md-autocomplete>
        </div>
-       <div class="md-layout-item md-small-size-100 md-size-20">
+       <div class="md-layout-item md-small-size-100 md-size-10">
          <md-field>
            <label>Qty</label>
-           <md-input v-model="row.qty" type="number"></md-input>
+           <md-input v-model="row.qty" type="number" @input="count_unit_purchase(index)"></md-input>
          </md-field>
        </div>
-       <div class="md-layout-item md-small-size-100 md-size-20">
+       <div class="md-layout-item md-small-size-100 md-size-10">
          <md-field>
            <label>Carton</label>
            <md-input v-model="row.carton" type="number"></md-input>
          </md-field>
        </div>
-       <div class="md-layout-item md-small-size-100 md-size-25">
+       <div class="md-layout-item md-small-size-100 md-size-15">
          <md-field>
-           <label>Purchase</label>
-           <md-input v-model="row.unit_purchse_price" type="number"></md-input>
+           <label>Unit Purchase</label>
+           <md-input v-model="row.unit_purchase_price" type="number"></md-input>
          </md-field>
        </div>
-       <div class="md-layout-item md-small-size-100 md-size-25">
+       <div class="md-layout-item md-small-size-100 md-size-15">
          <md-field>
            <label>Unit Sale</label>
            <md-input v-model="row.unit_sale_price" type="number"></md-input>
+         </md-field>
+       </div>
+       <div class="md-layout-item md-small-size-100 md-size-15">
+         <md-field>
+           <label>Total Purchase</label>
+           <md-input v-model="row.total_purchase" @input="count_unit_purchase(index)" type="number"></md-input>
          </md-field>
        </div>
        <div class="md-layout-item md-small-size-100 md-size-20">
@@ -62,7 +73,6 @@
            <md-icon>delete</md-icon>
         </md-button>
        </div>
-       <md-divider class="hr-divider"></md-divider>
     </div>
     <md-dialog-confirm
       :md-active.sync="active"
@@ -74,6 +84,9 @@
       @md-confirm="save" />
  
     <md-button @click="active = true" class="md-success">Save</md-button>
+    <md-button @click="addRow" class="md-primary">
+      <md-icon>playlist_add</md-icon> Add
+    </md-button>
     <md-dialog-alert
       :md-active.sync="success"
       md-title="Success"
@@ -92,7 +105,9 @@
     data :() => {
       return {
         
-        productrows: [{'company':null,'product':null,'qty':null,'carton':null,'expire':null,'unit_purchse_price':null,'unit_sale_price':null,'expire':null}],
+        productrows: [{'product':null,'qty':null,'carton':null,'expire':null,'unit_purchase_price':null,'unit_sale_price':null,'expire':null,'total_purchase':null}],
+        company:null,
+        purchasedate: null,
         companieslist: [],
         companies: [],
         productlist: [],
@@ -103,8 +118,8 @@
         selectedDate: new Date('2018/03/26')
       };
     },
-    mounted() {
-      // Fetch initial 
+    mounted :function() {
+        this.purchasedate = this.getDate();
     },
     methods: {
       searchCompanies (searchTerm) {
@@ -145,26 +160,37 @@
       },
       addRow(a){
         this.productrows.push({
-          company: null,
           product: null,
           qty: null,
           carton: null,
           expire: null,
-          unit_purchse_price: null,
-          unit_sale_price: null
+          unit_purchase_price: null,
+          unit_sale_price: null,
+          total_purchase: null
         })
+      },
+      count_unit_purchase(index){
+        this.productrows[index].unit_purchase_price = (this.productrows[index].total_purchase / this.productrows[index].qty).toFixed(2);
       },
       removeRow (rowId) {
         this.productrows.splice(rowId, 1)
       },
       save () {
-        axios.post('/inventory',{'productrows':this.productrows})
-        .then(d => {})
+        axios.post('/inventory',{'productrows':this.productrows,'company':this.company,'purchasedate':this.purchasedate})
+        .then(d => {console.log(d)})
         .catch(err => console.log(err));
         this.success=true;
       },
       onCancel(){
 
+      },
+      getDate () {
+        const toTwoDigits = num => num < 10 ? '0' + num : num;
+        let today = new Date();
+        let year = today.getFullYear();
+        let month = toTwoDigits(today.getMonth() + 1);
+        let day = toTwoDigits(today.getDate());
+        return `${year}-${month}-${day}`;
       }
     },
     created(){

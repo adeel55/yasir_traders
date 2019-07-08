@@ -18,8 +18,13 @@ class CreateStatementsTable extends Migration
             $table->unsignedBigInteger('customer_id');
             $table->decimal('debit',15,2);
             $table->decimal('credit',15,2);
+            $table->decimal('balance',15,2);
             $table->string('description',150);
             $table->timestamps();
+
+
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade')->onUpdate('cascade');
+
         });
     }
 

@@ -2,6 +2,11 @@
   <md-toolbar md-elevation="0" class="md-transparent">
     <div class="md-toolbar-row">
       <div class="md-toolbar-section-start">
+        <!-- <md-button 
+        class="md-info"
+        :class="{ toggled: $sidebar.showSidebar }" @click="toggleSidebar">
+        Hide
+        </md-button> -->
         <h3 class="md-title">{{ $route.name }}</h3>
       </div>
       <div class="md-toolbar-section-end">

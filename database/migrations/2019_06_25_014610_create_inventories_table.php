@@ -21,8 +21,12 @@ class CreateInventoriesTable extends Migration
             $table->integer('carton')->nullable();
             $table->decimal('unit_purchase_price',15,2)->nullable();
             $table->decimal('unit_sale_price',15,2)->nullable();
+            $table->decimal('total_purchase',15,2)->nullable();
             $table->date('expire')->nullable();
             $table->timestamps();
+
+            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
