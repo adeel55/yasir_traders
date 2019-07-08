@@ -2,8 +2,8 @@
 
 namespace App;
 
-use app\Customer
-use app\Sale
+use app\Customer;
+use app\Sale;
 
 use Illuminate\Database\Eloquent\Model;
 class Invoice extends Model

@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-use app\Invoice
+use app\Invoice;
 
 class Sale extends Model
 {
