@@ -15,12 +15,16 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('company_id')->nullable();
             $table->string('name',100);
             $table->integer('qty')->default(0);
             $table->integer('pcs_per_carton')->default(0);
             $table->decimal('unit_purchase_price',15,2)->default(0);
             $table->decimal('unit_sale_price',15,2)->default(0);
             $table->timestamps();
+
+            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade')->onUpdate('cascade');
+            
         });
     }
 

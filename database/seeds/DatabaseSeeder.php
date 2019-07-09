@@ -13,19 +13,57 @@ class DatabaseSeeder extends Seeder
     {
         factory(App\Company::class, 20)->create();
 
-        DB::table('products')->insert(['name' => 'Rio','qty' => 50,'unit_sale_price' => rand(10,150),'unit_purchase_price' => rand(10,100)]);
-        DB::table('products')->insert(['name' => 'Super','qty' => 50,'unit_sale_price' => rand(10,150),'unit_purchase_price' => rand(10,100)]);
-        DB::table('products')->insert(['name' => 'Lays','qty' => 50,'unit_sale_price' => rand(10,150),'unit_purchase_price' => rand(10,100)]);
-        DB::table('products')->insert(['name' => 'Coke','qty' => 50,'unit_sale_price' => rand(10,150),'unit_purchase_price' => rand(10,100)]);
-        DB::table('products')->insert(['name' => 'Sprite','qty' => 50,'unit_sale_price' => rand(10,150),'unit_purchase_price' => rand(10,100)]);
-        DB::table('products')->insert(['name' => 'Slanty','qty' => 50,'unit_sale_price' => rand(10,150),'unit_purchase_price' => rand(10,100)]);
-        DB::table('products')->insert(['name' => 'Prince','qty' => 50,'unit_sale_price' => rand(10,150),'unit_purchase_price' => rand(10,100)]);
-        DB::table('products')->insert(['name' => 'Gala','qty' => 50,'unit_sale_price' => rand(10,150),'unit_purchase_price' => rand(10,100)]);
-        DB::table('products')->insert(['name' => 'Zera Plus','qty' => 50,'unit_sale_price' => rand(10,150),'unit_purchase_price' => rand(10,100)]);
-        DB::table('products')->insert(['name' => 'Tuk','qty' => 50,'unit_sale_price' => rand(10,150),'unit_purchase_price' => rand(10,100)]);
-        DB::table('products')->insert(['name' => 'KurKuray','qty' => 50,'unit_sale_price' => rand(10,150),'unit_purchase_price' => rand(10,100)]);
-        DB::table('products')->insert(['name' => 'Walls Icecream','qty' => 50,'unit_sale_price' => rand(10,150),'unit_purchase_price' => rand(10,100)]);
-        DB::table('products')->insert(['name' => 'Lolypop','qty' => 50,'unit_sale_price' => rand(10,150),'unit_purchase_price' => rand(10,100)]);
+        
+
+
+
+
+        DB::table('companies')->insert(['name' => 'company'.rand(1,15)]);
+        DB::table('companies')->insert(['name' => 'company'.rand(1,15)]);
+        DB::table('companies')->insert(['name' => 'company'.rand(1,15)]);
+        DB::table('companies')->insert(['name' => 'company'.rand(1,15)]);
+        DB::table('companies')->insert(['name' => 'company'.rand(1,15)]);
+        DB::table('companies')->insert(['name' => 'company'.rand(1,15)]);
+        DB::table('companies')->insert(['name' => 'company'.rand(1,15)]);
+        DB::table('companies')->insert(['name' => 'company'.rand(1,15)]);
+        DB::table('companies')->insert(['name' => 'company'.rand(1,15)]);
+        DB::table('companies')->insert(['name' => 'company'.rand(1,15)]);
+        DB::table('companies')->insert(['name' => 'company'.rand(1,15)]);
+        DB::table('companies')->insert(['name' => 'company'.rand(1,15)]);
+        DB::table('companies')->insert(['name' => 'company'.rand(1,15)]);
+        DB::table('companies')->insert(['name' => 'company'.rand(1,15)]);
+        DB::table('companies')->insert(['name' => 'company'.rand(1,15)]);
+        DB::table('companies')->insert(['name' => 'company'.rand(1,15)]);
+        DB::table('companies')->insert(['name' => 'company'.rand(1,15)]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        DB::table('products')->insert(['name' => 'Rio','qty' => 50,'unit_sale_price' => rand(10,150),'unit_purchase_price' => rand(10,100),'company_id' => rand(1,15)]);
+        DB::table('products')->insert(['name' => 'Super','qty' => 50,'unit_sale_price' => rand(10,150),'unit_purchase_price' => rand(10,100),'company_id' => rand(1,15)]);
+        DB::table('products')->insert(['name' => 'Lays','qty' => 50,'unit_sale_price' => rand(10,150),'unit_purchase_price' => rand(10,100),'company_id' => rand(1,15)]);
+        DB::table('products')->insert(['name' => 'Coke','qty' => 50,'unit_sale_price' => rand(10,150),'unit_purchase_price' => rand(10,100),'company_id' => rand(1,15)]);
+        DB::table('products')->insert(['name' => 'Sprite','qty' => 50,'unit_sale_price' => rand(10,150),'unit_purchase_price' => rand(10,100),'company_id' => rand(1,15)]);
+        DB::table('products')->insert(['name' => 'Slanty','qty' => 50,'unit_sale_price' => rand(10,150),'unit_purchase_price' => rand(10,100),'company_id' => rand(1,15)]);
+        DB::table('products')->insert(['name' => 'Prince','qty' => 50,'unit_sale_price' => rand(10,150),'unit_purchase_price' => rand(10,100),'company_id' => rand(1,15)]);
+        DB::table('products')->insert(['name' => 'Gala','qty' => 50,'unit_sale_price' => rand(10,150),'unit_purchase_price' => rand(10,100),'company_id' => rand(1,15)]);
+        DB::table('products')->insert(['name' => 'Zera Plus','qty' => 50,'unit_sale_price' => rand(10,150),'unit_purchase_price' => rand(10,100),'company_id' => rand(1,15)]);
+        DB::table('products')->insert(['name' => 'Tuk','qty' => 50,'unit_sale_price' => rand(10,150),'unit_purchase_price' => rand(10,100),'company_id' => rand(1,15)]);
+        DB::table('products')->insert(['name' => 'KurKuray','qty' => 50,'unit_sale_price' => rand(10,150),'unit_purchase_price' => rand(10,100),'company_id' => rand(1,15)]);
+        DB::table('products')->insert(['name' => 'Walls Icecream','qty' => 50,'unit_sale_price' => rand(10,150),'unit_purchase_price' => rand(10,100),'company_id' => rand(1,15)]);
+        DB::table('products')->insert(['name' => 'Lolypop','qty' => 50,'unit_sale_price' => rand(10,150),'unit_purchase_price' => rand(10,100),'company_id' => rand(1,15)]);
 
 
         DB::table('sale_men')->insert(['name' => 'Ahmad','phone' => '0300-5868589']);

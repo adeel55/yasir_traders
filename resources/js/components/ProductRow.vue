@@ -43,6 +43,12 @@
            <md-input v-model="row.carton" type="number"></md-input>
          </md-field>
        </div>
+       <div class="md-layout-item md-small-size-100 md-size-10">
+         <md-field>
+           <label>Total</label>
+           <md-input v-model="row.total_purchase" @input="count_unit_purchase(index)" type="number"></md-input>
+         </md-field>
+       </div>
        <div class="md-layout-item md-small-size-100 md-size-15">
          <md-field>
            <label>Unit Purchase</label>
@@ -55,13 +61,7 @@
            <md-input v-model="row.unit_sale_price" type="number"></md-input>
          </md-field>
        </div>
-       <div class="md-layout-item md-small-size-100 md-size-15">
-         <md-field>
-           <label>Total Purchase</label>
-           <md-input v-model="row.total_purchase" @input="count_unit_purchase(index)" type="number"></md-input>
-         </md-field>
-       </div>
-       <div class="md-layout-item md-small-size-100 md-size-20">
+       <div class="md-layout-item md-small-size-100 md-size-10">
          <md-field>
            <label>Expire</label>
            <md-input v-model="row.expire" type="date"></md-input>

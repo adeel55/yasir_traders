@@ -17,12 +17,12 @@ class CreateSalesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('invoice_id');
             $table->unsignedBigInteger('product_id');
-            $table->integer('qty');
-            $table->integer('bonus');
-            $table->decimal('unit_price',15,2);
-            $table->decimal('total_price',15,2);
-            $table->decimal('discount',5,2);
-            $table->decimal('discount_total_price',15,2);
+            $table->integer('qty')->nullable();
+            $table->integer('bonus')->nullable();
+            $table->decimal('unit_price',15,2)->nullable();
+            $table->decimal('total_price',15,2)->nullable();
+            $table->decimal('discount',5,2)->nullable();
+            $table->decimal('discount_total_price',15,2)->nullable();
             $table->timestamps();
 
 

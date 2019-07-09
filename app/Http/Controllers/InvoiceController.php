@@ -54,24 +54,31 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        // $rows = $request->productrows;
-         // dd($request->company);
-        $rows = array(array('product' => 'Lays','qty' => 12,'bonus' => 12,'unit_price' => 50,'total' => 5000,'discount' => 12.00,'discount_total_price' => 13000,'disctotal' => 5000 ));
+        $rows = $request->productrows;
+        // dd($request->company);
+
+        // $rows = array(array('product' => 'Lays','qty' => 12,'bonus' => 12,'unit_price' => 50,'total' => 5000,'discount' => 12.00,'disctotal' => 5000 ));
 
         $customer_id = Customer::findOrSaveCustomer($request->customer);
         $orderbooker_id = OrderBooker::findOrSaveOrderBooker($request->orderbooker);
+        // dd($orderbooker_id);
         $saleman_id = SaleMan::findOrSaveSaleman($request->saleman);
         $invoicedate = $request->invoicedate;
+        $invoicetotal = $request->invoicetotal;
+
+        // die($request->invoicetotal);
 
         $rec = [
                 'customer_id' => $customer_id,
-                'orderbooker_id' => $orderbooker_id,
-                'saleman_id' => $saleman_id,
+                'order_booker_id' => $orderbooker_id,
+                'sale_man_id' => $saleman_id,
+                'total_amount' => $invoicetotal,
                 'created_at' => $invoicedate
             ];
 
 
         $invoice = Invoice::create($rec);
+        // dd($rec,$invoice);
 
         $invoice_id = $invoice->id;
 
@@ -79,7 +86,7 @@ class InvoiceController extends Controller
         foreach ($rows as $key => $val) {
 
             $product_id = Product::where('name','like', $val['product'])->first()->id;
-
+            
             $record = [    
                 'invoice_id' => $invoice_id,
                 'product_id' => $product_id,
@@ -91,8 +98,10 @@ class InvoiceController extends Controller
                 'discount_total_price' => $val['disctotal'],
                 'created_at' => $invoicedate
             ];
+            // dd($record);
             Sale::create($record);
             Product::find($product_id)->decrement('qty', $val['qty']);
+            Product::find($product_id)->decrement('qty', $val['bonus']);
         }
 
         $total_amount = $invoice->sales()->sum('discount_total_price');

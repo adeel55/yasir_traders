@@ -14,15 +14,10 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $filter = array();
-        foreach($request->input() as $key => $val ) {
-            if(strpos($key, 'filter') === 0){
-                array_push($filter, [ltrim($key,'filter'),'like','%'.$val.'%']);
-            }
-        };
+        $filter = filter($request);
 
 
-        $products = Product::where($filter)->paginate(10);
+        $products = Product::join('companies','companies.id','company_id')->select('products.id as product_id','products.name as product','companies.name as company','qty')->where($filter)->paginate(10);
         return request()->json(200,$products);
     }
 

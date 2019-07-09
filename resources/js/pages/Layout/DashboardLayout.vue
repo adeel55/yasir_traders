@@ -36,9 +36,9 @@
         <md-icon>dehaze</md-icon>
         <p>Sale Man List</p>
       </sidebar-link>
-      <sidebar-link to="/product_list">
+      <sidebar-link to="/stock_list">
         <md-icon>dehaze</md-icon>
-        <p>Product List</p>
+        <p>Stock List</p>
       </sidebar-link>
       <sidebar-link to="/company_list">
         <md-icon>dehaze</md-icon>

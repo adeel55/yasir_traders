@@ -46,7 +46,7 @@ class InventoryController extends Controller
 
         foreach ($rows as $key => $val) {
 
-            $product_id = Product::findOrSaveProduct($val);
+            $product_id = Product::findOrSaveProduct($val,$company_id);
 
             $rec = [
                 'company_id' => $company_id,

@@ -13,6 +13,7 @@
           <label>Customer</label>
         </md-autocomplete>
        </div>
+
        <div class="md-layout-item md-small-size-100 md-size-25">
         <md-autocomplete
           v-model="orderbooker"
@@ -55,14 +56,14 @@
        </div>
        <div class="md-layout-item md-small-size-100 md-size-10">
          <md-field>
-           <label>Bonus</label>
-           <md-input v-model="row.bonus" type="number"></md-input>
+           <label>Qty</label>
+           <md-input v-model="row.qty" type="number" @input="count_total(index)"></md-input>
          </md-field>
        </div>
        <div class="md-layout-item md-small-size-100 md-size-10">
          <md-field>
-           <label>Qty</label>
-           <md-input v-model="row.qty" type="number" @input="count_total(index)"></md-input>
+           <label>Bonus</label>
+           <md-input v-model="row.bonus" type="number"></md-input>
          </md-field>
        </div>
        <div class="md-layout-item md-small-size-100 md-size-10">
@@ -169,7 +170,7 @@
       count_invoicetotal(){
         this.invoicetotal = Number(0.00);
         for (var i = 0; i < this.rows.length; i ++) {
-          this.invoicetotal += this.rows[i].disctotal;
+          this.invoicetotal += (Number(this.invoicetotal) + Number(this.rows[i].disctotal));
         }
       },
       productChoosed(index){
@@ -284,8 +285,8 @@
         this.rows.splice(rowId, 1)
       },
       save () {
-        axios.post('/invoice',{'productrows':this.rows,'customer':this.customer,'orderbooker':this.orderbooker,'saleman':this.saleman,'invoicedate':this.invoicedate})
-        .then(d => {})
+        axios.post('/invoice',{'productrows':this.rows,'customer':this.customer,'orderbooker':this.orderbooker,'saleman':this.saleman,'invoicedate':this.invoicedate,'invoicetotal':this.invoicetotal})
+        .then(d => {console.log(d.data)})
         .catch(err => console.log(err));
         this.success=true;
       },

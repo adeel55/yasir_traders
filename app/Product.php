@@ -11,9 +11,9 @@ class Product extends Model
 
 
 
-    public static function findOrSaveProduct($val){
+    public static function findOrSaveProduct($val,$company_id){
         $unit_purchase_price = $val['unit_purchase_price'];
-        $pro = Product::firstOrCreate(['name' => $val['product']]);
+        $pro = Product::firstOrCreate(['company_id' => $company_id,'name' => $val['product']]);
         $pro->increment('qty',intval($val['qty']));
 
         if($pro->unit_purchase_price>0)

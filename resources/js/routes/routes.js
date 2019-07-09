@@ -10,7 +10,7 @@ import AddOrderBooker from '@/pages/AddOrderBooker.vue'
 import AddSaleMan from '@/pages/AddSaleMan.vue'
 import OrderBookerList from '@/pages/OrderBookerList.vue'
 import SaleManList from '@/pages/SaleManList.vue'
-import ProductList from '@/pages/ProductList.vue'
+import StockList from '@/pages/StockList.vue'
 import CompanyList from '@/pages/CompanyList.vue'
 import SalesReport from '@/pages/SalesReport.vue'
 import ExpenseReport from '@/pages/ExpenseReport.vue'
@@ -68,9 +68,9 @@ const routes = [
         component: SaleManList
       },
       {
-        path: 'product_list',
-        name: 'Product List',
-        component: ProductList
+        path: 'stock_list',
+        name: 'Stock List',
+        component: StockList
       },
       {
         path: 'company_list',
