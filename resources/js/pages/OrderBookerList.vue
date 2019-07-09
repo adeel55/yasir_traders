@@ -81,8 +81,8 @@ export default {
       .catch(err => console.log(err));
     },
     filter(){
-      this.flt_str += '&filtername='+this.filtername
-      this.flt_str += '&filterphone='+this.filterphone
+      this.flt_str += '&filterstrname='+this.filtername
+      this.flt_str += '&filterstrphone='+this.filterphone
     }
   },
   created(){
