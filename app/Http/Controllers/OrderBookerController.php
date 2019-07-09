@@ -12,15 +12,9 @@ class OrderBookerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $filter = array();
-        foreach($request->input() as $key => $val ) {
-            if(strpos($key, 'filter') === 0){
-                array_push($filter, [ltrim($key,'filter'),'like','%'.$val.'%']);
-            }
-        };
-
+        $filter = filter($request);
 
         $all = OrderBooker::where($filter)->paginate(10);
         return request()->json('200',$all);

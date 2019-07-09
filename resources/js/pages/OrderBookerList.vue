@@ -31,7 +31,7 @@
                   <md-table-cell md-label="Id">{{ item.id }}</md-table-cell>
                   <md-table-cell md-label="Name">{{ item.name }}</md-table-cell>
                   <md-table-cell md-label="Phone No.">{{ item.phone }}</md-table-cell>
-                  <md-table-cell md-label="Phone No.">{{ item.target }}</md-table-cell>
+                  <md-table-cell md-label="Target.">{{ item.target }}</md-table-cell>
                 </md-table-row>
               </md-table>
               <md-divider class="hr-divider"></md-divider>

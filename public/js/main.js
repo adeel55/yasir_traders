@@ -5003,8 +5003,8 @@ __webpack_require__.r(__webpack_exports__);
     },
 
     filter() {
-      this.flt_str += '&filtername=' + this.filtername;
-      this.flt_str += '&filterphone=' + this.filterphone;
+      this.flt_str += '&filterstrname=' + this.filtername;
+      this.flt_str += '&filterstrphone=' + this.filterphone;
     }
 
   },
@@ -37954,7 +37954,7 @@ var render = function() {
                                 _vm._v(" "),
                                 _c(
                                   "md-table-cell",
-                                  { attrs: { "md-label": "Phone No." } },
+                                  { attrs: { "md-label": "Target." } },
                                   [_vm._v(_vm._s(item.target))]
                                 )
                               ],
