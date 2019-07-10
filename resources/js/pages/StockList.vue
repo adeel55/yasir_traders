@@ -33,6 +33,8 @@
                   <md-table-cell md-label="Company">{{ item.company }}</md-table-cell>
                   <md-table-cell md-label="Product">{{ item.product }}</md-table-cell>
                   <md-table-cell md-label="QTY">{{ item.qty }}</md-table-cell>
+                  <md-table-cell md-label="Purchase Price">{{ item.unit_purchase_price }}</md-table-cell>
+                  <md-table-cell md-label="Sale Price">{{ item.unit_sale_price }}</md-table-cell>
                 </md-table-row>
               </md-table>
               <md-divider class="hr-divider"></md-divider>

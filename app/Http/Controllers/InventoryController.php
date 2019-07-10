@@ -39,7 +39,7 @@ class InventoryController extends Controller
     {
         $rows = $request->productrows;
          // dd($request->company);
-        // $rows = array(array('product' => 'candy','qty' => 12,'carton' => 12,'expire' => '2012-12-23','unit_purchase_price' => 12,'unit_sale_price' => 12,'total_purchase' => 500 ));
+        // $rows = array(array('product' => 'candy','qty' => 12,'carton' => 12,'expire' => '2012-12-23','unit_purchase_price' => 18,'unit_sale_price' => 20,'total_purchase' => 500 ),array('product' => 'lays','qty' => 16,'carton' => 12,'expire' => '2012-12-23','unit_purchase_price' => 15,'unit_sale_price' => 25,'total_purchase' => 300 ));
 
         $company_id = Company::findOrSaveCompany($request->company);
         $purchasedate = $request->purchasedate;

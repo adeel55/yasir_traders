@@ -3009,7 +3009,6 @@ __webpack_require__.r(__webpack_exports__);
         'product': null,
         'qty': null,
         'carton': null,
-        'expire': null,
         'unit_purchase_price': null,
         'unit_sale_price': null,
         'expire': null,
@@ -3087,9 +3086,23 @@ __webpack_require__.r(__webpack_exports__);
         'company': this.company,
         'purchasedate': this.purchasedate
       }).then(d => {
+        this.reset();
+        this.success = true;
         console.log(d);
       }).catch(err => console.log(err));
-      this.success = true;
+    },
+
+    reset() {
+      this.company = '';
+      this.productrows = [{
+        'product': '',
+        'qty': '',
+        'carton': '',
+        'unit_purchase_price': '',
+        'unit_sale_price': '',
+        'expire': '',
+        'total_purchase': ''
+      }];
     },
 
     onCancel() {},
@@ -5661,6 +5674,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -38500,6 +38515,18 @@ var render = function() {
                                   "md-table-cell",
                                   { attrs: { "md-label": "QTY" } },
                                   [_vm._v(_vm._s(item.qty))]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "md-table-cell",
+                                  { attrs: { "md-label": "Purchase Price" } },
+                                  [_vm._v(_vm._s(item.unit_purchase_price))]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "md-table-cell",
+                                  { attrs: { "md-label": "Sale Price" } },
+                                  [_vm._v(_vm._s(item.unit_sale_price))]
                                 )
                               ],
                               1

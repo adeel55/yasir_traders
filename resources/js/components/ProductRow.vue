@@ -105,7 +105,7 @@
     data :() => {
       return {
         
-        productrows: [{'product':null,'qty':null,'carton':null,'expire':null,'unit_purchase_price':null,'unit_sale_price':null,'expire':null,'total_purchase':null}],
+        productrows: [{'product':null,'qty':null,'carton':null,'unit_purchase_price':null,'unit_sale_price':null,'expire':null,'total_purchase':null}],
         company:null,
         purchasedate: null,
         companieslist: [],
@@ -177,9 +177,15 @@
       },
       save () {
         axios.post('/inventory',{'productrows':this.productrows,'company':this.company,'purchasedate':this.purchasedate})
-        .then(d => {console.log(d)})
+        .then(d => {
+          this.reset()
+          this.success=true;
+          console.log(d)})
         .catch(err => console.log(err));
-        this.success=true;
+      },
+      reset(){
+        this.company = ''
+        this.productrows = [{'product':'','qty':'','carton':'','unit_purchase_price':'','unit_sale_price':'','expire':'','total_purchase':''}];
       },
       onCancel(){
 

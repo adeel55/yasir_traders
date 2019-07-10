@@ -17,7 +17,7 @@ class ProductController extends Controller
         $filter = filter($request);
 
 
-        $products = Product::join('companies','companies.id','company_id')->select('products.id as product_id','products.name as product','companies.name as company','qty')->where($filter)->paginate(10);
+        $products = Product::join('companies','companies.id','company_id')->select('products.id as product_id','products.name as product','companies.name as company','qty','unit_purchase_price','unit_sale_price')->where($filter)->paginate(10);
         return request()->json(200,$products);
     }
 
