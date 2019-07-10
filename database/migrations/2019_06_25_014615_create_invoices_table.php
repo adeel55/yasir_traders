@@ -15,12 +15,12 @@ class CreateInvoicesTable extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('customer_id')->nullable();
-            $table->unsignedBigInteger('sale_man_id')->nullable();
-            $table->unsignedBigInteger('order_booker_id')->nullable();
-            $table->decimal('total_amount',15,2)->nullable();
-            $table->decimal('received_amount',15,2)->nullable();
-            $table->decimal('balance',15,2)->nullable();
+            $table->unsignedBigInteger('customer_id');
+            $table->unsignedBigInteger('sale_man_id');
+            $table->unsignedBigInteger('order_booker_id');
+            $table->decimal('total_amount',15,2)->default(0);
+            $table->decimal('received_amount',15,2)->default(0);
+            $table->decimal('balance',15,2)->default(0);
             $table->tinyInteger('received')->default(0);
             $table->timestamps();
 

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="printMe">
     </md-button>
     <div class="md-layout">
       <div class="md-layout-item md-small-size-100 md-size-25">
@@ -110,7 +110,8 @@
  
     <md-button @click="active = true" class="md-success">Save</md-button>
     <md-button @click="addRow" class="md-primary">Add <md-icon>playlist_add</md-icon></md-button>
-    <md-button class="md-info"><md-icon>print</md-icon></md-button>
+    <md-button @click="print" class="md-info"><md-icon>print</md-icon></md-button>
+    <printer :printcomponent="$options.components.test"  @printerStatus="printer_off = $event" :printer_off="printer_off"></printer>
     <md-dialog-alert
       :md-active.sync="success"
       md-title="Success"
@@ -122,6 +123,7 @@
   </div>
 </template>
 <script>
+
   export default {
     name: "invoice-row",
     prop: {
@@ -131,6 +133,7 @@
         
         rows: [{'product':null,'qty':0,'bonus':0,'total':0,'discount':0,'disctotal':0.0,'unit_price':0}],
         customer:null,
+        printer_off: false,
         invoicedate:null,
         customers:[],
         customerlist: [],
@@ -157,6 +160,9 @@
         this.count_invoicetotal();
     },
     methods: {
+      print(){
+          this.printer_off = true;
+      },
       count_total(index){
         this.rows[index].total = (this.rows[index].qty * this.rows[index].unit_price).toFixed(2);
         this.count_disctotal(index)

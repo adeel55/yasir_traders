@@ -15,13 +15,13 @@ class CreateInventoriesTable extends Migration
     {
         Schema::create('inventories', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('company_id')->nullable();
-            $table->unsignedBigInteger('product_id')->nullable();
-            $table->integer('qty')->nullable();
+            $table->unsignedBigInteger('company_id');
+            $table->unsignedBigInteger('product_id');
+            $table->integer('qty')->default();
             $table->integer('carton')->nullable();
-            $table->decimal('unit_purchase_price',15,2)->nullable();
-            $table->decimal('unit_sale_price',15,2)->nullable();
-            $table->decimal('total_purchase',15,2)->nullable();
+            $table->decimal('unit_purchase_price',15,2)->default(0);
+            $table->decimal('unit_sale_price',15,2)->default(0);
+            $table->decimal('total_purchase',15,2)->default(0);
             $table->date('expire')->nullable();
             $table->timestamps();
 

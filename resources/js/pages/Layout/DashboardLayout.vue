@@ -20,6 +20,14 @@
         <md-icon>assignment_returned</md-icon>
         <p>Receive Invoice</p>
       </sidebar-link>
+      <sidebar-link to="/stock_list">
+        <md-icon>dehaze</md-icon>
+        <p>Stock List</p>
+      </sidebar-link>
+      <sidebar-link to="/customer_list">
+        <md-icon>perm_contact_calendar</md-icon>
+        <p>Customers List</p>
+      </sidebar-link>
       <sidebar-link to="/add_order_booker">
         <md-icon>directions_walk</md-icon>
         <p>Add Order Booker</p>
@@ -35,10 +43,6 @@
       <sidebar-link to="/sale_man_list">
         <md-icon>dehaze</md-icon>
         <p>Sale Man List</p>
-      </sidebar-link>
-      <sidebar-link to="/stock_list">
-        <md-icon>dehaze</md-icon>
-        <p>Stock List</p>
       </sidebar-link>
       <sidebar-link to="/company_list">
         <md-icon>dehaze</md-icon>

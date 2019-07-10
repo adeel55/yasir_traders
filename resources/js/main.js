@@ -28,11 +28,14 @@ const router = new VueRouter({
   linkExactActiveClass: "nav-item active"
 });
 
+import printer from "vue-printer";
+
 Vue.component('vendor-table', require('./components/Tables/VendorTable.vue').default);
 Vue.component('create-profile-form', require('./pages/UserProfile/CreateProfile.vue').default);
 Vue.component('product-row', require('./components/ProductRow.vue').default);
 Vue.component('invoice-row', require('./components/InvoiceRow.vue').default);
 Vue.component('edit-invoice-row', require('./components/EditInvoiceRow.vue').default);
+Vue.component('printer', printer);
 
 
 // Pagination

@@ -6,6 +6,7 @@ import AddProduct from '@/pages/AddProduct.vue'
 import AddInvoice from '@/pages/AddInvoice.vue'
 import EditInvoice from '@/pages/EditInvoice.vue'
 import ReceiveInvoice from '@/pages/ReceiveInvoice.vue'
+import CustomerList from '@/pages/CustomerList.vue'
 import AddOrderBooker from '@/pages/AddOrderBooker.vue'
 import AddSaleMan from '@/pages/AddSaleMan.vue'
 import OrderBookerList from '@/pages/OrderBookerList.vue'
@@ -48,6 +49,16 @@ const routes = [
         component: ReceiveInvoice
       },
       {
+        path: 'stock_list',
+        name: 'Stock List',
+        component: StockList
+      },
+      {
+        path: 'customer_list',
+        name: 'Customer List',
+        component: CustomerList
+      },
+      {
         path: 'add_order_booker',
         name: 'Add OrderBooker',
         component: AddOrderBooker
@@ -66,11 +77,6 @@ const routes = [
         path: 'sale_man_list',
         name: 'SaleMan List',
         component: SaleManList
-      },
-      {
-        path: 'stock_list',
-        name: 'Stock List',
-        component: StockList
       },
       {
         path: 'company_list',

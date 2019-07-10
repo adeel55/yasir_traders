@@ -37,6 +37,7 @@
     "dependencies": {
         "laravel-mix-alias": "^1.0.1",
         "laravel-vue-pagination": "^2.3.0",
+        "vue-printer": "0.0.4",
         "vue-router": "^3.0.6"
     }
 }

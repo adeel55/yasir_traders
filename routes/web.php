@@ -33,6 +33,7 @@ Route::resource('/company', 'CompanyController');
 Route::resource('/invoice', 'InvoiceController');
 Route::resource('/expense', 'ExpenseController');
 Route::resource('/sale', 'SaleController');
+Route::resource('/customer', 'CustomerController');
 Route::post('/invoice_received', 'InvoiceController@received');
 Route::get('/orderbookerpost', 'OrderBookerController@store');
 Route::get('/inventorypost', 'InventoryController@store');

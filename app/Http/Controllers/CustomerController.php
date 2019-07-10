@@ -12,9 +12,12 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $filter = filter($request);
+
+        $all = Customer::where($filter)->paginate(10);
+        return request()->json('200',$all);
     }
 
 
