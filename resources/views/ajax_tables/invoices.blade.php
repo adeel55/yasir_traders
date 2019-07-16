@@ -13,7 +13,7 @@
 					@forelse($data as $it)
 					<tr>
 						<td>{{ $it->invoice_id }}</td>
-						<td><a href="/invoice/{{ $it->invoice_id }}/edit">{{ $it->customer_name }}</a></td>
+						<td>{{ $it->customer_name }}</td>
 						<td>{{ $it->orderbooker_name }}</td>
 						<td>{{ $it->saleman_name }}</td>
 						<td>{{ $it->discount_total }}</td>
