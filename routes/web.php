@@ -12,19 +12,22 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('dashboard');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/companies', 'CompanyController@index')->name('home');
-Route::get('/search_companies', 'CompanyController@search');
+Route::get('/search_companies', 'CompanyController@search')->name('searchcompany');
 Route::get('/search_products', 'ProductController@search');
 Route::get('/search_salemen', 'SaleManController@search');
 Route::get('/search_orderbooker', 'OrderBookerController@search');
 Route::get('/search_customer', 'CustomerController@search');
 Route::get('/get_sale_price', 'ProductController@getSalePrice');
+Route::get('/get_invoice_no', 'InvoiceController@getInvoiceNo');
+Route::get('/get_invoice_row', 'InvoiceController@getRow');
+Route::get('/get_stock_row', 'InventoryController@getRow');
 Route::resource('/inventory', 'InventoryController');
 Route::resource('/saleman', 'SaleManController');
 Route::resource('/orderbooker', 'OrderBookerController');

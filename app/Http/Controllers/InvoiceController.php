@@ -28,12 +28,22 @@ class InvoiceController extends Controller
         // dd(filter($request));
         $filter = filter($request);
 
-
-        $all = Invoice::join('customers','customers.id','customer_id')
+        $data = Invoice::join('customers','customers.id','customer_id')
         ->join('sale_men','sale_men.id','sale_man_id')
         ->join('order_bookers','order_bookers.id','order_booker_id')
-        ->select('invoices.id as invoice_id','customers.name as customer_name','order_bookers.name as orderbooker_name','sale_men.name as saleman_name','total_amount')->where($filter)->limit(100)->get();
-        return request()->json('200',$all);
+        ->select('invoices.id as invoice_id','customers.name as customer_name','order_bookers.name as orderbooker_name','sale_men.name as saleman_name','discount_total','invoices.created_at')->where($filter)->paginate(10);
+
+        // die($request);
+
+        
+        if($request->ajax())
+            return view('ajax_tables.invoices',compact('data'));
+        else
+            return view('invoice.invoices_list');
+
+
+            // return view('invoice/invoices_list');
+
     }
 
     /**
@@ -43,7 +53,7 @@ class InvoiceController extends Controller
      */
     public function create()
     {
-        //
+        return view('invoice/create_invoice');
     }
 
     /**
@@ -54,25 +64,23 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        $rows = $request->productrows;
-        // dd($request->company);
+        $rows = $request->rows;
+        // dd($request->input());
 
-        // $rows = array(array('product' => 'Lays','qty' => 12,'bonus' => 12,'unit_price' => 50,'total' => 5000,'discount' => 12.00,'disctotal' => 5000 ));
+        // $rows = array(array('product' => 'Lays','qty' => 12,'bonus' => 12,'unit_price' => 50,'total_price' => 5000,'discount' => 5,'discount_amount' => 50,'discount_total' => 5000 ),array('product' => 'Kurkuray','qty' => 25,'bonus' => 25,'unit_price' => 25,'total_price' => 2500,'discount' => 2,'discount_amount'=> 50,'discount_total' => 2300 ));
 
+        // dd($rows);
         $customer_id = Customer::findOrSaveCustomer($request->customer);
         $orderbooker_id = OrderBooker::findOrSaveOrderBooker($request->orderbooker);
-        // dd($orderbooker_id);
         $saleman_id = SaleMan::findOrSaveSaleman($request->saleman);
-        $invoicedate = $request->invoicedate;
-        $invoicetotal = $request->invoicetotal;
+        $invoicedate = $request->date;
 
-        // die($request->invoicetotal);
+        // die($request->invoice_total);
 
         $rec = [
                 'customer_id' => $customer_id,
                 'order_booker_id' => $orderbooker_id,
                 'sale_man_id' => $saleman_id,
-                'total_amount' => $invoicetotal,
                 'created_at' => $invoicedate
             ];
 
@@ -87,25 +95,35 @@ class InvoiceController extends Controller
 
             $product_id = Product::where('name','like', $val['product'])->first()->id;
             
-            $record = [    
+            // echo "success"; die($val['total_price']);
+            $record = [ 
                 'invoice_id' => $invoice_id,
                 'product_id' => $product_id,
                 'qty' => $val['qty'],
                 'bonus' => $val['bonus'],
                 'unit_price' => $val['unit_price'],
-                'total_price' => $val['total'],
+                'total_price' => $val['total_price'],
                 'discount' => $val['discount'],
-                'discount_total_price' => $val['disctotal'],
+                'discount_amount' => $val['discount_amount'],
+                'discount_total' => $val['discount_total'],
                 'created_at' => $invoicedate
             ];
             // dd($record);
             Sale::create($record);
-            Product::find($product_id)->decrement('qty', $val['qty']);
-            Product::find($product_id)->decrement('qty', $val['bonus']);
+            // Product::find($product_id)->decrement('qty', $val['qty']);
+            // Product::find($product_id)->decrement('qty', $val['bonus']);
         }
 
-        $total_amount = $invoice->sales()->sum('discount_total_price');
-        $invoice->total_amount = $total_amount;
+        // Update Invoice attributes
+        // dd($invoice->sales()->sum('total_price'));
+        $invoice->total_amount = $invoice->sales()->sum('total_price');
+        $invoice->total_discount = $invoice->sales()->sum('discount_amount');
+        $invoice->discount_total = $invoice->sales()->sum('discount_total');
+        $invoice->balance = $invoice->discount_total - $invoice->received_amount;
+
+        // dd($invoice->sales()->sum('discount_amount'));
+
+        $invoice->save();
 
         echo "success";
     }
@@ -136,15 +154,16 @@ class InvoiceController extends Controller
     public function edit(Invoice $invoice)
     {
         $data = array();
-        $data['sales'] = Sale::join('products','products.id','product_id')->select('sales.id as sale_id','product_id','products.name as product','bonus','sales.qty','total_price as total','discount','discount_total_price as disctotal','unit_price')->where('invoice_id',$invoice->id)->get();
+        $sales = Sale::join('products','products.id','product_id')->select('sales.id','product_id','products.name as product_name','bonus','sales.qty','total_price','discount','discount_amount','discount_total','unit_price')->where('invoice_id',$invoice->id)->get();
 
-        $data['invoice'] = Invoice::join('customers','customers.id','customer_id')
+        $invoice = Invoice::join('customers','customers.id','customer_id')
         ->join('sale_men','sale_men.id','sale_man_id')
         ->join('order_bookers','order_bookers.id','order_booker_id')
-        ->select('customers.name as customer','order_bookers.name as orderbooker','sale_men.name as saleman','invoices.created_at as invoicedate')->where('invoices.id',$invoice->id)->get()[0];
+        ->select('invoices.id','customers.name as customer','order_bookers.name as orderbooker','sale_men.name as saleman','total_amount','total_discount','discount_total','invoices.created_at as invoicedate')->where('invoices.id',$invoice->id)->get()[0];
 
-        $data['invoice']['invoicedate'] = date('Y-m-d',strtotime($data['invoice']['invoicedate']));
-        return request()->json('200',$data);
+        $invoice->invoicedate = date('Y-m-d',strtotime($invoice->invoicedate));
+
+        return view('invoice.edit_invoice',compact('invoice','sales'));
     }
 
     /**
@@ -156,7 +175,7 @@ class InvoiceController extends Controller
      */
     public function update(Request $request, Invoice $invoice)
     {
-        $rows = $request->productrows;
+        $rows = $request->rows;
          // dd($request->company);
         // $rows = array(array("sale_id" => 3,"product_id" => 3,"product" => "Lays","bonus" => 10,"qty" => 10,"total" => "5000.00","discount" => "12.00","disctotal" => "500.00","unit_price" => "50.00"),array("sale_id" => 4,"product_id" => 3,"product" => "Lays","bonus" => 5,"qty" => 40,"total" => "1200.00","discount" => "3.00","disctotal" => "1000.00","unit_price" => "55.00"));
 
@@ -269,6 +288,19 @@ class InvoiceController extends Controller
 
         }
 
-
     }
+
+    
+    public function getInvoiceNo()
+    {
+        $status = DB::select("show table status like 'invoices'");
+        echo $status[0]->Auto_increment;
+    }
+
+
+    public function getRow()
+    {
+        return view('components.invoice_row');
+    }
+
 }

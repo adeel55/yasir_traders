@@ -26,7 +26,8 @@ class CompanyController extends Controller
     public function search(Request $request)
     {
         $ss = $request->searchString;
-        $companies = Company::where('name','like','%'.$ss.'%')->limit(8)->pluck('name')->toArray();
+        $companies = Company::select('name')->where('name','like','%'.$ss.'%')->limit(8)->get();
+        // $companies = Company::where('name','like','%'.$ss.'%')->limit(8)->pluck('name')->toArray();
         return request()->json(200,$companies);
         // dd($companies);
     }

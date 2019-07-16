@@ -22,7 +22,8 @@ class CreateSalesTable extends Migration
             $table->decimal('unit_price',15,2)->nullable();
             $table->decimal('total_price',15,2)->nullable();
             $table->decimal('discount',5,2)->nullable();
-            $table->decimal('discount_total_price',15,2)->nullable();
+            $table->decimal('discount_amount',15,2)->nullable();
+            $table->decimal('discount_total',15,2)->nullable();
             $table->timestamps();
 
 

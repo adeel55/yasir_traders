@@ -16,8 +16,8 @@ class OrderBookerController extends Controller
     {
         $filter = filter($request);
 
-        $all = OrderBooker::where($filter)->paginate(10);
-        return request()->json('200',$all);
+        $data = OrderBooker::where($filter)->paginate(10);
+        return view('list.customer_list',compact('data'));
     }
 
 
@@ -29,7 +29,8 @@ class OrderBookerController extends Controller
     public function search(Request $request)
     {
         $ss = $request->searchString;
-        $results = OrderBooker::where('name','like','%'.$ss.'%')->limit(8)->pluck('name')->toArray();
+        $results = OrderBooker::select('name')->where('name','like','%'.$ss.'%')->limit(8)->get();
+        // $results = OrderBooker::where('name','like','%'.$ss.'%')->limit(8)->pluck('name')->toArray();
         return request()->json(200,$results);
         // dd($products);
     }

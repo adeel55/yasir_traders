@@ -16,8 +16,8 @@ class SaleManController extends Controller
     {
         $filter = filter($request);
 
-        $all = SaleMan::where($filter)->paginate(10);
-        return request()->json('200',$all);
+        $data = SaleMan::where($filter)->paginate(10);
+        return view('list.customer_list',compact('data'));
     }
 
     /**
@@ -28,7 +28,8 @@ class SaleManController extends Controller
     public function search(Request $request)
     {
         $ss = $request->searchString;
-        $results = SaleMan::where('name','like','%'.$ss.'%')->limit(8)->pluck('name')->toArray();
+        $results = SaleMan::select('name')->where('name','like','%'.$ss.'%')->limit(8)->get();
+        // $results = SaleMan::where('name','like','%'.$ss.'%')->limit(8)->pluck('name')->toArray();
         return request()->json(200,$results);
         // dd($products);
     }

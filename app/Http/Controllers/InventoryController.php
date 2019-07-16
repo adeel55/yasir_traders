@@ -14,9 +14,18 @@ class InventoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        
+        // dd(filter($request));
+        $filter = filter($request);
+
+
+        $data = Inventory::join('companies','companies.id','company_id')
+        ->join('products','products.id','product_id')
+        ->select('inventories.id as inventory_id','products.name as product','companies.name as company','inventories.qty','inventories.unit_purchase','inventories.unit_sale','total_purchase','inventories.created_at')->orderBy('inventories.id','DESC')->where($filter)->paginate(30);
+
+        return view('stock.stock_purchases',compact('data'));
     }
 
     /**
@@ -26,7 +35,7 @@ class InventoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('stock.add_stock');
     }
 
     /**
@@ -37,27 +46,30 @@ class InventoryController extends Controller
      */
     public function store(Request $request)
     {
-        $rows = $request->productrows;
+        $rows = $request->rows;
+        $date = $request->date;
+
+        $product = new Product;
+        $company = new Company;
          // dd($request->company);
-        // $rows = array(array('product' => 'candy','qty' => 12,'carton' => 12,'expire' => '2012-12-23','unit_purchase_price' => 18,'unit_sale_price' => 20,'total_purchase' => 500 ),array('product' => 'lays','qty' => 16,'carton' => 12,'expire' => '2012-12-23','unit_purchase_price' => 15,'unit_sale_price' => 25,'total_purchase' => 300 ));
+        // $rows = array(array('carton'=> '','expire'=> '1975-01-01','product'=> "nnc",'qty'=> "25",'total_purchase'=> "5000",'unit_purchase'=> "200.00",'unit_sale'=> "250"),array('carton'=> "10",'expire'=> "2019-07-11",'product'=> "SSB",'qty'=> "50",'total_purchase'=> "2550",'unit_purchase'=> "51.00",'unit_sale'=> "60"));
 
-        $company_id = Company::findOrSaveCompany($request->company);
-        $purchasedate = $request->purchasedate;
-
+        // echo '-|'.$request->date.'|-';
+        $company_id = $company->findOrSaveCompany($request->company);
         foreach ($rows as $key => $val) {
 
-            $product_id = Product::findOrSaveProduct($val,$company_id);
+            $product_id = $product->findOrSaveProduct($val,$company_id);
 
             $rec = [
                 'company_id' => $company_id,
                 'product_id' => $product_id,
                 'qty' => $val['qty'],
-                'carton' => $val['carton'],
+                'carton' => $val['carton']||null,
                 'expire' => $val['expire'],
-                'unit_purchase_price' => $val['unit_purchase_price'],
-                'unit_sale_price' => $val['unit_sale_price'],
+                'unit_purchase' => $val['unit_purchase'],
+                'unit_sale' => $val['unit_sale'],
                 'total_purchase' => $val['total_purchase'],
-                'created_at' => $purchasedate
+                'created_at' => $date
             ];
 
             Inventory::create($rec);
@@ -111,6 +123,12 @@ class InventoryController extends Controller
     public function destroy(Inventory $inventory)
     {
         //
+    }
+
+
+    public function getRow()
+    {
+        return view('components.stock_row');
     }
 
 }

@@ -8,7 +8,7 @@ use app\Sale;
 use Illuminate\Database\Eloquent\Model;
 class Invoice extends Model
 {
-    protected $fillable = ['customer_id','sale_man_id','order_booker_id', 'total_amount','received_amount','balance','received','created_at','updated_at'];
+    protected $fillable = ['customer_id','sale_man_id','order_booker_id','total_amount','total_discount', 'discount_total','received_amount','balance','received','created_at','updated_at'];
 
 
     public function sales()
@@ -20,9 +20,5 @@ class Invoice extends Model
     {
     	return $this->belongsTo(Customer::class);
     }
-
-    public function invoice_sum()
-	{
-	    return $this->sales()->withCount("discount_total_price")->get();
-	}
+    
 }

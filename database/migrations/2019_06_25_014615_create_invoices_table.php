@@ -19,6 +19,8 @@ class CreateInvoicesTable extends Migration
             $table->unsignedBigInteger('sale_man_id');
             $table->unsignedBigInteger('order_booker_id');
             $table->decimal('total_amount',15,2)->default(0);
+            $table->decimal('total_discount',15,2)->default(0);
+            $table->decimal('discount_total',15,2)->default(0);
             $table->decimal('received_amount',15,2)->default(0);
             $table->decimal('balance',15,2)->default(0);
             $table->tinyInteger('received')->default(0);

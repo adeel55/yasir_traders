@@ -7,32 +7,43 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     //
-    protected $fillable = ['company_id','name','qty','pcs_per_carton','unit_purchase_price','unit_sale_price','created_at','updated_at'];
+    protected $fillable = ['company_id','name','qty','pcs_per_carton','unit_purchase','unit_sale','created_at','updated_at'];
 
 
 
-    public static function findOrSaveProduct($val,$company_id){
-        $unit_purchase_price = $val['unit_purchase_price'];
+    public function findOrSaveProduct($val,$company_id){
+        
         $pro = Product::firstOrCreate(['company_id' => $company_id,'name' => $val['product']]);
         $pro->increment('qty',intval($val['qty']));
 
-        // Count Average Unit Purchase price
-        if($pro->unit_purchase_price>0)
+        // Count Average Unit Purchase
+        $this->avg_sale($pro,$val['unit_sale']);
 
-            $pro->update(['unit_purchase_price' => ($pro->unit_purchase_price + $val['unit_purchase_price'])/2]);
-        else
-            $pro->update(['unit_purchase_price' => $val['unit_purchase_price']]);
-
-
-        // Count Average Unit Sale price
-        if($pro->unit_sale_price>0)
-
-            $pro->update(['unit_sale_price' => ($pro->unit_sale_price + $val['unit_sale_price'])/2]);
-        else
-            $pro->update(['unit_sale_price' => $val['unit_sale_price']]);
+        // Count Average Unit Sale
+        $this->avg_purchase($pro,$val['unit_purchase']);
 
         $pro->save();
         return $pro->id;
+    }
+
+
+
+    public function avg_sale($pro,$unit_sale)
+    {
+        if($pro->unit_sale>0)
+            $pro->update(['unit_sale' => ($pro->unit_purchase+$unit_sale)/2]);
+        else
+            $pro->update(['unit_sale' => $unit_sale]);
+        
+    }
+
+    public function avg_purchase($pro,$unit_purchase)
+    {
+        if($pro->unit_purchase>0)
+            $pro->update(['unit_purchase' => ($pro->unit_purchase + $unit_purchase)/2]);
+        else
+            $pro->update(['unit_purchase' => $unit_purchase]);
+        
     }
 
     

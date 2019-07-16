@@ -16,8 +16,8 @@ class CustomerController extends Controller
     {
         $filter = filter($request);
 
-        $all = Customer::where($filter)->paginate(10);
-        return request()->json('200',$all);
+        $data = Customer::where($filter)->paginate(10);
+        return view('list.customer_list',compact('data'));
     }
 
 
@@ -29,7 +29,8 @@ class CustomerController extends Controller
     public function search(Request $request)
     {
         $ss = $request->searchString;
-        $results = Customer::where('name','like','%'.$ss.'%')->limit(8)->pluck('name')->toArray();
+        $results = Customer::select('name')->where('name','like','%'.$ss.'%')->limit(8)->get();
+        // $results = Customer::where('name','like','%'.$ss.'%')->limit(8)->pluck('name')->toArray();
         return request()->json(200,$results);
         // dd($products);
     }

@@ -17,8 +17,8 @@ class ProductController extends Controller
         $filter = filter($request);
 
 
-        $products = Product::join('companies','companies.id','company_id')->select('products.id as product_id','products.name as product','companies.name as company','qty','unit_purchase_price','unit_sale_price')->where($filter)->paginate(10);
-        return request()->json(200,$products);
+        $data = Product::join('companies','companies.id','company_id')->select('products.id as product_id','products.name as product','companies.name as company','qty','unit_purchase','unit_sale','products.created_at')->where($filter)->paginate(30);
+        return view('stock.stock_items',compact('data'));
     }
 
     /**
@@ -29,7 +29,8 @@ class ProductController extends Controller
     public function search(Request $request)
     {
         $ss = $request->searchString;
-        $products = Product::where('name','like','%'.$ss.'%')->limit(8)->pluck('name')->toArray();
+        $products = Product::select('name')->where('name','like','%'.$ss.'%')->limit(8)->get();
+        // $products = Product::where('name','like','%'.$ss.'%')->limit(8)->pluck('name')->toArray();
         return request()->json(200,$products);
         // dd($products);
     }
@@ -38,7 +39,7 @@ class ProductController extends Controller
     {
        $product = Product::where('name','like',$request->product)->first();
        if(!is_null($product))
-           echo $product->unit_sale_price;
+           echo $product->unit_sale;
        else
             echo 0.00;
     }

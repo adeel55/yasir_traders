@@ -17,7 +17,6 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
     <body>
-        <div id="app"></div>
-        <script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
+        
     </body>
 </html>

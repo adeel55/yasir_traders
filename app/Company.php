@@ -11,7 +11,7 @@ class Company extends Model
 
 
 
-    public static function findOrSaveCompany($val){
+    public function findOrSaveCompany($val){
         $company = Company::firstOrCreate(['name' => $val]);
         return $company->id;
     }
