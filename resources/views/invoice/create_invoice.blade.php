@@ -32,7 +32,7 @@
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text">Date</div>
 				  			    </div>
-					  			<input type="date" name="date" class="form-control" class="form-control form-control-sm" id="date" required="required">
+					  			<input type="date" name="date" class="form-control date" class="form-control form-control-sm" id="date" required="required">
 					  			@csrf
 				  			</div>
 				  		</div>

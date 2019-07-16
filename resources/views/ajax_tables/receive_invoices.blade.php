@@ -1,4 +1,4 @@
-				@php ($cols = 6)
+				@php ($cols = 7)
 				<thead>
 					<tr>
 						<th>Sr.</th>
@@ -18,7 +18,7 @@
 						<td>{{ $it->saleman_name }}</td>
 						<td>{{ $it->discount_total }}</td>
 						<td><input type="number" step="any" placeholder="amount received" class="received_amount"></td>
-						<td><button class="btn btn-success" onclick="receiveInvoice(this,{{ $it->invoice_id }})"><i class="fa fa-check"></i></button></td>
+						<td><button class="btn btn-sm btn-success" onclick="receiveInvoice(this,{{ $it->invoice_id }})"><i class="fa fa-check"></i></button></td>
 					</tr>
 					@empty
 					<tr>
