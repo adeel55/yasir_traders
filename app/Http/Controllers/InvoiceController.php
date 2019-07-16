@@ -115,7 +115,6 @@ class InvoiceController extends Controller
         }
 
         // Update Invoice attributes
-        // dd($invoice->sales()->sum('total_price'));
         $invoice->total_amount = $invoice->sales()->sum('total_price');
         $invoice->total_discount = $invoice->sales()->sum('discount_amount');
         $invoice->discount_total = $invoice->sales()->sum('discount_total');
@@ -176,6 +175,8 @@ class InvoiceController extends Controller
     public function update(Request $request, Invoice $invoice)
     {
         $rows = $request->rows;
+        $invoice = Invoice::find($request->id);
+        $invoicedate = $request->date;
          // dd($request->company);
         // $rows = array(array("sale_id" => 3,"product_id" => 3,"product" => "Lays","bonus" => 10,"qty" => 10,"total" => "5000.00","discount" => "12.00","disctotal" => "500.00","unit_price" => "50.00"),array("sale_id" => 4,"product_id" => 3,"product" => "Lays","bonus" => 5,"qty" => 40,"total" => "1200.00","discount" => "3.00","disctotal" => "1000.00","unit_price" => "55.00"));
 
@@ -190,10 +191,43 @@ class InvoiceController extends Controller
 
 
 
+
+        foreach ($rows as $key => $val) {
+
+            // Update Inventory
+            // $old_qty = Sale::find($val['sale_id'])->first()->qty;
+            // $change = $old_qty - $val['qty'];
+            // $ch = array('change' => $change,'old_qty' => $old_qty,'newqty' => $val['qty'] );
+            // dd($ch);
+            // if($change < 0){
+            //     $change = abs($change);
+            //     Product::find($val['product_id'])->decrement('qty', $change);
+            // }
+            // if($change > 0){
+            //     Product::find($val['product_id'])->increment('qty', $change);
+            // }
+
+            $product_id = Product::where('name','like', $val['product'])->first()->id;
+            
+            // echo "success"; die($val['total_price']);
+            $record = [
+                'product_id' => $product_id,
+                'qty' => $val['qty'],
+                'bonus' => $val['bonus'],
+                'unit_price' => $val['unit_price'],
+                'total_price' => $val['total_price'],
+                'discount' => $val['discount'],
+                'discount_amount' => $val['discount_amount'],
+                'discount_total' => $val['discount_total'],
+                'updated_at' => $invoicedate
+            ];
+            Sale::find($val['sale_id'])->update($record);
+
+        }
+
         $customer_id = Customer::findOrSaveCustomer($request->customer);
         $orderbooker_id = OrderBooker::findOrSaveOrderBooker($request->orderbooker);
         $saleman_id = SaleMan::findOrSaveSaleman($request->saleman);
-        $invoicedate = $request->invoicedate;
 
         $rec = [
             'customer_id' => $customer_id,
@@ -202,36 +236,14 @@ class InvoiceController extends Controller
             'updated_at' => $invoicedate
         ];
 
-
         // Update Invoice
-        $invoice = $invoice->update($rec);
-
-        
-        foreach ($rows as $key => $val) {
-
-            // Update Inventory
-            $old_qty = Sale::find($val['sale_id'])->first()->qty;
-            $change = $old_qty - $val['qty'];
-            // $ch = array('change' => $change,'old_qty' => $old_qty,'newqty' => $val['qty'] );
-            // dd($ch);
-            if($change < 0){
-                $change = abs($change);
-                Product::find($val['product_id'])->decrement('qty', $change);
-            }
-            if($change > 0){
-                Product::find($val['product_id'])->increment('qty', $change);
-            }
-
-            // Update Sales
-            $record = [    
-                'qty' => $val['qty'],
-                'total_price' => $val['total'],
-                'discount_total_price' => $val['disctotal'],
-                'updated_at' => $invoicedate
-            ];
-            Sale::find($val['sale_id'])->update($record);
-
-        }
+        $invoice->update($rec);
+        // Update Invoice attributes
+        $invoice->total_amount = $invoice->sales()->sum('total_price');
+        $invoice->total_discount = $invoice->sales()->sum('discount_amount');
+        $invoice->discount_total = $invoice->sales()->sum('discount_total');
+        $invoice->balance = $invoice->discount_total - $invoice->received_amount;
+        $invoice->save();
 
         echo "success";
     }
@@ -290,6 +302,37 @@ class InvoiceController extends Controller
 
     }
 
+    
+    public function showReceiveInvoice(Request $request)
+    {
+         // dd(filter($request));
+        $filter = filter($request);
+
+        $data = Invoice::join('customers','customers.id','customer_id')
+        ->join('sale_men','sale_men.id','sale_man_id')
+        ->join('order_bookers','order_bookers.id','order_booker_id')
+        ->select('invoices.id as invoice_id','customers.name as customer_name','order_bookers.name as orderbooker_name','sale_men.name as saleman_name','discount_total','invoices.created_at')->where($filter)->where('received',0)->paginate(10);
+
+        // die($request);
+
+        
+        if($request->ajax())
+            return view('ajax_tables.receive_invoices',compact('data'));
+        else
+            return view('invoice.receive_invoices');
+
+
+            // return view('invoice/invoices_list');
+    } 
+    public function receiveInvoice(Request $request)
+    {
+        $invoice = Invoice::find($request->id);
+        $invoice->received_amount = $request->received_amount;
+        $invoice->received = 1;
+        $invoice->balance = $invoice->discount_total - $invoice->received_amount;
+        $invoice->save();
+
+    }
     
     public function getInvoiceNo()
     {

@@ -136,21 +136,21 @@
 								<th colspan="5"></th>
 								<th>Net. Total:</th>
 								<th>
-									<input type="number" value="{{ $invoice->total_amount }}" id="total_amount">
+									<input type="number" step="any" value="{{ $invoice->total_amount }}" id="total_amount">
 								</th>
 							</tr>
 							<tr>
 								<th colspan="5"></th>
 								<th>Discount:</th>
 								<th>
-									<input type="number" value="{{ $invoice->total_discount }}" id="total_discount">
+									<input type="number" step="any" value="{{ $invoice->total_discount }}" id="total_discount">
 								</th>
 							</tr>
 							<tr>
 								<th colspan="5"></th>
 								<th>Total:</th>
 								<th>
-									<input type="number" value="{{ $invoice->discount_total }}" id="discount_total">
+									<input type="number" step="any" value="{{ $invoice->discount_total }}" id="discount_total">
 								</th>
 							</tr>
 						</tfoot>
@@ -179,12 +179,13 @@
 			var rows = [];
 			for(var i=0; i<rowsdata.length;i++){
 
-			rows.push({'product':$(rowsdata[i]).find('.product').val(),'qty':$(rowsdata[i]).find('.qty').val(),'bonus':$(rowsdata[i]).find('.bonus').val(),'unit_price':$(rowsdata[i]).find('.unit_price').val(),'total_price':$(rowsdata[i]).find('.total_price').val(),'discount':$(rowsdata[i]).find('.discount').val(), 'discount_amount':$(rowsdata[i]).find('.discount_amount').val(),'discount_total':$(rowsdata[i]).find('.discount_total').val()});
+			rows.push({'sale_id':$(rowsdata[i]).find('.sale_id').val(),'product':$(rowsdata[i]).find('.product').val(),'qty':$(rowsdata[i]).find('.qty').val(),'bonus':$(rowsdata[i]).find('.bonus').val(),'unit_price':$(rowsdata[i]).find('.unit_price').val(),'total_price':$(rowsdata[i]).find('.total_price').val(),'discount':$(rowsdata[i]).find('.discount').val(), 'discount_amount':$(rowsdata[i]).find('.discount_amount').val(),'discount_total':$(rowsdata[i]).find('.discount_total').val()});
 			}
 			// data['_token'] = $('meta[name="csrf-token"]').attr('content');
 			// data['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content');
 			data['_token'] = $("input[name='_token']").val();
 			data['rows'] = rows;
+			data['invoiceno'] = $('#invoiceno').val();
 			data['customer'] = $('#customer').val();
 			data['orderbooker'] = $('#orderbooker').val();
 			data['saleman'] = $('#saleman').val();
@@ -195,7 +196,9 @@
 			console.log(data);
 
 
-			axios.post("/invoice", {
+			axios.post("/invoice/{{ $sale->id }}", {
+				'_method' : "PUT",
+				'id' : $('#invoiceno').val(),
 				'_token' : $("input[name='_token']").val(),
 				'customer': $('#customer').val(),
 				'orderbooker': $('#orderbooker').val(),

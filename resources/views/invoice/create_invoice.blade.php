@@ -80,21 +80,21 @@
 								<th colspan="5"></th>
 								<th>Net. Total:</th>
 								<th>
-									<input type="number" class="" id="total_amount">
+									<input type="number" step="any" class="" id="total_amount">
 								</th>
 							</tr>
 							<tr>
 								<th colspan="5"></th>
 								<th>Discount:</th>
 								<th>
-									<input type="number" class="" id="total_discount">
+									<input type="number" step="any" class="" id="total_discount">
 								</th>
 							</tr>
 							<tr>
 								<th colspan="5"></th>
 								<th>Total:</th>
 								<th>
-									<input type="number" class="" id="discount_total">
+									<input type="number" step="any" class="" id="discount_total">
 								</th>
 							</tr>
 						</tfoot>

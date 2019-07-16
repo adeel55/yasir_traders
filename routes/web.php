@@ -28,6 +28,8 @@ Route::get('/get_sale_price', 'ProductController@getSalePrice');
 Route::get('/get_invoice_no', 'InvoiceController@getInvoiceNo');
 Route::get('/get_invoice_row', 'InvoiceController@getRow');
 Route::get('/get_stock_row', 'InventoryController@getRow');
+Route::get('/invoice_receive', 'InvoiceController@showReceiveInvoice');
+Route::post('/invoice_receive', 'InvoiceController@receiveInvoice');
 Route::resource('/inventory', 'InventoryController');
 Route::resource('/saleman', 'SaleManController');
 Route::resource('/orderbooker', 'OrderBookerController');

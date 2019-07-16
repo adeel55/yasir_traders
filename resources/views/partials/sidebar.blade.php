@@ -21,7 +21,7 @@
                         <a href="/invoice/create"><i class="menu-icon fa fa-file-text-o"></i> Creat Invoice</a>
                     </li>
                     <li>
-                        <a href="/invoice"><i class="menu-icon fa fa-list"></i> Receive Invoices</a>
+                        <a href="/invoice_receive"><i class="menu-icon fa fa-list"></i> Receive Invoices</a>
                     </li>
                     <li>
                         <a href="/invoice"><i class="menu-icon fa fa-list"></i> Invoices List</a>

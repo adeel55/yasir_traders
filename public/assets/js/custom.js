@@ -144,6 +144,15 @@ count_per_unit_purchase = function(obj){
 }
 
 
+
+receiveInvoice = function(obj,id){
+    var tr = $(obj).closest('tr');
+    var received_amount = $(tr).find('.received_amount').val();
+    axios.post('/invoice_receive',{id:id,received_amount:received_amount}).then(d => {$(tr).remove()}).catch(e => console.log(e));
+
+}
+
+
 jQuery(document).ready(function($) {
 
 
