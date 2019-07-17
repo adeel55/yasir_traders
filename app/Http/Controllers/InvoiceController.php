@@ -31,7 +31,7 @@ class InvoiceController extends Controller
         $data = Invoice::join('customers','customers.id','customer_id')
         ->join('sale_men','sale_men.id','sale_man_id')
         ->join('order_bookers','order_bookers.id','order_booker_id')
-        ->select('invoices.id as invoice_id','customers.name as customer_name','order_bookers.name as orderbooker_name','sale_men.name as saleman_name','discount_total','invoices.created_at')->where($filter)->paginate(10);
+        ->select('invoices.id as invoice_id','customers.name as customer_name','order_bookers.name as orderbooker_name','sale_men.name as saleman_name','discount_total','received_amount','invoices.created_at')->where($filter)->paginate(25);
 
         // die($request);
 
@@ -323,7 +323,26 @@ class InvoiceController extends Controller
 
 
             // return view('invoice/invoices_list');
-    } 
+    }
+
+    public function receiveInvoiceEdit(Request $request)
+    {
+        $data = array();
+        $sales = Sale::join('products','products.id','product_id')->select('sales.id','product_id','products.name as product_name','bonus','sales.qty','total_price','discount','discount_amount','discount_total','unit_price')->where('invoice_id',$invoice->id)->get();
+
+        $invoice = Invoice::join('customers','customers.id','customer_id')
+        ->join('sale_men','sale_men.id','sale_man_id')
+        ->join('order_bookers','order_bookers.id','order_booker_id')
+        ->select('invoices.id','customers.name as customer','order_bookers.name as orderbooker','sale_men.name as saleman','total_amount','total_discount','discount_total','invoices.created_at as invoicedate')->where('invoices.id',$invoice->id)->get()[0];
+
+        $invoice->invoicedate = date('Y-m-d',strtotime($invoice->invoicedate));
+        $expenses = $invoice->expenses();
+
+
+        return view('invoice.edit_invoice',compact('invoice','sales','expenses'));
+        
+    }
+
     public function receiveInvoice(Request $request)
     {
         $invoice = Invoice::find($request->id);
@@ -332,6 +351,28 @@ class InvoiceController extends Controller
         $invoice->balance = $invoice->discount_total - $invoice->received_amount;
         $invoice->save();
 
+        $customer = Customer::find($invoice->customer_id);
+
+        $sales = Sale::where('invoice_id',$invoice->id)->get();
+        foreach($sales as $sale){
+           Product::find($sale->product_id)->decrement('qty',$sale->qty);
+        }
+        // die("success");
+
+        if($invoice->balance>0){
+
+            $customer->balance = $customer->balance + $invoice->balance;
+            $rec = ['customer_id'=> $customer->id,'credit'=>$invoice->balance,'balance'=>$customer->balance];
+            $customer->save();
+            Statement::create($rec);
+        }
+        if($invoice->balance<0){
+
+            $customer->balance = $customer->balance - abs($invoice->balance);
+            $rec = ['customer_id'=>$customer->id,'debit'=>abs($invoice->balance),'balance'=>$customer->balance];
+            $customer->save();
+            Statement::create($rec);
+        }
     }
     
     public function getInvoiceNo()

@@ -148,6 +148,7 @@
 				'discount_total': $('#discount_total').val(),
 				'date': $('#date').val(),'rows': rows} )
 			.then(d => { console.log(d.data)
+				$('form').trigger("reset");
 				if(d.data == "success")
 				$(".alert").show().delay(3000).slideUp(500, function() {
 				    $(this).alert('close');

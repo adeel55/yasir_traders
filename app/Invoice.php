@@ -3,6 +3,7 @@
 namespace App;
 
 use app\Customer;
+use app\Expense;
 use app\Sale;
 
 use Illuminate\Database\Eloquent\Model;
@@ -20,5 +21,10 @@ class Invoice extends Model
     {
     	return $this->belongsTo(Customer::class);
     }
+
+    // public function expenses()
+    // {
+    // 	return $this->hasMany(Expense::class);
+    // }
     
 }

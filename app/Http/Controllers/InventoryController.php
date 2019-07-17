@@ -25,7 +25,13 @@ class InventoryController extends Controller
         ->join('products','products.id','product_id')
         ->select('inventories.id as inventory_id','products.name as product','companies.name as company','inventories.qty','inventories.unit_purchase','inventories.unit_sale','total_purchase','inventories.created_at')->orderBy('inventories.id','DESC')->where($filter)->paginate(30);
 
-        return view('stock.stock_purchases',compact('data'));
+        // dd(json_encode($data));
+
+        if($request->ajax())
+            return view('ajax_tables.stock_purchases',compact('data'));
+        else
+            return view('stock.stock_purchases');
+
     }
 
     /**

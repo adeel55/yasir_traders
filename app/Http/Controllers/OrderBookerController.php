@@ -17,7 +17,11 @@ class OrderBookerController extends Controller
         $filter = filter($request);
 
         $data = OrderBooker::where($filter)->paginate(10);
-        return view('list.customer_list',compact('data'));
+        
+         if($request->ajax())
+            return view('ajax_tables.orderbookers',compact('data'));
+        else
+            return view('list.orderbooker_list');
     }
 
 

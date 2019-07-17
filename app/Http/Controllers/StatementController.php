@@ -12,9 +12,16 @@ class StatementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $filter = filter($request);
+
+        $data = Statement::join('customers','customers.id','customer_id')->select('statements.*','name')->where($filter)->paginate(25);
+
+        if($request->ajax())
+            return view('ajax_tables.statements',compact('data'));
+        else
+            return view('accounts.statement_list');
     }
 
     /**

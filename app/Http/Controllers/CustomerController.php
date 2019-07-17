@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Customer;
+use App\OrderBooker;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -16,8 +17,12 @@ class CustomerController extends Controller
     {
         $filter = filter($request);
 
-        $data = Customer::where($filter)->paginate(10);
-        return view('list.customer_list',compact('data'));
+        $data = Customer::where($filter)->paginate(25);
+
+        if($request->ajax())
+            return view('ajax_tables.customers',compact('data'));
+        else
+            return view('accounts.customer_list');
     }
 
 
@@ -100,4 +105,22 @@ class CustomerController extends Controller
     {
         //
     }
+
+
+
+
+    public function report(Request $request)
+    {
+        $filter = filter($request);
+
+        $order_booker = OrderBooker::where($filter)->paginate(25);
+
+        if($request->ajax())
+            return view('ajax_tables.customer_report',compact('order_booker'));
+        else
+            return view('accounts.customer_list');
+    }
+
+
+
 }

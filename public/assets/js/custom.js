@@ -52,6 +52,7 @@ document.onkeyup = function(e) {
         filter += '&' + $(el).attr('id') + '=' + $(el).val();
     });
     var url = $("#table").attr("data-url")
+    // console.log(filter);
     axios.get(url+'?page='+page+filter).then(d => $('#table').html(d.data));
 }
 
@@ -143,12 +144,19 @@ count_per_unit_purchase = function(obj){
 
 }
 
+    // Receive Invoice
 
 
 receiveInvoice = function(obj,id){
     var tr = $(obj).closest('tr');
     var received_amount = $(tr).find('.received_amount').val();
-    axios.post('/invoice_receive',{id:id,received_amount:received_amount}).then(d => {$(tr).remove()}).catch(e => console.log(e));
+    if (received_amount) {
+        
+    }
+    axios.post('/invoice_receive',{id:id,received_amount:received_amount})
+    .then(d => {
+        console.log(d.data);
+        $(tr).remove()}).catch(e => console.log(e));
 
 }
 
@@ -159,7 +167,7 @@ jQuery(document).ready(function($) {
 	$('#company').typeahead({
         source: function (query, result) {
             $.ajax({
-                url: "http://localhost:8000/search_companies",
+                url: "/search_companies",
 				data: 'searchString=' + query,            
                 dataType: "json",
                 type: "GET",
@@ -175,7 +183,7 @@ jQuery(document).ready(function($) {
     $('#customer').typeahead({
         source: function (query, result) {
             $.ajax({
-                url: "http://localhost:8000/search_customer",
+                url: "/search_customer",
                 data: 'searchString=' + query,            
                 dataType: "json",
                 type: "GET",
@@ -191,7 +199,7 @@ jQuery(document).ready(function($) {
     $('#orderbooker').typeahead({
         source: function (query, result) {
             $.ajax({
-                url: "http://localhost:8000/search_orderbooker",
+                url: "/search_orderbooker",
                 data: 'searchString=' + query,            
                 dataType: "json",
                 type: "GET",
@@ -207,7 +215,7 @@ jQuery(document).ready(function($) {
     $('#saleman').typeahead({
         source: function (query, result) {
             $.ajax({
-                url: "http://localhost:8000/search_salemen",
+                url: "/search_salemen",
                 data: 'searchString=' + query,            
                 dataType: "json",
                 type: "GET",

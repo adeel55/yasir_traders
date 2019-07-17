@@ -39,6 +39,15 @@
                         <a href="/product"><i class="menu-icon fa fa-list"></i> Stock Items</a>
                     </li>
 
+                    <h3 class="menu-title">Accounts</h3><!-- /.menu-title -->
+                    
+                    <li>
+                        <a href="/customer"><i class="menu-icon fa fa-list"></i> Customers</a>
+                    </li>
+                    <li>
+                        <a href="/statement"><i class="menu-icon fa fa-list"></i> Statements</a>
+                    </li>
+
                     <h3 class="menu-title">Lists</h3><!-- /.menu-title -->
                     
                     <li>
@@ -46,9 +55,6 @@
                     </li>
                     <li>
                         <a href="/saleman"><i class="menu-icon fa fa-list"></i> SaleMen List</a>
-                    </li>
-                    <li>
-                        <a href="/customer"><i class="menu-icon fa fa-list"></i> Customers List</a>
                     </li>
                     
                     <h3 class="menu-title">Reports</h3><!-- /.menu-title -->

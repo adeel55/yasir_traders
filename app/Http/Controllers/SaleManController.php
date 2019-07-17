@@ -16,8 +16,12 @@ class SaleManController extends Controller
     {
         $filter = filter($request);
 
-        $data = SaleMan::where($filter)->paginate(10);
-        return view('list.customer_list',compact('data'));
+        $data = SaleMan::where($filter)->paginate(25);
+
+        if($request->ajax())
+            return view('ajax_tables.salemen',compact('data'));
+        else
+            return view('list.saleman_list');
     }
 
     /**

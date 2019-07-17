@@ -1,24 +1,20 @@
-				@php ($cols = 7)
+				@php ($cols = 5)
 				<thead>
 					<tr>
 						<th>Sr.</th>
-						<th>Customer</th>
-						<th>OrderBooker</th>
-						<th>Sale Man</th>
-						<th>Total</th>
-						<th>Received</th>
-						<th>Date</th>
+						<th>Name</th>
+						<th>Phone</th>
+						<th>Balance</th>
+						<th>Created On</th>
 					</tr>
 				</thead>
 				<tbody>
 					@forelse($data as $it)
 					<tr>
-						<td>{{ $it->invoice_id }}</td>
-						<td>{{ $it->customer_name }}</td>
-						<td>{{ $it->orderbooker_name }}</td>
-						<td>{{ $it->saleman_name }}</td>
-						<td>{{ $it->discount_total }}</td>
-						<td>{{ $it->received_amount }}</td>
+						<td>{{ $it->id }}</td>
+						<td>{{ $it->name }}</td>
+						<td>{{ $it->phone }}</td>
+						<td>{{ $it->balance }}</td>
 						<td>{{ date('d-M-Y',strtotime($it->created_at)) }}</td>
 					</tr>
 					@empty

@@ -3,6 +3,12 @@
 	@section('title','Add Stock')
 	@section('content')
 
+	<div class="alert alert-success alert-dismissible hide" role="alert">
+	  Stock added successfully.
+	  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+	    <span aria-hidden="true">&times;</span>
+	  </button>
+	</div>
 	<div class="row">
 		<div class="col">
 			<form action="#">
@@ -45,6 +51,7 @@
 	</div>
 	<script>
 		today_form_date();
+		$('.alert').hide();
 
 		$('form').submit(function(e){
 			e.preventDefault()
@@ -74,7 +81,13 @@
 		 //      });
 
 			axios.post("/inventory", {'_token' : $("input[name='_token']").val(),'company' : $('#company').val(),'date' : $('#date').val(),'rows': rows} )
-			.then(d => console.log(d.data) )
+			.then(d => {
+				console.log(d.data);
+				$('form').trigger("reset");
+				if(d.data == "success")
+				$(".alert").show().delay(3000).slideUp(500, function() {
+				    $(this).alert('close');
+				}); })
 			.catch((err) => console.log(err) );
 		})
 

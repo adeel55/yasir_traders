@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\Inventory;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -18,7 +19,13 @@ class ProductController extends Controller
 
 
         $data = Product::join('companies','companies.id','company_id')->select('products.id as product_id','products.name as product','companies.name as company','qty','unit_purchase','unit_sale','products.created_at')->where($filter)->paginate(30);
-        return view('stock.stock_items',compact('data'));
+
+
+         if($request->ajax())
+            return view('ajax_tables.stock_items',compact('data'));
+        else
+            return view('stock.stock_items');
+
     }
 
     /**
@@ -39,7 +46,10 @@ class ProductController extends Controller
     {
        $product = Product::where('name','like',$request->product)->first();
        if(!is_null($product))
-           echo $product->unit_sale;
+       {
+            $unit_sale = Inventory::where('product_id',$product->id)->orderBy('created_at','DESC')->first()->unit_sale;
+            echo $unit_sale;
+       }
        else
             echo 0.00;
     }
