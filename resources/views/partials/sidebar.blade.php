@@ -14,14 +14,14 @@
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li class="active">
-                        <a href="../"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
+                        <a href="../"> <i class="menu-icon fa fa-tachometer-alt"></i>Dashboard </a>
                     </li>
                     <h3 class="menu-title">Invoice</h3><!-- /.menu-title -->
                     <li>
-                        <a href="/invoice/create"><i class="menu-icon fa fa-file-text-o"></i> Creat Invoice</a>
+                        <a href="/invoice/create"><i class="menu-icon fa fa-file-invoice"></i> Creat Invoice</a>
                     </li>
                     <li>
-                        <a href="/invoice_receive"><i class="menu-icon fa fa-list"></i> Receive Invoices</a>
+                        <a href="/invoice_receive"><i class="menu-icon fa fa-tasks"></i> Receive Invoices</a>
                     </li>
                     <li>
                         <a href="/invoice"><i class="menu-icon fa fa-list"></i> Invoices List</a>
@@ -42,19 +42,19 @@
                     <h3 class="menu-title">Accounts</h3><!-- /.menu-title -->
                     
                     <li>
-                        <a href="/customer"><i class="menu-icon fa fa-list"></i> Customers</a>
+                        <a href="/customer"><i class="menu-icon fa fa-users"></i> Customers</a>
                     </li>
                     <li>
-                        <a href="/statement"><i class="menu-icon fa fa-list"></i> Statements</a>
+                        <a href="/statement"><i class="menu-icon fa fa-file-invoice-dollar"></i> Statements</a>
                     </li>
 
                     <h3 class="menu-title">Lists</h3><!-- /.menu-title -->
                     
                     <li>
-                        <a href="/orderbooker"><i class="menu-icon fa fa-list"></i> OrderBooker List</a>
+                        <a href="/orderbooker"><i class="menu-icon fa fa-address-card"></i> OrderBooker List</a>
                     </li>
                     <li>
-                        <a href="/saleman"><i class="menu-icon fa fa-list"></i> SaleMen List</a>
+                        <a href="/saleman"><i class="menu-icon fa fa-shipping-fast"></i> SaleMen List</a>
                     </li>
                     
                     <h3 class="menu-title">Reports</h3><!-- /.menu-title -->
@@ -63,6 +63,12 @@
                     </li>
                     <li>
                         <a href="/invoice"><i class="menu-icon fa fa-bar-chart"></i> Customers Report</a>
+                    </li>
+                    <li>
+                        <a href="/invoice"><i class="menu-icon fa fa-bar-chart"></i> Customers Sales Report</a>
+                    </li>
+                    <li>
+                        <a href="/expense"><i class="menu-icon fa fa-bar-chart"></i> Expense Report</a>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->

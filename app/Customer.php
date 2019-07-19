@@ -9,7 +9,7 @@ class Customer extends Model
 {
 	protected $fillable = ['name','phone','balance','address','created_at','updated_at'];
 
-	public function FunctionName()
+	public function invoices()
 	{
 		return $this->hasMany(Invoice::class);
 	}
@@ -17,5 +17,9 @@ class Customer extends Model
     public static function findOrSaveCustomer($val){
         $customer = Customer::firstOrCreate(['name' => $val]);
         return $customer->id;
+    }
+
+    public function totalSaleAmount(){
+
     }
 }

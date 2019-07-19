@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Customer;
 use App\OrderBooker;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
 {
@@ -109,14 +110,14 @@ class CustomerController extends Controller
 
 
 
-    public function report(Request $request)
+    public function salesReport(Request $request)
     {
         $filter = filter($request);
 
-        $order_booker = OrderBooker::where($filter)->paginate(25);
+        $customers = Customer::select()->paginate(50);
 
         if($request->ajax())
-            return view('ajax_tables.customer_report',compact('order_booker'));
+            return view('ajax_tables.customer_sales',compact('customers'));
         else
             return view('accounts.customer_list');
     }

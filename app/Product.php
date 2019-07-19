@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use app\Sale;
+
 class Product extends Model
 {
     //
@@ -44,6 +46,11 @@ class Product extends Model
         else
             $pro->update(['unit_purchase' => $unit_purchase]);
         
+    }
+
+    public function sales()
+    {
+        return $this->hasMany(Sale::class);
     }
 
     

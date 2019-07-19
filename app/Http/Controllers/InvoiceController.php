@@ -231,8 +231,8 @@ class InvoiceController extends Controller
 
         $rec = [
             'customer_id' => $customer_id,
-            'orderbooker_id' => $orderbooker_id,
-            'saleman_id' => $saleman_id,
+            'order_booker_id' => $orderbooker_id,
+            'sale_man_id' => $saleman_id,
             'updated_at' => $invoicedate
         ];
 
@@ -254,9 +254,9 @@ class InvoiceController extends Controller
      * @param  \App\Invoice  $invoice
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Invoice $invoice)
+    public function destroy($id)
     {
-        $invoice->delete();
+        Invoice::destroy($id);
     }
 
         /**
@@ -311,7 +311,7 @@ class InvoiceController extends Controller
         $data = Invoice::join('customers','customers.id','customer_id')
         ->join('sale_men','sale_men.id','sale_man_id')
         ->join('order_bookers','order_bookers.id','order_booker_id')
-        ->select('invoices.id as invoice_id','customers.name as customer_name','order_bookers.name as orderbooker_name','sale_men.name as saleman_name','discount_total','invoices.created_at')->where($filter)->where('received',0)->paginate(10);
+        ->select('invoices.id as invoice_id','customers.name as customer_name','order_bookers.name as orderbooker_name','sale_men.name as saleman_name','discount_total','invoices.created_at')->where($filter)->where('received',0)->get();
 
         // die($request);
 
@@ -354,6 +354,7 @@ class InvoiceController extends Controller
         $customer = Customer::find($invoice->customer_id);
 
         $sales = Sale::where('invoice_id',$invoice->id)->get();
+        $sales = $invoice->sales;
         foreach($sales as $sale){
            Product::find($sale->product_id)->decrement('qty',$sale->qty);
         }

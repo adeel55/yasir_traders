@@ -9,7 +9,7 @@ use app\Invoice;
 
 class Expense extends Model
 {
-    protected $fillable = ['sale_man_id','amount','description','created_at','updated_at'];
+    protected $fillable = ['sale_man_id','receive_invoice_id','amount','description','created_at','updated_at'];
 
     public function invoice()
     {

@@ -42,15 +42,23 @@
 					</div>
 				  </div>
 				  <div class="card-footer d-print-none">
-				    <button class="btn btn-success" id="addstock" type="submit">Add Stock</button>
-				    <button type="button" class="btn btn-info" id="stock_btn" onclick="add_stock_row()">Insert</button>
+				    <button class="btn btn-success" id="addstock" type="submit"><i class="fa fa-boxes"></i> Add Stock</button>
+				    <button type="button" class="btn btn-info" id="stock_btn" onclick="add_stock_row()"><i class="fa fa-align-justify"></i> Insert</button>
 				  </div>
 				</div>
 			</form>
 		</div>	
 	</div>
 	<script>
-		today_form_date();
+
+
+		reset_form = function(){
+			$("form").trigger("reset");
+			today_form_date();
+		}
+		reset_form()
+		
+
 		$('.alert').hide();
 
 		$('form').submit(function(e){
@@ -83,14 +91,17 @@
 			axios.post("/inventory", {'_token' : $("input[name='_token']").val(),'company' : $('#company').val(),'date' : $('#date').val(),'rows': rows} )
 			.then(d => {
 				console.log(d.data);
-				$('form').trigger("reset");
 				if(d.data == "success")
-				$(".alert").show().delay(3000).slideUp(500, function() {
-				    $(this).alert('close');
-				}); })
+				{
+					reset_form()
+					$(".alert").show().delay(3000).slideUp(500, function() {
+					    $(this).alert('close');
+					}); 
+				}
+			})
 			.catch((err) => console.log(err) );
 		})
-
+		
 		
 	</script>
 

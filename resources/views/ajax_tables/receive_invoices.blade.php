@@ -8,20 +8,41 @@
 						<th>Total</th>
 						<th>Received</th>
 						<th>Edit</th>
-						<th>Rec</th>
+						<th>Del
+							<script>
+								invoices = [];
+								countInvoicesDiscountTotal()
+								countInvoicesReceiveAmount()
+								getInvoices =function(){
+									invoices = [];
+									$("#invoices_rows tr").each(function(ind,el){
+										invoices.push({'id' : $(el).find('.invoice_id').val(),
+										'received_amount': $(el).find('.received_amount').val()});
+									});
+								}
+								// console.log(invoices)
+							</script>
+						</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="invoices_rows">
 					@forelse($data as $it)
 					<tr>
-						<td>{{ $it->invoice_id }}</td>
+						<td>{{ $it->invoice_id }}
+							<input type="hidden" value="{{ $it->invoice_id }}" class="invoice_id">
+						</td>
 						<td>{{ $it->customer_name }}</td>
 						<td>{{ $it->orderbooker_name }}</td>
 						<td>{{ $it->saleman_name }}</td>
-						<td>{{ $it->discount_total }}</td>
-						<td><input type="number" step="any" style="width: 90px" placeholder="amount" class="form-control form-control-sm received_amount"></td>
-						<td><a href="/invoice/{{ $it->invoice_id }}/edit" class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i></a></td>
-						<td><button class="btn btn-sm btn-success" onclick="receiveInvoice(this,{{ $it->invoice_id }})"><i class="fa fa-arrow-down"></i></button></td>
+						<td>{{ $it->discount_total }}
+							<input type="hidden" step="any" value="{{ $it->discount_total }}" class="discount_total">
+						</td>
+						<td>
+							<input type="number" step="any" oninput="countInvoicesReceiveAmount()" value="{{ $it->discount_total }}" style="width: 90px" placeholder="amount" class="received_amount" required>
+						</td>
+						<td><a href="/invoice/{{ $it->invoice_id }}/edit" class="btn btn-sm btn-primary"><i class="fa fa-pencil-alt"></i></a>
+						</td>
+						<td><button class="btn btn-danger btn-sm" onclick="deleteInvoice(this,{{ $it->invoice_id }})"><i class="fa fa-trash"></i></button></td>
 					</tr>
 					@empty
 					<tr>
@@ -29,8 +50,3 @@
 					</tr>
 					@endforelse
 				</tbody>
-				<tfoot>
-					<tr>
-						<td colspan="{{$cols}}">{{ $data->links() }}</td>
-					</tr>
-				</tfoot>

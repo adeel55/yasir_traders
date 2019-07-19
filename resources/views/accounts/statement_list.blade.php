@@ -21,7 +21,7 @@
 	</div>
 	<div class="row">
 		<div class="col">
-			<table id="table" data-url="/statement" class="table table-sm table-hover">
+			<table id="table" data-url="/statement" class="table table-sm small table-hover">
 			</table>
 		</div>
 	</div>

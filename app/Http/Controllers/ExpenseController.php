@@ -15,13 +15,19 @@ class ExpenseController extends Controller
     public function index(Request $request)
     {
         
-        // dd(filter($request));
         $filter = filter($request);
 
 
-        $all = Expense::join('sale_men','sale_men.id','sale_man_id')
-        ->select('expenses.id as expense_id','sale_men.name as saleman_name','amount','description','created_at')->where($filter)->paginate(20);
-        return request()->json('200',$all);
+        $data = Expense::join('sale_men','sale_men.id','sale_man_id')
+        ->select('expenses.id as expense_id','sale_men.name as saleman_name','amount','description','expenses.created_at')->where($filter)->paginate(20);
+        
+        if($request->ajax()){
+
+            // die(json_encode(filter($request)));
+            return view('ajax_tables.expense_report',compact('data'));
+        }
+        else
+            return view('reports.expense_report');
     }
 
     /**
@@ -90,10 +96,17 @@ class ExpenseController extends Controller
         //
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Expense  $expense
+     * @return \Illuminate\Http\Response
+     */
+
 
     public function getRow()
     {
-        return
+        return view("components.expense_row");
     }
 
 

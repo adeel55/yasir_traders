@@ -144,10 +144,31 @@ count_per_unit_purchase = function(obj){
 
 }
 
+
+
     // Receive Invoice
 
 
-receiveInvoice = function(obj,id){
+countInvoicesDiscountTotal = function(){
+     var ttl =0;
+    $("#invoices_rows tr").each(function(index,el){
+        ttl = sum(ttl,$(el).find('.discount_total').val());
+    });
+    $('#discount_total').val(ttl);
+}
+
+countInvoicesReceiveAmount = function(){
+    var ttl =0;
+    $("#invoices_rows tr").each(function(index,el){
+        ttl = sum(ttl,$(el).find('.received_amount').val());
+    });
+    $('#total_received').val(sub(ttl,$('#total_expenses').val()));
+}
+
+receiveInvoices = function(obj,id){
+
+    if(!confirm('Are you sure to close all these Invoices?')) return;
+
     var tr = $(obj).closest('tr');
     var received_amount = $(tr).find('.received_amount').val();
     if (received_amount) {
@@ -156,9 +177,53 @@ receiveInvoice = function(obj,id){
     axios.post('/invoice_receive',{id:id,received_amount:received_amount})
     .then(d => {
         console.log(d.data);
-        $(tr).remove()}).catch(e => console.log(e));
+        $(tr).remove()
+    }).catch(e => console.log(e));
 
 }
+
+deleteInvoice = function(obj,id){
+    if(!confirm('Are you sure to delete this Invoice?')) return;
+    axios.post('/invoice/'+id,{_method:'DELETE'})
+    .then(d => {
+        console.log(d.data);
+        var tr = $(obj).closest('tr').remove();
+    }).catch(e => console.log(e));
+}
+
+
+
+// Expenses
+countTotalExpenses = function(){
+    var ttl = 0;
+    $('#expenses_rows .row').each(function(index,el){
+        ttl = sum(ttl,$(el).find('.expense_amount').val());
+    });
+    $('#total_expenses').val(ttl);
+    countInvoicesReceiveAmount()
+}
+add_expense_row = function(){
+    axios.get('/get_expense_row').then(d => $('#expenses_rows').append(d.data));
+}
+delExpenseRow = function(obj){
+    $(obj).closest('.row').remove();
+    countInvoicesReceiveAmount()
+    countTotalExpenses()
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 jQuery(document).ready(function($) {

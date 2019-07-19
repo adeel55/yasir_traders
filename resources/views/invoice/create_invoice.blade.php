@@ -15,7 +15,7 @@
 			<form action="#">
 				<div class="card">
 				  <div class="card-header">
-					   Add Stock
+					   Create Invoice
 				  </div>
 				  <div class="card-body p-2">
 				  	<div class="row m-0">
@@ -71,6 +71,7 @@
 							<th>Total</th>
 							<th>Disc(%)</th>
 							<th>Disc. Total</th>
+							<th class="d-print-none">Del</th>
 						</thead>
 						<tbody id="tbody">
 							@include('components.invoice_row')
@@ -102,19 +103,17 @@
 					</div>
 				  </div>
 				  <div class="card-footer d-print-none">
-				    <button class="btn btn-success" id="addstock" type="submit">Create</button>
-				    <button type="button" onclick="print()" class="btn btn-warning">Print</button>
-				    <button type="button" class="btn btn-info" id="stock_btn" onclick="add_invoice_row()">Insert</button>
+				    <button class="btn btn-success" id="addstock" type="submit"><i class="fa fa-save"></i> Create</button>
+				    <button type="button" onclick="print()" class="btn btn-warning"><i class="fa fa-print"></i> Print</button>
+				    <button type="button" class="btn btn-info" id="stock_btn" onclick="add_invoice_row()"><i class="fa fa-align-justify"></i> Insert</button>
 				  </div>
 				</div>
 			</form>
 		</div>	
 	</div>
 	<script>
-		today_form_date();
-		$('.alert').hide();
-		
 
+		$('.alert').hide();
 		$('form').submit(function(e){
 			e.preventDefault()
 			var data = {};
@@ -124,19 +123,6 @@
 
 			rows.push({'product':$(rowsdata[i]).find('.product').val(),'qty':$(rowsdata[i]).find('.qty').val(),'bonus':$(rowsdata[i]).find('.bonus').val(),'unit_price':$(rowsdata[i]).find('.unit_price').val(),'total_price':$(rowsdata[i]).find('.total_price').val(),'discount':$(rowsdata[i]).find('.discount').val(), 'discount_amount':$(rowsdata[i]).find('.discount_amount').val(),'discount_total':$(rowsdata[i]).find('.discount_total').val()});
 			}
-			// data['_token'] = $('meta[name="csrf-token"]').attr('content');
-			// data['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content');
-			data['_token'] = $("input[name='_token']").val();
-			data['rows'] = rows;
-			data['customer'] = $('#customer').val();
-			data['orderbooker'] = $('#orderbooker').val();
-			data['saleman'] = $('#saleman').val();
-			data['date'] = $('#date').val();
-			data['total_amount'] = $('#total_amount').val();
-			data['total_discount'] = $('#total_discount').val();
-			data['discount_total'] = $('#discount_total').val();
-			console.log(data);
-
 
 			axios.post("/invoice", {
 				'_token' : $("input[name='_token']").val(),
@@ -147,21 +133,28 @@
 				'total_discount': $('#total_discount').val(),
 				'discount_total': $('#discount_total').val(),
 				'date': $('#date').val(),'rows': rows} )
-			.then(d => { console.log(d.data)
-				$('form').trigger("reset");
+			.then(d => {
+				// console.log(d.data)
+				// console.log(d.data);
 				if(d.data == "success")
-				$(".alert").show().delay(3000).slideUp(500, function() {
-				    $(this).alert('close');
-				});
+				{
+					reset_form()
+					$(".alert").show().delay(3000).slideUp(500, function() {
+					    $(this).alert('close');
+					}); 
+				}
 			})
 			.catch((err) => console.log(err) );
 		});
 
 
-		// Get Invoice No.
-		axios.get("/get_invoice_no").then(d => $('#invoiceno').val(d.data));
-
-
+		reset_form = function(){
+			$("form").trigger("reset");
+			today_form_date();
+			// Get Invoice No.
+			axios.get("/get_invoice_no").then(d => $('#invoiceno').val(d.data));
+		}
+	reset_form()
 		
 	</script>
 

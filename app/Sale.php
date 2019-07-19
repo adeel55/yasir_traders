@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 use app\Invoice;
+use app\Customer;
+use app\Product;
 
 class Sale extends Model
 {
@@ -15,5 +17,15 @@ class Sale extends Model
     public function invoice()
     {
     	return $this->belongsTo(Invoice::class);
+    }
+
+    public function customers()
+    {
+    	return hasManyThrough(Customer::class, Invoice::class);
+    }
+
+    public function product()
+    {
+    	return $this->belongsTo(Product::class);
     }
 }
