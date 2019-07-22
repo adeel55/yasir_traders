@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Sale;
+use App\Company;
 use App\Product;
 use App\Customer;
 use Illuminate\Http\Request;
@@ -90,21 +91,24 @@ class SaleController extends Controller
      */
     public function destroy(Sale $sale)
     {
-        //
+        $sale->delete();
     }
 
 
-    public function salesReport(Request $request)
+    public function customerSalesReport(Request $request)
     {
         // dd(filter($request));
         $filter = filter($request);
 
+        $customers = Customer::all();
 
-        $data = Sale::selectRaw('product_id, products.name as product_name, sum_qty, sum_bonus, avg_unit_price, sum_sales_amount, sum_qty * products.unit_purchase as sum_purchase_amount, sum_sales_amount - (products.unit_purchase * sum_qty) as profit')->from(DB::raw('(select product_id, sum(sales.qty) as sum_qty, sum(sales.bonus) as sum_bonus, AVG(unit_price) avg_unit_price, SUM(total_price) as sum_total_price, SUM(discount_total) as sum_discount_total from sales group by product_id) as groupsales'))->join('invoices','invoices.id','invoice_id')->join('customers','customers.id','customer_id')->paginate(30);
+        // $data = Sale::selectRaw('product_id, products.name as product_name, sum_qty, sum_bonus, avg_unit_price, sum_sales_amount, sum_qty * products.unit_purchase as sum_purchase_amount, sum_sales_amount - (products.unit_purchase * sum_qty) as profit')->from(DB::raw('(select product_id, sum(sales.qty) as sum_qty, sum(sales.bonus) as sum_bonus, AVG(unit_price) avg_unit_price, SUM(total_price) as sum_total_price, SUM(discount_total) as sum_discount_total from sales group by product_id) as groupsales'))->join('invoices','invoices.id','invoice_id')->join('customers','customers.id','customer_id')->paginate(30);
         
-
-        return view('ajax_tables.customer_sale_report',compact($data));
-        
+        if($request->ajax())
+            return view('ajax_tables.customer_sale_report',compact('customers'));
+        else
+            // return view('ajax_tables.customer_sale_report',compact('customers'));
+            return view('reports.customer_sale_report',compact('customers'));  
     }
 
     public function orderbookerCustomerReport(Request $request)
@@ -112,13 +116,13 @@ class SaleController extends Controller
         // dd(filter($request));
         $filter = filter($request);
 
-
-        $data = Sale::selectRaw('product_id, products.name as product_name, sum_qty, sum_bonus, avg_unit_price, sum_sales_amount, sum_qty * products.unit_purchase as sum_purchase_amount, sum_sales_amount - (products.unit_purchase * sum_qty) as profit')->from(DB::raw('(select product_id, sum(sales.qty) as sum_qty, sum(sales.bonus) as sum_bonus, AVG(unit_price) avg_unit_price, SUM(total_price) as sum_total_price, SUM(discount_total) as sum_discount_total from sales group by product_id) as groupsales'))->join('invoices','invoices.id','invoice_id')->join('customers','customers.id','customer_id')->paginate(30);
+        $customers = Customer::all();
         
         if($request->ajax())
-            return view('ajax_tables.orderbooker_customer_report',compact('data'));
+            return view('ajax_tables.orderbooker_customer_report',compact('customers'));
         else
-            return view('reports.ajax_tables.orderbooker_customer_report');
+            // return view('ajax_tables.orderbooker_customer_report',compact('customers'));
+            return view('reports.orderbooker_customer_report');
         
     }
     public function orderbookerProductReport(Request $request)
@@ -126,16 +130,16 @@ class SaleController extends Controller
         // dd(filter($request));
         $filter = filter($request);
 
+        $orderbooker = $request->order_booker;
 
-        $products = Product::all();
-
-        // $data = Sale::selectRaw('product_id, products.name as product_name, sum_qty, sum_bonus, avg_unit_price, sum_sales_amount, sum_qty * products.unit_purchase as sum_purchase_amount, sum_sales_amount - (products.unit_purchase * sum_qty) as profit')->from(DB::raw('(select product_id, sum(sales.qty) as sum_qty, sum(sales.bonus) as sum_bonus, AVG(unit_price) avg_unit_price, SUM(total_price) as sum_total_price, SUM(discount_total) as sum_discount_total from sales group by product_id) as groupsales'))->join('products','products.id','product_id')->where($filter)->paginate(30);
+        $companies = Company::all();
         
 
         if($request->ajax())
-            return view('ajax_tables.orderbooker_product_report',compact('products'));
+            return view('ajax_tables.orderbooker_product_report',compact('companies'),compact('orderbooker'));
         else
-            return view('reports.ajax_tables.orderbooker_product_report');
+            // return view('ajax_tables.orderbooker_product_report',compact('companies'),compact('orderbooker'));
+            return view('reports.orderbooker_product_report');
         
     }
 

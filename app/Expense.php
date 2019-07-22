@@ -15,4 +15,9 @@ class Expense extends Model
     {
     	return $this->belongsTo(Invoice::class);
     }
+
+    public function created_at()
+    {
+        return date('Y-m-d',strtotime($this->created_at));
+    }
 }

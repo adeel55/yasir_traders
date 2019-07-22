@@ -42,6 +42,18 @@ class CustomerController extends Controller
     }
 
     /**
+     * Display a list of searched items.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function searchArea(Request $request)
+    {
+        $ss = $request->searchString;
+        $results = Customer::selectRaw('distinct(area) as name')->where('area','like','%'.$ss.'%')->limit(8)->get();
+        return request()->json(200,$results);
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -70,7 +82,7 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        //
+        return view('customer.view_customer',compact('customer'));
     }
 
     /**
@@ -81,7 +93,7 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        //
+        return view('customer.edit_customer',compact('customer'));
     }
 
     /**
@@ -93,7 +105,8 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-        //
+        $customer->update($request->all());
+        return "success";
     }
 
     /**
@@ -102,9 +115,11 @@ class CustomerController extends Controller
      * @param  \App\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Customer $customer)
+    public function destroy($id)
     {
-        //
+        Customer::destroy($id);
+        return view('components.alert',['msg'=>'Inventory deleted!','type'=>'primary']);
+        
     }
 
 

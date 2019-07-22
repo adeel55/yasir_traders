@@ -16,12 +16,12 @@ class OrderBookerController extends Controller
     {
         $filter = filter($request);
 
-        $data = OrderBooker::where($filter)->paginate(10);
+        $data = OrderBooker::where($filter)->orderBy('id','DESC')->paginate(15);
         
          if($request->ajax())
             return view('ajax_tables.orderbookers',compact('data'));
         else
-            return view('list.orderbooker_list');
+            return view('orderbooker.orderbooker_list');
     }
 
 
@@ -68,9 +68,9 @@ class OrderBookerController extends Controller
      * @param  \App\OrderBooker  $orderBooker
      * @return \Illuminate\Http\Response
      */
-    public function show(OrderBooker $orderBooker)
+    public function show(OrderBooker $orderbooker)
     {
-        //
+        return view("orderbooker.view_orderbooker", compact('orderbooker'));
     }
 
     /**
@@ -79,9 +79,9 @@ class OrderBookerController extends Controller
      * @param  \App\OrderBooker  $orderBooker
      * @return \Illuminate\Http\Response
      */
-    public function edit(OrderBooker $orderBooker)
+    public function edit(OrderBooker $orderbooker)
     {
-        //
+        return view("orderbooker.edit_orderbooker", compact('orderbooker'));
     }
 
     /**
@@ -91,9 +91,10 @@ class OrderBookerController extends Controller
      * @param  \App\OrderBooker  $orderBooker
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OrderBooker $orderBooker)
+    public function update(Request $request, OrderBooker $orderbooker)
     {
-        //
+        $orderbooker->update($request->all());
+        return "success";
     }
 
     /**
@@ -102,8 +103,9 @@ class OrderBookerController extends Controller
      * @param  \App\OrderBooker  $orderBooker
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OrderBooker $orderBooker)
+    public function destroy($id)
     {
-        //
+        OrderBooker::destroy($id);
+        return view('components.alert',['msg'=>'Inventory deleted!','type'=>'primary']);
     }
 }

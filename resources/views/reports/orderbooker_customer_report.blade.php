@@ -12,9 +12,9 @@
 		<div class="col-lg-4 col-md-6 col-sm-12 p-1">
   			<div class="input-group input-group-sm">
   			    <div class="input-group-prepend">
-  			     	<div class="input-group-text">SaleMan</div>
+  			     	<div class="input-group-text">OrderBooker</div>
   			    </div>
-	  			<input type="text" id="filterstrjoinsale_men-name" oninput="filter()" class="filter form-control">
+	  			<input type="text" id="order_booker" oninput="filter()" class="filter form-control">
   			</div>
 		</div>
 		<div class="col-lg-4 col-md-6 col-sm-12 p-1">

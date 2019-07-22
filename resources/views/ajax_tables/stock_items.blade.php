@@ -1,4 +1,4 @@
-				@php ($cols = 6)
+				@php ($cols = 8)
 				<thead>
 					<tr>
 						<th>Sr.</th>
@@ -7,7 +7,10 @@
 						<th>Company</th>
 						<th>Purchase Price</th>
 						<th>Sale Price</th>
-						{{-- <th>Date</th> --}}
+						<th>Date</th>
+						<th>Del</th>
+
+
 					</tr>
 				</thead>
 				<tbody>
@@ -20,7 +23,8 @@
 						<td>{{ $it->company }}</td>
 						<td>{{ $it->unit_purchase }}</td>
 						<td>{{ $it->unit_sale }}</td>
-						{{-- <td>{{ date('d-M-Y',strtotime($it->created_at)) }}</td> --}}
+						<td>{{ date('d-M-Y',strtotime($it->created_at)) }}</td>
+						<td><button class="btn btn-danger btn-sm" onclick="deleteProduct(this,{{ $it->product_id }})"><i class="fa fa-trash"></i></button></td>
 					</tr>
 					@empty
 					<tr>

@@ -31,7 +31,7 @@ class InvoiceController extends Controller
         $data = Invoice::join('customers','customers.id','customer_id')
         ->join('sale_men','sale_men.id','sale_man_id')
         ->join('order_bookers','order_bookers.id','order_booker_id')
-        ->select('invoices.id as invoice_id','customers.name as customer_name','order_bookers.name as orderbooker_name','sale_men.name as saleman_name','discount_total','received_amount','invoices.created_at')->where($filter)->paginate(25);
+        ->select('invoices.id as invoice_id','customers.name as customer_name','order_bookers.name as orderbooker_name','sale_men.name as saleman_name','discount_total','received_amount','invoices.created_at')->where($filter)->orderBy('invoices.id','DESC')->paginate(25);
 
         // die($request);
 
@@ -74,6 +74,7 @@ class InvoiceController extends Controller
         $orderbooker_id = OrderBooker::findOrSaveOrderBooker($request->orderbooker);
         $saleman_id = SaleMan::findOrSaveSaleman($request->saleman);
         $invoicedate = $request->date;
+        Customer::find($customer_id)->area = $request->area;
 
         // die($request->invoice_total);
 
@@ -141,7 +142,7 @@ class InvoiceController extends Controller
      */
     public function show(Invoice $invoice)
     {
-        //
+        return view('invoice.view_invoice',compact('invoice'));
     }
 
     /**
@@ -152,17 +153,7 @@ class InvoiceController extends Controller
      */
     public function edit(Invoice $invoice)
     {
-        $data = array();
-        $sales = Sale::join('products','products.id','product_id')->select('sales.id','product_id','products.name as product_name','bonus','sales.qty','total_price','discount','discount_amount','discount_total','unit_price')->where('invoice_id',$invoice->id)->get();
-
-        $invoice = Invoice::join('customers','customers.id','customer_id')
-        ->join('sale_men','sale_men.id','sale_man_id')
-        ->join('order_bookers','order_bookers.id','order_booker_id')
-        ->select('invoices.id','customers.name as customer','order_bookers.name as orderbooker','sale_men.name as saleman','total_amount','total_discount','discount_total','invoices.created_at as invoicedate')->where('invoices.id',$invoice->id)->get()[0];
-
-        $invoice->invoicedate = date('Y-m-d',strtotime($invoice->invoicedate));
-
-        return view('invoice.edit_invoice',compact('invoice','sales'));
+        return view('invoice.edit_invoice',compact('invoice'));
     }
 
     /**
@@ -228,6 +219,9 @@ class InvoiceController extends Controller
         $customer_id = Customer::findOrSaveCustomer($request->customer);
         $orderbooker_id = OrderBooker::findOrSaveOrderBooker($request->orderbooker);
         $saleman_id = SaleMan::findOrSaveSaleman($request->saleman);
+        $cust = Customer::find($customer_id)->update(['area'=>$request->area]);
+        // $cust->area = $request->area;
+        // $cust->save();
 
         $rec = [
             'customer_id' => $customer_id,
@@ -257,6 +251,7 @@ class InvoiceController extends Controller
     public function destroy($id)
     {
         Invoice::destroy($id);
+        return view('components.alert',['msg'=>'Invoice deleted!','type'=>'primary']);
     }
 
         /**

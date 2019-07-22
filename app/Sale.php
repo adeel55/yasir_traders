@@ -26,6 +26,10 @@ class Sale extends Model
 
     public function product()
     {
-    	return $this->belongsTo(Product::class);
+    	return $this->belongsTo('App\Product');
+    }
+    public function created_at()
+    {
+        return date('Y-m-d',strtotime($this->created_at));
     }
 }

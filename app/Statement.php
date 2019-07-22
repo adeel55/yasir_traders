@@ -15,4 +15,10 @@ class Statement extends Model
     {
     	return $this->belongsTo(Customer::class);
     }
+
+
+    public function created_at()
+    {
+        return date('Y-m-d',strtotime($this->created_at));
+    }
 }

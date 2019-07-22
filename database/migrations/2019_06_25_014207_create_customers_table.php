@@ -18,6 +18,7 @@ class CreateCustomersTable extends Migration
             $table->string('name',100);
             $table->string('phone',20)->nullable();
             $table->decimal('balance',15,2)->default(0);
+            $table->string('area',200)->nullable();
             $table->string('address',200)->nullable();
 
             $table->timestamps();

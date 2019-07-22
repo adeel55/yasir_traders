@@ -132,6 +132,15 @@ delInvoiceRow = function(btn){
         $(btn).closest('tr').remove();
 
 }
+delEditInvoiceRow = function(obj,id){
+    
+    if(!confirm("Are you sure to delete this product from this invoice?")) return;
+    // delete row
+    axios.post('/sale/'+id,{"_method":"DELETE",'_token':$("input[name='_token']").val()}).then(
+       d => {$(obj).closest('tr').remove();
+       countTotalPrice() }).catch(e => console.log(e));
+
+}
 
 
 
@@ -187,6 +196,59 @@ deleteInvoice = function(obj,id){
     axios.post('/invoice/'+id,{_method:'DELETE'})
     .then(d => {
         console.log(d.data);
+        var tr = $(obj).closest('tr').remove();
+    }).catch(e => console.log(e));
+}
+
+
+
+
+    // Inventory
+
+
+deleteInventory = function(obj,id){
+    if(!confirm('Are you sure to delete this Stock Purchase?')) return;
+    axios.post('/inventory/'+id,{_method:'DELETE'})
+    .then(d => {
+        console.log(d.data);
+        $('#msg').html(d.data);
+        var tr = $(obj).closest('tr').remove();
+    }).catch(e => console.log(e));
+}
+
+deleteProduct = function(obj,id){
+    if(!confirm('Are you sure to delete this Product and its Purchases completely?')) return;
+    axios.post('/product/'+id ,{_method:'DELETE'})
+    .then(d => {
+        console.log(d.data);
+        $('#msg').html(d.data);
+        var tr = $(obj).closest('tr').remove();
+    }).catch(e => console.log(e));
+}
+deleteCustomer = function(obj,id){
+    if(!confirm('Are you sure to delete this Customer permanently?')) return;
+    axios.post('/customer/'+id ,{_method:'DELETE'})
+    .then(d => {
+        console.log(d.data);
+        $('#msg').html(d.data);
+        var tr = $(obj).closest('tr').remove();
+    }).catch(e => console.log(e));
+}
+deleteSaleman = function(obj,id){
+    if(!confirm('Are you sure to delete this SaleMan permanently?')) return;
+    axios.post('/saleman/'+id ,{_method:'DELETE'})
+    .then(d => {
+        console.log(d.data);
+        $('#msg').html(d.data);
+        var tr = $(obj).closest('tr').remove();
+    }).catch(e => console.log(e));
+}
+deleteOrderbooker = function(obj,id){
+    if(!confirm('Are you sure to delete this Order Booker permanently?')) return;
+    axios.post('/orderbooker/'+id ,{_method:'DELETE'})
+    .then(d => {
+        console.log(d.data);
+        $('#msg').html(d.data);
         var tr = $(obj).closest('tr').remove();
     }).catch(e => console.log(e));
 }
@@ -281,6 +343,22 @@ jQuery(document).ready(function($) {
         source: function (query, result) {
             $.ajax({
                 url: "/search_salemen",
+                data: 'searchString=' + query,            
+                dataType: "json",
+                type: "GET",
+                success: function (data) {
+                    result($.map(data, function (item) {
+                        return item;
+                    }));
+                }
+            });
+        }
+    });
+
+    $('#area').typeahead({
+        source: function (query, result) {
+            $.ajax({
+                url: "/search_area",
                 data: 'searchString=' + query,            
                 dataType: "json",
                 type: "GET",

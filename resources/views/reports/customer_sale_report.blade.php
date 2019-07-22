@@ -12,7 +12,7 @@
 		<div class="col-lg-4 col-md-6 col-sm-12 p-1">
   			<div class="input-group input-group-sm">
   			    <div class="input-group-prepend">
-  			     	<div class="input-group-text">SaleMan</div>
+  			     	<div class="input-group-text">Customer</div>
   			    </div>
 	  			<input type="text" id="filterstrjoinsale_men-name" oninput="filter()" class="filter form-control">
   			</div>
@@ -28,7 +28,7 @@
 	</div>
 	<div class="row">
 		<div class="col">
-			<table id="table" data-url="/sales_report" class="table table-sm table-hover">
+			<table id="table" data-url="/customer_sales_report" class="table small table-sm table-hover">
 			</table>
 		</div>
 	</div>

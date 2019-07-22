@@ -15,7 +15,7 @@
 			<form action="#">
 				<div class="card">
 				  <div class="card-header">
-					   Create Invoice
+					Invoice
 				  </div>
 				  <div class="card-body p-2">
 				  	<div class="row m-0">
@@ -36,7 +36,7 @@
 					  			@csrf
 				  			</div>
 				  		</div>
-				  		<div class="col-lg-4 p-1">
+				  		<div class="col-6 p-1">
 				  			<div class="input-group input-group-sm">
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text ">Customer</div>
@@ -44,7 +44,15 @@
 					  			<input type="text" name="customer" class="form-control" id="customer" required="required">
 				  			</div>
 				  		</div>
-				  		<div class="col-lg-4 p-1">
+				  		<div class="col-6 p-1">
+				  			<div class="input-group input-group-sm">
+				  			    <div class="input-group-prepend">
+				  			      <div class="input-group-text ">Area</div>
+				  			    </div>
+					  			<input type="text" name="area" class="form-control" id="area" required="required">
+				  			</div>
+				  		</div>
+				  		<div class="col-6 p-1">
 				  			<div class="input-group input-group-sm">
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text ">OrderBooker</div>
@@ -52,7 +60,7 @@
 					  			<input type="text" name="orderbooker" class="form-control" id="orderbooker" required="required">
 				  			</div>
 				  		</div>
-				  		<div class="col-lg-4 p-1">
+				  		<div class="col-6 p-1">
 				  			<div class="input-group input-group-sm">
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text ">SaleMan</div>
@@ -127,6 +135,7 @@
 			axios.post("/invoice", {
 				'_token' : $("input[name='_token']").val(),
 				'customer': $('#customer').val(),
+				'area': $('#area').val(),
 				'orderbooker': $('#orderbooker').val(),
 				'saleman': $('#saleman').val(),
 				'total_amount': $('#total_amount').val(),

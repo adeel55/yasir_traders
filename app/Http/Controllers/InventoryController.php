@@ -57,10 +57,7 @@ class InventoryController extends Controller
 
         $product = new Product;
         $company = new Company;
-         // dd($request->company);
-        // $rows = array(array('carton'=> '','expire'=> '1975-01-01','product'=> "nnc",'qty'=> "25",'total_purchase'=> "5000",'unit_purchase'=> "200.00",'unit_sale'=> "250"),array('carton'=> "10",'expire'=> "2019-07-11",'product'=> "SSB",'qty'=> "50",'total_purchase'=> "2550",'unit_purchase'=> "51.00",'unit_sale'=> "60"));
 
-        // echo '-|'.$request->date.'|-';
         $company_id = $company->findOrSaveCompany($request->company);
         foreach ($rows as $key => $val) {
 
@@ -105,7 +102,9 @@ class InventoryController extends Controller
      */
     public function edit(Inventory $inventory)
     {
-        //
+        $inventory = Inventory::join('companies','companies.id','company_id')->join('products','products.id','product_id')->select('inventories.*','companies.name as company','products.name as product')->where('inventories.id',$inventory->id)->first();
+
+        return view('stock.edit_purchase',compact('inventory'));
     }
 
     /**
@@ -117,7 +116,31 @@ class InventoryController extends Controller
      */
     public function update(Request $request, Inventory $inventory)
     {
-        //
+
+        $company_id = Company::where('name',$request->company)->first()->id;
+        $product = Product::where('name',$request->product)->first();
+
+        $product->decrement('qty',$inventory->qty);
+        $product->increment('qty',$request->qty);
+        $product->save();
+
+        $rec = [
+            'company_id' => $company_id,
+            'product_id' => $product->id,
+            'qty' => $request->qty,
+            'carton' => $request->carton?$request->carton:0,
+            'unit_purchase' => $request->unit_purchase,
+            'unit_sale' => $request->unit_sale,
+            'total_purchase' => $request->total_purchase,
+            'expire' => $request->expire,
+            'updated_at' => $request->date
+        ];
+
+        $inventory->update($rec);
+        $inventory->save();
+        return "success";
+        return json_encode($product);
+
     }
 
     /**
@@ -126,9 +149,16 @@ class InventoryController extends Controller
      * @param  \App\Inventory  $inventory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Inventory $inventory)
+    public function destroy($id)
     {
-        //
+        $inventory = Inventory::find($id);
+        $product_id = $inventory->product_id;
+        $product = Product::find($product_id);        
+        $product->decrement('qty',$inventory->qty);
+        $product->save();
+        Inventory::destroy($id);
+
+        return view('components.alert',['msg'=>'Inventory deleted!','type'=>'primary']);
     }
 
 

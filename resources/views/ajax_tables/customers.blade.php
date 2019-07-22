@@ -3,19 +3,21 @@
 					<tr>
 						<th>Sr.</th>
 						<th>Name</th>
-						<th>Phone</th>
 						<th>Balance</th>
 						<th>Created On</th>
+						<th>Edit</th>
+						<th>Del</th>
 					</tr>
 				</thead>
 				<tbody>
 					@forelse($data as $it)
 					<tr>
 						<td>{{ $it->id }}</td>
-						<td>{{ $it->name }}</td>
-						<td>{{ $it->phone }}</td>
+						<td><a href="/customer/{{ $it->id }}">{{ $it->name }}</a></td>
 						<td>{{ $it->balance }}</td>
 						<td>{{ date('d-M-Y',strtotime($it->created_at)) }}</td>
+						<td><a href="/customer/{{ $it->id }}/edit" class="btn btn-sm btn-primary"><i class="fa fa-pencil-alt"></i></a></td>
+						<td><button class="btn btn-danger btn-sm" onclick="deleteCustomer(this,{{ $it->id }})"><i class="fa fa-trash"></i></button></td>
 					</tr>
 					@empty
 					<tr>

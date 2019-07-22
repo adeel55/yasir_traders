@@ -98,7 +98,7 @@ class ReceiveInvoiceController extends Controller
             $sales = Sale::where('invoice_id',$invoice->id)->get();
             // $sales = $invoice->sales;
             foreach($sales as $sale){
-               Product::find($sale->product_id)->decrement('qty',$sale->qty);
+               Product::find($sale->product_id)->decrement('qty',$sale->qty + $sale->bonus);
             }
             // die("success");
 

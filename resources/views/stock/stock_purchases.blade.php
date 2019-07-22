@@ -3,7 +3,7 @@
 	@section('title','Stock Puchases')
 	@section('content')
 
-		
+	<div id="msg"></div>	
 	<div class="row">
 		<div class="col">
 			<h5>Stock Items Purchases List</h5>	

@@ -16,5 +16,15 @@ class Company extends Model
         return $company->id;
     }
 
+
+    public function sales()
+    {
+        return $this->hasManyThrough('App\Sale','App\Product')->select('*');
+    }
+
+    public function created_at()
+    {
+        return date('Y-m-d',strtotime($this->created_at));
+    }
     
 }

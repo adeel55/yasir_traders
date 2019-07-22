@@ -53,5 +53,10 @@ class Product extends Model
         return $this->hasMany(Sale::class);
     }
 
+    public function created_at()
+    {
+        return date('Y-m-d',strtotime($this->created_at));
+    }
+
     
 }

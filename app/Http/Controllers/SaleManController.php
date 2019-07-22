@@ -16,12 +16,12 @@ class SaleManController extends Controller
     {
         $filter = filter($request);
 
-        $data = SaleMan::where($filter)->paginate(25);
+        $data = SaleMan::where($filter)->orderBy('id','DESC')->paginate(15);
 
         if($request->ajax())
             return view('ajax_tables.salemen',compact('data'));
         else
-            return view('list.saleman_list');
+            return view('saleman.saleman_list');
     }
 
     /**
@@ -66,9 +66,9 @@ class SaleManController extends Controller
      * @param  \App\SaleMan  $saleMan
      * @return \Illuminate\Http\Response
      */
-    public function show(SaleMan $saleMan)
+    public function show(SaleMan $saleman)
     {
-        //
+        return view("saleman.view_saleman", compact('saleman'));
     }
 
     /**
@@ -77,9 +77,9 @@ class SaleManController extends Controller
      * @param  \App\SaleMan  $saleMan
      * @return \Illuminate\Http\Response
      */
-    public function edit(SaleMan $saleMan)
+    public function edit(SaleMan $saleman)
     {
-        //
+        return view("saleman.edit_saleman", compact('saleman'));
     }
 
     /**
@@ -89,9 +89,11 @@ class SaleManController extends Controller
      * @param  \App\SaleMan  $saleMan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, SaleMan $saleMan)
+    public function update(Request $request, SaleMan $saleman)
     {
-        //
+        // return json_encode($saleman);
+        $saleman->update($request->all());
+        return "success";
     }
 
     /**
@@ -102,6 +104,7 @@ class SaleManController extends Controller
      */
     public function destroy(SaleMan $saleMan)
     {
-        //
+        SaleMan::destroy($id);
+        return view('components.alert',['msg'=>'Inventory deleted!','type'=>'primary']);
     }
 }

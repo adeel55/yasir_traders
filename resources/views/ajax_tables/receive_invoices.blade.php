@@ -31,14 +31,14 @@
 						<td>{{ $it->invoice_id }}
 							<input type="hidden" value="{{ $it->invoice_id }}" class="invoice_id">
 						</td>
-						<td>{{ $it->customer_name }}</td>
+						<td><a href="/invoice/{{ $it->invoice_id }}">{{ $it->customer_name }}</a></td>
 						<td>{{ $it->orderbooker_name }}</td>
 						<td>{{ $it->saleman_name }}</td>
 						<td>{{ $it->discount_total }}
 							<input type="hidden" step="any" value="{{ $it->discount_total }}" class="discount_total">
 						</td>
 						<td>
-							<input type="number" step="any" oninput="countInvoicesReceiveAmount()" value="{{ $it->discount_total }}" style="width: 90px" placeholder="amount" class="received_amount" required>
+							<input type="number" step="any" oninput="countInvoicesReceiveAmount()" value="{{ $it->discount_total }}" style="width: 90px; margin-top: -2px" placeholder="amount" class="received_amount" required>
 						</td>
 						<td><a href="/invoice/{{ $it->invoice_id }}/edit" class="btn btn-sm btn-primary"><i class="fa fa-pencil-alt"></i></a>
 						</td>

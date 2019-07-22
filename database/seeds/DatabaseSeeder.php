@@ -136,16 +136,16 @@ class DatabaseSeeder extends Seeder
 
 
         // Seeder for Customers
-        DB::table('customers')->insert(['name' => 'Ilias genral Store pakki kotly','phone' => '0300-500589','balance' => 0.00,'address'=>'New Kashif street']);
-        DB::table('customers')->insert(['name' => 'Hafiz Fahad General Store','phone' => '0300-500589','balance' => 0.00,'address'=>'Fateh Gharh']);
-        DB::table('customers')->insert(['name' => 'Haji Liaqat Store','phone' => '0300-500589','balance' => 0.00,'address'=>'New Kashif street']);
-        DB::table('customers')->insert(['name' => 'Ali Store daska','phone' => '0300-500589','balance' => 0.00,'address'=>'Daska Road']);
-        DB::table('customers')->insert(['name' => 'Umar Farooq Store rangpura','phone' => '0300-500589','balance' => 0.00,'address'=>'Adha Road']);
-        DB::table('customers')->insert(['name' => 'Raza General stor kachari','phone' => '0300-500589','balance' => 0.00,'address'=>'Rana Colony']);
-        DB::table('customers')->insert(['name' => 'Aqib Pawn Shop Doburji chownk','phone' => '0300-500589','balance' => 0.00,'address'=>'Model Town']);
-        DB::table('customers')->insert(['name' => 'Asad Karyana store peris road','phone' => '0300-500589','balance' => 0.00,'address'=>'Aamar road']);
-        DB::table('customers')->insert(['name' => 'Qazi Studio rangpura','phone' => '0300-500589','balance' => 0.00,'address'=>'New Kashif street']);
-        DB::table('customers')->insert(['name' => 'Bismila karyana store hajipura road','phone' => '0300-500589','balance' => 0.00,'address'=>'New Kashif street']);
+        DB::table('customers')->insert(['name' => 'Ilias genral Store pakki kotly','phone' => '0300-500589','balance' => 0.00,'address'=>'New Kashif street','area'=>'Lahore']);
+        DB::table('customers')->insert(['name' => 'Hafiz Fahad General Store','phone' => '0300-500589','balance' => 0.00,'address'=>'Fateh Gharh','area'=>'sialkot']);
+        DB::table('customers')->insert(['name' => 'Haji Liaqat Store','phone' => '0300-500589','balance' => 0.00,'address'=>'New Kashif street','area'=>'Lahore']);
+        DB::table('customers')->insert(['name' => 'Ali Store daska','phone' => '0300-500589','balance' => 0.00,'address'=>'Daska Road','area'=>'Lahore']);
+        DB::table('customers')->insert(['name' => 'Umar Farooq Store rangpura','phone' => '0300-500589','balance' => 0.00,'address'=>'Adha Road','area'=>'circular road']);
+        DB::table('customers')->insert(['name' => 'Raza General stor kachari','phone' => '0300-500589','balance' => 0.00,'address'=>'Rana Colony','area'=>'samrial']);
+        DB::table('customers')->insert(['name' => 'Aqib Pawn Shop Doburji chownk','phone' => '0300-500589','balance' => 0.00,'address'=>'Model Town','area'=>'Lahore']);
+        DB::table('customers')->insert(['name' => 'Asad Karyana store peris road','phone' => '0300-500589','balance' => 0.00,'address'=>'Aamar road','area'=>'Rangpura']);
+        DB::table('customers')->insert(['name' => 'Qazi Studio rangpura','phone' => '0300-500589','balance' => 0.00,'address'=>'New Kashif street','area'=>'Lahore']);
+        DB::table('customers')->insert(['name' => 'Bismila karyana store hajipura road','phone' => '0300-500589','balance' => 0.00,'address'=>'New Kashif street','area'=>'hajipura']);
 
 
 

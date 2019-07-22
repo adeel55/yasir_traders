@@ -1,21 +1,16 @@
 @extends('layouts.main')
 
 
-	@section('title','Edit Invoice')
+	@section('title','Invoice View')
 	@section('content')
 
-	<div class="alert alert-success alert-dismissible hide" role="alert">
-	  Invoice edited successfully.
-	  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-	    <span aria-hidden="true">&times;</span>
-	  </button>
 	</div>
 	<div class="row">
 		<div class="col">
 			<form action="#">
 				<div class="card">
 				  <div class="card-header">
-					   Edit Invoice
+					   Invoice View
 				  </div>
 				  <div class="card-body p-2">
 				  	<div class="row m-0">
@@ -32,7 +27,7 @@
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text">Date</div>
 				  			    </div>
-					  			<input type="date" name="date" class="form-control" class="form-control form-control-sm" value="{{ $invoice->created_at() }}" id="date" required="required">
+					  			<input type="date" name="date" class="form-control" class="form-control form-control-sm" value="{{ $invoice->created_at() }}" id="date" readonly>
 					  			@csrf
 				  			</div>
 				  		</div>
@@ -41,7 +36,7 @@
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text ">Customer</div>
 				  			    </div>
-					  			<input type="text" name="customer" class="form-control" id="customer" value="{{ $invoice->customer->name }}" required="required">
+					  			<input type="text" name="customer" class="form-control" id="customer" value="{{ $invoice->customer->name }}" readonly>
 				  			</div>
 				  		</div>
 				  		<div class="col-6 p-1">
@@ -49,7 +44,7 @@
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text ">Area</div>
 				  			    </div>
-								<input type="text" name="area" class="form-control" id="area" value="{{ $invoice->customer->area }}" required="required">
+					  			<input type="text" name="area" class="form-control" id="area" value="{{ $invoice->customer->area }}" readonly>
 				  			</div>
 				  		</div>
 				  		<div class="col-6 p-1">
@@ -57,7 +52,7 @@
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text ">OrderBooker</div>
 				  			    </div>
-					  			<input type="text" name="orderbooker" class="form-control" value="{{ $invoice->order_booker->name }}" id="orderbooker" required="required">
+					  			<input type="text" name="orderbooker" class="form-control" value="{{ $invoice->order_booker->name }}" id="orderbooker" readonly>
 				  			</div>
 				  		</div>
 				  		<div class="col-6 p-1">
@@ -65,7 +60,7 @@
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text ">SaleMan</div>
 				  			    </div>
-					  			<input type="text" name="saleman" class="form-control" value="{{ $invoice->sale_man->name }}" id="saleman" required="required">
+					  			<input type="text" name="saleman" class="form-control" value="{{ $invoice->sale_man->name }}" id="saleman" readonly>
 				  			</div>
 				  		</div>
 				  	</div>
@@ -79,63 +74,38 @@
 							<th>Total</th>
 							<th>Disc(%)</th>
 							<th>Disc. Total</th>
-							<th class="d-print-none">Del</th>
 						</thead>
 						<tbody id="tbody">
 							@foreach($invoice->sales as $sale)
 
 							<tr>
 								<td>
-									<input type="text" name="product" class="form-control form-control-sm product" value="{{ $sale->product->name }}" placeholder="product" required="required">
-									<input type="hidden" class="sale_id" value="{{ $sale->id }}">
-									<script>
-									jQuery(document).ready(function($) {
-										$('input.product').typeahead({
-									        source: function (query, result) {
-									            $.ajax({
-									                url: "http://localhost:8000/search_products",
-													data: 'searchString=' + query,            
-									                dataType: "json",
-									                type: "GET",
-									                success: function (data) { result($.map(data, function (item) { return item; }));
-									                }
-									            });
-									        },
-									        updater:function (item) {
-									        	axios.get('/get_sale_price?product=' + item['name'])
-									        	.then(d => {
-									        		$(document.activeElement).closest('tr').find('.unit_price').val(d.data);
-									        	});
-										        return item;
-										    }
-									    });
-									});
-									</script>
+									<input type="text" name="product" class="form-control form-control-sm product" value="{{ $sale->product->name }}" placeholder="product" readonly>
 								</td>
 								<td>
-									<input type="number" step="any" name="qty" class="form-control form-control-sm qty" value="{{ $sale->qty }}" placeholder="qty" oninput="countTotalPrice(this)" required="required">
+									<input type="number" step="any" name="qty" class="form-control form-control-sm qty" value="{{ $sale->qty }}" placeholder="qty" oninput="countTotalPrice(this)" readonly>
 								</td>
 								<td>
-									<input type="number" step="any" name="bonus" class="form-control form-control-sm bonus" value="{{ $sale->bonus }}">
+									<input type="number" step="any" name="bonus" class="form-control form-control-sm bonus" value="{{ $sale->bonus }}" readonly>
 								</td>
 								<td>
-									<input type="number" step="any" oninput="countTotalPrice(this)" name="unit_price" class="form-control form-control-sm unit_price" value="{{ $sale->unit_price }}" placeholder="unit_price" required="required">
+									<input type="number" step="any" name="unit_price" class="form-control form-control-sm unit_price" value="{{ $sale->unit_price }}" placeholder="unit_price" readonly>
 								</td>
 								<td>
-									<input type="number" step="any" name="total_price" class="form-control form-control-sm total_price" value="{{ $sale->total_price }}" required="required">
+									<input type="number" step="any" name="total_price" class="form-control form-control-sm total_price" value="{{ $sale->total_price }}" readonly>
 								</td>
 								<td class="d-print-none">
-									<input type="number" step="any" name="discount" class="form-control form-control-sm discount" value="{{ $sale->discount }}" oninput="countDiscountAmount(this)">
+									<input type="number" step="any" name="discount" class="form-control form-control-sm discount" value="{{ $sale->discount }}" oninput="countDiscountAmount(this)" readonly>
 								</td>
 								<td class="d-print-block d-none">
-									<input type="number" step="any" name="discount_amount" class="form-control form-control-sm discount_amount" value="{{ $sale->discount_amount }}">
+									<input type="number" step="any" name="discount_amount" class="form-control form-control-sm discount_amount" value="{{ $sale->discount_amount }}" readonly>
 								</td>
 								<td>
-									<input type="number" step="any" name="discount_total" class="form-control form-control-sm discount_total" placeholder="Disc.Total" value="{{ $sale->discount_total }}" required="required">
+									<input type="number" step="any" name="discount_total" class="form-control form-control-sm discount_total" placeholder="Disc.Total" value="{{ $sale->discount_total }}" readonly>
 								</td>
-								<td class="d-print-none">
-									<button type="button" onclick="delEditInvoiceRow(this,{{ $sale->id }})" class="btn btn-sm btn-danger"><i class="fa fa-trash delrowbtn"></i></button>
-								</td>
+								{{-- <td class="d-print-none">
+									<button onclick="delsale(this)" class="btn btn-sm btn-danger"><i class="fa fa-trash delrowbtn"></i></button>
+								</td> --}}
 							</tr>
 
 							@endforeach
@@ -145,21 +115,21 @@
 								<th colspan="5"></th>
 								<th>Net. Total:</th>
 								<th>
-									<input type="number" step="any" value="{{ $invoice->total_amount }}" id="total_amount">
+									<input type="number" step="any" value="{{ $invoice->total_amount }}" id="total_amount" readonly>
 								</th>
 							</tr>
 							<tr>
 								<th colspan="5"></th>
 								<th>Discount:</th>
 								<th>
-									<input type="number" step="any" value="{{ $invoice->total_discount }}" id="total_discount">
+									<input type="number" step="any" value="{{ $invoice->total_discount }}" id="total_discount" readonly>
 								</th>
 							</tr>
 							<tr>
 								<th colspan="5"></th>
 								<th>Total:</th>
 								<th>
-									<input type="number" step="any" value="{{ $invoice->discount_total }}" id="discount_total">
+									<input type="number" step="any" value="{{ $invoice->discount_total }}" id="discount_total" readonly>
 								</th>
 							</tr>
 						</tfoot>
@@ -167,9 +137,8 @@
 					</div>
 				  </div>
 				  <div class="card-footer d-print-none">
-				    <button type="button" class="btn btn-info" id="stock_btn" onclick="window.history.go(-1);"><i class="fa fa-arrow-left"></i> Back</button>
-				    <button class="btn btn-success" id="addstock" type="submit"><i class="fa fa-save"></i> Update</button>
-				    <button type="button" onclick="print()" class="btn btn-warning"><i class="fa fa-print"></i> Print</button>
+				    <button type="button" class="btn btn-info" id="stock_btn" onclick="window.history.go(-1);">Back</button>
+				    <button type="button" onclick="print()" class="btn btn-warning">Print</button>
 				    {{-- <button type="button" class="btn btn-info" id="stock_btn" onclick="add_invoice_row()">Insert</button> --}}
 				  </div>
 				</div>
@@ -196,7 +165,6 @@
 			data['rows'] = rows;
 			data['invoiceno'] = $('#invoiceno').val();
 			data['customer'] = $('#customer').val();
-			data['area'] = $('#area').val();
 			data['orderbooker'] = $('#orderbooker').val();
 			data['saleman'] = $('#saleman').val();
 			data['date'] = $('#date').val();
@@ -211,7 +179,6 @@
 				'id' : $('#invoiceno').val(),
 				'_token' : $("input[name='_token']").val(),
 				'customer': $('#customer').val(),
-				'area': $('#area').val(),
 				'orderbooker': $('#orderbooker').val(),
 				'saleman': $('#saleman').val(),
 				'total_amount': $('#total_amount').val(),

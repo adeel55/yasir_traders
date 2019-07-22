@@ -37,3 +37,12 @@ ul.typeahead.dropdown-menu li:last-child a {
 .invoice-table tfoot{
 	border-top: 2px solid #666;
 }
+
+
+.bb-2{
+	border-bottom: 2px solid #aaa;
+}
+td>.btn-sm{
+    padding: .01rem .3rem;
+    font-size: .75rem;
+}

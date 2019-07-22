@@ -1,4 +1,4 @@
- <!-- Left Panel -->
+<!-- Left Panel -->
 
     <aside id="left-panel" class="left-panel d-print-none">
         <nav class="navbar navbar-expand-sm navbar-default">
@@ -59,13 +59,13 @@
                     
                     <h3 class="menu-title">Reports</h3><!-- /.menu-title -->
                     <li>
-                        <a href="/invoice"><i class="menu-icon fa fa-bar-chart"></i> Summary Report</a>
+                        <a href="/orderbooker_product_report"><i class="menu-icon fa fa-bar-chart"></i> Product Sales Report</a>
                     </li>
                     <li>
-                        <a href="/invoice"><i class="menu-icon fa fa-bar-chart"></i> Customers Report</a>
+                        <a href="/orderbooker_customer_report"><i class="menu-icon fa fa-bar-chart"></i> Customers Sales Report</a>
                     </li>
                     <li>
-                        <a href="/invoice"><i class="menu-icon fa fa-bar-chart"></i> Customers Sales Report</a>
+                        <a href="/customer_sales_report"><i class="menu-icon fa fa-bar-chart"></i> Sales Report</a>
                     </li>
                     <li>
                         <a href="/expense"><i class="menu-icon fa fa-bar-chart"></i> Expense Report</a>

@@ -14,17 +14,29 @@ class Invoice extends Model
 
     public function sales()
     {
-    	return $this->hasMany(Sale::class);
+    	return $this->hasMany('App\Sale');
     }
 
     public function customer()
     {
-    	return $this->belongsTo(Customer::class);
+    	return $this->belongsTo('App\Customer','id');
     }
 
-    // public function expenses()
-    // {
-    // 	return $this->hasMany(Expense::class);
-    // }
+    public function sale_man()
+    {
+        return $this->belongsTo('App\SaleMan','id');
+    } 
+
+    public function order_booker()
+    {
+        return $this->belongsTo('App\OrderBooker','id');
+    }
+
+
+
+    public function created_at()
+    {
+        return date('Y-m-d',strtotime($this->created_at));
+    }
     
 }
