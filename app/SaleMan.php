@@ -15,9 +15,14 @@ class SaleMan extends Model
     }
 
 
-    public function created_at()
+    public function putdate()
     {
         return date('Y-m-d',strtotime($this->created_at));
+    }
+
+    public function showdate()
+    {
+        return date('d-M-Y',strtotime($this->created_at));
     }
 
 }

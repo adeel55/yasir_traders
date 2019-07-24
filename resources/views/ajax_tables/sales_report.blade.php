@@ -23,7 +23,7 @@
 						<td>{{ $product->name }}</td>
 						<td>{{ $product->phone }}</td>
 						<td>{{ $product->balance }}</td>
-						<td>{{ date('d-M-Y',strtotime($product->created_at)) }}</td>
+						<td>{{ $product->showdate() }}</td>
 					</tr>
 					@empty
 					<tr>

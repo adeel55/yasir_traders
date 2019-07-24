@@ -32,9 +32,13 @@
 			</table>
 		</div>
 	</div>
+	<div class="row bt-2 py-2 d-print-none">
+		<div class="col">
+			<button class="btn btn-warning btn-sm" type="button" onclick="window.print()"><i class="fa fa-print"></i> Print</button>
+		</div>
+	</div>
 	<script>
 		filter()
-
 	</script>
 
 

@@ -16,7 +16,7 @@ class OrderBookerController extends Controller
     {
         $filter = filter($request);
 
-        $data = OrderBooker::where($filter)->orderBy('id','DESC')->paginate(15);
+        $data = OrderBooker::where($filter)->orderBy('id','DESC')->paginate(40);
         
          if($request->ajax())
             return view('ajax_tables.orderbookers',compact('data'));
@@ -106,6 +106,6 @@ class OrderBookerController extends Controller
     public function destroy($id)
     {
         OrderBooker::destroy($id);
-        return view('components.alert',['msg'=>'Inventory deleted!','type'=>'primary']);
+        return view('components.alert',['msg'=>'Order Booker deleted!','type'=>'primary']);
     }
 }

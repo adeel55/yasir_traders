@@ -19,24 +19,29 @@ class Invoice extends Model
 
     public function customer()
     {
-    	return $this->belongsTo('App\Customer','id');
+    	return $this->belongsTo('App\Customer');
     }
 
     public function sale_man()
     {
-        return $this->belongsTo('App\SaleMan','id');
+        return $this->belongsTo('App\SaleMan');
     } 
 
     public function order_booker()
     {
-        return $this->belongsTo('App\OrderBooker','id');
+        return $this->belongsTo('App\OrderBooker');
     }
 
 
 
-    public function created_at()
+    public function putdate()
     {
         return date('Y-m-d',strtotime($this->created_at));
+    }
+
+    public function showdate()
+    {
+        return date('d-M-Y',strtotime($this->created_at));
     }
     
 }

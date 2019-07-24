@@ -17,7 +17,12 @@ class Customer extends Model
 
     public function sales()
     {
-        return $this->hasManyThrough('App\Sale','App\Invoice')->join('products','products.id','product_id')->select('*');
+        return $this->hasManyThrough('App\Sale','App\Invoice');
+    }
+    
+    public function group_sales()
+    {
+        return $this->hasManyThrough('App\Sale','App\Invoice')->select('product_id')->groupBy('product_id');
     }
 
     public static function findOrSaveCustomer($val){
@@ -29,8 +34,13 @@ class Customer extends Model
 
     }
 
-    public function created_at()
+    public function putdate()
     {
         return date('Y-m-d',strtotime($this->created_at));
+    }
+
+    public function showdate()
+    {
+        return date('d-M-Y',strtotime($this->created_at));
     }
 }

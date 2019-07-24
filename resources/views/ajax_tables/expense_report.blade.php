@@ -15,7 +15,7 @@
 						<td>{{ $it->saleman_name }}</td>
 						<td>{{ $it->amount }}</td>
 						<td>{{ $it->description }}</td>
-						<td>{{ date('d-M-Y',strtotime($it->created_at)) }}</td>
+						<td>{{ $it->showdate() }}</td>
 					</tr>
 					@empty
 					<tr>

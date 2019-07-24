@@ -1,12 +1,12 @@
-document.onkeyup = function(e) {
-  if (e.shiftKey && e.which == 13) {
-    if($('#stock_btn').length)
-        add_stock_row()
-        else
-        add_invoice_row()
-    // delete row
-  }
-};
+// document.onkeyup = function(e) {
+//   if (e.shiftKey && e.which == 13) {
+//     if($('#stock_btn').length)
+//         add_stock_row()
+//         else
+//         add_invoice_row()
+//     // delete row
+//   }
+// };
 
 
 

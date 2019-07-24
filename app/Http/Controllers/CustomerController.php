@@ -18,7 +18,7 @@ class CustomerController extends Controller
     {
         $filter = filter($request);
 
-        $data = Customer::where($filter)->paginate(25);
+        $data = Customer::where($filter)->paginate(40);
 
         if($request->ajax())
             return view('ajax_tables.customers',compact('data'));
@@ -118,7 +118,7 @@ class CustomerController extends Controller
     public function destroy($id)
     {
         Customer::destroy($id);
-        return view('components.alert',['msg'=>'Inventory deleted!','type'=>'primary']);
+        return view('components.alert',['msg'=>'Customer deleted!','type'=>'primary']);
         
     }
 

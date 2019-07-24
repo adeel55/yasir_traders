@@ -8,20 +8,20 @@
 						<th>Total</th>
 						<th>Received</th>
 						<th>Date</th>
-						<th>Del</th>
+						<th class="d-print-none">Del</th>
 					</tr>
 				</thead>
 				<tbody>
-					@forelse($data as $it)
+					@forelse($data as $invoice)
 					<tr>
-						<td>{{ $it->invoice_id }}</td>
-						<td><a href="/invoice/{{ $it->invoice_id }}">{{ $it->customer_name }}</a></td>
-						<td>{{ $it->orderbooker_name }}</td>
-						<td>{{ $it->saleman_name }}</td>
-						<td>{{ $it->discount_total }}</td>
-						<td>{{ $it->received_amount }}</td>
-						<td>{{ date('d-M-Y',strtotime($it->created_at)) }}</td>
-						<td><button class="btn btn-danger btn-sm" onclick="deleteInvoice(this,{{ $it->invoice_id }})"><i class="fa fa-trash"></i></button></td>
+						<td>{{ $invoice->id }}</td>
+						<td><a href="/invoice/{{ $invoice->id }}">{{ $invoice->customer->name }}</a></td>
+						<td>{{ $invoice->order_booker->name }}</td>
+						<td>{{ $invoice->sale_man->name }}</td>
+						<td>{{ $invoice->discount_total }}</td>
+						<td>{{ $invoice->received_amount }}</td>
+						<td>{{ $invoice->showdate() }}</td>
+						<td class="d-print-none"><button class="btn btn-danger btn-sm" onclick="deleteInvoice(this,{{ $invoice->id }})"><i class="fa fa-trash"></i></button></td>
 					</tr>
 					@empty
 					<tr>

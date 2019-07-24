@@ -5,7 +5,7 @@
 
 	<div class="row">
 		<div class="col">
-			<h5>Expenses Report</h5>	
+			<h5>Products Report</h5>	
 		</div>
 	</div>
 	<div class="row filters p-2">

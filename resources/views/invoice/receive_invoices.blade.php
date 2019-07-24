@@ -53,7 +53,7 @@
 						<div class="col-10 p-0">
 							<h4 class="text-success p-2">Expenses</h4>
 						</div>
-						<div class="col-2 p-0">
+						<div class="col-2 p-0 d-print-none">
 							<button type="button" onclick="add_expense_row()" class="btn btn-success btn-sm m-2"><i class="fa fa-plus"></i></button>
 						</div>
 					</div>
@@ -62,10 +62,10 @@
 							<div class="col-4 p-0">
 								<input type="number" placeholder="amount" step="any" oninput="countTotalExpenses()" class="form-control form-control-sm expense_amount" required>
 							</div>
-							<div class="col-7 p-0">
+							<div class="col p-0">
 								<input type="text" placeholder="description" class="form-control form-control-sm expense_description" required>
 							</div>
-							<div class="col-1 p-0">
+							<div class="col-1 p-0 d-print-none">
 								<button type="button" class="btn btn-danger btn-sm" onclick="delExpenseRow(this)"><i class="fa fa-trash"></i></button>
 							</div>
 						</div>
@@ -104,7 +104,10 @@
 					</div>
 					<div class="row p-0 py-4">
 						<div class="col">
-				  			<button class="btn btn-success" onclick=""><i class="fa fa-arrow-down"></i> Receive Invoices & Close Day</button>
+				  			<button class="btn btn-success d-print-none" onclick=""><i class="fa fa-arrow-down"></i> Receive Invoices & Close Day</button>
+						</div>
+						<div class="col">
+				  			<button class="btn btn-warning d-print-none" type="button" onclick="window.print()"><i class="fa fa-print"></i> Print</button>
 						</div>
 					</div>
 				</div>

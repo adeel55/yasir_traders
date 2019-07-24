@@ -43,6 +43,7 @@
 				  </div>
 				  <div class="card-footer d-print-none">
 				    <button class="btn btn-success" id="addstock" type="submit"><i class="fa fa-boxes"></i> Add Stock</button>
+				    <button type="button" class="btn btn-warning" onclick="window.print()"><i class="fa fa-print"></i> Print</button>
 				    <button type="button" class="btn btn-info" id="stock_btn" onclick="add_stock_row()"><i class="fa fa-align-justify"></i> Insert</button>
 				  </div>
 				</div>

@@ -17,7 +17,7 @@
 						<td>{{ $it->dabit }}</td>
 						<td>{{ $it->credit }}</td>
 						<td>{{ $it->balance }}</td>
-						<td>{{ date('d-M-Y',strtotime($it->created_at)) }}</td>
+						<td>{{ $it->showdate() }}</td>
 					</tr>
 					@empty
 					<tr>

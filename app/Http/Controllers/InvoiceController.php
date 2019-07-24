@@ -28,10 +28,7 @@ class InvoiceController extends Controller
         // dd(filter($request));
         $filter = filter($request);
 
-        $data = Invoice::join('customers','customers.id','customer_id')
-        ->join('sale_men','sale_men.id','sale_man_id')
-        ->join('order_bookers','order_bookers.id','order_booker_id')
-        ->select('invoices.id as invoice_id','customers.name as customer_name','order_bookers.name as orderbooker_name','sale_men.name as saleman_name','discount_total','received_amount','invoices.created_at')->where($filter)->orderBy('invoices.id','DESC')->paginate(25);
+        $data = Invoice::where($filter)->orderBy('invoices.id','DESC')->paginate(40);
 
         // die($request);
 

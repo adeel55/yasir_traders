@@ -23,7 +23,7 @@ class InventoryController extends Controller
 
         $data = Inventory::join('companies','companies.id','company_id')
         ->join('products','products.id','product_id')
-        ->select('inventories.id as inventory_id','products.name as product','companies.name as company','inventories.qty','inventories.unit_purchase','inventories.unit_sale','total_purchase','inventories.created_at')->orderBy('inventories.id','DESC')->where($filter)->paginate(30);
+        ->select('inventories.id as inventory_id','products.name as product','companies.name as company','inventories.qty','inventories.unit_purchase','inventories.unit_sale','total_purchase','inventories.created_at')->orderBy('inventories.id','DESC')->where($filter)->paginate(40);
 
         // dd(json_encode($data));
 

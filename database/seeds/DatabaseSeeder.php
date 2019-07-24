@@ -11,354 +11,68 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+    function rand_date()
+    {
+        return '2019-07-'.rand(15,25);
+    }
+    function rand_phone()
+    {
+        return '03'.rand(10,50).'-'.rand(5000000,9000000);
+    }
         factory(App\Company::class, 20)->create();
 
         
+        $products = array('Rio','Super','Lays','Coke','Sprite','Slanty','Prince','Gala','Zera','Tuk','KurKuray','Walls','Lolypop','Soap','Cady','Bombay','Shezaan','Buble','Catchup','Cake','Imli','DairyMilk','Chocklate','Biskit','Pencil');
+        $saleman = array('Ahmad','Ali','Faraz','Hamid','Mansoor','Riaz','Shahid','Sadaqat','Bilal','Sfeer','Tasawur','Asad','Yasir','Sibti','Sajjad','Khizer','Raza','SHAHID MUNAWWAR','MUHAMMAD ZAWISH','RABEEL NAZEER','HASAN','KHIZAR HUSSAIN','MUHAMMAD ZAIN UL ABIDIN','MUHAMMAD DAWOOD TALLAT','TAYYAB AKASH','MUHAMMAD ASIM','HAMZA MEHMOOD','SYED SAAD ALI SHAH','SAMEER TARIQ','ABDULLAH ASLAM','ZAIN UL ABDIN','NAZIM SHEHZAD','JAWAD AHMED MALIK','FAISAL NOSHAD TAHIR','HAMZA JAHANGIR','MAJADIL HUSSAIN','MUHAMMAD MOHSIN TALLAT','SOHA KHIZAR','MUHAMMAD KHIZAR','MUHAMMAD JABIR','HAROON MOAZZAM ELAHI','ABDUL HANAN','ANISA SALEEM','HAMZA','HAMZA TAHIR','MUHAMMAD AZFAR REHMAN','M.FURQAN SHABBIR','Hannan Ali','Haseeb','Aitzaz');
+        $order_bookers = array('Shahid','Amna','Arooj','Saba','Alia','Riaz','Sadaqat Ali','Ashar Ali','Furqan','Asad','Qasim Ali','Sami Ali','Kamran Ali','Umer','Tehseen','Rana');
+        $order_bookers = array('Shahid','Amna','Arooj','Saba','Alia','Riaz','Sadaqat Ali','Ashar Ali','Furqan','Asad','Qasim Ali','Sami Ali','Kamran Ali','Umer','Tehseen','Rana');
+        $customers = array('Ilias genral Store pakki kotly','Hafiz Fahad General Store','Haji Liaqat Store','Ali Store daska','Umar Farooq Store rangpura','Raza General stor kachari','Aqib Pawn Shop Doburji chownk','Asad Karyana store peris road','Qazi Studio rangpura','Bismila karyana store hajipura road');
+        $area = array('Lahore','sialkot','Lahore','Lahore','circular Road','samrial','Lahore','Rangpura','Lahore','hajipura');
+        $address = array('New Kashif street','Fateh Gharh','New Kashif street','Daska Road','Adha Road','Rana Colony','Model Town','Aamar road','New Kashif street','New Kashif street');
 
 
+        // Seeder For Companies
+        for ($i=0; $i < 15; $i++) { 
+            DB::table('companies')->insert(['name' => 'company'.$i,'created_at' => rand_date()]);
+        }
 
 
-        DB::table('companies')->insert(['name' => 'company'.rand(1,15)]);
-        DB::table('companies')->insert(['name' => 'company'.rand(1,15)]);
-        DB::table('companies')->insert(['name' => 'company'.rand(1,15)]);
-        DB::table('companies')->insert(['name' => 'company'.rand(1,15)]);
-        DB::table('companies')->insert(['name' => 'company'.rand(1,15)]);
-        DB::table('companies')->insert(['name' => 'company'.rand(1,15)]);
-        DB::table('companies')->insert(['name' => 'company'.rand(1,15)]);
-        DB::table('companies')->insert(['name' => 'company'.rand(1,15)]);
-        DB::table('companies')->insert(['name' => 'company'.rand(1,15)]);
-        DB::table('companies')->insert(['name' => 'company'.rand(1,15)]);
-        DB::table('companies')->insert(['name' => 'company'.rand(1,15)]);
-        DB::table('companies')->insert(['name' => 'company'.rand(1,15)]);
-        DB::table('companies')->insert(['name' => 'company'.rand(1,15)]);
-        DB::table('companies')->insert(['name' => 'company'.rand(1,15)]);
-        DB::table('companies')->insert(['name' => 'company'.rand(1,15)]);
-        DB::table('companies')->insert(['name' => 'company'.rand(1,15)]);
-        DB::table('companies')->insert(['name' => 'company'.rand(1,15)]);
+        // Seeder For Products
+        for ($i=0; $i < 25; $i++) { 
+            DB::table('products')->insert(['name' => $products[$i],'qty' => rand(40,400),'unit_sale' => rand(10,150),'unit_purchase' => rand(10,100),'company_id' => rand(1,15),'created_at' => rand_date()]);
+        }
 
+        // Seeder For Sale Man
+        for ($i=0; $i < 50; $i++) {
+            DB::table('sale_men')->insert(['name' => $saleman[$i],'phone' => rand_phone(),'created_at' => rand_date()]);
+        }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        DB::table('products')->insert(['name' => 'Rio','qty' => 50,'unit_sale' => rand(10,150),'unit_purchase' => rand(10,100),'company_id' => rand(1,15)]);
-        DB::table('products')->insert(['name' => 'Super','qty' => 50,'unit_sale' => rand(10,150),'unit_purchase' => rand(10,100),'company_id' => rand(1,15)]);
-        DB::table('products')->insert(['name' => 'Lays','qty' => 50,'unit_sale' => rand(10,150),'unit_purchase' => rand(10,100),'company_id' => rand(1,15)]);
-        DB::table('products')->insert(['name' => 'Coke','qty' => 50,'unit_sale' => rand(10,150),'unit_purchase' => rand(10,100),'company_id' => rand(1,15)]);
-        DB::table('products')->insert(['name' => 'Sprite','qty' => 50,'unit_sale' => rand(10,150),'unit_purchase' => rand(10,100),'company_id' => rand(1,15)]);
-        DB::table('products')->insert(['name' => 'Slanty','qty' => 50,'unit_sale' => rand(10,150),'unit_purchase' => rand(10,100),'company_id' => rand(1,15)]);
-        DB::table('products')->insert(['name' => 'Prince','qty' => 50,'unit_sale' => rand(10,150),'unit_purchase' => rand(10,100),'company_id' => rand(1,15)]);
-        DB::table('products')->insert(['name' => 'Gala','qty' => 50,'unit_sale' => rand(10,150),'unit_purchase' => rand(10,100),'company_id' => rand(1,15)]);
-        DB::table('products')->insert(['name' => 'Zera Plus','qty' => 50,'unit_sale' => rand(10,150),'unit_purchase' => rand(10,100),'company_id' => rand(1,15)]);
-        DB::table('products')->insert(['name' => 'Tuk','qty' => 50,'unit_sale' => rand(10,150),'unit_purchase' => rand(10,100),'company_id' => rand(1,15)]);
-        DB::table('products')->insert(['name' => 'KurKuray','qty' => 50,'unit_sale' => rand(10,150),'unit_purchase' => rand(10,100),'company_id' => rand(1,15)]);
-        DB::table('products')->insert(['name' => 'Walls Icecream','qty' => 50,'unit_sale' => rand(10,150),'unit_purchase' => rand(10,100),'company_id' => rand(1,15)]);
-        DB::table('products')->insert(['name' => 'Lolypop','qty' => 50,'unit_sale' => rand(10,150),'unit_purchase' => rand(10,100),'company_id' => rand(1,15)]);
-
-
-        DB::table('sale_men')->insert(['name' => 'Ahmad','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'Ali','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'Faraz','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'Hamid','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'Mansoor','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'Riaz','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'Shahid','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'Sadaqat','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'Bilal','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'Sfeer','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'Tasawur','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'Asad','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'Yasir','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'Sibti','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'Sajjad','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'Khizer','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'Raza','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'SHAHID MUNAWWAR','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'MUHAMMAD ZAWISH','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'RABEEL NAZEER','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'HASAN','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'KHIZAR HUSSAIN','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'MUHAMMAD ZAIN UL ABIDIN','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'MUHAMMAD DAWOOD TALLAT','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'TAYYAB AKASH','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'MUHAMMAD ASIM','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'HAMZA MEHMOOD','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'SYED SAAD ALI SHAH','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'SAMEER TARIQ','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'ABDULLAH ASLAM','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'ZAIN UL ABDIN','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'NAZIM SHEHZAD','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'JAWAD AHMED MALIK','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'FAISAL NOSHAD TAHIR','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'HAMZA JAHANGIR','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'MAJADIL HUSSAIN','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'MUHAMMAD MOHSIN TALLAT','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'SOHA KHIZAR','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'MUHAMMAD KHIZAR','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'MUHAMMAD JABIR','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'HAROON MOAZZAM ELAHI','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'ABDUL HANAN','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'ANISA SALEEM','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'HAMZA','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'HAMZA TAHIR','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'MUHAMMAD AZFAR REHMAN','phone' => '0300-5868589']);
-        DB::table('sale_men')->insert(['name' => 'M.FURQAN SHABBIR','phone' => '0300-5868589']);
-
-
-        // Seeder for order bookers
-        DB::table('order_bookers')->insert(['name' => 'Shahid','phone' => '0300-500589']);
-        DB::table('order_bookers')->insert(['name' => 'Amna','phone' => '0300-500589']);
-        DB::table('order_bookers')->insert(['name' => 'Arooj','phone' => '0300-500589']);
-        DB::table('order_bookers')->insert(['name' => 'Saba','phone' => '0300-500589']);
-        DB::table('order_bookers')->insert(['name' => 'Alia','phone' => '0300-500589']);
-        DB::table('order_bookers')->insert(['name' => 'Riaz','phone' => '0300-500589']);
-        DB::table('order_bookers')->insert(['name' => 'Sadaqat Ali','phone' => '0300-500589']);
-        DB::table('order_bookers')->insert(['name' => 'Ashar Ali','phone' => '0300-500589']);
-        DB::table('order_bookers')->insert(['name' => 'Furqan','phone' => '0300-500589']);
-        DB::table('order_bookers')->insert(['name' => 'Asad','phone' => '0300-500589']);
-        DB::table('order_bookers')->insert(['name' => 'Qasim Ali','phone' => '0300-500589']);
-        DB::table('order_bookers')->insert(['name' => 'Sami Ali','phone' => '0300-500589']);
-        DB::table('order_bookers')->insert(['name' => 'Kamran Ali','phone' => '0300-500589']);
-        DB::table('order_bookers')->insert(['name' => 'Umer','phone' => '0300-500589']);
-        DB::table('order_bookers')->insert(['name' => 'Tehseen','phone' => '0300-500589']);
-        DB::table('order_bookers')->insert(['name' => 'Rana','phone' => '0300-500589']);
-
-
+        // Seeder For order_bookers
+        for ($i=0; $i < 15; $i++) { 
+            DB::table('order_bookers')->insert(['name' => $order_bookers[$i],'phone' => rand_phone(),'target' => rand(500,5000),'created_at' => rand_date()]);
+        }
 
         // Seeder for Customers
-        DB::table('customers')->insert(['name' => 'Ilias genral Store pakki kotly','phone' => '0300-500589','balance' => 0.00,'address'=>'New Kashif street','area'=>'Lahore']);
-        DB::table('customers')->insert(['name' => 'Hafiz Fahad General Store','phone' => '0300-500589','balance' => 0.00,'address'=>'Fateh Gharh','area'=>'sialkot']);
-        DB::table('customers')->insert(['name' => 'Haji Liaqat Store','phone' => '0300-500589','balance' => 0.00,'address'=>'New Kashif street','area'=>'Lahore']);
-        DB::table('customers')->insert(['name' => 'Ali Store daska','phone' => '0300-500589','balance' => 0.00,'address'=>'Daska Road','area'=>'Lahore']);
-        DB::table('customers')->insert(['name' => 'Umar Farooq Store rangpura','phone' => '0300-500589','balance' => 0.00,'address'=>'Adha Road','area'=>'circular road']);
-        DB::table('customers')->insert(['name' => 'Raza General stor kachari','phone' => '0300-500589','balance' => 0.00,'address'=>'Rana Colony','area'=>'samrial']);
-        DB::table('customers')->insert(['name' => 'Aqib Pawn Shop Doburji chownk','phone' => '0300-500589','balance' => 0.00,'address'=>'Model Town','area'=>'Lahore']);
-        DB::table('customers')->insert(['name' => 'Asad Karyana store peris road','phone' => '0300-500589','balance' => 0.00,'address'=>'Aamar road','area'=>'Rangpura']);
-        DB::table('customers')->insert(['name' => 'Qazi Studio rangpura','phone' => '0300-500589','balance' => 0.00,'address'=>'New Kashif street','area'=>'Lahore']);
-        DB::table('customers')->insert(['name' => 'Bismila karyana store hajipura road','phone' => '0300-500589','balance' => 0.00,'address'=>'New Kashif street','area'=>'hajipura']);
+        for ($i=0; $i < 10; $i++) { 
+            DB::table('customers')->insert(['name' => $customers[$i],'phone' => rand_phone(),'balance' => 0.00,'address'=>$address[$i],'area'=>$area[$i],'created_at' => rand_date()]);
 
+        }    
 
-
-
-
-        // inventory
-
-
-
-
-
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-        DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,12),'qty' => rand(50,300),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>'2019-12-12']);
-
-
-
-
-
+        // Seeder for Inventory
+        for ($i=0; $i < 1000; $i++) { 
+            DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,25),'qty' => rand(500,2500),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>rand_date(),'created_at'=>rand_date()]);
+        }
 
         // Seeder for Invoices
-        // DB::table('invoices')->insert(['customer_id' => rand(1,10), 'sale_man_id' => rand(1,40), 'order_booker_id' => rand(1,5), 'created_at' => '2019-07-08']);
-        // DB::table('invoices')->insert(['customer_id' => rand(1,10), 'sale_man_id' => rand(1,40), 'order_booker_id' => rand(1,5), 'created_at' => '2019-07-08']);
-        // DB::table('invoices')->insert(['customer_id' => rand(1,10), 'sale_man_id' => rand(1,40), 'order_booker_id' => rand(1,5), 'created_at' => '2019-07-08']);
-        // DB::table('invoices')->insert(['customer_id' => rand(1,10), 'sale_man_id' => rand(1,40), 'order_booker_id' => rand(1,5), 'created_at' => '2019-07-08']);
-        // DB::table('invoices')->insert(['customer_id' => rand(1,10), 'sale_man_id' => rand(1,40), 'order_booker_id' => rand(1,5), 'created_at' => '2019-07-08']);
-        // DB::table('invoices')->insert(['customer_id' => rand(1,10), 'sale_man_id' => rand(1,40), 'order_booker_id' => rand(1,5), 'created_at' => '2019-07-08']);
-        // DB::table('invoices')->insert(['customer_id' => rand(1,10), 'sale_man_id' => rand(1,40), 'order_booker_id' => rand(1,5), 'created_at' => '2019-07-08']);
-        // DB::table('invoices')->insert(['customer_id' => rand(1,10), 'sale_man_id' => rand(1,40), 'order_booker_id' => rand(1,5), 'created_at' => '2019-07-08']);
-        // DB::table('invoices')->insert(['customer_id' => rand(1,10), 'sale_man_id' => rand(1,40), 'order_booker_id' => rand(1,5), 'created_at' => '2019-07-08']);
-        // DB::table('invoices')->insert(['customer_id' => rand(1,10), 'sale_man_id' => rand(1,40), 'order_booker_id' => rand(1,5), 'created_at' => '2019-07-08']);
-        // DB::table('invoices')->insert(['customer_id' => rand(1,10), 'sale_man_id' => rand(1,40), 'order_booker_id' => rand(1,5), 'created_at' => '2019-07-08']);
-        // DB::table('invoices')->insert(['customer_id' => rand(1,10), 'sale_man_id' => rand(1,40), 'order_booker_id' => rand(1,5), 'created_at' => '2019-07-08']);
-        // DB::table('invoices')->insert(['customer_id' => rand(1,10), 'sale_man_id' => rand(1,40), 'order_booker_id' => rand(1,5), 'created_at' => '2019-07-08']);
-        // DB::table('invoices')->insert(['customer_id' => rand(1,10), 'sale_man_id' => rand(1,40), 'order_booker_id' => rand(1,5), 'created_at' => '2019-07-08']);
-        // DB::table('invoices')->insert(['customer_id' => rand(1,10), 'sale_man_id' => rand(1,40), 'order_booker_id' => rand(1,5), 'created_at' => '2019-07-08']);
-        // DB::table('invoices')->insert(['customer_id' => rand(1,10), 'sale_man_id' => rand(1,40), 'order_booker_id' => rand(1,5), 'created_at' => '2019-07-08']);
-        // DB::table('invoices')->insert(['customer_id' => rand(1,10), 'sale_man_id' => rand(1,40), 'order_booker_id' => rand(1,5), 'created_at' => '2019-07-08']);
-        // DB::table('invoices')->insert(['customer_id' => rand(1,10), 'sale_man_id' => rand(1,40), 'order_booker_id' => rand(1,5), 'created_at' => '2019-07-08']);
-        // DB::table('invoices')->insert(['customer_id' => rand(1,10), 'sale_man_id' => rand(1,40), 'order_booker_id' => rand(1,5), 'created_at' => '2019-07-08']);
-        // DB::table('invoices')->insert(['customer_id' => rand(1,10), 'sale_man_id' => rand(1,40), 'order_booker_id' => rand(1,5), 'created_at' => '2019-07-08']);
-        // DB::table('invoices')->insert(['customer_id' => rand(1,10), 'sale_man_id' => rand(1,40), 'order_booker_id' => rand(1,5), 'created_at' => '2019-07-08']);
-        // DB::table('invoices')->insert(['customer_id' => rand(1,10), 'sale_man_id' => rand(1,40), 'order_booker_id' => rand(1,5), 'created_at' => '2019-07-08']);
-        // DB::table('invoices')->insert(['customer_id' => rand(1,10), 'sale_man_id' => rand(1,40), 'order_booker_id' => rand(1,5), 'created_at' => '2019-07-08']);
-        // DB::table('invoices')->insert(['customer_id' => rand(1,10), 'sale_man_id' => rand(1,40), 'order_booker_id' => rand(1,5), 'created_at' => '2019-07-08']);
-        // DB::table('invoices')->insert(['customer_id' => rand(1,10), 'sale_man_id' => rand(1,40), 'order_booker_id' => rand(1,5), 'created_at' => '2019-07-08']);
-        // DB::table('invoices')->insert(['customer_id' => rand(1,10), 'sale_man_id' => rand(1,40), 'order_booker_id' => rand(1,5), 'created_at' => '2019-07-08']);
-        // DB::table('invoices')->insert(['customer_id' => rand(1,10), 'sale_man_id' => rand(1,40), 'order_booker_id' => rand(1,5), 'created_at' => '2019-07-08']);
-        // DB::table('invoices')->insert(['customer_id' => rand(1,10), 'sale_man_id' => rand(1,40), 'order_booker_id' => rand(1,5), 'created_at' => '2019-07-08']);
-        // DB::table('invoices')->insert(['customer_id' => rand(1,10), 'sale_man_id' => rand(1,40), 'order_booker_id' => rand(1,5), 'created_at' => '2019-07-08']);
-        // DB::table('invoices')->insert(['customer_id' => rand(1,10), 'sale_man_id' => rand(1,40), 'order_booker_id' => rand(1,5), 'created_at' => '2019-07-08']);
+        for ($i=1; $i < 200; $i++) { 
+            $rand_date = rand_date();
+            $lim = rand(2,6);
+            DB::table('invoices')->insert(['customer_id' => rand(1,10), 'sale_man_id' => rand(1,40), 'order_booker_id' => rand(1,15), 'total_amount' => rand(1500,5000), 'total_discount' => rand(150,500), 'discount_total' => rand(1000,4000), 'received_amount' => rand(1000,4000), 'received' => rand(0,1), 'created_at' => $rand_date]);
 
-
-
-
-
-
-        // // Sales Seedeer
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-        // DB::table('sales')->insert(['invoice_id' => rand(1,30),'product_id' => rand(1,13), 'qty' => rand(1,150), 'bonus' => rand(1,5), 'unit_price' => rand(1,120), 'total_price' => rand(1,5000), 'discount' => rand(1,5), 'discount_amount' => rand(1,6000),'discount_total' => rand(1,6000), 'created_at' => '2019-07-08']);
-
-
-
+            for ($j=0; $j < $lim; $j++) { 
+                DB::table('sales')->insert(['invoice_id' => $i,'product_id' => rand(1,25), 'qty' => rand(1,30), 'bonus' => rand(1,5), 'unit_price' => rand(1,80), 'total_price' => rand(1,1000), 'discount' => rand(5,25), 'discount_amount' => rand(10,20),'discount_total' => rand(1,6000), 'created_at' => $rand_date]);
+            }
+        }
         
     }
 }

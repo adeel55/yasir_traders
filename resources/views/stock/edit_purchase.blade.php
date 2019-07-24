@@ -31,14 +31,14 @@
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text">Date</div>
 				  			    </div>
-					  			<input type="date" name="date" class="form-control form-control-sm" id="date" value="{{ $inventory->created_at() }}"  required="required">
+					  			<input type="date" name="date" class="form-control form-control-sm" id="date" value="{{ $inventory->putdate() }}"  required="required">
 					  			@csrf
 				  			</div>
 				  		</div>
 				  	</div>
 				  	<hr>
 					<div id="rows" class="rows">
-						<div class="row ml-2">
+						<div class="row pl-4 pr-4">
 							<div class="col p-0">
 								<input type="text" name="product" class="form-control form-control-sm product" id="product" placeholder="product" value="{{ $inventory->product }}" required="required" readonly>
 								<script>
@@ -76,7 +76,7 @@
 							<div class="col p-0">
 								<input type="date" name="expire" class="form-control form-control-sm expire" id="expire" value="{{ $inventory->expire }}" >
 							</div>
-							<div class="col p-0">
+							<div class="col-1 p-0 d-print-none">
 								<button onclick="delRow(this)" class="btn btn-sm btn-danger"><i class="fa fa-trash delrowbtn"></i></button>
 							</div>
 						</div>
@@ -85,20 +85,17 @@
 				  <div class="card-footer d-print-none">
 				    <button class="btn btn-info" type="button" onclick="window.history.go(-1);"><i class="fa fa-arrow-back"></i> Back</button>
 				    <button class="btn btn-success" id="addstock" type="submit"><i class="fa fa-boxes"></i> Update Stock</button>
+				    <button class="btn btn-info" type="button" onclick="window.print()"><i class="fa fa-print"></i> Print</button>
 				  </div>
 				</div>
 			</form>
 		</div>	
 	</div>
 	<script>
-		
-
 		$('.alert').hide();
-
 		$('form').submit(function(e){
 			e.preventDefault()
 			var tr = $('#rows');
-
 			axios.post("/inventory/{{ $inventory->id }}", {'_method':'PUT','_token' : $("input[name='_token']").val(),'company' : $('#company').val(),'date' : $('#date').val(),'product':$(tr).find('.product').val(),'qty':$(tr).find('.qty').val(),'carton':$(tr).find('.carton').val(),'unit_purchase':$(tr).find('.unit_purchase').val(),'unit_sale':$(tr).find('.unit_sale').val(),'total_purchase':$(tr).find('.total_purchase').val(),'expire':$(tr).find('.expire').val()} )
 			.then(d => {
 				console.log(d.data);
@@ -106,7 +103,7 @@
 				{
 					$(".alert").show().delay(3000).slideUp(500, function() {
 					    $(this).alert('close');
-					}); 
+					})
 				}
 			}).catch((err) => console.log(err));
 		})

@@ -19,7 +19,7 @@ class ExpenseController extends Controller
 
 
         $data = Expense::join('sale_men','sale_men.id','sale_man_id')
-        ->select('expenses.id as expense_id','sale_men.name as saleman_name','amount','description','expenses.created_at')->where($filter)->paginate(20);
+        ->select('expenses.id as expense_id','sale_men.name as saleman_name','amount','description','expenses.created_at')->where($filter)->paginate(40);
         
         if($request->ajax()){
 

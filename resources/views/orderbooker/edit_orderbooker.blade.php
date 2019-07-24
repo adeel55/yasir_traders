@@ -47,7 +47,7 @@
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text">Created On</div>
 				  			    </div>
-					  			<input type="date" name="created_at" class="form-control form-control-sm" id="created_at" value="{{ $orderbooker->created_at() }}" required="required">
+					  			<input type="date" name="created_at" class="form-control form-control-sm" id="created_at" value="{{ $orderbooker->putdate() }}" required="required">
 					  			<input type="hidden" name="_method" value="PUT">
 					  			<input type="hidden" name="id" value="{{ $orderbooker->id }}">
 					  			@csrf
@@ -56,7 +56,7 @@
 				  	</div>
 				  </div>
 				  <div class="card-footer d-print-none">
-				    <button class="btn btn-success" id="addstock" type="submit"><i class="fa fa-boxes"></i> Update</button>
+				    <button class="btn btn-success" type="submit"><i class="fa fa-arrow-up"></i> Update</button>
 				    <button class="btn btn-info" type="button" onclick="window.history.go(-1);"><i class="fa fa-arrow-back"></i> Back</button>
 				  </div>
 				</div>

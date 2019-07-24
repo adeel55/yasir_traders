@@ -16,7 +16,7 @@ class SaleManController extends Controller
     {
         $filter = filter($request);
 
-        $data = SaleMan::where($filter)->orderBy('id','DESC')->paginate(15);
+        $data = SaleMan::where($filter)->orderBy('id','DESC')->paginate(40);
 
         if($request->ajax())
             return view('ajax_tables.salemen',compact('data'));
@@ -102,9 +102,9 @@ class SaleManController extends Controller
      * @param  \App\SaleMan  $saleMan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SaleMan $saleMan)
+    public function destroy($id)
     {
         SaleMan::destroy($id);
-        return view('components.alert',['msg'=>'Inventory deleted!','type'=>'primary']);
+        return view('components.alert',['msg'=>'Sale Man deleted!','type'=>'primary']);
     }
 }

@@ -16,20 +16,25 @@ class Sale extends Model
 
     public function invoice()
     {
-    	return $this->belongsTo(Invoice::class);
+    	return $this->belongsTo('App\Invoice');
     }
 
     public function customers()
     {
-    	return hasManyThrough(Customer::class, Invoice::class);
+    	return hasManyThrough('App\Customer', 'App\Invoice');
     }
 
     public function product()
     {
     	return $this->belongsTo('App\Product');
     }
-    public function created_at()
+    public function putdate()
     {
         return date('Y-m-d',strtotime($this->created_at));
+    }
+
+    public function showdate()
+    {
+        return date('d-M-Y',strtotime($this->created_at));
     }
 }

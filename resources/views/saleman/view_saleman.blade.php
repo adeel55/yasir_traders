@@ -33,7 +33,7 @@
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text">Created On</div>
 				  			    </div>
-					  			<input type="date" name="created_at" class="form-control form-control-sm" id="created_at" value="{{ $saleman->created_at() }}" readonly>
+					  			<input type="date" name="created_at" class="form-control form-control-sm" id="created_at" value="{{ $saleman->putdate() }}" readonly>
 					  			<input type="hidden" name="_method" value="PUT">
 					  			@csrf
 				  			</div>

@@ -5,8 +5,8 @@
 						<th>Name</th>
 						<th>Balance</th>
 						<th>Created On</th>
-						<th>Edit</th>
-						<th>Del</th>
+						<th class="d-print-none">Edit</th>
+						<th class="d-print-none">Del</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -16,8 +16,8 @@
 						<td><a href="/customer/{{ $it->id }}">{{ $it->name }}</a></td>
 						<td>{{ $it->balance }}</td>
 						<td>{{ date('d-M-Y',strtotime($it->created_at)) }}</td>
-						<td><a href="/customer/{{ $it->id }}/edit" class="btn btn-sm btn-primary"><i class="fa fa-pencil-alt"></i></a></td>
-						<td><button class="btn btn-danger btn-sm" onclick="deleteCustomer(this,{{ $it->id }})"><i class="fa fa-trash"></i></button></td>
+						<td class="d-print-none"><a href="/customer/{{ $it->id }}/edit" class="btn btn-sm btn-primary"><i class="fa fa-pencil-alt"></i></a></td>
+						<td class="d-print-none"><button class="btn btn-danger btn-sm" onclick="deleteCustomer(this,{{ $it->id }})"><i class="fa fa-trash"></i></button></td>
 					</tr>
 					@empty
 					<tr>

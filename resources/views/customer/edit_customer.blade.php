@@ -11,7 +11,7 @@
 	</div>
 	<div class="row">
 		<div class="col">
-			<form method="post" action="#">
+			<form method="post" action="/customer/{{ $customer->id }}">
 				<div class="card">
 				  <div class="card-header">
 					   Edit Customer
@@ -63,7 +63,7 @@
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text">Created On</div>
 				  			    </div>
-					  			<input type="date" name="created_at" class="form-control form-control-sm" id="created_at" value="{{ $customer->created_at() }}" required="required">
+					  			<input type="date" name="created_at" class="form-control form-control-sm" id="created_at" value="{{ $customer->putdate() }}" required="required">
 					  			<input type="hidden" name="_method" value="PUT">
 					  			@csrf
 				  			</div>

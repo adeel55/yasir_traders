@@ -9,8 +9,8 @@
 						<th>Sale</th>
 						<th>Total</th>
 						<th>Date</th>
-						<th>Edit</th>
-						<th>Del</th>
+						<th class="d-print-none">Edit</th>
+						<th class="d-print-none">Del</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -24,9 +24,13 @@
 						<td>{{ $it->unit_purchase }}</td>
 						<td>{{ $it->unit_sale }}</td>
 						<td>{{ $it->total_purchase }}</td>
-						<td>{{ date('d-M-Y',strtotime($it->created_at)) }}</td>
-						<td><a href="/inventory/{{ $it->inventory_id }}/edit" class="btn btn-sm btn-primary"><i class="fa fa-pencil-alt"></i></a></td>
-						<td><button class="btn btn-danger btn-sm" onclick="deleteInventory(this,{{ $it->inventory_id }})"><i class="fa fa-trash"></i></button></td>
+						<td>{{ $it->showdate() }}</td>
+						<td class="d-print-none">
+							<a href="/inventory/{{ $it->inventory_id }}/edit" class="btn btn-sm btn-primary"><i class="fa fa-pencil-alt"></i></a>
+						</td>
+						<td class="d-print-none">
+							<button class="btn btn-danger btn-sm" onclick="deleteInventory(this,{{ $it->inventory_id }})"><i class="fa fa-trash"></i></button>
+						</td>
 					</tr>
 					@empty
 					<tr>

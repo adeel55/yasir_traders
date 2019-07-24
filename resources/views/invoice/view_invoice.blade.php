@@ -27,7 +27,7 @@
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text">Date</div>
 				  			    </div>
-					  			<input type="date" name="date" class="form-control" class="form-control form-control-sm" value="{{ $invoice->created_at() }}" id="date" readonly>
+					  			<input type="date" name="date" class="form-control" class="form-control form-control-sm" value="{{ $invoice->putdate() }}" id="date" readonly>
 					  			@csrf
 				  			</div>
 				  		</div>
