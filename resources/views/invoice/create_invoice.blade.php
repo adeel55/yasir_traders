@@ -14,8 +14,8 @@
 		<div class="col">
 			<form action="#">
 				<div class="card">
-				  <div class="card-header">
-					Invoice
+				   <div class="card-header text-center">
+					  @include('invoice._header')
 				  </div>
 				  <div class="card-body p-2">
 				  	<div class="row m-0">

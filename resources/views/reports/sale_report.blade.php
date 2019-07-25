@@ -3,9 +3,10 @@
 	@section('title','Sales Report')
 	@section('content')
 
+	<h4 class="text-center"><u>Yasir Traders</u></h4>	
 	<div class="row">
 		<div class="col">
-			Sales Reports
+			<h5>Sales Reports</h5>
 		</div>
 	</div>
 	<div class="row filters p-2">
@@ -28,8 +29,13 @@
 	</div>
 	<div class="row">
 		<div class="col">
-			<table id="table" data-url="/customer_sales_report" class="table small table-sm table-hover">
+			<table id="table" data-url="/sale_report" class="table small table-sm table-hover">
 			</table>
+		</div>
+	</div>
+	<div class="row bt-2 py-2 d-print-none">
+		<div class="col">
+			<button class="btn btn-warning btn-sm" type="button" onclick="window.print()"><i class="fa fa-print"></i> Print</button>
 		</div>
 	</div>
 	<script>

@@ -1,4 +1,4 @@
-				@php ($cols = 7)
+				@php ($cols = 4)
 				<thead>
 					<tr>
 						<th>Customer</th>

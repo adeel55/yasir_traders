@@ -59,13 +59,13 @@
                     
                     <h3 class="menu-title">Reports</h3><!-- /.menu-title -->
                     <li>
-                        <a href="/orderbooker_product_report"><i class="menu-icon fa fa-bar-chart"></i> Product Sales Report</a>
+                        <a href="/product_report"><i class="menu-icon fa fa-bar-chart"></i> Product Summary Report</a>
                     </li>
                     <li>
-                        <a href="/orderbooker_customer_report"><i class="menu-icon fa fa-bar-chart"></i> Customers Sales Report</a>
+                        <a href="/customer_report"><i class="menu-icon fa fa-bar-chart"></i> Customers Summary Report</a>
                     </li>
                     <li>
-                        <a href="/customer_sales_report"><i class="menu-icon fa fa-bar-chart"></i> Sales Report</a>
+                        <a href="/sale_report"><i class="menu-icon fa fa-bar-chart"></i> Sales Report</a>
                     </li>
                     <li>
                         <a href="/expense"><i class="menu-icon fa fa-bar-chart"></i> Expense Report</a>

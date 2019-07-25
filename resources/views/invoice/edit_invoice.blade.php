@@ -15,7 +15,7 @@
 			<form action="#">
 				<div class="card">
 				  <div class="card-header">
-					   Edit Invoice
+					   @include('invoice._header')
 				  </div>
 				  <div class="card-body p-2">
 				  	<div class="row m-0">

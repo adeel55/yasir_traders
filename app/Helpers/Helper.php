@@ -51,3 +51,7 @@
 				return null;
 		}
     }
+
+    function flt($q,$req){
+    	
+    }

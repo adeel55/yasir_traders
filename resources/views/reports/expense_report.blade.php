@@ -3,6 +3,7 @@
 	@section('title','Expense Report')
 	@section('content')
 
+	<h4 class="text-center"><u>Yasir Traders</u></h4>
 	<div class="row">
 		<div class="col">
 			<h5>Expenses Report</h5>	
@@ -30,6 +31,11 @@
 		<div class="col">
 			<table id="table" data-url="/expense" class="table small table-sm table-hover">
 			</table>
+		</div>
+	</div>
+	<div class="row bt-2 py-2 d-print-none">
+		<div class="col">
+			<button class="btn btn-warning btn-sm" type="button" onclick="window.print()"><i class="fa fa-print"></i> Print</button>
 		</div>
 	</div>
 	<script>
