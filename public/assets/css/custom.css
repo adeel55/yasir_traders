@@ -49,3 +49,14 @@ td>.btn-sm{
     padding: .01rem .3rem;
     font-size: .75rem;
 }
+.div-form-control{
+	/*height: calc(1.8125rem + 2px);*/
+    padding: 0px !important;
+}
+.div-form-control>select{
+	width: 100% !important;
+	border: none;
+}
+.div-form-control .select2{
+	/*height: 100%;*/
+}

@@ -247,12 +247,7 @@ class InvoiceController extends Controller
      */
     public function destroy($id)
     {
-
-        foreach (Invoice::find($id)->sales as $sale){
-            Product::find($sale->product_id)->increment('qty',$sale->qty);
-        }
         Invoice::destroy($id);
-
         return view('components.alert',['msg'=>'Invoice deleted!','type'=>'primary']);
     }
 

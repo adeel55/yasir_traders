@@ -1,4 +1,4 @@
-				@php ($cols = 8)
+				@php ($cols = 7)
 				<thead>
 					<tr>
 						<th>Sr.</th>
@@ -8,7 +8,7 @@
 						<th>Total</th>
 						<th>Received</th>
 						<th>Date</th>
-						<th class="d-print-none">Del</th>
+						{{-- <th class="d-print-none">Del</th> --}}
 					</tr>
 				</thead>
 				<tbody>
@@ -21,7 +21,7 @@
 						<td>{{ $invoice->discount_total }}</td>
 						<td>{{ $invoice->received_amount }}</td>
 						<td>{{ $invoice->showdate() }}</td>
-						<td class="d-print-none"><button class="btn btn-danger btn-sm" onclick="deleteInvoice(this,{{ $invoice->id }})"><i class="fa fa-trash"></i></button></td>
+						{{-- <td class="d-print-none"><button class="btn btn-danger btn-sm" onclick="deleteInvoice(this,{{ $invoice->id }})"><i class="fa fa-trash"></i></button></td> --}}
 					</tr>
 					@empty
 					<tr>

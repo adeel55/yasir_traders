@@ -13,13 +13,13 @@ class DatabaseSeeder extends Seeder
     {
     function rand_date()
     {
-        return '2019-07-'.rand(15,25);
+        return '2019-07-'.rand(25,26);
     }
     function rand_phone()
     {
         return '03'.rand(10,50).'-'.rand(5000000,9000000);
     }
-        factory(App\Company::class, 20)->create();
+        factory(App\Company::class, 50)->create();
 
         
         $products = array('Rio','Super','Lays','Coke','Sprite','Slanty','Prince','Gala','Zera','Tuk','KurKuray','Walls','Lolypop','Soap','Cady','Bombay','Shezaan','Buble','Catchup','Cake','Imli','DairyMilk','Chocklate','Biskit','Pencil');
@@ -39,7 +39,7 @@ class DatabaseSeeder extends Seeder
 
         // Seeder For Products
         for ($i=0; $i < 25; $i++) { 
-            DB::table('products')->insert(['name' => $products[$i],'qty' => rand(40,400),'unit_sale' => rand(10,150),'unit_purchase' => rand(10,100),'company_id' => rand(1,15),'created_at' => rand_date()]);
+            DB::table('products')->insert(['name' => $products[$i],'qty' => rand(40,400),'unit_sale' => rand(30,40),'unit_purchase' => rand(10,20),'company_id' => rand(1,15),'created_at' => rand_date()]);
         }
 
         // Seeder For Sale Man
@@ -60,7 +60,7 @@ class DatabaseSeeder extends Seeder
 
         // Seeder for Inventory
         for ($i=0; $i < 1000; $i++) { 
-            DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,25),'qty' => rand(500,2500),'carton'=>0,'unit_purchase'=>rand(5,110),'unit_sale'=>rand(15,150),'total_purchase'=>rand(5,35000),'expire'=>rand_date(),'created_at'=>rand_date()]);
+            DB::table('inventories')->insert(['company_id' => rand(1,15),'product_id' => rand(1,25),'qty' => rand(6,10),'carton'=>0,'unit_purchase'=>rand(28,30),'unit_sale'=>rand(50,55),'total_purchase'=>rand(150,300),'expire'=>rand_date(),'created_at'=>rand_date()]);
         }
 
         // Seeder for Invoices
@@ -70,7 +70,7 @@ class DatabaseSeeder extends Seeder
             DB::table('invoices')->insert(['customer_id' => rand(1,10), 'sale_man_id' => rand(1,40), 'order_booker_id' => rand(1,15), 'total_amount' => rand(1500,5000), 'total_discount' => rand(150,500), 'discount_total' => rand(1000,4000), 'received_amount' => rand(1000,4000), 'received' => rand(0,1), 'created_at' => $rand_date]);
 
             for ($j=0; $j < $lim; $j++) { 
-                DB::table('sales')->insert(['invoice_id' => $i,'product_id' => rand(1,25), 'qty' => rand(1,30), 'bonus' => rand(1,5), 'unit_price' => rand(1,80), 'total_price' => rand(1,1000), 'discount' => rand(5,25), 'discount_amount' => rand(10,20),'discount_total' => rand(1,6000), 'created_at' => $rand_date]);
+                DB::table('sales')->insert(['invoice_id' => $i,'product_id' => rand(1,25), 'qty' => rand(6,10), 'bonus' => rand(1,3), 'unit_price' => rand(30,35), 'total_price' => rand(150,300), 'discount' => rand(5,25), 'discount_amount' => rand(5,10),'discount_total' => rand(100,250), 'created_at' => $rand_date]);
             }
         }
         

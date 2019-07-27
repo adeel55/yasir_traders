@@ -16,22 +16,14 @@ class Company extends Model
         return $company->id;
     }
 
-
-    public function sales()
+    public function sales($req)
     {
         return $this->hasManyThrough('App\Sale','App\Product');
     }
 
-    public function group_sales()
+    public function group_sales($req)
     {
-        return $this->hasManyThrough('App\Sale','App\Product')->selectRaw('sales.product_id, products.name, sum(sales.qty) as qty, sum(sales.bonus) as bonus, avg(unit_price) as unit_price, sum(total_price) as total_price, sum(discount) as discount, sum(discount_amount) as discount_amount, sum(discount_total) as discount_total')->groupBy('sales.product_id');
-    }
-
-
-    public function profit()
-    {
-
-        return $this->sales()->sum('discount_total');
+        return $this->hasManyThrough('App\Sale','App\Product')->selectRaw('sales.product_id, products.name, sum(sales.qty) as qty, sum(sales.bonus) as bonus, avg(sales.unit_price) as unit_price, sum(sales.total_price) as total_price, sum(sales.discount) as discount, sum(sales.discount_amount) as discount_amount, sum(sales.discount_total) as discount_total')->groupBy('sales.product_id')->whereDate('sales.created_at', $req->date)->get();
     }
 
     public function putdate()

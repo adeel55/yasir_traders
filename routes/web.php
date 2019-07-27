@@ -23,6 +23,7 @@ Route::get('/search_companies', 'CompanyController@search')->name('searchcompany
 Route::get('/search_products', 'ProductController@search');
 Route::get('/search_salemen', 'SaleManController@search');
 Route::get('/search_orderbooker', 'OrderBookerController@search');
+Route::get('/search2_orderbooker', 'OrderBookerController@search2');
 Route::get('/search_customer', 'CustomerController@search');
 Route::get('/search_area', 'CustomerController@searchArea');
 Route::get('/get_sale_price', 'ProductController@getSalePrice');

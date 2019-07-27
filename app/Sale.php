@@ -28,6 +28,10 @@ class Sale extends Model
     {
     	return $this->belongsTo('App\Product');
     }
+    public function profit($qty, $disc)
+    {
+        return (($this->product->unit_sale * $qty) - ($this->product->unit_purchase * $qty)) - $disc;
+    }
     public function putdate()
     {
         return date('Y-m-d',strtotime($this->created_at));

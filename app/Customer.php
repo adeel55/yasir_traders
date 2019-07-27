@@ -19,12 +19,6 @@ class Customer extends Model
     {
         return $this->hasManyThrough('App\Sale','App\Invoice');
     }
-    
-    public function group_sales()
-    {
-        return $this->hasManyThrough('App\Sale','App\Invoice')->select('product_id')->groupBy('product_id');
-    }
-
     public static function findOrSaveCustomer($val){
         $customer = Customer::firstOrCreate(['name' => $val]);
         return $customer->id;

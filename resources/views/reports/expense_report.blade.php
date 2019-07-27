@@ -26,6 +26,22 @@
 	  			<input type="date" id="filterdatejoinexpenses-created_at" onchange="filter()" class="filter date form-control">
   			</div>
 		</div>
+		<div class="col-lg-4 col-md-6 col-sm-12 p-1">
+  			<div class="input-group input-group-sm">
+  			    <div class="input-group-prepend">
+  			     	<div class="input-group-text ">From</div>
+  			    </div>
+	  			<input type="date" id="datefrom" onchange="filter()" class="filter form-control">
+  			</div>
+		</div>
+		<div class="col-lg-4 col-md-6 col-sm-12 p-1">
+  			<div class="input-group input-group-sm">
+  			    <div class="input-group-prepend">
+  			     	<div class="input-group-text ">To</div>
+  			    </div>
+	  			<input type="date" id="dateto" onchange="filter()" class="filter form-control">
+  			</div>
+		</div>
 	</div>
 	<div class="row">
 		<div class="col">
@@ -39,9 +55,8 @@
 		</div>
 	</div>
 	<script>
-		
+		today_form_date()
 		filter()
-
 	</script>
 
 

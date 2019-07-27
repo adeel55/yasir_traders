@@ -27,8 +27,8 @@
 
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/select2.css') }}" />
 
-    @yield('stylesheet')
 
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('assets/js/jquery-3.4.1.min.js') }}"></script>
@@ -37,6 +37,8 @@
     <script src="{{ asset('assets/js/main.js') }}"></script>
     <script src="{{ asset('assets/js/typeahead.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
+    <script src="{{ asset('js/select2.full.min.js') }}"></script>
 
+    @yield('stylesheet')
 
 </head>
