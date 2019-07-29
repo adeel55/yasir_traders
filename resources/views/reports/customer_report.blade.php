@@ -10,15 +10,17 @@
 		</div>
 	</div>
 	<div class="row filters p-2">
-		<div class="col-lg-4 col-md-6 col-sm-12 p-1">
+		<div class="col-lg-4 col-md-6 col-sm-12 p-1 d-print-none">
   			<div class="input-group input-group-sm">
   			    <div class="input-group-prepend">
-  			     	<div class="input-group-text">OrderBooker</div>
+  			     	<div class="input-group-text">Customer</div>
   			    </div>
-	  			<input type="text" id="order_booker" oninput="filter()" class="filter form-control">
+  			    <div class="div-form-control form-control">
+	  			    <select id="customer" class="filter form-control" onchange="filter()" style="width: 100%"></select>
+  			    </div>
   			</div>
 		</div>
-		<div class="col-lg-4 col-md-6 col-sm-12 p-1">
+		<div class="col-lg-4 col-md-6 col-sm-12 p-1 d-print-none">
   			<div class="input-group input-group-sm">
   			    <div class="input-group-prepend">
   			     	<div class="input-group-text ">Date</div>
@@ -26,7 +28,7 @@
 	  			<input type="date" id="date" onchange="filter()" class="filter date form-control">
   			</div>
 		</div>
-		<div class="col-lg-4 col-md-6 col-sm-12 p-1">
+		<div class="col-lg-4 col-md-6 col-sm-12 p-1 d-print-none">
   			<div class="input-group input-group-sm">
   			    <div class="input-group-prepend">
   			     	<div class="input-group-text ">From</div>
@@ -34,7 +36,7 @@
 	  			<input type="date" id="datefrom" onchange="filter()" class="filter form-control">
   			</div>
 		</div>
-		<div class="col-lg-4 col-md-6 col-sm-12 p-1">
+		<div class="col-lg-4 col-md-6 col-sm-12 p-1 d-print-none">
   			<div class="input-group input-group-sm">
   			    <div class="input-group-prepend">
   			     	<div class="input-group-text ">To</div>
@@ -55,8 +57,21 @@
 		</div>
 	</div>
 	<script>
-		today_form_date()
-		filter()
+		// today_form_date()
+		// filter()
+
+		jQuery(document).ready(function($) {
+			$('#customer').select2({
+			  ajax: {
+			    url: '/search2_customer',
+			    data: function (params) {
+			      var query = { searchString: params.term }
+			      return query;
+			    }
+			  }
+			})
+		});
+
 	</script>
 
 

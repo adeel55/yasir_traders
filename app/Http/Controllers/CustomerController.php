@@ -41,6 +41,13 @@ class CustomerController extends Controller
         // dd($products);
     }
 
+    public function search2(Request $request)
+    {
+        $ss = $request->searchString;
+        $results = Customer::select('id','name as text')->where('name','like','%'.$ss.'%')->limit(8)->get();
+        return request()->json(200,['results'=>$results]);
+    }
+
     /**
      * Display a list of searched items.
      *

@@ -15,9 +15,9 @@ class Customer extends Model
 		return $this->hasMany('App\Invoice');
 	}
 
-    public function sales()
+    public function sales($req)
     {
-        return $this->hasManyThrough('App\Sale','App\Invoice');
+        return $this->hasManyThrough('App\Sale','App\Invoice')->when($req->date, function ($q) use ($req) { return $q->whereDate('sales.created_at', $req->date); })->when($req->datefrom, function ($q) use ($req) { return $q->whereDate('sales.created_at','>=', $req->datefrom); })->when($req->dateto, function ($q) use ($req) { return $q->whereDate('sales.created_at','<=', $req->dateto); })->get();
     }
     public static function findOrSaveCustomer($val){
         $customer = Customer::firstOrCreate(['name' => $val]);

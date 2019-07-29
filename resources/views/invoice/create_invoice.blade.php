@@ -143,8 +143,7 @@
 				'discount_total': $('#discount_total').val(),
 				'date': $('#date').val(),'rows': rows} )
 			.then(d => {
-				// console.log(d.data)
-				// console.log(d.data);
+				console.log(d.data);
 				if(d.data == "success")
 				{
 					reset_form()

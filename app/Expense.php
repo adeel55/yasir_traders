@@ -16,6 +16,11 @@ class Expense extends Model
     	return $this->belongsTo('App\ReceiveInvoice');
     }
 
+    public function saleMan()
+    {
+        return $this->belongsTo('App\SaleMan');
+    }
+
     public function putdate()
     {
         return date('Y-m-d',strtotime($this->created_at));

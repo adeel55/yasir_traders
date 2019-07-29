@@ -9,12 +9,12 @@
 				</thead>
 				<tbody>
 					@forelse($customers as $customer)
-					@if($customer->sales()->exists())
+					@if($customer->sales($req)->count())
 					<tr>
 						<td class="font-weight-bold">{{ $customer->name }}</td>
-						<td>{{ $customer->sales->sum('total_price') }}</td>
-						<td>{{ $customer->sales->sum('discount_amount') }}</td>
-						<td>{{ $customer->sales->sum('discount_total') }}</td>
+						<td>{{ $customer->sales($req)->sum('total_price') }}</td>
+						<td>{{ $customer->sales($req)->sum('discount_amount') }}</td>
+						<td>{{ $customer->sales($req)->sum('discount_total') }}</td>
 					</tr>
 					@endif
 					@empty

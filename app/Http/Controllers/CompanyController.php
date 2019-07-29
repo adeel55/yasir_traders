@@ -32,6 +32,13 @@ class CompanyController extends Controller
         // dd($companies);
     }
 
+    public function search2(Request $request)
+    {
+        $ss = $request->searchString;
+        $results = Company::select('id','name as text')->where('name','like','%'.$ss.'%')->limit(8)->get();
+        return request()->json(200,['results'=>$results]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

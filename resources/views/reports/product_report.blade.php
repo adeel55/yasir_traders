@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-	@section('title','Expense Report')
+	@section('title','Products Report')
 	@section('content')
 
 	<h4 class="text-center"><u>Yasir Traders</u></h4>	
@@ -10,15 +10,17 @@
 		</div>
 	</div>
 	<div class="row filters p-2">
-		<div class="col-lg-4 col-md-6 col-sm-12 p-1">
+		<div class="col-lg-4 col-md-6 col-sm-12 p-1 d-print-none">
   			<div class="input-group input-group-sm">
   			    <div class="input-group-prepend">
-  			     	<div class="input-group-text">OrderBooker</div>
+  			     	<div class="input-group-text">Order Booker</div>
   			    </div>
-	  			<input type="text" id="order_booker" oninput="filter()" class="filter form-control">
+  			    <div class="div-form-control form-control">
+	  			    <select id="orderbooker" class="filter form-control" onchange="filter()" style="width: 100%"></select>
+  			    </div>
   			</div>
 		</div>
-		<div class="col-lg-4 col-md-6 col-sm-12 p-1">
+		<div class="col-lg-4 col-md-6 col-sm-12 p-1 d-print-none">
   			<div class="input-group input-group-sm">
   			    <div class="input-group-prepend">
   			     	<div class="input-group-text">Company</div>
@@ -26,15 +28,15 @@
 	  			<input type="text" id="company" oninput="filter()" class="filter form-control">
   			</div>
 		</div>
-		<div class="col-lg-4 col-md-6 col-sm-12 p-1">
+		<div class="col-lg-4 col-md-6 col-sm-12 p-1 d-print-none">
   			<div class="input-group input-group-sm">
   			    <div class="input-group-prepend">
   			     	<div class="input-group-text ">Date</div>
   			    </div>
-	  			<input type="date" id="filterdatejoinexpenses-created_at" onchange="filter()" class="filter date form-control">
+	  			<input type="date" id="date" onchange="filter()" class="filter date form-control">
   			</div>
 		</div>
-		<div class="col-lg-4 col-md-6 col-sm-12 p-1">
+		<div class="col-lg-4 col-md-6 col-sm-12 p-1 d-print-none">
   			<div class="input-group input-group-sm">
   			    <div class="input-group-prepend">
   			     	<div class="input-group-text ">From</div>
@@ -42,7 +44,7 @@
 	  			<input type="date" id="datefrom" onchange="filter()" class="filter form-control">
   			</div>
 		</div>
-		<div class="col-lg-4 col-md-6 col-sm-12 p-1">
+		<div class="col-lg-4 col-md-6 col-sm-12 p-1 d-print-none">
   			<div class="input-group input-group-sm">
   			    <div class="input-group-prepend">
   			     	<div class="input-group-text ">To</div>
@@ -63,8 +65,21 @@
 		</div>
 	</div>
 	<script>
-		today_form_date()
-		filter()
+		// today_form_date()
+		// filter()
+
+
+	jQuery(document).ready(function($) {
+		$('#orderbooker').select2({
+		  ajax: {
+		    url: '/search2_orderbooker',
+		    data: function (params) {
+		      var query = { searchString: params.term }
+		      return query;
+		    }
+		  }
+		});
+	});
 
 	</script>
 

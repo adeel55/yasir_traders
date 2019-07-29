@@ -48,8 +48,10 @@
 
     var filter = '';
     $('.filter').each(function(ind,el){
-        if($(el).val()!=='')
-        filter += '&' + $(el).attr('id') + '=' + $(el).val();
+        if($(el).val()!=='' && $(el).val()!==null){
+            filter += '&' + $(el).attr('id') + '=' + $(el).val();
+            $(el).closest('.col-lg-4').removeClass('d-print-none');
+        }
     });
     var url = $("#table").attr("data-url")
     // console.log(filter);

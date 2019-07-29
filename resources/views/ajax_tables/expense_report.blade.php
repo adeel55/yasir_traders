@@ -11,8 +11,8 @@
 				<tbody>
 					@forelse($data as $it)
 					<tr>
-						<td>{{ $it->expense_id }}</td>
-						<td>{{ $it->saleman_name }}</td>
+						<td>{{ $it->id }}</td>
+						<td>{{ $it->saleMan->name }}</td>
 						<td>{{ $it->amount }}</td>
 						<td>{{ $it->description }}</td>
 						<td>{{ $it->showdate() }}</td>

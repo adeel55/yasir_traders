@@ -97,70 +97,82 @@ class SaleController extends Controller
 
 
 
-    public function productReport(Request $request)
+    public function productReport(Request $req)
     {
-        $filter = filter($request);
+        // $filter = filter($request);
+        if($req->ajax()){
 
-        $companies = Company::all();
-        $sales = Sale::all();
-        
-        if($request->ajax())
-            return view('ajax_tables.product_report',compact('companies','sales'));
+            $q = Company::query();
+            if($req->has('company')) $q->where('id',$req->company);
+            $companies = $q->get();
+            
+            $q = Sale::query();
+            if($req->has('date')) $q->whereDate('created_at', $req->date);
+            if($req->has('datefrom')) $q->whereDate('created_at','>=', $req->datefrom);
+            if($req->has('dateto')) $q->whereDate('created_at','<=', $req->dateto);
+            $sales = $q->get();
+            if($req->has('company')) $sales = Company::find($req->company)->sales($req);
+
+            return view('ajax_tables.product_report',compact('companies','sales','req'));
+        }
         else
             return view('reports.product_report');
         
     }
-    public function customerReport(Request $request)
-    {
-        $customers = Customer::all();
-        $sales = Sale::all();
 
-        if($request->ajax())
-            return view('ajax_tables.customer_report',compact('customers','sales'));
+    public function customerReport(Request $req)
+    {
+
+        // $req->date = '2019-07-26';
+        if($req->ajax()){
+
+            $q = Customer::query();
+            if($req->has('customer')) $q->where('id',$req->customer);
+            $customers = $q->get();
+            
+            $q = Sale::query();
+            if($req->has('date')) $q->whereDate('created_at', $req->date);
+            if($req->has('datefrom')) $q->whereDate('created_at','>=', $req->datefrom);
+            if($req->has('dateto')) $q->whereDate('created_at','<=', $req->dateto);
+            $sales = $q->get();
+            if($req->has('customer')) $sales = Customer::find($req->customer)->sales($req);
+
+            return view('ajax_tables.customer_report',compact('customers','sales','req'));
+        }
         else
-            // return view('ajax_tables.customer_report',compact('customers','sales'));
             return view('reports.customer_report');
         
-    }
-    public function flt($q, $req)
-    {
-        $q->when($req->has('date'), function($q){
-            return $q->where('created_at',$req->date);
-        });
-        return $q;
     }
 
     public function saleReport(Request $req)
     {   
         // $req->date = '2019-07-26';
+        // $req->datefrom = '2019-07-26';
+        // $req->dateto = '2019-07-28';
         if($req->ajax()){
 
             $q = Company::query();
-            // if($req->has('date')) $q->whereDate('created_at',$req->date);
+            if($req->has('company')) $q->where('id',$req->company);
             $companies = $q->get();
-
-            // $qry->when(1, function($qry) use($req){
-            //     return $qry->where('created_at',$req->date);
-            // });
-            // die(json_encode($companies));
-            // $companies  = Company::all();
-
 
             $q = Sale::query();
             if($req->has('date')) $q->whereDate('created_at', $req->date);
+            if($req->has('datefrom')) $q->whereDate('created_at','>=', $req->datefrom);
+            if($req->has('dateto')) $q->whereDate('created_at','<=', $req->dateto);
             $sales = $q->get();
+            if($req->has('company')) $sales = Company::find($req->company)->sales($req);
 
             $q = Expense::query();
             if($req->has('date')) $q->whereDate('created_at', $req->date);
+            if($req->has('datefrom')) $q->whereDate('created_at','>=', $req->datefrom);
+            if($req->has('dateto')) $q->whereDate('created_at','<=', $req->dateto);
             $expenses = $q->sum('amount');
 
             $q = Statement::query();
             if($req->has('date')) $q->whereDate('created_at', $req->date);
+            if($req->has('datefrom')) $q->whereDate('created_at','>=', $req->datefrom);
+            if($req->has('dateto')) $q->whereDate('created_at','<=', $req->dateto);
             $balance = $q->sum('credit');
-
-
-            // $expenses = Expense::where('created_at','2019-07-25')->sum('amount');
-            // $balance = Statement::where('created_at','2019-07-25')->sum('credit');
 
             return view('ajax_tables.sale_report',compact('companies','sales','expenses','balance','req'));
         }

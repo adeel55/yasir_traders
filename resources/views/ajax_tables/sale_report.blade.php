@@ -2,7 +2,6 @@
 				$profit_sum=0;
 				$grand_profit_sum=0;
 				@endphp 
-				{{-- <table> --}}
 				<thead>
 					<tr>
 						<th>Name</th>
@@ -21,7 +20,6 @@
 					<tr>
 						<td colspan="{{$cols}}" class="font-weight-bold text-capitalize">{{ $company->name }}</td>
 					</tr>
-					{{-- @php ($company_sales = ) --}}
 					@foreach($company->group_sales($req) as $sale)
 					<tr>
 						<td>{{ $sale->name }}</td>
@@ -39,7 +37,7 @@
 					@endforeach
 					<tr class="font-weight-bold bb-2">
 						<td>Total:</td>
-						<td>{{ $company->sales($req)->sum('sales.qty') }}</td>
+						<td>{{ $company->sales($req)->sum('qty') }}</td>
 						<td>{{ $company->sales($req)->sum('bonus') }}</td>
 						<td>{{ round($company->sales($req)->avg('unit_price'),2) }}</td>
 						<td>{{ $company->sales($req)->sum('total_price') }}</td>
@@ -57,9 +55,6 @@
 					@endforelse
 				</tbody>
 				<tfoot>
-					{{-- <tr>
-						<td colspan="{{$cols}}">{{ $data->links() }}</td>
-					</tr> --}}
 					<tr>
 						<th>Grand Total:</th>
 						<th>{{ $sales->sum('qty') }}</th>
@@ -77,4 +72,3 @@
 						<th colspan="2">Net Profit: {{ $grand_profit_sum-$expenses }}</th>
 					</tr>
 				</tfoot>
-				{{-- </table> --}}

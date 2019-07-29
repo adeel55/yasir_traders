@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
     {
     function rand_date()
     {
-        return '2019-07-'.rand(25,26);
+        return '2019-07-'.rand(28,30);
     }
     function rand_phone()
     {

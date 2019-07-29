@@ -13,12 +13,12 @@
 				</thead>
 				<tbody>
 					@forelse($companies as $company)
-					@if($company->sales()->exists())
+					@if($company->group_sales($req)->count())
 					{{-- @php (die(json_encode($company->group_sales))) --}}
 					<tr>
 						<td colspan="{{$cols}}" class="font-weight-bold text-capitalize">{{ $company->name }}</td>
 					</tr>
-					@foreach($company->group_sales as $sale)
+					@foreach($company->group_sales($req) as $sale)
 					<tr>
 						<td>{{ $sale->name }}</td>
 						<td>{{ $sale->qty }}</td>
@@ -31,12 +31,12 @@
 					@endforeach
 					<tr class="font-weight-bold bb-2">
 						<td>Total:</td>
-						<td>{{ $company->sales->sum('qty') }}</td>
-						<td>{{ $company->sales->sum('bonus') }}</td>
-						<td>{{ round($company->sales->avg('unit_price'),2) }}</td>
-						<td>{{ $company->sales->sum('total_price') }}</td>
-						<td>{{ $company->sales->sum('discount_amount') }}</td>
-						<td>{{ $company->sales->sum('discount_total') }}</td>
+						<td>{{ $company->sales($req)->sum('qty') }}</td>
+						<td>{{ $company->sales($req)->sum('bonus') }}</td>
+						<td>{{ round($company->sales($req)->avg('unit_price'),2) }}</td>
+						<td>{{ $company->sales($req)->sum('total_price') }}</td>
+						<td>{{ $company->sales($req)->sum('discount_amount') }}</td>
+						<td>{{ $company->sales($req)->sum('discount_total') }}</td>
 					</tr>
 					@endif
 					@empty
@@ -52,7 +52,7 @@
 					<tr>
 						{{-- <th colspan="{{$cols-3}}"></th> --}}
 						<th>Grand Total:</th>
-						<th>{{ $sales->sum('qty') }}</th>
+						<th>{{ $sales->sum('sales.qty') }}</th>
 						<th>{{ $sales->sum('bonus') }}</th>
 						<th>{{ round($sales->avg('unit_price'),2) }}</th>
 						<th>{{ $sales->sum('total_price') }}</th>

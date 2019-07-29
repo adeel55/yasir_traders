@@ -48,9 +48,7 @@ class OrderBookerController extends Controller
     {
         $ss = $request->searchString;
         $results = OrderBooker::select('id','name as text')->where('name','like','%'.$ss.'%')->limit(8)->get();
-        // $results = OrderBooker::where('name','like','%'.$ss.'%')->limit(8)->pluck('name')->toArray();
         return request()->json(200,['results'=>$results]);
-        // dd($products);
     }
 
     /**

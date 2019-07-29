@@ -71,9 +71,13 @@ class InvoiceController extends Controller
         $orderbooker_id = OrderBooker::findOrSaveOrderBooker($request->orderbooker);
         $saleman_id = SaleMan::findOrSaveSaleman($request->saleman);
         $invoicedate = $request->date;
-        Customer::find($customer_id)->area = $request->area;
+        $customer = Customer::find($customer_id);
+        $customer->area = $request->area;
+        $customer->save();
 
         // die($request->invoice_total);
+
+        // die($request."|----|".$customer_id.$request->area);
 
         $rec = [
                 'customer_id' => $customer_id,

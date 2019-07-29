@@ -12,18 +12,22 @@ class ExpenseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $req)
     {
         
-        $filter = filter($request);
+        // $filter = filter($request);
 
 
-        $data = Expense::join('sale_men','sale_men.id','sale_man_id')
-        ->select('expenses.id as expense_id','sale_men.name as saleman_name','amount','description','expenses.created_at')->where($filter)->paginate(40);
         
-        if($request->ajax()){
+        if($req->ajax()){
 
-            // die(json_encode(filter($request)));
+            $q = Expense::query();
+            if($req->has('date')) $q->whereDate('created_at', $req->date);
+            if($req->has('datefrom')) $q->whereDate('created_at','>=', $req->datefrom);
+            if($req->has('dateto')) $q->whereDate('created_at','<=', $req->dateto);
+            if($req->has('saleman')) $q->where('sale_man_id',$req->saleman);
+            $data = $q->paginate(40);
+
             return view('ajax_tables.expense_report',compact('data'));
         }
         else

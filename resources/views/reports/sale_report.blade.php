@@ -10,26 +10,27 @@
 		</div>
 	</div>
 	<div class="row filters p-2">
-		<div class="col-lg-4 col-md-6 col-sm-12 p-1">
+		<div class="col-lg-4 col-md-6 col-sm-12 p-1 d-print-none">
   			<div class="input-group input-group-sm">
   			    <div class="input-group-prepend">
   			     	<div class="input-group-text">Order Booker</div>
   			    </div>
   			    <div class="div-form-control form-control">
-	  			    <select id="orderbooker" class="form-control" style="width: 100%"></select>
+	  			    <select id="orderbooker" class="filter form-control" onchange="filter()" style="width: 100%"></select>
   			    </div>
-	  			{{-- <input type="text" id="order_booker" oninput="filter()" class="filter form-control"> --}}
   			</div>
 		</div>
-		<div class="col-lg-4 col-md-6 col-sm-12 p-1">
+		<div class="col-lg-4 col-md-6 col-sm-12 p-1 d-print-none">
   			<div class="input-group input-group-sm">
   			    <div class="input-group-prepend">
   			     	<div class="input-group-text">Comapny</div>
   			    </div>
-	  			<input type="text" id="company" oninput="filter()" class="filter form-control">
+  			    <div class="div-form-control form-control">
+	  			    <select id="company" class="filter form-control" onchange="filter()" style="width: 100%"></select>
+  			    </div>
   			</div>
 		</div>
-		<div class="col-lg-4 col-md-6 col-sm-12 p-1">
+		<div class="col-lg-4 col-md-6 col-sm-12 p-1 d-print-none">
   			<div class="input-group input-group-sm">
   			    <div class="input-group-prepend">
   			     	<div class="input-group-text ">Date</div>
@@ -37,7 +38,7 @@
 	  			<input type="date" id="date" oninput="filter()" class="filter date form-control">
   			</div>
 		</div>
-		<div class="col-lg-4 col-md-6 col-sm-12 p-1">
+		<div class="col-lg-4 col-md-6 col-sm-12 p-1 d-print-none">
   			<div class="input-group input-group-sm">
   			    <div class="input-group-prepend">
   			     	<div class="input-group-text ">From</div>
@@ -45,7 +46,7 @@
 	  			<input type="date" id="datefrom" onchange="filter()" class="filter form-control">
   			</div>
 		</div>
-		<div class="col-lg-4 col-md-6 col-sm-12 p-1">
+		<div class="col-lg-4 col-md-6 col-sm-12 p-1 d-print-none">
   			<div class="input-group input-group-sm">
   			    <div class="input-group-prepend">
   			     	<div class="input-group-text ">To</div>
@@ -68,23 +69,26 @@
 
 	<script>
 		
-	today_form_date()
-	filter()
+	// today_form_date()
+	// filter()
 
 	jQuery(document).ready(function($) {
 		$('#orderbooker').select2({
 		  ajax: {
 		    url: '/search2_orderbooker',
 		    data: function (params) {
-		      var query = {
-		        searchString: params.term
-		      }
-
-		      // Query parameters will be ?search=[term]&type=public
+		      var query = { searchString: params.term }
 		      return query;
 		    }
-		    // dataType: 'json'
-		    // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
+		  }
+		});
+		$('#company').select2({
+		  ajax: {
+		    url: '/search2_companies',
+		    data: function (params) {
+		      var query = { searchString: params.term }
+		      return query;
+		    }
 		  }
 		});
 	});
