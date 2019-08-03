@@ -149,14 +149,16 @@
 								</th>
 							</tr>
 							<tr>
-								<th colspan="5"></th>
+								<th colspan="3">Developed by: EncoderSolutions</th>
+								<th colspan="2"></th>
 								<th>Discount:</th>
 								<th>
 									<input type="number" step="any" value="{{ $invoice->total_discount }}" id="total_discount">
 								</th>
 							</tr>
 							<tr>
-								<th colspan="5"></th>
+								<th colspan="3">Phone: +92 335-0659527</th>
+								<th colspan="2"></th>
 								<th>Total:</th>
 								<th>
 									<input type="number" step="any" value="{{ $invoice->discount_total }}" id="discount_total">

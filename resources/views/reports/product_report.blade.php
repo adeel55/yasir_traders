@@ -25,7 +25,10 @@
   			    <div class="input-group-prepend">
   			     	<div class="input-group-text">Company</div>
   			    </div>
-	  			<input type="text" id="company" oninput="filter()" class="filter form-control">
+  			    <div class="div-form-control form-control">
+	  			    <select id="company" class="filter form-control" onchange="filter()" style="width: 100%"></select>
+  			    </div>
+	  			{{-- <input type="text" id="company" oninput="filter()" class="filter form-control"> --}}
   			</div>
 		</div>
 		<div class="col-lg-4 col-md-6 col-sm-12 p-1 d-print-none">
@@ -73,6 +76,16 @@
 		$('#orderbooker').select2({
 		  ajax: {
 		    url: '/search2_orderbooker',
+		    data: function (params) {
+		      var query = { searchString: params.term }
+		      return query;
+		    }
+		  }
+		});
+
+		$('#company').select2({
+		  ajax: {
+		    url: '/search2_companies',
 		    data: function (params) {
 		      var query = { searchString: params.term }
 		      return query;

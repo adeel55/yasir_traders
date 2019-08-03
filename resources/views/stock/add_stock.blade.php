@@ -69,7 +69,7 @@
 			var rows = [];
 			for(var i=0; i<rowsdata.length;i++){
 
-				rows.push({'product':$(rowsdata[i]).find('.product').val(),'qty':$(rowsdata[i]).find('.qty').val(),'carton':$(rowsdata[i]).find('.carton').val(),'unit_purchase':$(rowsdata[i]).find('.unit_purchase').val(),'unit_sale':$(rowsdata[i]).find('.unit_sale').val(),'total_purchase':$(rowsdata[i]).find('.total_purchase').val(),'expire':$(rowsdata[i]).find('.expire').val()});
+				rows.push({'product':$(rowsdata[i]).find('.product').val(),'qty':$(rowsdata[i]).find('.qty').val(),'unit_purchase':$(rowsdata[i]).find('.unit_purchase').val(),'unit_sale':$(rowsdata[i]).find('.unit_sale').val(),'total_purchase':$(rowsdata[i]).find('.total_purchase').val(),'expire':$(rowsdata[i]).find('.expire').val()});
 			}
 			// data['_token'] = $('meta[name="csrf-token"]').attr('content');
 			// data['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content');

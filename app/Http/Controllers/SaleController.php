@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Sale;
+use App\OrderBooker;
 use App\Company;
 use App\Product;
 use App\Customer;
@@ -124,18 +125,23 @@ class SaleController extends Controller
     {
 
         // $req->date = '2019-07-26';
+        // $req->orderbooker = 1;
         if($req->ajax()){
 
-            $q = Customer::query();
-            if($req->has('customer')) $q->where('id',$req->customer);
-            $customers = $q->get();
+            if($req->has('orderbooker'))
+            {
+                $orderbooker = OrderBooker::find($req->orderbooker);
+                $customers = $orderbooker->customers($req);
+            }else{
+                
+                $customers = Customer::all();
+            }
             
             $q = Sale::query();
             if($req->has('date')) $q->whereDate('created_at', $req->date);
             if($req->has('datefrom')) $q->whereDate('created_at','>=', $req->datefrom);
             if($req->has('dateto')) $q->whereDate('created_at','<=', $req->dateto);
             $sales = $q->get();
-            if($req->has('customer')) $sales = Customer::find($req->customer)->sales($req);
 
             return view('ajax_tables.customer_report',compact('customers','sales','req'));
         }

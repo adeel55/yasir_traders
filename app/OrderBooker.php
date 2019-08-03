@@ -14,6 +14,11 @@ class OrderBooker extends Model
         return $orderbooker->id;
     }
 
+    public function customers($req)
+    {
+        $customers_ids = $this->hasMany('App\Invoice')->when($req->date, function ($q) use ($req) { return $q->whereDate('invoices.created_at', $req->date); })->when($req->datefrom, function ($q) use ($req) { return $q->whereDate('invoices.created_at','>=', $req->datefrom); })->when($req->dateto, function ($q) use ($req) { return $q->whereDate('invoices.created_at','<=', $req->dateto); })->pluck('customer_id')->toArray();
+        return Customer::find($customers_ids);
+    }
 
     public function putdate()
     {

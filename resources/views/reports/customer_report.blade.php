@@ -13,10 +13,10 @@
 		<div class="col-lg-4 col-md-6 col-sm-12 p-1 d-print-none">
   			<div class="input-group input-group-sm">
   			    <div class="input-group-prepend">
-  			     	<div class="input-group-text">Customer</div>
+  			     	<div class="input-group-text">Order Booker</div>
   			    </div>
   			    <div class="div-form-control form-control">
-	  			    <select id="customer" class="filter form-control" onchange="filter()" style="width: 100%"></select>
+	  			    <select id="orderbooker" class="filter form-control" onchange="filter()" style="width: 100%"></select>
   			    </div>
   			</div>
 		</div>
@@ -61,9 +61,9 @@
 		// filter()
 
 		jQuery(document).ready(function($) {
-			$('#customer').select2({
+			$('#orderbooker').select2({
 			  ajax: {
-			    url: '/search2_customer',
+			    url: '/search2_orderbooker',
 			    data: function (params) {
 			      var query = { searchString: params.term }
 			      return query;

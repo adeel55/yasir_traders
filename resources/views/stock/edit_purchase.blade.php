@@ -62,9 +62,6 @@
 								<input type="number" step="any" name="qty" oninput="count_per_unit_purchase(this)" class="form-control form-control-sm qty" id="qty" min="0" placeholder="qty" value="{{ $inventory->qty }}" required="required">
 							</div>
 							<div class="col p-0">
-								<input type="number" step="any" min="0" name="carton" class="form-control form-control-sm carton" id="carton" placeholder="carton" value="{{ $inventory->carton }}" >
-							</div>
-							<div class="col p-0">
 								<input type="number" step="any" name="total_purchase" oninput="count_per_unit_purchase(this)" class="form-control form-control-sm total_purchase" id="total_purchase" placeholder="total_purchase" value="{{ $inventory->total_purchase }}" required="required">
 							</div>
 							<div class="col p-0">
@@ -96,7 +93,7 @@
 		$('form').submit(function(e){
 			e.preventDefault()
 			var tr = $('#rows');
-			axios.post("/inventory/{{ $inventory->id }}", {'_method':'PUT','_token' : $("input[name='_token']").val(),'company' : $('#company').val(),'date' : $('#date').val(),'product':$(tr).find('.product').val(),'qty':$(tr).find('.qty').val(),'carton':$(tr).find('.carton').val(),'unit_purchase':$(tr).find('.unit_purchase').val(),'unit_sale':$(tr).find('.unit_sale').val(),'total_purchase':$(tr).find('.total_purchase').val(),'expire':$(tr).find('.expire').val()} )
+			axios.post("/inventory/{{ $inventory->id }}", {'_method':'PUT','_token' : $("input[name='_token']").val(),'company' : $('#company').val(),'date' : $('#date').val(),'product':$(tr).find('.product').val(),'qty':$(tr).find('.qty').val(),'unit_purchase':$(tr).find('.unit_purchase').val(),'unit_sale':$(tr).find('.unit_sale').val(),'total_purchase':$(tr).find('.total_purchase').val(),'expire':$(tr).find('.expire').val()} )
 			.then(d => {
 				console.log(d.data);
 				if(d.data == "success")
