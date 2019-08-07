@@ -9,7 +9,7 @@ use app\Customer;
 class Statement extends Model
 {
 
-	protected $fillable = ['customer_id','debit','credit','balance','created_at','updated_at'];
+	protected $fillable = ['customer_id','invoice_id','debit','credit','balance','created_at','updated_at'];
 
     public function customer()
     {

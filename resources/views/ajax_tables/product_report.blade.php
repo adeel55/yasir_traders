@@ -52,7 +52,7 @@
 					<tr>
 						{{-- <th colspan="{{$cols-3}}"></th> --}}
 						<th>Grand Total:</th>
-						<th>{{ $sales->sum('sales.qty') }}</th>
+						<th>{{ $sales->sum('qty') }}</th>
 						<th>{{ $sales->sum('bonus') }}</th>
 						<th>{{ round($sales->avg('unit_price'),2) }}</th>
 						<th>{{ $sales->sum('total_price') }}</th>

@@ -10,10 +10,10 @@
 					</tr>
 				</thead>
 				<tbody>
-					@forelse($data as $it)
+					@forelse($statements as $it)
 					<tr>
 						<td>{{ $it->id }}</td>
-						<td>{{ $it->name }}</td>
+						<td><a href="/invoice/{{ $it->invoice_id }}">{{ $it->name }}</a></td>
 						<td>{{ $it->dabit }}</td>
 						<td>{{ $it->credit }}</td>
 						<td>{{ $it->balance }}</td>
@@ -27,6 +27,6 @@
 				</tbody>
 				<tfoot>
 					<tr>
-						<td colspan="{{$cols}}">{{ $data->links() }}</td>
+						<td colspan="{{$cols}}">{{ $statements->links() }}</td>
 					</tr>
 				</tfoot>

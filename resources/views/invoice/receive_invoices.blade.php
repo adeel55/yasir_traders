@@ -139,16 +139,16 @@
 
 		    getInvoices();
 
-			console.log({
-				'_token' : $("input[name='_token']").val(),
-				'orderbooker': $('#filterstrjoinorder_bookers-name').val(),
-				'saleman': $('#filterstrjoinsale_men-name').val(),
-				'discount_total': $('#discount_total').val(),
-				'received_amount': $('#total_received').val(),
-				'received_at': $('#filterdatejoininvoices-created_at').val(),
-				'expenses': expenses,
-				'invoices': invoices
-			});
+			// console.log({
+			// 	'_token' : $("input[name='_token']").val(),
+			// 	'orderbooker': $('#filterstrjoinorder_bookers-name').val(),
+			// 	'saleman': $('#filterstrjoinsale_men-name').val(),
+			// 	'discount_total': $('#discount_total').val(),
+			// 	'received_amount': $('#total_received').val(),
+			// 	'received_at': $('#filterdatejoininvoices-created_at').val(),
+			// 	'expenses': expenses,
+			// 	'invoices': invoices
+			// });
 
 			axios.post("/receive_invoices", {
 				'_token' : $("input[name='_token']").val(),

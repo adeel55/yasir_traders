@@ -69,7 +69,7 @@
 	</div>
 	<script>
 		// today_form_date()
-		// filter()
+		filter()
 
 
 	jQuery(document).ready(function($) {

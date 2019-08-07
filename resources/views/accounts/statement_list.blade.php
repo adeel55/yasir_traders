@@ -13,9 +13,19 @@
 		<div class="col-lg-4 col-md-6 col-sm-12 p-1">
   			<div class="input-group input-group-sm">
   			    <div class="input-group-prepend">
-  			     	<div class="input-group-text ">Customer</div>
+  			     	<div class="input-group-text ">Orderbooker</div>
   			    </div>
-	  			<input type="text" id="filterstrjoincustomers-name" oninput="filter()" class="filter form-control">
+	  			<div class="div-form-control form-control">
+	  			    <select id="orderbooker" class="filter form-control" onchange="filter()" style="width: 100%"></select>
+  			    </div>
+  			</div>
+		</div>
+		<div class="col-lg-4 col-md-6 col-sm-12 p-1 d-print-none">
+  			<div class="input-group input-group-sm">
+  			    <div class="input-group-prepend">
+  			     	<div class="input-group-text ">Date</div>
+  			    </div>
+	  			<input type="date" id="date" onchange="filter()" class="filter date form-control">
   			</div>
 		</div>
 	</div>
@@ -31,10 +41,34 @@
 		</div>
 	</div>
 	<script>
-		
-		filter()
+
+
+	// today_form_date()
+	filter()
+
+
+	jQuery(document).ready(function($) {
+		$('#orderbooker').select2({
+		  ajax: {
+		    url: '/search2_orderbooker',
+		    data: function (params) {
+		      var query = { searchString: params.term }
+		      return query;
+		    }
+		  }
+		});
+
+		$('#customer').select2({
+		  ajax: {
+		    url: '/search2_customer',
+		    data: function (params) {
+		      var query = { searchString: params.term }
+		      return query;
+		    }
+		  }
+		});
+	});
 
 	</script>
-
 
 	@endsection

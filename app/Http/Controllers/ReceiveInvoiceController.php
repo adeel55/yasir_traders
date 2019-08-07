@@ -100,24 +100,24 @@ class ReceiveInvoiceController extends Controller
             foreach($sales as $sale){
                Product::find($sale->product_id)->decrement('qty',$sale->qty + $sale->bonus);
             }
-            // die("success");
 
 
+                // die("success");
             if($invoice->balance>0){
 
                 $customer->balance = $customer->balance + $invoice->balance;
-                $rec = ['customer_id'=> $customer->id,'credit'=>$invoice->balance,'balance'=>$customer->balance];
+                $rec = ['customer_id' => $customer->id, 'invoice_id' => $invoice->id,'credit'=>$invoice->balance,'balance'=>$customer->balance];
                 $customer->save();
                 Statement::create($rec);
             }
             if($invoice->balance<0){
 
                 $customer->balance = $customer->balance - abs($invoice->balance);
-                $rec = ['customer_id'=>$customer->id,'debit'=>abs($invoice->balance),'balance'=>$customer->balance];
+                $rec = ['customer_id' => $customer->id, 'invoice_id' => $invoice->id,'debit'=>abs($invoice->balance),'balance'=>$customer->balance];
                 $customer->save();
                 Statement::create($rec);
             }
-            // die(json_encode($invoice->balance));
+            // die(json_encode($rec));
         }
 
         echo "success";

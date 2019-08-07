@@ -73,6 +73,5 @@ class DatabaseSeeder extends Seeder
                 DB::table('sales')->insert(['invoice_id' => $i,'product_id' => rand(1,25), 'qty' => rand(6,10), 'bonus' => rand(1,3), 'unit_price' => rand(30,35), 'total_price' => rand(150,300), 'discount' => rand(5,25), 'discount_amount' => rand(5,10),'discount_total' => rand(100,250), 'created_at' => $rand_date]);
             }
         }
-        
     }
 }

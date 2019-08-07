@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Statement;
+use App\OrderBooker;
 use Illuminate\Http\Request;
 
 class StatementController extends Controller
@@ -12,14 +13,28 @@ class StatementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $req)
     {
-        $filter = filter($request);
+        // $filter = filter($request);
+        // $req->orderbooker = 1;
 
-        $data = Statement::join('customers','customers.id','customer_id')->select('statements.*','name')->where($filter)->paginate(25);
+        if($req->ajax()){
 
-        if($request->ajax())
-            return view('ajax_tables.statements',compact('data'));
+            if($req->has('orderbooker'))
+            {
+                $orderbooker = OrderBooker::find($req->orderbooker);
+                $statements = $orderbooker->statements($req);
+                // die($statements);
+            }else{
+                
+                $statements = Statement::join('customers','customers.id','customer_id')->paginate();
+            }
+
+
+            // $statements = Statement::join('customers','customers.id','customer_id')->select('statements.*','name')->where($filter)->paginate(40);
+
+            return view('ajax_tables.statements',compact('statements'));
+        }
         else
             return view('accounts.statement_list');
     }
