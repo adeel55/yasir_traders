@@ -20,6 +20,12 @@
                 <div class="col-sm-5">
                     <div class="user-area dropdown float-right">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <form action="logout" method="post">
+                                @csrf
+                                <button type="submit" class="btn btn-sm btn-outline-danger">
+                                    <i class="fa fa-power-off mt-1" style="font-size: 1.2rem"></i>
+                                </button>
+                            </form>
                             {{-- <img class="user-avatar rounded-circle" src="{{ asset('images/admin.jpg') }}" alt="User Avatar"> --}}
                         </a>
 
