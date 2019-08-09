@@ -31,12 +31,12 @@
 					@endforeach
 					<tr class="font-weight-bold bb-2">
 						<td>Total:</td>
-						<td>{{ $company->sales($req)->sum('qty') }}</td>
-						<td>{{ $company->sales($req)->sum('bonus') }}</td>
-						<td>{{ round($company->sales($req)->avg('unit_price'),2) }}</td>
-						<td>{{ $company->sales($req)->sum('total_price') }}</td>
-						<td>{{ $company->sales($req)->sum('discount_amount') }}</td>
-						<td>{{ $company->sales($req)->sum('discount_total') }}</td>
+						<td>{{ $company->group_sales($req)->sum('qty') }}</td>
+						<td>{{ $company->group_sales($req)->sum('bonus') }}</td>
+						<td>{{ round($company->group_sales($req)->avg('unit_price'),2) }}</td>
+						<td>{{ $company->group_sales($req)->sum('total_price') }}</td>
+						<td>{{ $company->group_sales($req)->sum('discount_amount') }}</td>
+						<td>{{ $company->group_sales($req)->sum('discount_total') }}</td>
 					</tr>
 					@endif
 					@empty
@@ -46,11 +46,7 @@
 					@endforelse
 				</tbody>
 				<tfoot>
-					{{-- <tr>
-						<td colspan="{{$cols}}">{{ $data->links() }}</td>
-					</tr> --}}
 					<tr>
-						{{-- <th colspan="{{$cols-3}}"></th> --}}
 						<th>Grand Total:</th>
 						<th>{{ $sales->sum('qty') }}</th>
 						<th>{{ $sales->sum('bonus') }}</th>

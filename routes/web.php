@@ -31,6 +31,7 @@ Route::group(['middleware'=> 'auth'], function(){
 	Route::get('/', function () {
 	    return view('dashboard');
 	});
+	Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 	Route::get('/home', 'HomeController@index')->name('home');
 	Route::get('/companies', 'CompanyController@index')->name('conmapy');
 	Route::get('/get_sale_price', 'ProductController@getSalePrice');

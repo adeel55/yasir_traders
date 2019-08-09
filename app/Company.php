@@ -18,7 +18,7 @@ class Company extends Model
 
     public function sales($req)
     {
-        return $this->hasManyThrough('App\Sale','App\Product')->when($req->date, function ($q) use ($req) { return $q->whereDate('sales.created_at', $req->date); })->when($req->datefrom, function ($q) use ($req) { return $q->whereDate('sales.created_at','>=', $req->datefrom); })->when($req->dateto, function ($q) use ($req) { return $q->whereDate('sales.created_at','<=', $req->dateto); })->get();
+        return $this->hasManyThrough('App\Sale','App\Product')->when($req->orderbooker, function ($q) use ($req) { return $q->join('invoices','invoices.id','invoice_id')->where('order_booker_id', $req->orderbooker); })->when($req->date, function ($q) use ($req) { return $q->whereDate('sales.created_at', $req->date); })->when($req->datefrom, function ($q) use ($req) { return $q->whereDate('sales.created_at','>=', $req->datefrom); })->when($req->dateto, function ($q) use ($req) { return $q->whereDate('sales.created_at','<=', $req->dateto); })->get();
     }
 
     public function group_sales($req)

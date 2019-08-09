@@ -18,11 +18,12 @@ class ProductController extends Controller
         $filter = filter($request);
 
 
-        $data = Product::join('companies','companies.id','company_id')->select('products.id as product_id','products.name as product','companies.name as company','qty','unit_purchase','unit_sale','products.created_at')->where($filter)->paginate(40);
+        $data = Product::join('companies','companies.id','company_id')->selectRaw('products.id as product_id,products.name as product,companies.name as company,qty,unit_purchase,unit_sale,products.created_at,qty*unit_purchase as total_purchase')->where($filter)->paginate(45);
+        $all = Product::selectRaw('*, qty*unit_purchase as total_purchase')->get();
 
 
          if($request->ajax())
-            return view('ajax_tables.stock_items',compact('data'));
+            return view('ajax_tables.stock_items',compact('data','all'));
         else
             return view('stock.stock_items');
 

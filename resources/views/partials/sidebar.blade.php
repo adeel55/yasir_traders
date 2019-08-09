@@ -51,7 +51,10 @@
                     <h3 class="menu-title">Lists</h3><!-- /.menu-title -->
                     
                     <li>
-                        <a href="/orderbooker"><i class="menu-icon fa fa-address-card"></i> OrderBooker List</a>
+                        <a href="/company"><i class="menu-icon fa fa-industry"></i> Companies List</a>
+                    </li>
+                    <li>
+                        <a href="/orderbooker"><i class="menu-icon fa fa-address-card"></i> OrderBookers List</a>
                     </li>
                     <li>
                         <a href="/saleman"><i class="menu-icon fa fa-shipping-fast"></i> SaleMen List</a>

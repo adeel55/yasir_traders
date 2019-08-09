@@ -112,7 +112,10 @@ class SaleController extends Controller
             if($req->has('datefrom')) $q->whereDate('created_at','>=', $req->datefrom);
             if($req->has('dateto')) $q->whereDate('created_at','<=', $req->dateto);
             $sales = $q->get();
-            if($req->has('company')) $sales = Company::find($req->company)->sales($req);
+            if($req->has('company')) 
+                $sales = Company::find($req->company)->group_sales($req);
+            if($req->has('orderbooker') and !$req->has('company')) 
+                $sales = OrderBooker::find($req->orderbooker)->sales($req);
 
             return view('ajax_tables.product_report',compact('companies','sales','req'));
         }
@@ -143,6 +146,9 @@ class SaleController extends Controller
             if($req->has('dateto')) $q->whereDate('created_at','<=', $req->dateto);
             $sales = $q->get();
 
+            if($req->has('orderbooker') and !$req->has('company')) 
+                $sales = OrderBooker::find($req->orderbooker)->sales($req);
+
             return view('ajax_tables.customer_report',compact('customers','sales','req'));
         }
         else
@@ -167,6 +173,8 @@ class SaleController extends Controller
             if($req->has('dateto')) $q->whereDate('created_at','<=', $req->dateto);
             $sales = $q->get();
             if($req->has('company')) $sales = Company::find($req->company)->sales($req);
+            if($req->has('orderbooker') and !$req->has('company'))
+                $sales = OrderBooker::find($req->orderbooker)->sales($req);
 
             $q = Expense::query();
             if($req->has('date')) $q->whereDate('created_at', $req->date);

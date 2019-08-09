@@ -93,7 +93,7 @@
 								</th>
 							</tr>
 							<tr>
-								<th colspan="3">Developed by: EncoderSolutions</th>
+								<th colspan="3">Developed by: Encoder Solutions</th>
 								<th colspan="2"></th>
 								<th>Discount:</th>
 								<th>

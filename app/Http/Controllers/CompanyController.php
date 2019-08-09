@@ -12,10 +12,16 @@ class CompanyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $companies = Company::paginate(10);
-        return request()->json(200,$companies);
+        $filter = filter($request);
+
+        $data = Company::where($filter)->orderBy('id','DESC')->paginate(40);
+        
+         if($request->ajax())
+            return view('ajax_tables.companies',compact('data'));
+        else
+            return view('company.company_list');
     }
 
       /**
@@ -57,7 +63,9 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+          $rec = Company::create($request->all());
+         if($rec) echo "success"; else echo "fail";
     }
 
     /**
@@ -68,7 +76,7 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-        //
+        return view("company.view_company", compact('company'));
     }
 
     /**
@@ -79,7 +87,7 @@ class CompanyController extends Controller
      */
     public function edit(Company $company)
     {
-        //
+        return view("company.edit_company", compact('company'));
     }
 
     /**
@@ -91,7 +99,8 @@ class CompanyController extends Controller
      */
     public function update(Request $request, Company $company)
     {
-        //
+        $company->update($request->all());
+        return "success";
     }
 
     /**
@@ -100,8 +109,9 @@ class CompanyController extends Controller
      * @param  \App\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Company $company)
+    public function destroy($id)
     {
-        //
+        Company::destroy($id);
+        return view('components.alert',['msg'=>'Company deleted!','type'=>'primary']);
     }
 }

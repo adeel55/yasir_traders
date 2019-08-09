@@ -254,6 +254,15 @@ deleteOrderbooker = function(obj,id){
         var tr = $(obj).closest('tr').remove();
     }).catch(e => console.log(e));
 }
+deleteCompany = function(obj,id){
+    if(!confirm('Are you sure to delete this Company permanently?')) return;
+    axios.post('/company/'+id ,{_method:'DELETE'})
+    .then(d => {
+        console.log(d.data);
+        $('#msg').html(d.data);
+        var tr = $(obj).closest('tr').remove();
+    }).catch(e => console.log(e));
+}
 
 
 
