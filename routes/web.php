@@ -45,6 +45,7 @@ Route::group(['middleware'=> 'auth'], function(){
 	Route::get('/product_report', 'SaleController@productReport');
 	Route::get('/customer_report', 'SaleController@customerReport');
 	Route::get('/sale_report', 'SaleController@saleReport');
+	Route::get('/purchase_report', 'InventoryController@purchasesReport');
 	Route::resource('/inventory', 'InventoryController');
 	Route::resource('/saleman', 'SaleManController');
 	Route::resource('/orderbooker', 'OrderBookerController');

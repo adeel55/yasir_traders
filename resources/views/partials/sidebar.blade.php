@@ -71,6 +71,9 @@
                         <a href="/sale_report"><i class="menu-icon fa fa-bar-chart"></i> Sales Report</a>
                     </li>
                     <li>
+                        <a href="/purchase_report"><i class="menu-icon fa fa-bar-chart"></i> Purchases Report</a>
+                    </li>
+                    <li>
                         <a href="/expense"><i class="menu-icon fa fa-bar-chart"></i> Expense Report</a>
                     </li>
                 </ul>

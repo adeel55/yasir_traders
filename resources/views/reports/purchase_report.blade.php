@@ -1,12 +1,12 @@
 @extends('layouts.main')
 
-	@section('title','Stock Puchases')
+	@section('title','Products Report')
 	@section('content')
 
-	<div id="msg"></div>	
+	<h4 class="text-center"><u>Yasir Traders</u></h4>	
 	<div class="row">
 		<div class="col">
-			<h5>Stock Items Purchases List</h5>	
+			<h5>Products Report</h5>	
 		</div>
 	</div>
 	<div class="row filters p-2">
@@ -48,7 +48,7 @@
 	</div>
 	<div class="row">
 		<div class="col">
-			<table id="table" data-url="/inventory" class="table table-sm small table-hover">
+			<table id="table" data-url="/purchase_report" class="table small table-sm table-hover">
 			</table>
 		</div>
 	</div>
@@ -61,9 +61,8 @@
 		// today_form_date()
 		filter()
 
-	jQuery(document).ready(function($) {
-		
 
+	jQuery(document).ready(function($) {
 		$('#company').select2({
 		  ajax: {
 		    url: '/search2_companies',
