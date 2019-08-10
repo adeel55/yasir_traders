@@ -13,7 +13,7 @@
 	<div class="row">
 		<div class="col">
 			<form action="#">
-				<div class="card">
+				<div class="card invoice">
 				  <div class="card-header">
 					   @include('invoice._header')
 				  </div>
@@ -166,7 +166,6 @@
 							</tr>
 						</tfoot>
 					</table>
-					</div>
 				  </div>
 				  <div class="card-footer d-print-none">
 				    <button type="button" class="btn btn-info" id="stock_btn" onclick="window.history.go(-1);"><i class="fa fa-arrow-left"></i> Back</button>

@@ -69,7 +69,22 @@ $(document).on('click', '.pagination a', function(event){
 
 
 
+// Fetch Printable Invoices
 
+function print_invoices(argument) {
+    if(!confirm("Are you sure to printout all these invoices?")) return;
+
+    var filter = '';
+    $('.filter').each(function(ind,el){
+        if($(el).val()!=='' && $(el).val()!==null){
+            filter += '&' + $(el).attr('id') + '=' + $(el).val();
+        }
+    });
+    axios.post('/invoice_print?page=1'+filter).then(d => {
+        $('#invoice_pages').html(d.data)
+        window.print();
+    });
+}
 
 
     // Stock Functions
@@ -130,8 +145,8 @@ add_invoice_row = function(){
 }
 delInvoiceRow = function(btn){
     
-        // delete row
-        $(btn).closest('tr').remove();
+    // delete row
+    $(btn).closest('tr').remove();
 
 }
 delEditInvoiceRow = function(obj,id){
@@ -149,9 +164,17 @@ delEditInvoiceRow = function(obj,id){
 
 count_per_unit_purchase = function(obj){
     
-        var total_price = $(obj).closest('.row').find('.total_purchase').val();
-        var qty = $(obj).closest('.row').find('.qty').val();
-        $(obj).closest('.row').find('.unit_purchase').val(div(total_price,qty));
+    var total_price = $(obj).closest('.row').find('.total_purchase').val();
+    var qty = $(obj).closest('.row').find('.qty').val();
+    $(obj).closest('.row').find('.unit_purchase').val(div(total_price,qty));
+
+}
+
+count_total_purchase = function(obj){
+    
+    var unit_price = $(obj).closest('.row').find('.unit_purchase').val();
+    var qty = $(obj).closest('.row').find('.qty').val();
+    $(obj).closest('.row').find('.total_purchase').val(mul(unit_price,qty));
 
 }
 

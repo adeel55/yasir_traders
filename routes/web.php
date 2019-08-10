@@ -25,6 +25,8 @@ Route::get('/search2_orderbooker', 'OrderBookerController@search2');
 Route::get('/search_customer', 'CustomerController@search');
 Route::get('/search2_customer', 'CustomerController@search2');
 Route::get('/search_area', 'CustomerController@searchArea');
+Route::get('/search2_invoiceid', 'InvoiceController@searchid');
+
 
 Route::group(['middleware'=> 'auth'], function(){
 
@@ -57,6 +59,8 @@ Route::group(['middleware'=> 'auth'], function(){
 	Route::resource('/statement', 'StatementController');
 	Route::resource('/expense', 'ExpenseController');
 	Route::resource('/receive_invoices', 'ReceiveInvoiceController');
+	Route::get('/invoice_print', 'InvoiceController@printInvoices');
+	Route::post('/invoice_print', 'InvoiceController@printInvoices');
 	Route::post('/invoice_received', 'InvoiceController@received');
 });
 

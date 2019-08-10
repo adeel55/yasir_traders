@@ -21,26 +21,70 @@ class InvoiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $req)
     {
 
 
         // dd(filter($request));
-        $filter = filter($request);
+        // $filter = filter($req);
+        if($req->ajax()){
 
-        $data = Invoice::where($filter)->orderBy('invoices.id','DESC')->paginate(40);
+
+            $q = Invoice::query();
+            if($req->has('invoiceid')) $q->where('id', $req->invoiceid);
+            if($req->has('customer')) $q->where('customer_id', $req->customer);
+            if($req->has('orderbooker')) $q->where('order_booker_id', $req->orderbooker);
+            if($req->has('saleman')) $q->where('sale_man_id', $req->saleman);
+            if($req->has('date')) $q->whereDate('created_at', $req->date);
+            if($req->has('datefrom')) $q->whereDate('created_at','>=', $req->datefrom);
+            if($req->has('dateto')) $q->whereDate('created_at','<=', $req->dateto);
+            $invoices = $q->orderBy('id','DESC')->paginate(45);
+
+
+
+        // $invoices = Invoice::where($filter)->orderBy('invoices.id','DESC')->paginate(40);
 
         // die($request);
 
         
-        if($request->ajax())
-            return view('ajax_tables.invoices',compact('data'));
+            return view('ajax_tables.invoices',compact('invoices','req'));
+        }
         else
             return view('invoice.invoices_list');
 
 
             // return view('invoice/invoices_list');
 
+    }
+
+    public function printInvoices(Request $req)
+    {
+        if($req->ajax()){
+            $q = Invoice::query();
+            if($req->has('invoiceid')) $q->where('id', $req->invoiceid);
+            if($req->has('customer')) $q->where('customer_id', $req->customer);
+            if($req->has('orderbooker')) $q->where('order_booker_id', $req->orderbooker);
+            if($req->has('saleman')) $q->where('sale_man_id', $req->saleman);
+            if($req->has('date')) $q->whereDate('created_at', $req->date);
+            if($req->has('datefrom')) $q->whereDate('created_at','>=', $req->datefrom);
+            if($req->has('dateto')) $q->whereDate('created_at','<=', $req->dateto);
+            $invoices = $q->get();
+
+            return view('ajax_tables.print_invoices',compact('invoices','req'));
+        }
+        else
+            return view('invoice.print_invoices');
+
+    }
+
+    public function searchid(Request $request)
+    {
+        $ss = $request->searchString;
+        $q = Invoice::query();
+        // when($req->d, function ($q) use ($req) { return $q->whereDate('created_at','>=', $req->d); })
+        $q->select('id','id as text')->when($ss, function($q) use($ss){ return $q->where('id',$ss); })->limit(8);
+        $results = $q->get();
+        return request()->json(200,['results'=>$results]);
     }
 
     /**
@@ -299,21 +343,34 @@ class InvoiceController extends Controller
     }
 
     
-    public function showReceiveInvoice(Request $request)
+    public function showReceiveInvoice(Request $req)
     {
-         // dd(filter($request));
-        $filter = filter($request);
+         // dd(filter($req));
+        // $filter = filter($req);
 
-        $data = Invoice::join('customers','customers.id','customer_id')
-        ->join('sale_men','sale_men.id','sale_man_id')
-        ->join('order_bookers','order_bookers.id','order_booker_id')
-        ->select('invoices.id as invoice_id','customers.name as customer_name','order_bookers.name as orderbooker_name','sale_men.name as saleman_name','discount_total','invoices.created_at')->where($filter)->where('received',0)->get();
 
-        // die($request);
+        // $data = Invoice::join('customers','customers.id','customer_id')
+        // ->join('sale_men','sale_men.id','sale_man_id')
+        // ->join('order_bookers','order_bookers.id','order_booker_id')
+        // ->select('invoices.id as invoice_id','customers.name as customer_name','order_bookers.name as orderbooker_name','sale_men.name as saleman_name','discount_total','invoices.created_at')->where($filter)->where('received',0)->get();
+
+        // die($req);
 
         
-        if($request->ajax())
+        if($req->ajax()){
+
+            $q = Invoice::query();
+            if($req->has('invoiceid')) $q->where('id', $req->invoiceid);
+            if($req->has('customer')) $q->where('customer_id', $req->customer);
+            if($req->has('orderbooker')) $q->where('order_booker_id', $req->orderbooker);
+            if($req->has('saleman')) $q->where('sale_man_id', $req->saleman);
+            if($req->has('date')) $q->whereDate('created_at', $req->date);
+            if($req->has('datefrom')) $q->whereDate('created_at','>=', $req->datefrom);
+            if($req->has('dateto')) $q->whereDate('created_at','<=', $req->dateto);
+            $data = $q->where('received',0)->orderBy('id','DESC')->get();
+
             return view('ajax_tables.receive_invoices',compact('data'));
+        }
         else
             return view('invoice.receive_invoices');
 
@@ -341,6 +398,7 @@ class InvoiceController extends Controller
 
     public function receiveInvoice(Request $request)
     {
+
         $invoice = Invoice::find($request->id);
         $invoice->received_amount = $request->received_amount;
         $invoice->received = 1;

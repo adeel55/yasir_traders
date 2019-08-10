@@ -40,10 +40,33 @@
 					<div id="rows" class="rows">
 						<div class="row pl-4 pr-4">
 							<div class="col p-0">
+								<b style="font-size: 0.8rem">Name</b>
+							</div>
+							<div class="col p-0">
+								<b style="font-size: 0.8rem">QTY</b>
+							</div>
+							<div class="col p-0">
+								<b style="font-size: 0.8rem">Total Purchase</b>
+							</div>
+							<div class="col p-0">
+								<b style="font-size: 0.8rem">Unit Sale</b>
+							</div>
+							<div class="col p-0">
+								<b style="font-size: 0.8rem">Unit Purchase</b>
+							</div>
+							<div class="col p-0">
+								<b style="font-size: 0.8rem">Expire</b>
+							</div>
+							<div class="col-1 p-0">
+								{{-- <b style="font-size: 0.8rem">Delete</b> --}}
+							</div>
+						</div>
+						<div class="row pl-4 pr-4">
+							<div class="col p-0">
 								<input type="text" name="product" class="form-control form-control-sm product" id="product" placeholder="product" value="{{ $inventory->product }}" required="required" readonly>
 							</div>
 							<div class="col p-0">
-								<input type="number" step="any" name="qty" oninput="count_per_unit_purchase(this)" class="form-control form-control-sm qty" id="qty" min="0" placeholder="qty" value="{{ $inventory->qty }}" required="required">
+								<input type="number" step="any" name="qty" oninput="count_total_purchase(this)" class="form-control form-control-sm qty" id="qty" min="0" placeholder="qty" value="{{ $inventory->qty }}" required="required">
 							</div>
 							<div class="col p-0">
 								<input type="number" step="any" name="total_purchase" oninput="count_per_unit_purchase(this)" class="form-control form-control-sm total_purchase" id="total_purchase" placeholder="total_purchase" value="{{ $inventory->total_purchase }}" required="required">
@@ -52,7 +75,7 @@
 								<input type="number" step="any" name="unit_sale" class="form-control form-control-sm unit_sale" id="unit_sale" value="{{ $inventory->unit_sale }}" placeholder="unit_sale" required="required">
 							</div>
 							<div class="col p-0">
-								<input type="number" step="any" name="unit_purchase" class="form-control form-control-sm unit_purchase" id="unit_purchase" value="{{ $inventory->unit_purchase }}" placeholder="unit_purchase" required="required">
+								<input type="number" step="any" name="unit_purchase" class="form-control form-control-sm unit_purchase" id="unit_purchase" value="{{ $inventory->unit_purchase }}" oninput="count_total_purchase(this)" placeholder="unit_purchase" required="required">
 							</div>
 							<div class="col p-0">
 								<input type="date" name="expire" class="form-control form-control-sm expire" id="expire" value="{{ $inventory->expire }}" >

@@ -19,18 +19,21 @@
 		<div class="col-lg-4 col-md-6 col-sm-12 p-1">
   			<div class="input-group input-group-sm">
   			    <div class="input-group-prepend">
-  			     	<div class="input-group-text ">OrderBooker</div>
+  			     	<div class="input-group-text">Order Booker</div>
   			    </div>
-	  			<input type="text" id="filterstrjoinorder_bookers-name"  class="filter form-control" required>
-	  			{{ csrf_field() }}
+  			    <div class="div-form-control form-control">
+	  			    <select id="orderbooker" class="filter form-control" onchange="filter()" style="width: 100%"></select>
+  			    </div>
   			</div>
 		</div>
 		<div class="col-lg-4 col-md-6 col-sm-12 p-1">
   			<div class="input-group input-group-sm">
   			    <div class="input-group-prepend">
-  			     	<div class="input-group-text ">SaleMan</div>
+  			     	<div class="input-group-text">Sale Man</div>
   			    </div>
-	  			<input type="text" id="filterstrjoinsale_men-name"  class="filter form-control" required>
+  			    <div class="div-form-control form-control">
+	  			    <select id="saleman" class="filter form-control" onchange="filter()" style="width: 100%"></select>
+  			    </div>
   			</div>
 		</div>
 		<div class="col-lg-4 col-md-6 col-sm-12 p-1">
@@ -38,7 +41,8 @@
   			    <div class="input-group-prepend">
   			     	<div class="input-group-text ">Date</div>
   			    </div>
-	  			<input type="date" id="filterdatejoininvoices-created_at" oninput="filter()" class="filter date form-control" required>
+	  			<input type="date" id="date" oninput="filter()" class="filter date form-control" required>
+	  			{{ csrf_field() }}
   			</div>
 		</div>
 	</div>
@@ -179,46 +183,25 @@
 
 
 	jQuery(document).ready(function($) {
-		$('#filterstrjoinorder_bookers-name').typeahead({
-	        source: function (query, result) {
-	            $.ajax({
-	                url: "/search_orderbooker",
-					data: 'searchString=' + query,            
-	                dataType: "json",
-	                type: "GET",
-	                success: function (data) {
-						result($.map(data, function (item) {
-							return item;
-	                    }));
-	                }
-	            });
-	        },
-	        updater:function (item) {
-	        	filter();
-		        return item;
+		$('#orderbooker').select2({
+		  ajax: {
+		    url: '/search2_orderbooker',
+		    data: function (params) {
+		      var query = { searchString: params.term }
+		      return query;
 		    }
-	    });
+		  }
+		})
 
-		$('#filterstrjoinsale_men-name').typeahead({
-	        source: function (query, result) {
-	            $.ajax({
-	                url: "/search_salemen",
-					data: 'searchString=' + query,            
-	                dataType: "json",
-	                type: "GET",
-	                success: function (data) {
-						result($.map(data, function (item) {
-							return item;
-	                    }));
-	                },
-	            });
-	        },
-	        updater:function (item) {
-	        	filter();
-		        return item;
+		$('#saleman').select2({
+		  ajax: {
+		    url: '/search2_salemen',
+		    data: function (params) {
+		      var query = { searchString: params.term }
+		      return query;
 		    }
-	    });
-
+		  }
+		})
 	});
 	</script>
 

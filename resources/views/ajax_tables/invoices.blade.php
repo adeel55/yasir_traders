@@ -12,7 +12,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					@forelse($data as $invoice)
+					@forelse($invoices as $invoice)
 					<tr>
 						<td>{{ $invoice->id }}</td>
 						<td><a href="/invoice/{{ $invoice->id }}">{{ $invoice->customer->name }}</a></td>
@@ -31,6 +31,6 @@
 				</tbody>
 				<tfoot>
 					<tr>
-						<td colspan="{{$cols}}">{{ $data->links() }}</td>
+						<td colspan="{{$cols}}">{{ $invoices->links() }}</td>
 					</tr>
 				</tfoot>

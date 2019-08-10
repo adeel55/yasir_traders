@@ -16,6 +16,7 @@
                     <li class="active">
                         <a href="../"> <i class="menu-icon fa fa-tachometer-alt"></i>Dashboard </a>
                     </li>
+                    
                     <h3 class="menu-title">Invoice</h3><!-- /.menu-title -->
                     <li>
                         <a href="/invoice/create"><i class="menu-icon fa fa-file-invoice"></i> Creat Invoice</a>
@@ -24,8 +25,14 @@
                         <a href="/invoice_receive"><i class="menu-icon fa fa-tasks"></i> Receive Invoices</a>
                     </li>
                     <li>
+                        <a href="/invoice_print"><i class="menu-icon fa fa-tasks"></i> Print Invoices</a>
+                    </li>
+                    <li>
                         <a href="/invoice"><i class="menu-icon fa fa-list"></i> Invoices List</a>
                     </li>
+
+                    @if(Auth::user()->admin)
+
 
                     <h3 class="menu-title">Stock</h3><!-- /.menu-title -->
                     
@@ -38,6 +45,8 @@
                     <li>
                         <a href="/product"><i class="menu-icon fa fa-list"></i> Stock Items</a>
                     </li>
+
+                    @endif
 
                     <h3 class="menu-title">Accounts</h3><!-- /.menu-title -->
                     
@@ -67,6 +76,10 @@
                     <li>
                         <a href="/customer_report"><i class="menu-icon fa fa-bar-chart"></i> Customers Summary Report</a>
                     </li>
+
+                    @if(Auth::user()->admin)
+
+
                     <li>
                         <a href="/sale_report"><i class="menu-icon fa fa-bar-chart"></i> Sales Report</a>
                     </li>
@@ -76,6 +89,9 @@
                     <li>
                         <a href="/expense"><i class="menu-icon fa fa-bar-chart"></i> Expense Report</a>
                     </li>
+
+                    @endif
+
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>

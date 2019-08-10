@@ -28,12 +28,12 @@
 				<tbody id="invoices_rows">
 					@forelse($data as $it)
 					<tr>
-						<td>{{ $it->invoice_id }}
-							<input type="hidden" value="{{ $it->invoice_id }}" class="invoice_id">
+						<td>{{ $it->id }}
+							<input type="hidden" value="{{ $it->id }}" class="invoice_id">
 						</td>
-						<td><a href="/invoice/{{ $it->invoice_id }}">{{ $it->customer_name }}</a></td>
-						<td>{{ $it->orderbooker_name }}</td>
-						<td>{{ $it->saleman_name }}</td>
+						<td><a href="/invoice/{{ $it->id }}">{{ $it->customer->name }}</a></td>
+						<td>{{ $it->order_booker->name }}</td>
+						<td>{{ $it->sale_man->name }}</td>
 						<td>{{ $it->discount_total }}
 							<input type="hidden" step="any" value="{{ $it->discount_total }}" class="discount_total">
 						</td>

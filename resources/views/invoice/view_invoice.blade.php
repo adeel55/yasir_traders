@@ -8,7 +8,7 @@
 	<div class="row">
 		<div class="col">
 			<form action="#">
-				<div class="card">
+				<div class="card invoice">
 				  <div class="card-header">
 					   @include('invoice._header')
 				  </div>
