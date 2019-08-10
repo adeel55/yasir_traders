@@ -41,22 +41,6 @@
 						<div class="row pl-4 pr-4">
 							<div class="col p-0">
 								<input type="text" name="product" class="form-control form-control-sm product" id="product" placeholder="product" value="{{ $inventory->product }}" required="required" readonly>
-								<script>
-								jQuery(document).ready(function($) {
-									$('input.product').typeahead({
-								        source: function (query, result) {
-								            $.ajax({
-								                url: "http://localhost:8000/search_products",
-												data: 'searchString=' + query,            
-								                dataType: "json",
-								                type: "GET",
-								                success: function (data) { result($.map(data, function (item) { return item; }));
-								                }
-								            });
-								        }
-								    });
-								});
-								</script>
 							</div>
 							<div class="col p-0">
 								<input type="number" step="any" name="qty" oninput="count_per_unit_purchase(this)" class="form-control form-control-sm qty" id="qty" min="0" placeholder="qty" value="{{ $inventory->qty }}" required="required">
