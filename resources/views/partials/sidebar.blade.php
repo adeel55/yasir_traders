@@ -14,7 +14,7 @@
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li class="active">
-                        <a href="../"> <i class="menu-icon fa fa-tachometer-alt"></i>Dashboard </a>
+                        <a href="/"> <i class="menu-icon fa fa-tachometer-alt"></i>Dashboard </a>
                     </li>
                     
                     <h3 class="menu-title">Invoice</h3><!-- /.menu-title -->
@@ -25,7 +25,7 @@
                         <a href="/invoice_receive"><i class="menu-icon fa fa-tasks"></i> Receive Invoices</a>
                     </li>
                     <li>
-                        <a href="/invoice_print"><i class="menu-icon fa fa-tasks"></i> Print Invoices</a>
+                        <a href="/invoice_print"><i class="menu-icon fa fa-print"></i> Print Invoices</a>
                     </li>
                     <li>
                         <a href="/invoice"><i class="menu-icon fa fa-list"></i> Invoices List</a>
@@ -48,17 +48,12 @@
 
                     @endif
 
-                    <h3 class="menu-title">Accounts</h3><!-- /.menu-title -->
+
+                    <h3 class="menu-title">Lists</h3><!-- /.menu-title -->
                     
                     <li>
                         <a href="/customer"><i class="menu-icon fa fa-users"></i> Customers</a>
                     </li>
-                    <li>
-                        <a href="/statement"><i class="menu-icon fa fa-file-invoice-dollar"></i> Statements</a>
-                    </li>
-
-                    <h3 class="menu-title">Lists</h3><!-- /.menu-title -->
-                    
                     <li>
                         <a href="/company"><i class="menu-icon fa fa-industry"></i> Companies List</a>
                     </li>
@@ -67,6 +62,12 @@
                     </li>
                     <li>
                         <a href="/saleman"><i class="menu-icon fa fa-shipping-fast"></i> SaleMen List</a>
+                    </li>
+                    
+                    <h3 class="menu-title">Accounts</h3><!-- /.menu-title -->
+                    
+                    <li>
+                        <a href="/statement"><i class="menu-icon fa fa-file-invoice-dollar"></i> Statements</a>
                     </li>
                     
                     <h3 class="menu-title">Reports</h3><!-- /.menu-title -->

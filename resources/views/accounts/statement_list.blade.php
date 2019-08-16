@@ -10,14 +10,20 @@
 		</div>
 	</div>
 	<div class="row filters p-2">
-		<div class="col-lg-4 col-md-6 col-sm-12 p-1">
+		<div class="col-lg-4 col-md-6 col-sm-12 p-1 d-print-none">
   			<div class="input-group input-group-sm">
   			    <div class="input-group-prepend">
   			     	<div class="input-group-text ">Orderbooker</div>
   			    </div>
-	  			<div class="div-form-control form-control">
-	  			    <select id="orderbooker" class="filter form-control" onchange="filter()" style="width: 100%"></select>
+  			    <select id="orderbooker" class="filter" onchange="filter()"></select>
+  			</div>
+		</div>
+		<div class="col-lg-4 col-md-6 col-sm-12 p-1 d-print-none">
+  			<div class="input-group input-group-sm">
+  			    <div class="input-group-prepend">
+  			     	<div class="input-group-text ">Customer</div>
   			    </div>
+  			    <select id="customer" class="filter" onchange="filter()"></select>
   			</div>
 		</div>
 		<div class="col-lg-4 col-md-6 col-sm-12 p-1 d-print-none">

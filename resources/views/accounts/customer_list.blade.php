@@ -26,6 +26,9 @@
 	  			<input type="text" id="filterstrname" oninput="filter()" class="filter form-control">
   			</div>
 		</div>
+		<div class="col-lg-4 col-md-6 col-sm-12 p-1 d-print-none">
+  			<a href="/customer/create" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Add New</a>
+		</div>
 	</div>
 	<div class="row">
 		<div class="col">

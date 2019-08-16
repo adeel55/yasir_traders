@@ -13,6 +13,11 @@ class Product extends Model
 
 
 
+    public function company()
+    {
+        return $this->belongsTo('App\Company');
+    }
+
     public function findOrSaveProduct($val,$company_id){
         
         $pro = Product::firstOrCreate(['company_id' => $company_id,'name' => $val['product']]);
@@ -46,6 +51,22 @@ class Product extends Model
         else
             $pro->update(['unit_purchase' => $unit_purchase]);
         
+    }
+
+    public function reserved_qty()
+    {
+        return Invoice::where('received',0)->join('sales','invoices.id','invoice_id')->where('product_id',$this->id)->sum('qty');
+    }
+
+    public function getSalePriceAndMaxQty()
+    {
+        $unit_sale =  floatVal(Inventory::where('product_id',$this->id)->orderBy('created_at','DESC')->first()->unit_sale);
+        return [$unit_sale,$this->getMaxQty()];
+    }
+
+    public function getMaxQty()
+    {
+        return $this->qty - $this->reserved_qty();
     }
 
     public function sales()

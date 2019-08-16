@@ -12,7 +12,7 @@
 	</div>
 	<div class="row">
 		<div class="col">
-			<form action="#">
+			<form id="form" action="#">
 				<div class="card invoice">
 				   <div class="card-header text-center">
 					  @include('invoice._header')
@@ -70,7 +70,7 @@
 				  		</div>
 				  	</div>
 				  	<hr>
-					<table class="table table-sm small invoice-table">
+					<table class="table table-sm small table-responsive invoice-table">
 						<thead>
 							<th>Product</th>
 							<th>QTY.</th>
@@ -79,7 +79,7 @@
 							<th>Total</th>
 							<th>Disc(%)</th>
 							<th>Disc. Total</th>
-							<th class="d-print-none">Del</th>
+							<th colspan="2" class="d-print-none">Del</th>
 						</thead>
 						<tbody id="tbody">
 							@include('components.invoice_row')
@@ -124,7 +124,7 @@
 	<script>
 
 		$('.alert').hide();
-		$('form').submit(function(e){
+		$('#form').submit(function(e){
 			e.preventDefault()
 			var data = {};
 			var rowsdata = $('#tbody').children();
@@ -158,13 +158,25 @@
 		});
 
 
-		reset_form = function(){
-			$("form").trigger("reset");
-			today_form_date();
-			// Get Invoice No.
-			axios.get("/get_invoice_no").then(d => $('#invoiceno').val(d.data));
-		}
+	reset_form = function(){
+		$("#form").trigger("reset");
+		today_form_date();
+		// Get Invoice No.
+		axios.get("/get_invoice_no").then(d => $('#invoiceno').val(d.data));
+	}
 	reset_form()
+	jQuery(document).ready(function($) {
+        $('select.product').select2({
+          ajax: {
+            placeholder: 'Item',
+            url: '/search2_products',
+            data: function (params) {
+              var query = { searchString: params.term }
+              return query;
+            }
+          }
+        });
+    })
 		
 	</script>
 

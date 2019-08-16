@@ -21,7 +21,7 @@ class CompanyController extends Controller
          if($request->ajax())
             return view('ajax_tables.companies',compact('data'));
         else
-            return view('company.company_list');
+            return view('company.companies_list');
     }
 
       /**
@@ -52,7 +52,7 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        //
+        return view('company.create_company');
     }
 
     /**
@@ -63,9 +63,8 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
-          $rec = Company::create($request->all());
-         if($rec) echo "success"; else echo "fail";
+        $rec = Company::create($request->all());
+        if($rec) echo "success"; else echo "fail";
     }
 
     /**

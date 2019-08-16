@@ -1,4 +1,4 @@
-				@php ($cols = 9)
+				@php ($cols = 10)
 				<thead>
 					<tr>
 						<th>Sr.</th>
@@ -9,6 +9,7 @@
 						<th>Purchase Price</th>
 						<th>Total Purchase</th>
 						<th>Date</th>
+						<th class="d-print-none">Edit</th>
 						<th class="d-print-none">Del</th>
 
 
@@ -19,13 +20,14 @@
 					@forelse($data as $it)
 					<tr>
 						<td>{{ $it->product_id }}</td>
-						<td>{{ $it->product }}</td>
+						<td><a href="product/{{ $it->product_id  }}">{{ $it->product }}</a></td>
 						<td>{{ $it->qty }}</td>
 						<td>{{ $it->company }}</td>
 						<td>{{ $it->unit_sale }}</td>
 						<td>{{ $it->unit_purchase }}</td>
 						<td>{{ $it->total_purchase }}</td>
 						<td>{{ $it->showdate() }}</td>
+						<td class="d-print-none"><a href="product/{{ $it->product_id }}/edit" class="btn btn-primary btn-sm"><i class="fa fa-pen"></i></a></td>
 						<td class="d-print-none"><button class="btn btn-danger btn-sm" onclick="deleteProduct(this,{{ $it->product_id }})"><i class="fa fa-trash"></i></button></td>
 					</tr>
 					@empty

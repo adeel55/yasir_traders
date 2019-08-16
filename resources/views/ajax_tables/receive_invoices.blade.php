@@ -40,9 +40,9 @@
 						<td>
 							<input type="number" step="any" oninput="countInvoicesReceiveAmount()" value="{{ $it->discount_total }}" style="width: 90px; margin-top: -2px" placeholder="amount" class="received_amount" required>
 						</td>
-						<td class="d-print-none"><a href="/invoice/{{ $it->invoice_id }}/edit" class="btn btn-sm btn-primary"><i class="fa fa-pencil-alt"></i></a>
+						<td class="d-print-none"><a href="/invoice/{{ $it->id }}/edit" class="btn btn-sm btn-primary"><i class="fa fa-pencil-alt"></i></a>
 						</td>
-						<td class="d-print-none"><button class="btn btn-danger btn-sm" onclick="deleteInvoice(this,{{ $it->invoice_id }})"><i class="fa fa-trash"></i></button></td>
+						<td class="d-print-none"><button class="btn btn-danger btn-sm" onclick="deleteInvoice(this,{{ $it->id }})"><i class="fa fa-trash"></i></button></td>
 					</tr>
 					@empty
 					<tr>

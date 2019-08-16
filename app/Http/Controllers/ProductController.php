@@ -23,9 +23,9 @@ class ProductController extends Controller
 
 
          if($request->ajax())
-            return view('ajax_tables.stock_items',compact('data','all'));
+            return view('ajax_tables.products_list',compact('data','all'));
         else
-            return view('stock.stock_items');
+            return view('product.products_list');
 
     }
 
@@ -43,16 +43,16 @@ class ProductController extends Controller
         // dd($products);
     }
 
-    public function getSalePrice(Request $request)
+    public function search2(Request $request)
     {
-       $product = Product::where('name','like',$request->product)->first();
-       if(!is_null($product))
-       {
-            $unit_sale = Inventory::where('product_id',$product->id)->orderBy('created_at','DESC')->first()->unit_sale;
-            echo $unit_sale;
-       }
-       else
-            echo 0.00;
+        $ss = $request->searchString;
+        $results = Product::select('id','name as text')->where('name','like','%'.$ss.'%')->limit(8)->get();
+        return request()->json(200,['results'=>$results]);
+    }
+
+    public function getSalePrice(Request $req)
+    {
+        return Product::find($req->product)->getSalePriceAndMaxQty();
     }
 
     /**
@@ -62,7 +62,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('product.create_product');
     }
 
     /**
@@ -73,7 +73,8 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Product::create($request->all());
+        return "success";
     }
 
     /**
@@ -84,7 +85,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        return view('product.view_product',compact('product'));
     }
 
     /**
@@ -95,7 +96,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view('product.edit_product',compact('product'));
     }
 
     /**
@@ -107,7 +108,8 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $product->update($request->all());
+        return "success";
     }
 
     /**

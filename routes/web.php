@@ -18,6 +18,7 @@ Auth::routes();
 Route::get('/search_companies', 'CompanyController@search');
 Route::get('/search2_companies', 'CompanyController@search2');
 Route::get('/search_products', 'ProductController@search');
+Route::get('/search2_products', 'ProductController@search2');
 Route::get('/search_salemen', 'SaleManController@search');
 Route::get('/search2_salemen', 'SaleManController@search2');
 Route::get('/search_orderbooker', 'OrderBookerController@search');
@@ -59,6 +60,7 @@ Route::group(['middleware'=> 'auth'], function(){
 	Route::resource('/statement', 'StatementController');
 	Route::resource('/expense', 'ExpenseController');
 	Route::resource('/receive_invoices', 'ReceiveInvoiceController');
+	Route::resource('/user', 'UserController');
 	Route::get('/invoice_print', 'InvoiceController@printInvoices');
 	Route::post('/invoice_print', 'InvoiceController@printInvoices');
 	Route::post('/invoice_received', 'InvoiceController@received');

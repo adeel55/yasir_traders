@@ -49,6 +49,11 @@ td>.btn-sm{
     padding: .01rem .3rem;
     font-size: .75rem;
 }
+
+td>.inv-btn:focus{
+	/*border: 2px solid #34c;*/
+	box-shadow: 2px 5px 4px rgba(22,22,22,0.9) !important;
+}
 .div-form-control{
 	/*height: calc(1.8125rem + 2px);*/
     padding: 0px !important;
@@ -61,22 +66,53 @@ td>.btn-sm{
 	/*height: 100%;*/
 }
 
-
-.invoice{
-	/*margin: 50px;*/
-	padding-left: 30px;
-	padding-right: 220px;
-	padding-top: 40px;
-
-
-	font-size: 0.9rem;
-	color: #000 !important;
+.invoice-table input{ font-size: 0.8rem !important; }
+.invoice-table thead>tr>th{ padding: 5px 15px; }
+.invoice-table tbody>tr>td>select{ width: 100%; }
+.invoice-table tbody>tr>td .select2-container--default{ margin-right: 0px !important; }
+.invoice-table tbody>tr>td .select2-container{ width: 100% !important; }
+.invoice-table tbody>tr>td .select2-selection__rendered{
+	line-height: calc(1.5em + 0.9rem) !important;
+	padding-right: 5px !important;
 }
+.invoice-table tbody>tr>td .select2-selection--single{ 
+	height: calc(1.5em + 0.7rem + 2px) !important;	
+}
+
+.invoice-table tbody>tr>td:nth-child(1){ width: 30% !important; }
+.invoice-table tbody>tr>td:nth-child(2){ width: 8%; }
+.invoice-table tbody>tr>td:nth-child(3){ width: 8%; }
+.invoice-table tbody>tr>td:nth-child(4){ width: 15%; }
+.invoice-table tbody>tr>td:nth-child(5){ width: 10%; }
+.invoice-table tbody>tr>td:nth-child(6){ width: 8%; }
+.invoice-table tbody>tr>td:nth-child(7){ width: 10%; }
+/*.invoice-table tbody>tr>td:nth-child(8){ width: 6%; }*/
+
 
 .invoice-page{
 	page-break-after: always;
 }
 
+@media print {
+    
+	.invoice{
+
+		/*margin: 50px;*/
+		padding-left: 30px;
+		padding-right: 220px;
+		padding-top: 40px;
+
+
+		font-size: 0.9rem;
+		color: #000 !important;
+	}
+	.invoice input{
+		font-size: 0.9rem;
+		color: #000 !important;
+
+	}
+
+}   
 
 
 

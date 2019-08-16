@@ -15,9 +15,7 @@
   			    <div class="input-group-prepend">
   			     	<div class="input-group-text">Order Booker</div>
   			    </div>
-  			    <div class="div-form-control form-control">
-	  			    <select id="orderbooker" class="filter form-control" onchange="filter()" style="width: 100%"></select>
-  			    </div>
+  			    <select id="orderbooker" class="filter" onchange="filter()"></select>
   			</div>
 		</div>
 		<div class="col-lg-4 col-md-6 col-sm-12 p-1 d-print-none">

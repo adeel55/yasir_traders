@@ -11,10 +11,10 @@
 	</div>
 	<div class="row">
 		<div class="col">
-			<form action="#">
+			<form id="form" action="#">
 				<div class="card">
 				  <div class="card-header">
-					   Edit SalMan
+					   Edit Sale Man
 				  </div>
 				  <div class="card-body">
 				  	<div class="row m-0">
@@ -31,7 +31,7 @@
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text">Phone</div>
 				  			    </div>
-					  			<input type="text" name="phone" id="phone" class="form-control" value="{{ $saleman->phone }}" required="required">
+					  			<input type="text" name="phone" id="phone" class="form-control" value="{{ $saleman->phone }}">
 				  			</div>
 				  		</div>
 				  		<div class="col-6 my-2">
@@ -56,7 +56,7 @@
 	</div>
 	<script>
 		$('.alert').hide()
-		$('form').submit(function(e){
+		$('#form').submit(function(e){
 			e.preventDefault()
 			axios.post("/saleman/{{ $saleman->id }}", $(this).serialize())
 			.then(d => {

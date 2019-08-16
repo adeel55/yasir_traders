@@ -1,20 +1,20 @@
 @extends('layouts.main')
 
-	@section('title','Edit OrderBooker')
+	@section('title','Create Sale Man')
 	@section('content')
 
 	<div class="alert alert-success alert-dismissible hide" role="alert">
-	  Order Booker updated successfully.
+	  Sale Man created successfully.
 	  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 	    <span aria-hidden="true">&times;</span>
 	  </button>
 	</div>
 	<div class="row">
 		<div class="col">
-			<form id="form" action="/orderbooker/{{ $orderbooker->id }}" method="post">
+			<form id="form" action="#">
 				<div class="card">
 				  <div class="card-header">
-					   Edit OrderBooker
+					   Create Sale Man
 				  </div>
 				  <div class="card-body">
 				  	<div class="row m-0">
@@ -23,7 +23,7 @@
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text">Name</div>
 				  			    </div>
-					  			<input type="text" name="name" id="name" class="form-control" value="{{ $orderbooker->name }}" required="required">
+					  			<input type="text" name="name" class="form-control" placeholder="Sale Man" required="required">
 				  			</div>
 				  		</div>
 				  		<div class="col-6 my-2">
@@ -31,15 +31,7 @@
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text">Phone</div>
 				  			    </div>
-					  			<input type="text" name="phone" id="phone" class="form-control" value="{{ $orderbooker->phone }}" required="required">
-				  			</div>
-				  		</div>
-				  		<div class="col-6 my-2">
-				  			<div class="input-group input-group-sm">
-				  			    <div class="input-group-prepend">
-				  			      <div class="input-group-text">Target</div>
-				  			    </div>
-					  			<input type="number" name="target" id="target" class="form-control" value="{{ $orderbooker->target }}">
+					  			<input type="text" name="phone" class="form-control"  placeholder="phone no.">
 				  			</div>
 				  		</div>
 				  		<div class="col-6 my-2">
@@ -47,30 +39,28 @@
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text">Created On</div>
 				  			    </div>
-					  			<input type="date" name="created_at" class="form-control form-control-sm" id="created_at" value="{{ $orderbooker->putdate() }}" required="required">
-					  			<input type="hidden" name="_method" value="PUT">
-					  			<input type="hidden" name="id" value="{{ $orderbooker->id }}">
+					  			<input type="date" name="created_at" class="form-control date" id="created_at" required="required" readonly>
 					  			@csrf
 				  			</div>
 				  		</div>
 				  	</div>
 				  </div>
 				  <div class="card-footer d-print-none">
-				    <button class="btn btn-success" type="submit"><i class="fa fa-arrow-up"></i> Update</button>
+				    <button class="btn btn-success" id="addstock" type="submit"><i class="fa fa-save"></i> Create</button>
 				    <button class="btn btn-info" type="button" onclick="window.history.go(-1);"><i class="fa fa-arrow-back"></i> Back</button>
-				    <button class="btn btn-warning" type="button" onclick="window.print()"><i class="fa fa-print"></i> Print</button>
 				  </div>
 				</div>
 			</form>
-		</div>
+		</div>	
 	</div>
 	<script>
+		today_form_date()
 		$('.alert').hide()
 		$('#form').submit(function(e){
 			e.preventDefault()
-			axios.post("/orderbooker/{{ $orderbooker->id }}", $(this).serialize())
+			axios.post("/saleman", $(this).serialize())
 			.then(d => {
-				console.log(d.data)
+				console.log(d.data);
 				if(d.data == "success")
 				{
 					$(".alert").show().delay(2000).slideUp(500, function() { $(this).alert('close')});

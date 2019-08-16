@@ -18,28 +18,16 @@
                 </div>
 
                 <div class="col-sm-5">
-                    <div class="user-area dropdown float-right">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <form action="logout" method="post">
-                                @csrf
-                                <button type="submit" class="btn btn-sm btn-outline-danger">
-                                    <i class="fa fa-power-off mt-1" style="font-size: 1.2rem"></i>
-                                </button>
-                            </form>
-                            {{-- <img class="user-avatar rounded-circle" src="{{ asset('images/admin.jpg') }}" alt="User Avatar"> --}}
-                        </a>
-
-                        <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href="#"><i class="fa fa-user"></i> My Profile</a>
-
-                            <a class="nav-link" href="#"><i class="fa fa-user"></i> Notifications <span class="count">13</span></a>
-
-                            <a class="nav-link" href="#"><i class="fa fa-cog"></i> Settings</a>
-
-                            <a class="nav-link" href="#"><i class="fa fa-power-off"></i> Logout</a>
-                        </div>
-                    </div>
-
+                    <form action="{{ route('logout') }}" method="post">
+                        <button type="submit" class="btn btn-sm btn-outline-danger float-right mx-1">
+                            <i class="fa fa-power-off mt-1" style="font-size: 1.2rem"></i>
+                        </button>
+                        @csrf
+                    </form>
+                    @if(Auth::user()->admin)
+                    <a href="/user/{{ Auth::user()->id }}/edit" class="btn btn-sm btn-outline-success float-right mx-1" title="Admin profile settings"><i class="fa fa-user-cog mt-1" style="font-size: 1.2rem"></i></a>
+                    <a href="/user/2/edit" class="btn btn-sm btn-outline-primary float-right" title="Operator profile settings"><i class="fa fa-user mt-1" style="font-size: 1.2rem"></i></a>
+                    @endif
                 </div>
             </div>
 

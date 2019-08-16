@@ -139,12 +139,9 @@ class InvoiceController extends Controller
      
         foreach ($rows as $key => $val) {
 
-            $product_id = Product::where('name','like', $val['product'])->first()->id;
-            
-            // echo "success"; die($val['total_price']);
             $record = [ 
                 'invoice_id' => $invoice_id,
-                'product_id' => $product_id,
+                'product_id' => $val['product'],
                 'qty' => $val['qty'],
                 'bonus' => $val['bonus'],
                 'unit_price' => $val['unit_price'],
@@ -154,10 +151,8 @@ class InvoiceController extends Controller
                 'discount_total' => $val['discount_total'],
                 'created_at' => $invoicedate
             ];
-            // dd($record);
+
             Sale::create($record);
-            // Product::find($product_id)->decrement('qty', $val['qty']);
-            // Product::find($product_id)->decrement('qty', $val['bonus']);
         }
 
         // Update Invoice attributes
@@ -166,7 +161,6 @@ class InvoiceController extends Controller
         $invoice->discount_total = $invoice->sales()->sum('discount_total');
         $invoice->balance = $invoice->discount_total - $invoice->received_amount;
 
-        // dd($invoice->sales()->sum('discount_amount'));
 
         $invoice->save();
 

@@ -7,9 +7,9 @@
 	</div>
 	<div class="row">
 		<div class="col">
-			<form action="#">
+			<form id="form" action="#">
 				<div class="card invoice">
-				  <div class="card-header">
+				  <div class="card-header text-center">
 					   @include('invoice._header')
 				  </div>
 				  <div class="card-body p-2">
@@ -65,7 +65,7 @@
 				  		</div>
 				  	</div>
 				  	<hr>
-					<table class="table table-sm small invoice-table">
+					<table class="table table-sm small table-responsive invoice-table">
 						<thead>
 							<th>Product</th>
 							<th>QTY.</th>
@@ -80,7 +80,9 @@
 
 							<tr>
 								<td>
-									<input type="text" name="product" class="form-control form-control-sm product" value="{{ $sale->product->name }}" placeholder="product" readonly>
+									<select class="product" onchange="productSelected(this)" disabled="true">
+										<option value="{{ $sale->product->id }}" selected="selected">{{ $sale->product->name }}</option>
+									</select>
 								</td>
 								<td>
 									<input type="number" step="any" name="qty" class="form-control form-control-sm qty" value="{{ $sale->qty }}" placeholder="qty" oninput="countTotalPrice(this)" readonly>
@@ -119,14 +121,16 @@
 								</th>
 							</tr>
 							<tr>
-								<th colspan="5"></th>
+								<th colspan="3">Developed by: Encoder Solutions</th>
+								<th colspan="2"></th>
 								<th>Discount:</th>
 								<th>
 									<input type="number" step="any" value="{{ $invoice->total_discount }}" id="total_discount" readonly>
 								</th>
 							</tr>
 							<tr>
-								<th colspan="5"></th>
+								<th colspan="3">Phone: +92 335-0659527</th>
+								<th colspan="2"></th>
 								<th>Total:</th>
 								<th>
 									<input type="number" step="any" value="{{ $invoice->discount_total }}" id="discount_total" readonly>
@@ -139,63 +143,24 @@
 				  <div class="card-footer d-print-none">
 				    <button type="button" class="btn btn-info" id="stock_btn" onclick="window.history.go(-1);">Back</button>
 				    <button type="button" onclick="print()" class="btn btn-warning">Print</button>
-				    {{-- <button type="button" class="btn btn-info" id="stock_btn" onclick="add_invoice_row()">Insert</button> --}}
 				  </div>
 				</div>
 			</form>
 		</div>	
 	</div>
 	<script>
-		today_form_date();
-		$('.alert').hide();
-		
-
-		$('form').submit(function(e){
-			e.preventDefault()
-			var data = {};
-			var rowsdata = $('#tbody').children();
-			var rows = [];
-			for(var i=0; i<rowsdata.length;i++){
-
-			rows.push({'sale_id':$(rowsdata[i]).find('.sale_id').val(),'product':$(rowsdata[i]).find('.product').val(),'qty':$(rowsdata[i]).find('.qty').val(),'bonus':$(rowsdata[i]).find('.bonus').val(),'unit_price':$(rowsdata[i]).find('.unit_price').val(),'total_price':$(rowsdata[i]).find('.total_price').val(),'discount':$(rowsdata[i]).find('.discount').val(), 'discount_amount':$(rowsdata[i]).find('.discount_amount').val(),'discount_total':$(rowsdata[i]).find('.discount_total').val()});
-			}
-			// data['_token'] = $('meta[name="csrf-token"]').attr('content');
-			// data['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content');
-			data['_token'] = $("input[name='_token']").val();
-			data['rows'] = rows;
-			data['invoiceno'] = $('#invoiceno').val();
-			data['customer'] = $('#customer').val();
-			data['orderbooker'] = $('#orderbooker').val();
-			data['saleman'] = $('#saleman').val();
-			data['date'] = $('#date').val();
-			data['total_amount'] = $('#total_amount').val();
-			data['total_discount'] = $('#total_discount').val();
-			data['discount_total'] = $('#discount_total').val();
-			console.log(data);
-
-
-			axios.post("/invoice/{{ $invoice->id }}", {
-				'_method' : "PUT",
-				'id' : $('#invoiceno').val(),
-				'_token' : $("input[name='_token']").val(),
-				'customer': $('#customer').val(),
-				'orderbooker': $('#orderbooker').val(),
-				'saleman': $('#saleman').val(),
-				'total_amount': $('#total_amount').val(),
-				'total_discount': $('#total_discount').val(),
-				'discount_total': $('#discount_total').val(),
-				'date': $('#date').val(),'rows': rows} )
-			.then(d => { console.log(d.data)
-				if(d.data == "success")
-				$(".alert").show().delay(3000).slideUp(500, function() {
-				    $(this).alert('close');
-				});
-			})
-			.catch((err) => console.log(err) );
-		});
-
-
-		
+		jQuery(document).ready(function($) {
+	        $('select.product').select2({
+	          ajax: {
+	            placeholder: 'Item',
+	            url: '/search2_products',
+	            data: function (params) {
+	              var query = { searchString: params.term }
+	              return query;
+	            }
+	          }
+	        });
+	    })
 	</script>
 
 	@endsection

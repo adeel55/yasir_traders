@@ -18,7 +18,7 @@ class CustomerController extends Controller
     {
         $filter = filter($request);
 
-        $data = Customer::where($filter)->paginate(40);
+        $data = Customer::where($filter)->orderBy('id','DESC')->paginate(40);
 
         if($request->ajax())
             return view('ajax_tables.customers',compact('data'));
@@ -67,7 +67,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        return view('customer.create_customer');
     }
 
     /**
@@ -78,7 +78,8 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rec = Customer::create($request->all());
+        if($rec) echo "success"; else echo "fail";
     }
 
     /**

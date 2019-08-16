@@ -15,9 +15,7 @@
   			    <div class="input-group-prepend">
   			     	<div class="input-group-text">Sale Man</div>
   			    </div>
-  			    <div class="div-form-control form-control">
-	  			    <select id="saleman" class="filter form-control" onchange="filter()" style="width: 100%"></select>
-  			    </div>
+  			    <select id="saleman" class="filter" onchange="filter()"></select>
   			</div>
 		</div>
 		<div class="col-lg-4 col-md-6 col-sm-12 p-1">
@@ -25,7 +23,7 @@
   			    <div class="input-group-prepend">
   			     	<div class="input-group-text ">Date</div>
   			    </div>
-	  			<input type="date" id="filterdatejoinexpenses-created_at" onchange="filter()" class="filter date form-control">
+	  			<input type="date" id="date" onchange="filter()" class="filter date form-control">
   			</div>
 		</div>
 		<div class="col-lg-4 col-md-6 col-sm-12 p-1">

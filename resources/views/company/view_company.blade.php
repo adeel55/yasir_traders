@@ -5,7 +5,7 @@
 
 	<div class="row">
 		<div class="col">
-			<form action="#">
+			<form id="form" action="#">
 				<div class="card">
 				  <div class="card-header">
 					   View Company
@@ -29,6 +29,10 @@
 				  			</div>
 				  		</div>
 				  	</div>
+				  </div>
+				  <div class="card-footer d-print-none">
+				    <button class="btn btn-info" type="button" onclick="window.history.go(-1);"><i class="fa fa-arrow-back"></i> Back</button>
+				    <button class="btn btn-warning" type="button" onclick="window.print()"><i class="fa fa-print"></i> Print</button>
 				  </div>
 				</div>
 			</form>

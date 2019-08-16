@@ -1,5 +1,5 @@
 <div class="card invoice">
-  <div class="card-header">
+  <div class="card-header text-center">
 	   @include('invoice._header')
   </div>
   <div class="card-body p-2">
@@ -64,62 +64,37 @@
 			<th>Total</th>
 			<th>Disc(%)</th>
 			<th>Disc. Total</th>
-			<th class="d-print-none">Del</th>
 		</thead>
 		<tbody id="tbody">
 			@foreach($invoice->sales as $sale)
 
 			<tr>
 				<td>
-					<input type="text" name="product" class="form-control form-control-sm product" value="{{ $sale->product->name }}" placeholder="product" required="required">
+					<select class="product">
+						<option value="{{ $sale->product->id }}" selected="selected">{{ $sale->product->name }}</option>
+					</select>
 					<input type="hidden" class="sale_id" value="{{ $sale->id }}">
-					<script>
-					jQuery(document).ready(function($) {
-						$('input.product').typeahead({
-					        source: function (query, result) {
-					            $.ajax({
-					                url: "http://localhost:8000/search_products",
-									data: 'searchString=' + query,            
-					                dataType: "json",
-					                type: "GET",
-					                success: function (data) { result($.map(data, function (item) { return item; }));
-					                }
-					            });
-					        },
-					        updater:function (item) {
-					        	axios.get('/get_sale_price?product=' + item['name'])
-					        	.then(d => {
-					        		$(document.activeElement).closest('tr').find('.unit_price').val(d.data);
-					        	});
-						        return item;
-						    }
-					    });
-					});
-					</script>
 				</td>
 				<td>
-					<input type="number" step="any" name="qty" class="form-control form-control-sm qty" value="{{ $sale->qty }}" placeholder="qty" oninput="countTotalPrice(this)" required="required">
+					<input type="number" step="any" name="qty" class="form-control form-control-sm qty" value="{{ $sale->qty }}" placeholder="qty">
 				</td>
 				<td>
 					<input type="number" step="any" name="bonus" class="form-control form-control-sm bonus" value="{{ $sale->bonus }}">
 				</td>
 				<td>
-					<input type="number" step="any" oninput="countTotalPrice(this)" name="unit_price" class="form-control form-control-sm unit_price" value="{{ $sale->unit_price }}" placeholder="unit_price" required="required">
+					<input type="number" step="any" name="unit_price" class="form-control form-control-sm unit_price" value="{{ $sale->unit_price }}" placeholder="unit_price">
 				</td>
 				<td>
-					<input type="number" step="any" name="total_price" class="form-control form-control-sm total_price" value="{{ $sale->total_price }}" required="required">
+					<input type="number" step="any" name="total_price" class="form-control form-control-sm total_price" value="{{ $sale->total_price }}">
 				</td>
 				<td class="d-print-none">
-					<input type="number" step="any" name="discount" class="form-control form-control-sm discount" value="{{ $sale->discount }}" oninput="countDiscountAmount(this)">
+					<input type="number" step="any" name="discount" class="form-control form-control-sm discount" value="{{ $sale->discount }}">
 				</td>
 				<td class="d-print-block d-none">
 					<input type="number" step="any" name="discount_amount" class="form-control form-control-sm discount_amount" value="{{ $sale->discount_amount }}">
 				</td>
 				<td>
-					<input type="number" step="any" name="discount_total" class="form-control form-control-sm discount_total" placeholder="Disc.Total" value="{{ $sale->discount_total }}" required="required">
-				</td>
-				<td class="d-print-none">
-					<button type="button" onclick="delEditInvoiceRow(this,{{ $sale->id }})" class="btn btn-sm btn-danger"><i class="fa fa-trash delrowbtn"></i></button>
+					<input type="number" step="any" name="discount_total" class="form-control form-control-sm discount_total" placeholder="Disc.Total" value="{{ $sale->discount_total }}">
 				</td>
 			</tr>
 

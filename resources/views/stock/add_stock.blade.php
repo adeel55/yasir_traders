@@ -11,7 +11,7 @@
 	</div>
 	<div class="row">
 		<div class="col">
-			<form action="#">
+			<form id="form" action="#">
 				<div class="card">
 				  <div class="card-header">
 					   Add Stock
@@ -23,9 +23,10 @@
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text ">Company</div>
 				  			    </div>
-					  			<input type="text" name="company typeahead" id="company" required="required">
+					  			<input type="text" name="company typeahead" id="company" class="form-control form-control-sm" required="required">
 				  			</div>
 				  		</div>
+				  		<div class="col-1 p-0"></div>
 				  		<div class="col p-0">
 				  			<div class="input-group input-group-sm">
 				  			    <div class="input-group-prepend">
@@ -35,6 +36,7 @@
 					  			@csrf
 				  			</div>
 				  		</div>
+				  		<div class="col-1 p-0"></div>
 				  	</div>
 				  	<hr>
 					<div id="rows" class="rows">
@@ -62,7 +64,7 @@
 
 		$('.alert').hide();
 
-		$('form').submit(function(e){
+		$('#form').submit(function(e){
 			e.preventDefault()
 			var data = {};
 			var rowsdata = $('#rows').children();

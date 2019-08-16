@@ -10,7 +10,7 @@
 		</div>
 	</div>
 	<div class="row filters p-2">
-		<div class="col-lg-4 col-md-6 col-sm-12 p-1">
+		<div class="col-lg-4 col-md-6 col-sm-12 p-1 d-print-none">
   			<div class="input-group input-group-sm">
   			    <div class="input-group-prepend">
   			     	<div class="input-group-text ">Sr. No</div>
@@ -18,7 +18,7 @@
 	  			<input type="number" id="filternumid" oninput="filter()" class="filter form-control">
   			</div>
 		</div>
-		<div class="col-lg-4 col-md-6 col-sm-12 p-1">
+		<div class="col-lg-4 col-md-6 col-sm-12 p-1 d-print-none">
   			<div class="input-group input-group-sm">
   			    <div class="input-group-prepend">
   			     	<div class="input-group-text ">Sale Man</div>
@@ -26,13 +26,16 @@
 	  			<input type="text" id="filterstrname" oninput="filter()" class="filter form-control">
   			</div>
 		</div>
-		<div class="col-lg-4 col-md-6 col-sm-12 p-1">
+		<div class="col-lg-4 col-md-6 col-sm-12 p-1 d-print-none">
   			<div class="input-group input-group-sm">
   			    <div class="input-group-prepend">
   			     	<div class="input-group-text ">Phone</div>
   			    </div>
 	  			<input type="text" id="filterstrphone" oninput="filter()" class="filter date form-control">
   			</div>
+		</div>
+		<div class="col-lg-4 col-md-6 col-sm-12 p-1 d-print-none">
+  			<a href="/saleman/create" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Add New</a>
 		</div>
 	</div>
 	<div class="row">

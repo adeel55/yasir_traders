@@ -51,7 +51,7 @@ class SaleManController extends Controller
      */
     public function create()
     {
-        //
+        return view('saleman.create_saleman');
     }
 
     /**

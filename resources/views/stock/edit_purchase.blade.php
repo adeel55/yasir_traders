@@ -11,7 +11,7 @@
 	</div>
 	<div class="row">
 		<div class="col">
-			<form action="#">
+			<form id="form" action="#">
 				<div class="card">
 				  <div class="card-header">
 					   Add Stock
@@ -97,7 +97,7 @@
 	</div>
 	<script>
 		$('.alert').hide();
-		$('form').submit(function(e){
+		$('#form').submit(function(e){
 			e.preventDefault()
 			var tr = $('#rows');
 			axios.post("/inventory/{{ $inventory->id }}", {'_method':'PUT','_token' : $("input[name='_token']").val(),'company' : $('#company').val(),'date' : $('#date').val(),'product':$(tr).find('.product').val(),'qty':$(tr).find('.qty').val(),'unit_purchase':$(tr).find('.unit_purchase').val(),'unit_sale':$(tr).find('.unit_sale').val(),'total_purchase':$(tr).find('.total_purchase').val(),'expire':$(tr).find('.expire').val()} )

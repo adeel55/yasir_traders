@@ -5,7 +5,7 @@
 		
 	<div class="row d-print-none">
 		<div class="col">
-			<h4>Invoices List</h4>	
+			<h4><i class="fa fa-print"></i> Print Invoices List</h4>	
 		</div>
 	</div>
 	<div class="row filters p-2 d-print-none">
@@ -14,9 +14,7 @@
   			    <div class="input-group-prepend">
   			     	<div class="input-group-text">Customer</div>
   			    </div>
-  			    <div class="div-form-control form-control">
-	  			    <select id="customer" class="filter form-control" onchange="filter()" style="width: 100%"></select>
-  			    </div>
+  			    <select id="customer" class="filter" onchange="filter()"></select>
   			</div>
 		</div>
 		<div class="col-lg-4 col-md-6 col-sm-12 p-1">
@@ -24,9 +22,7 @@
   			    <div class="input-group-prepend">
   			     	<div class="input-group-text">Order Booker</div>
   			    </div>
-  			    <div class="div-form-control form-control">
-	  			    <select id="orderbooker" class="filter form-control" onchange="filter()" style="width: 100%"></select>
-  			    </div>
+  			    <select id="orderbooker" class="filter" onchange="filter()"></select>
   			</div>
 		</div>
 		<div class="col-lg-4 col-md-6 col-sm-12 p-1">
@@ -34,9 +30,7 @@
   			    <div class="input-group-prepend">
   			     	<div class="input-group-text">Sale Man</div>
   			    </div>
-  			    <div class="div-form-control form-control">
-	  			    <select id="saleman" class="filter form-control" onchange="filter()" style="width: 100%"></select>
-  			    </div>
+  			    <select id="saleman" class="filter" onchange="filter()"></select>
   			</div>
 		</div>
 		<div class="col-lg-4 col-md-6 col-sm-12 p-1">
@@ -44,9 +38,7 @@
   			    <div class="input-group-prepend">
   			     	<div class="input-group-text">Invoice No.</div>
   			    </div>
-  			    <div class="div-form-control form-control">
-	  			    <select id="invoiceid" class="filter form-control" onchange="filter()" style="width: 100%"></select>
-  			    </div>
+  			    <select id="invoiceid" class="filter" onchange="filter()"></select>
   			</div>
 		</div>
 		<div class="col-lg-4 col-md-6 col-sm-12 p-1">

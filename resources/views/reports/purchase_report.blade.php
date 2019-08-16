@@ -15,10 +15,7 @@
   			    <div class="input-group-prepend">
   			     	<div class="input-group-text">Company</div>
   			    </div>
-  			    <div class="div-form-control form-control">
-	  			    <select id="company" class="filter form-control" onchange="filter()" style="width: 100%"></select>
-  			    </div>
-	  			{{-- <input type="text" id="company" oninput="filter()" class="filter form-control"> --}}
+  			    <select id="company" class="filter" onchange="filter()"></select>
   			</div>
 		</div>
 		<div class="col-lg-4 col-md-6 col-sm-12 p-1 d-print-none">

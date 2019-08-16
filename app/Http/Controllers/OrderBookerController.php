@@ -58,7 +58,7 @@ class OrderBookerController extends Controller
      */
     public function create()
     {
-        //
+        return view('orderbooker.create_orderbooker');
     }
 
     /**
@@ -69,7 +69,6 @@ class OrderBookerController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
           $rec = OrderBooker::create($request->all());
          if($rec) echo "success"; else echo "fail";
     }

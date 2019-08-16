@@ -1,20 +1,20 @@
 @extends('layouts.main')
 
-	@section('title','Edit Company')
+	@section('title','Create Company')
 	@section('content')
 
 	<div class="alert alert-success alert-dismissible hide" role="alert">
-	  Company updated successfully.
+	  Company created successfully.
 	  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 	    <span aria-hidden="true">&times;</span>
 	  </button>
 	</div>
 	<div class="row">
 		<div class="col">
-			<form id="form" action="/company/{{ $company->id }}" method="post">
+			<form id="form" action="/company" method="post">
 				<div class="card">
 				  <div class="card-header">
-					   Edit Company
+					   Create Company
 				  </div>
 				  <div class="card-body">
 				  	<div class="row m-0">
@@ -23,7 +23,7 @@
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text">Name</div>
 				  			    </div>
-					  			<input type="text" name="name" id="name" class="form-control" value="{{ $company->name }}" required="required">
+					  			<input type="text" name="name" id="name" class="form-control" placeholder="New Company" required="required">
 				  			</div>
 				  		</div>
 				  		<div class="col-6 my-2">
@@ -31,27 +31,26 @@
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text">Created On</div>
 				  			    </div>
-					  			<input type="date" name="created_at" class="form-control form-control-sm" id="created_at" value="{{ $company->putdate() }}" required="required">
-					  			<input type="hidden" name="_method" value="PUT">
+					  			<input type="date" name="created_at" class="form-control form-control-sm date" id="created_at" required="required" readonly>
 					  			@csrf
 				  			</div>
 				  		</div>
 				  	</div>
 				  </div>
 				  <div class="card-footer d-print-none">
-				    <button class="btn btn-success" type="submit"><i class="fa fa-arrow-up"></i> Update</button>
+				    <button class="btn btn-success" type="submit"><i class="fa fa-save"></i> Create</button>
 				    <button class="btn btn-info" type="button" onclick="window.history.go(-1);"><i class="fa fa-arrow-back"></i> Back</button>
-				    <button class="btn btn-warning" type="button" onclick="window.print()"><i class="fa fa-print"></i> Print</button>
 				  </div>
 				</div>
 			</form>
 		</div>
 	</div>
 	<script>
+		today_form_date()
 		$('.alert').hide()
 		$('#form').submit(function(e){
 			e.preventDefault()
-			axios.post("/company/{{ $company->id }}", $(this).serialize())
+			axios.post("/company", $(this).serialize())
 			.then(d => {
 				console.log(d.data)
 				if(d.data == "success")

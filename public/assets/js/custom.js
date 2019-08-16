@@ -1,14 +1,12 @@
-// document.onkeyup = function(e) {
-//   if (e.shiftKey && e.which == 13) {
-//     if($('#stock_btn').length)
-//         add_stock_row()
-//         else
-//         add_invoice_row()
-//     // delete row
-//   }
-// };
-
-
+document.onkeyup = function(e) {
+  if (e.ctrlKey && e.which == 46) {
+    if($('#stock_btn').length)
+        add_stock_row()
+        else
+        add_invoice_row()
+    // delete row
+  }
+};
 
 
     function getdate(d){
@@ -82,7 +80,19 @@ function print_invoices(argument) {
     });
     axios.post('/invoice_print?page=1'+filter).then(d => {
         $('#invoice_pages').html(d.data)
-        window.print();
+
+        jQuery(document).ready(function($) {
+            $('select.product').select2({
+              ajax: {
+                url: '/search2_products',
+                data: function (params) {
+                  var query = { searchString: params.term }
+                  return query;
+                }
+              }
+            });
+            window.print();
+        });
     });
 }
 
@@ -97,6 +107,17 @@ delRow = function(btn){
 }
 
 // Invoice Functions
+
+
+
+productSelected = function(obj){
+    axios.get('/get_sale_price?product=' + $(obj).val())
+    .then(d => {
+        $(obj).closest('tr').find('.unit_price').val(d.data[0]);
+        $(obj).closest('tr').find('.max_qty').val(d.data[1]);
+    });
+}
+
 
 countTotalPrice = function(obj){
     var qty = $(obj).closest('tr').find('.qty').val();
@@ -141,7 +162,20 @@ countInvoiceDiscount = function(){
 }
 
 add_invoice_row = function(){
-    axios.get('/get_invoice_row').then(d => $('#tbody').append(d.data));
+    axios.get('/get_invoice_row').then(d => { $('#tbody').append(d.data);
+        jQuery(document).ready(function($) {
+            $('select.product').select2({
+              ajax: {
+                placeholder: 'Item',
+                url: '/search2_products',
+                data: function (params) {
+                  var query = { searchString: params.term }
+                  return query;
+                }
+              }
+            });
+        })
+    });
 }
 delInvoiceRow = function(btn){
     
@@ -160,7 +194,22 @@ delEditInvoiceRow = function(obj,id){
 }
 
 
+checkMaxQty = function(obj){
+    var qty = $(obj).val();
+    var max_qty = $(obj).closest('tr').find('.max_qty').val();
+    var bonus = $(obj).closest('tr').find('.bonus').val();
 
+    if(qty>(max_qty-bonus)) 
+        $(obj).val(max_qty-bonus);
+}
+checkMaxBonus = function(obj){
+    var bonus = $(obj).val();
+    var max_qty = $(obj).closest('tr').find('.max_qty').val();
+    var qty = $(obj).closest('tr').find('.qty').val();
+
+    if(bonus>(max_qty-qty)) 
+        $(obj).val(max_qty-qty);
+}
 
 count_per_unit_purchase = function(obj){
     

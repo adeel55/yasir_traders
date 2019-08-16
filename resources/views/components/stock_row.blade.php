@@ -6,7 +6,7 @@
 			$('input.product').typeahead({
 		        source: function (query, result) {
 		            $.ajax({
-		                url: "http://localhost:8000/search_products",
+		                url: "/search_products",
 						data: 'searchString=' + query,            
 		                dataType: "json",
 		                type: "GET",
