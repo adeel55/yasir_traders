@@ -14,7 +14,7 @@
 				  </div>
 				  <div class="card-body p-2">
 				  	<div class="row m-0">
-				  		<div class="col-6 p-1">
+				  		<div class="col-md-6 col-sm-12 p-1">
 				  			<div class="input-group input-group-sm">
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text ">Invoice No.</div>
@@ -22,7 +22,7 @@
 					  			<input type="number" name="invoiceno" class="form-control" value="{{ $invoice->id }}" id="invoiceno" readonly>
 				  			</div>
 				  		</div>
-				  		<div class="col-6 p-1">
+				  		<div class="col-md-6 col-sm-12 p-1">
 				  			<div class="input-group input-group-sm">
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text">Date</div>
@@ -31,7 +31,7 @@
 					  			@csrf
 				  			</div>
 				  		</div>
-				  		<div class="col-6 p-1">
+				  		<div class="col-md-6 col-sm-12 p-1">
 				  			<div class="input-group input-group-sm">
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text ">Customer</div>
@@ -39,7 +39,7 @@
 					  			<input type="text" name="customer" class="form-control" id="customer" value="{{ $invoice->customer->name }}" readonly>
 				  			</div>
 				  		</div>
-				  		<div class="col-6 p-1">
+				  		<div class="col-md-6 col-sm-12 p-1">
 				  			<div class="input-group input-group-sm">
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text ">Area</div>
@@ -47,7 +47,7 @@
 					  			<input type="text" name="area" class="form-control" id="area" value="{{ $invoice->customer->area }}" readonly>
 				  			</div>
 				  		</div>
-				  		<div class="col-6 p-1">
+				  		<div class="col-md-6 col-sm-12 p-1">
 				  			<div class="input-group input-group-sm">
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text ">OrderBooker</div>
@@ -55,7 +55,7 @@
 					  			<input type="text" name="orderbooker" class="form-control" value="{{ $invoice->order_booker->name }}" id="orderbooker" readonly>
 				  			</div>
 				  		</div>
-				  		<div class="col-6 p-1">
+				  		<div class="col-md-6 col-sm-12 p-1">
 				  			<div class="input-group input-group-sm">
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text ">SaleMan</div>
@@ -136,6 +136,15 @@
 									<input type="number" step="any" value="{{ $invoice->discount_total }}" id="discount_total" readonly>
 								</th>
 							</tr>
+							@if($invoice->received)
+							<tr>
+								<th colspan="4"></th>
+								<th colspan="2">Received Amount:</th>
+								<th>
+									<input type="number" step="any" value="{{ $invoice->received_amount }}" id="discount_total" readonly>
+								</th>
+							</tr>
+							@endif
 						</tfoot>
 					</table>
 					</div>

@@ -31,7 +31,7 @@
 						<td>{{ $sale->discount_total }}</td>
 						@php ($profit = $sale->profit($sale->qty, $sale->discount_amount))
 						@php ($profit_sum += $profit)
-						<td>{{ $profit }}</td>
+						<td>{{ round($profit,2) }}</td>
 					</tr>
 						{{-- @php (die(json_encode($sale))) --}}
 					@endforeach
@@ -43,7 +43,7 @@
 						<td>{{ $company->group_sales($req)->sum('total_price') }}</td>
 						<td>{{ $company->group_sales($req)->sum('discount_amount') }}</td>
 						<td>{{ $company->group_sales($req)->sum('discount_total') }}</td>
-						<td>{{ $profit_sum }}</td>
+						<td>{{ round($profit_sum,2) }}</td>
 						@php ($grand_profit_sum += $profit_sum)
 						@php ($profit_sum = 0)
 					</tr>
@@ -63,7 +63,7 @@
 						<th>{{ $sales->sum('total_price') }}</th>
 						<th>{{ $sales->sum('discount_amount') }}</th>
 						<th>{{ $sales->sum('discount_total') }}</th>
-						<th>{{ $grand_profit_sum }}</th>
+						<th>{{ round($grand_profit_sum,2) }}</th>
 					</tr>
 					<tr class="bt-2">
 						<th colspan="2">Balance: {{ $balance }}</th>

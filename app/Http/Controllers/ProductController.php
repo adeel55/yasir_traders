@@ -74,7 +74,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         Product::create($request->all());
-        return "success";
+        return view('components.alert',['msg'=>'Product Created Successfully','type'=>'success']);
     }
 
     /**
@@ -109,7 +109,7 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $product->update($request->all());
-        return "success";
+        return view('components.alert',['msg'=>'Product Updated Successfully','type'=>'success']);
     }
 
     /**

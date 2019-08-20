@@ -41,50 +41,30 @@ class ReceiveInvoiceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $req)
     {
-        $expnses = $request->expenses;
-        $received_at = $request->received_at;
-        $sale_man_id = SaleMan::where('name',$request->saleman)->first()->id;
-        $order_booker_id = OrderBooker::where('name',$request->orderbooker)->first()->id;
-        // die("-->".$order_booker_id);
-
-        // $invoice = Invoice::find($request->invoice);
-        // dd($invoice);
-        // $sales = $invoice->sales;
-        // $sales = Sale::where('invoice_id',$request->invoice)->get();
-
-        // dd($sales);
-
+        $expnses = $req->expenses;
+        $received_at = $req->date;
         $rec = [
-                'sale_man_id' => $sale_man_id,
-                'order_booker_id' => $order_booker_id,
-                'discount_total' => $request->discount_total,
-                'received_amount' => $request->received_amount,
-                'received_at' => $request->received_at
+                'sale_man_id' => $req->saleman,
+                'order_booker_id' => $req->orderbooker,
+                'discount_total' => $req->discount_total,
+                'received_amount' => $req->received_amount,
+                'received_at' => $req->date
             ];
-        // die(json_encode($rec));
-        $received_invoices = ReceiveInvoice::create($rec);
-        $received_invoices_id = $received_invoices->id;
-        // die(json_encode($received_invoices_id));
+        $received_invoices_id = ReceiveInvoice::create($rec)->id;
         foreach ($expnses as $expnse) {
             $rec = [
-                'sale_man_id' => $sale_man_id,
+                'sale_man_id' => $req->saleman,
                 'receive_invoice_id' => $received_invoices_id,
                 'amount' => $expnse['amount'],
                 'description' => $expnse['description'],
                 'create_at' => $received_at
             ];
-
             Expense::create($rec);
         }
-        // die('success');
 
-        // Invoices Stock Detuctions And Customers Accounts
-
-
-        $invoices = $request->invoices;
-
+        $invoices = $req->invoices;
         foreach ($invoices as $inv) {
 
             $invoice = Invoice::find($inv['id']);
@@ -95,32 +75,18 @@ class ReceiveInvoiceController extends Controller
 
             $customer = Customer::find($invoice->customer_id);
 
-            $sales = Sale::where('invoice_id',$invoice->id)->get();
-            // $sales = $invoice->sales;
-            foreach($sales as $sale){
+            foreach($invoice->sales as $sale)
                Product::find($sale->product_id)->decrement('qty',$sale->qty + $sale->bonus);
-            }
+            
+            if($invoice->balance>0) 
+                $customer->credit($invoice->balance,"Paid less on invoice",$received_at,$invoice->id);
+            if($invoice->balance<0) 
+                $customer->debit($invoice->balance,"Paid extra on invoice",$received_at,$invoice->id);
 
-
-                // die("success");
-            if($invoice->balance>0){
-
-                $customer->balance = $customer->balance + $invoice->balance;
-                $rec = ['customer_id' => $customer->id, 'invoice_id' => $invoice->id,'credit'=>$invoice->balance,'balance'=>$customer->balance];
-                $customer->save();
-                Statement::create($rec);
-            }
-            if($invoice->balance<0){
-
-                $customer->balance = $customer->balance - abs($invoice->balance);
-                $rec = ['customer_id' => $customer->id, 'invoice_id' => $invoice->id,'debit'=>abs($invoice->balance),'balance'=>$customer->balance];
-                $customer->save();
-                Statement::create($rec);
-            }
             // die(json_encode($rec));
         }
 
-        echo "success";
+        return view('components.alert',['msg'=>'Invoices Received Successfully','type'=>'success']);
     }
 
     /**
@@ -148,7 +114,7 @@ class ReceiveInvoiceController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\req  $request
      * @param  \App\ReceiveInvoice  $receiveInvoice
      * @return \Illuminate\Http\Response
      */

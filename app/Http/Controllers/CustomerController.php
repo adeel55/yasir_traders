@@ -79,7 +79,7 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         $rec = Customer::create($request->all());
-        if($rec) echo "success"; else echo "fail";
+        return view('components.alert',['msg'=>'Customer Created Successfully','type'=>'success']);
     }
 
     /**
@@ -114,7 +114,7 @@ class CustomerController extends Controller
     public function update(Request $request, Customer $customer)
     {
         $customer->update($request->all());
-        return "success";
+        return view('components.alert',['msg'=>'Customer Updated Successfully','type'=>'success']);
     }
 
     /**

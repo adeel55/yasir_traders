@@ -3,12 +3,7 @@
 	@section('title','Edit Company')
 	@section('content')
 
-	<div class="alert alert-success alert-dismissible hide" role="alert">
-	  Company updated successfully.
-	  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-	    <span aria-hidden="true">&times;</span>
-	  </button>
-	</div>
+	<div id="msg"></div>
 	<div class="row">
 		<div class="col">
 			<form id="form" action="/company/{{ $company->id }}" method="post">
@@ -48,16 +43,12 @@
 		</div>
 	</div>
 	<script>
-		$('.alert').hide()
 		$('#form').submit(function(e){
 			e.preventDefault()
 			axios.post("/company/{{ $company->id }}", $(this).serialize())
 			.then(d => {
-				console.log(d.data)
-				if(d.data == "success")
-				{
-					$(".alert").show().delay(2000).slideUp(500, function() { $(this).alert('close')});
-				}
+				$('#msg').html(d.data);
+				$(".alert").delay(2000).slideUp(500, function() { $(this).alert('close')});
 			})
 			.catch((err) => console.log(err) );
 		})

@@ -1,67 +1,59 @@
 @extends('layouts.main')
 
-	@section('title','Create Customer')
+	@section('title','Create Statement')
 	@section('content')
 
 	<div id="msg"></div>
 	<div class="row">
 		<div class="col">
-			<form id="form" method="post" action="/customer">
+			<form id="form" action="/statement" method="post">
 				<div class="card">
 				  <div class="card-header">
-					   Create Customer
+					   Create Account Statement Of Customers
 				  </div>
 				  <div class="card-body">
 				  	<div class="row m-0">
 				  		<div class="col-lg-6 col-md-12 my-2">
 				  			<div class="input-group input-group-sm">
 				  			    <div class="input-group-prepend">
-				  			      <div class="input-group-text">Name</div>
+				  			     	<div class="input-group-text">Customer</div>
 				  			    </div>
-					  			<input type="text" name="name" id="name" class="form-control" placeholder="Customer" required="required">
+				  			    <select id="customer" name="customer_id" required></select>
 				  			</div>
-				  		</div>
-				  		<div class="col-lg-6 col-md-12 my-2">
-				  			<div class="input-group input-group-sm">
-				  			    <div class="input-group-prepend">
-				  			      <div class="input-group-text">Phone</div>
-				  			    </div>
-					  			<input type="text" name="phone" id="phone" class="form-control" placeholder="Phone no.">
-				  			</div>
-				  		</div>
-				  		<div class="col-lg-6 col-md-12 my-2">
-				  			<div class="input-group input-group-sm">
-				  			    <div class="input-group-prepend">
-				  			      <div class="input-group-text">Balance</div>
-				  			    </div>
-					  			<input type="number" name="balance" id="balance" class="form-control" value="0.00" readonly>
-				  			</div>
-				  		</div>
-				  		<div class="col-lg-6 col-md-12 my-2">
-				  			<div class="input-group input-group-sm">
-				  			    <div class="input-group-prepend">
-				  			      <div class="input-group-text">Address</div>
-				  			    </div>
-					  			<input type="text" name="address" id="address" class="form-control" placeholder="Address...">
-				  			</div>
-				  		</div>
-				  		<div class="col-lg-6 col-md-12 my-2">
-				  			<div class="input-group input-group-sm">
-				  			    <div class="input-group-prepend">
-				  			      <div class="input-group-text">Area</div>
-				  			    </div>
-					  			<input type="text" name="area" id="area" class="form-control" placeholder="Area" required="required">
-				  			</div>
-				  		</div>
+						</div>
 				  		<div class="col-lg-6 col-md-12 my-2">
 				  			<div class="input-group input-group-sm">
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text">Created On</div>
 				  			    </div>
-					  			<input type="date" name="created_at" class="form-control date" required="required" readonly>
+					  			<input type="date" name="created_at" class="form-control form-control-sm date" id="created_at" required="required" readonly>
 					  			@csrf
 				  			</div>
 				  		</div>
+				  		<div class="col-lg-6 col-md-12 my-2">
+				  			<div class="input-group input-group-sm">
+				  			    <div class="input-group-prepend">
+				  			     	<div class="input-group-text text-success">Credit</div>
+				  			    </div>
+				  			    <input type="number" step="any" name="credit" class="form-control" placeholder="amount">
+				  			</div>
+						</div>
+				  		<div class="col-lg-6 col-md-12 my-2">
+				  			<div class="input-group input-group-sm">
+				  			    <div class="input-group-prepend">
+				  			     	<div class="input-group-text text-danger">Debit</div>
+				  			    </div>
+				  			    <input type="number" step="any" name="debit" class="form-control" placeholder="amount">
+				  			</div>
+						</div>
+				  		<div class="col-lg-6 col-md-12 my-2">
+				  			<div class="input-group input-group-sm">
+				  			    <div class="input-group-prepend">
+				  			     	<div class="input-group-text">Description</div>
+				  			    </div>
+				  			    <input type="text" name="description" class="form-control" placeholder="Description">
+				  			</div>
+						</div>
 				  	</div>
 				  </div>
 				  <div class="card-footer d-print-none">
@@ -70,20 +62,33 @@
 				  </div>
 				</div>
 			</form>
-		</div>	
+		</div>
 	</div>
 	<script>
 		today_form_date()
 		$('#form').submit(function(e){
 			e.preventDefault()
-			axios.post("/customer", $(this).serialize())
+			if(!confirm('Are you sure to create this statement?')) return;
+			axios.post("/statement", $(this).serialize())
 			.then(d => {
 				$('#msg').html(d.data);
 				$(".alert").delay(2000).slideUp(500, function() { $(this).alert('close')});
+				$('#customer').empty();
 			})
 			.catch((err) => console.log(err) );
-		})
+		});
+
+		jQuery(document).ready(function($) {
+			$('#customer').select2({
+			  ajax: {
+			    url: '/search2_customer',
+			    data: function (params) {
+			      var query = { searchString: params.term }
+			      return query;
+			    }
+			  }
+			});
+		});
 	</script>
 
 	@endsection
-

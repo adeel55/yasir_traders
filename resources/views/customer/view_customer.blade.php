@@ -12,7 +12,7 @@
 				  </div>
 				  <div class="card-body">
 				  	<div class="row m-0">
-				  		<div class="col-6 my-2">
+				  		<div class="col-lg-6 col-md-12 my-2">
 				  			<div class="input-group input-group-sm">
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text">Name</div>
@@ -20,7 +20,7 @@
 					  			<input type="text" name="name" id="name" class="form-control" value="{{ $customer->name }}" readonly>
 				  			</div>
 				  		</div>
-				  		<div class="col-6 my-2">
+				  		<div class="col-lg-6 col-md-12 my-2">
 				  			<div class="input-group input-group-sm">
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text">Phone</div>
@@ -28,7 +28,7 @@
 					  			<input type="text" name="phone" id="phone" class="form-control" value="{{ $customer->phone }}" readonly>
 				  			</div>
 				  		</div>
-				  		<div class="col-6 my-2">
+				  		<div class="col-lg-6 col-md-12 my-2">
 				  			<div class="input-group input-group-sm">
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text">Balance</div>
@@ -36,7 +36,7 @@
 					  			<input type="number" name="balance" id="balance" class="form-control" value="{{ $customer->balance }}" readonly>
 				  			</div>
 				  		</div>
-				  		<div class="col-6 my-2">
+				  		<div class="col-lg-6 col-md-12 my-2">
 				  			<div class="input-group input-group-sm">
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text">Address</div>
@@ -44,7 +44,7 @@
 					  			<input type="text" name="address" id="address" class="form-control" value="{{ $customer->address }}" readonly>
 				  			</div>
 				  		</div>
-				  		<div class="col-6 my-2">
+				  		<div class="col-lg-6 col-md-12 my-2">
 				  			<div class="input-group input-group-sm">
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text">Area</div>
@@ -52,7 +52,7 @@
 					  			<input type="text" name="area" id="area" class="form-control" value="{{ $customer->area }}" readonly>
 				  			</div>
 				  		</div>
-				  		<div class="col-6 my-2">
+				  		<div class="col-lg-6 col-md-12 my-2">
 				  			<div class="input-group input-group-sm">
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text">Created On</div>

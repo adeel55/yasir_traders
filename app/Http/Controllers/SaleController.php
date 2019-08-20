@@ -93,7 +93,9 @@ class SaleController extends Controller
      */
     public function destroy(Sale $sale)
     {
+        $invoice = $sale->invoice;
         $sale->delete();
+        $invoice->updateTotal();
     }
 
 

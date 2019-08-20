@@ -62,8 +62,8 @@ class SaleManController extends Controller
      */
     public function store(Request $request)
     {
-        $rec = SaleMan::create($request->all());
-        if($rec) echo "success"; else echo "fail";
+        SaleMan::create($request->all());
+        return view('components.alert',['msg'=>'Sale Man Created Successfully','type'=>'success']);
     }
 
     /**
@@ -99,7 +99,7 @@ class SaleManController extends Controller
     {
         // return json_encode($saleman);
         $saleman->update($request->all());
-        return "success";
+        return view('components.alert',['msg'=>'Sale Man Updated Successfully','type'=>'success']);
     }
 
     /**

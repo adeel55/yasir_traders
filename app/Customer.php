@@ -28,6 +28,25 @@ class Customer extends Model
 
     }
 
+    public function debit($amount, $desc, $date, $invoice_id=NULL)
+    {
+        $amount = abs($amount);
+        $this->balance = $this->balance - $amount;
+        $this->save();
+        $rec = ['customer_id' => $this->id, 'invoice_id' => $invoice_id,'debit'=>$amount,'balance'=>$this->balance,'description' => $desc,'created_at' => $date];
+        Statement::create($rec);
+    }
+
+
+    public function credit($amount, $desc, $date, $invoice_id=NULL)
+    {
+        $amount = abs($amount);
+        $this->balance = $this->balance + $amount;
+        $this->save();
+        $rec = ['customer_id' => $this->id, 'invoice_id' => $invoice_id,'credit'=>$amount,'balance'=>$this->balance, 'description' => $desc, 'created_at' => $date];
+        Statement::create($rec);
+    }
+
     public function putdate()
     {
         return date('Y-m-d',strtotime($this->created_at));

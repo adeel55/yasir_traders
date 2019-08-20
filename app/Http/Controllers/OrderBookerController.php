@@ -70,7 +70,7 @@ class OrderBookerController extends Controller
     public function store(Request $request)
     {
           $rec = OrderBooker::create($request->all());
-         if($rec) echo "success"; else echo "fail";
+        return view('components.alert',['msg'=>'Order Booker Created Successfully','type'=>'success']);
     }
 
     /**
@@ -105,7 +105,7 @@ class OrderBookerController extends Controller
     public function update(Request $request, OrderBooker $orderbooker)
     {
         $orderbooker->update($request->all());
-        return "success";
+        return view('components.alert',['msg'=>'Order Booker Updated Successfully','type'=>'success']);
     }
 
     /**

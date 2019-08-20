@@ -4,12 +4,7 @@
 	@section('title','Create Invoice')
 	@section('content')
 
-	<div class="alert alert-success alert-dismissible hide" role="alert">
-	  Invoice created successfully.
-	  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-	    <span aria-hidden="true">&times;</span>
-	  </button>
-	</div>
+	<div id="msg"></div>
 	<div class="row">
 		<div class="col">
 			<form id="form" action="#">
@@ -19,7 +14,7 @@
 				  </div>
 				  <div class="card-body p-2">
 				  	<div class="row m-0">
-				  		<div class="col-6 p-1">
+				  		<div class="col-md-6 col-sm-12 p-1">
 				  			<div class="input-group input-group-sm">
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text ">Invoice No.</div>
@@ -27,7 +22,7 @@
 					  			<input type="number" name="invoiceno" class="form-control" id="invoiceno" readonly>
 				  			</div>
 				  		</div>
-				  		<div class="col-6 p-1">
+				  		<div class="col-md-6 col-sm-12 p-1">
 				  			<div class="input-group input-group-sm">
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text">Date</div>
@@ -36,7 +31,7 @@
 					  			@csrf
 				  			</div>
 				  		</div>
-				  		<div class="col-6 p-1">
+				  		<div class="col-md-6 col-sm-12 p-1">
 				  			<div class="input-group input-group-sm">
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text ">Customer</div>
@@ -44,7 +39,7 @@
 					  			<input type="text" name="customer" class="form-control" id="customer" required="required">
 				  			</div>
 				  		</div>
-				  		<div class="col-6 p-1">
+				  		<div class="col-md-6 col-sm-12 p-1">
 				  			<div class="input-group input-group-sm">
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text ">Area</div>
@@ -52,7 +47,7 @@
 					  			<input type="text" name="area" class="form-control" id="area" required="required">
 				  			</div>
 				  		</div>
-				  		<div class="col-6 p-1">
+				  		<div class="col-md-6 col-sm-12 p-1">
 				  			<div class="input-group input-group-sm">
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text ">OrderBooker</div>
@@ -60,7 +55,7 @@
 					  			<input type="text" name="orderbooker" class="form-control" id="orderbooker" required="required">
 				  			</div>
 				  		</div>
-				  		<div class="col-6 p-1">
+				  		<div class="col-md-6 col-sm-12 p-1">
 				  			<div class="input-group input-group-sm">
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text ">SaleMan</div>
@@ -145,14 +140,10 @@
 				'discount_total': $('#discount_total').val(),
 				'date': $('#date').val(),'rows': rows} )
 			.then(d => {
-				console.log(d.data);
-				if(d.data == "success")
-				{
-					reset_form()
-					$(".alert").show().delay(3000).slideUp(500, function() {
-					    $(this).alert('close');
-					}); 
-				}
+				reset_form()
+				$('#msg').html(d.data);
+				$(".alert").delay(2000).slideUp(500, function() { $(this).alert('close')});
+				$('select').empty();
 			})
 			.catch((err) => console.log(err) );
 		});
@@ -160,6 +151,7 @@
 
 	reset_form = function(){
 		$("#form").trigger("reset");
+		$('select.product').empty();
 		today_form_date();
 		// Get Invoice No.
 		axios.get("/get_invoice_no").then(d => $('#invoiceno').val(d.data));

@@ -79,20 +79,13 @@ class InventoryController extends Controller
      */
     public function store(Request $request)
     {
-        $rows = $request->rows;
         $date = $request->date;
+        foreach ($request->rows as $key => $val) {
 
-        $product = new Product;
-        $company = new Company;
-
-        $company_id = $company->findOrSaveCompany($request->company);
-        foreach ($rows as $key => $val) {
-
-            $product_id = $product->findOrSaveProduct($val,$company_id);
-
+            Product::find($val['product'])->increment('qty',$val['qty']);
             $rec = [
-                'company_id' => $company_id,
-                'product_id' => $product_id,
+                'company_id' => $request->company,
+                'product_id' => $val['product'],
                 'qty' => $val['qty'],
                 'expire' => $val['expire'],
                 'unit_purchase' => $val['unit_purchase'],
@@ -105,8 +98,7 @@ class InventoryController extends Controller
 
         }
 
-        echo "success";
-
+        return view('components.alert',['msg'=>'Stock Added Successfully','type'=>'success']);
     }
 
     /**
@@ -128,8 +120,6 @@ class InventoryController extends Controller
      */
     public function edit(Inventory $inventory)
     {
-        $inventory = Inventory::join('companies','companies.id','company_id')->join('products','products.id','product_id')->select('inventories.*','companies.name as company','products.name as product')->where('inventories.id',$inventory->id)->first();
-
         return view('stock.edit_purchase',compact('inventory'));
     }
 
@@ -143,29 +133,14 @@ class InventoryController extends Controller
     public function update(Request $request, Inventory $inventory)
     {
 
-        $company_id = Company::where('name',$request->company)->first()->id;
-        $product = Product::where('name',$request->product)->first();
-
+        $product = $inventory->product;
         $product->decrement('qty',$inventory->qty);
         $product->increment('qty',$request->qty);
         $product->save();
 
-        $rec = [
-            'company_id' => $company_id,
-            'product_id' => $product->id,
-            'qty' => $request->qty,
-            'unit_purchase' => $request->unit_purchase,
-            'unit_sale' => $request->unit_sale,
-            'total_purchase' => $request->total_purchase,
-            'expire' => $request->expire,
-            'updated_at' => $request->date
-        ];
+        $inventory->update($request->all());
 
-        $inventory->update($rec);
-        $inventory->save();
-        return "success";
-        return json_encode($product);
-
+        return view('components.alert',['msg'=>'Purchase Updated Successfully','type'=>'success']);
     }
 
     /**

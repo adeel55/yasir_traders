@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Customer;
 use App\Statement;
 use App\OrderBooker;
 use Illuminate\Http\Request;
@@ -21,13 +22,11 @@ class StatementController extends Controller
         if($req->ajax()){
 
             if($req->has('orderbooker'))
-            {
-                $orderbooker = OrderBooker::find($req->orderbooker);
-                $statements = $orderbooker->statements($req);
-                // die($statements);
-            }else{
-                
-                $statements = Statement::join('customers','customers.id','customer_id')->paginate();
+                $statements = OrderBooker::find($req->orderbooker)->statements($req);
+            else if($req->has('customer'))
+                $statements = Statement::where('customer_id',$req->customer)->orderBy('id','DESC')->paginate(40);
+            else{
+                $statements = Statement::orderBy('id','DESC')->paginate(40);
             }
 
 
@@ -46,7 +45,7 @@ class StatementController extends Controller
      */
     public function create()
     {
-        //
+        return view('accounts.create_statement');
     }
 
     /**
@@ -55,9 +54,14 @@ class StatementController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $req)
+    { 
+        // return $req->all();
+        $customer = Customer::find($req->customer_id);
+        if($req->credit) $customer->credit($req->credit,$req->description,$req->created_at);
+        if($req->debit) $customer->debit($req->debit,$req->description,$req->created_at);
+        return view('components.alert',['msg'=>'Statement Created Successfully','type'=>'success']);
+        echo "success";
     }
 
     /**

@@ -28,6 +28,7 @@
 		</div>
 		<div class="col-lg-4 col-md-6 col-sm-12 p-1 d-print-none">
   			<a href="/customer/create" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Add New</a>
+  			<a href="/statement/create" class="btn btn-sm btn-primary"><i class="fa fa-dollar"></i> Create Statement</a>
 		</div>
 	</div>
 	<div class="row">

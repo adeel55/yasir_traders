@@ -34,6 +34,9 @@
 	  			<input type="date" id="date" onchange="filter()" class="filter date form-control">
   			</div>
 		</div>
+		<div class="col-lg-4 col-md-6 col-sm-12 p-1 d-print-none">
+  			<a href="/statement/create" class="btn btn-sm btn-primary"><i class="fa fa-dollar"></i> Create Statement</a>
+		</div>
 	</div>
 	<div class="row">
 		<div class="col">

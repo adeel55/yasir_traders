@@ -31,7 +31,14 @@ class Invoice extends Model
         return $this->belongsTo('App\OrderBooker');
     }
 
-
+    public function updateTotal()
+    {
+        $this->total_amount = $this->sales()->sum('total_price');
+        $this->total_discount = $this->sales()->sum('discount_amount');
+        $this->discount_total = $this->sales()->sum('discount_total');
+        $this->balance = $this->discount_total - $this->received_amount;
+        $this->save();
+    }
 
     public function putdate()
     {

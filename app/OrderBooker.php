@@ -22,8 +22,7 @@ class OrderBooker extends Model
 
     public function statements($req)
     {
-        $customers_ids = $this->hasMany('App\Invoice')->when($req->date, function ($q) use ($req) { return $q->whereDate('created_at', $req->date); })->when($req->datefrom, function ($q) use ($req) { return $q->whereDate('created_at','>=', $req->datefrom); })->when($req->dateto, function ($q) use ($req) { return $q->whereDate('created_at','<=', $req->dateto); })->distinct('customer_id')->pluck('customer_id')->toArray();
-        return Statement::join('customers','customers.id','customer_id')->whereIn('customer_id',$customers_ids)->when($req->date, function ($q) use ($req) { return $q->whereDate('statements.created_at', $req->date); })->paginate(40);
+        return $this->hasManyThrough('App\Statement','App\Invoice')->where('invoices.received',1)->when($req->date, function ($q) use ($req) { return $q->whereDate('invoices.created_at', $req->date); })->when($req->datefrom, function ($q) use ($req) { return $q->whereDate('invoices.created_at','>=', $req->datefrom); })->when($req->dateto, function ($q) use ($req) { return $q->whereDate('invoices.created_at','<=', $req->dateto); })->orderBy('statements.id','DESC')->paginate(40);
     }
 
 

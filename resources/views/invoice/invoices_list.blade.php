@@ -49,6 +49,18 @@
 	  			<input type="date" id="date" onchange="filter()" class="filter date form-control">
   			</div>
 		</div>
+		<div class="col-lg-4 col-md-6 col-sm-12 p-1 d-print-none">
+  			<div class="input-group input-group-sm">
+  			    <div class="input-group-prepend">
+  			     	<div class="input-group-text ">Type</div>
+  			    </div>
+	  			<select name="received" id="received" onchange="filter()" class="form-control filter">
+	  				<option value="">All</option>
+	  				<option value="1">Received</option>
+	  				<option value="0">Not Received</option>
+	  			</select>
+  			</div>
+		</div>
 	</div>
 	<div class="row">
 		<div class="col p-2">

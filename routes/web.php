@@ -42,9 +42,6 @@ Route::group(['middleware'=> 'auth'], function(){
 	Route::get('/get_invoice_row', 'InvoiceController@getRow');
 	Route::get('/get_stock_row', 'InventoryController@getRow');
 	Route::get('/get_expense_row', 'ExpenseController@getRow');
-	Route::post('/invoice_receive', 'InvoiceController@receiveInvoice');
-	Route::get('/invoice_receive', 'InvoiceController@showReceiveInvoice');
-	Route::get('/invoice_receive_edit', 'InvoiceController@receiveInvoiceEdit');
 	Route::get('/product_report', 'SaleController@productReport');
 	Route::get('/customer_report', 'SaleController@customerReport');
 	Route::get('/sale_report', 'SaleController@saleReport');
@@ -61,6 +58,7 @@ Route::group(['middleware'=> 'auth'], function(){
 	Route::resource('/expense', 'ExpenseController');
 	Route::resource('/receive_invoices', 'ReceiveInvoiceController');
 	Route::resource('/user', 'UserController');
+	Route::get('/invoice_receive', 'InvoiceController@showReceiveInvoice');
 	Route::get('/invoice_print', 'InvoiceController@printInvoices');
 	Route::post('/invoice_print', 'InvoiceController@printInvoices');
 	Route::post('/invoice_received', 'InvoiceController@received');

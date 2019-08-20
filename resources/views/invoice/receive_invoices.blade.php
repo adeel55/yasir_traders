@@ -3,12 +3,7 @@
 	@section('title','Invoices List')
 	@section('content')
 	
-	<div class="alert alert-success alert-dismissible hide" role="alert">
-	  Invoices Received successfully.
-	  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-	    <span aria-hidden="true">&times;</span>
-	  </button>
-	</div>
+	<div id="msg"></div>
 	<div class="row">
 		<div class="col">
 			<h4>Receive Invoices</h4>	
@@ -152,23 +147,19 @@
 
 			axios.post("/receive_invoices", {
 				'_token' : $("input[name='_token']").val(),
-				'orderbooker': $('#filterstrjoinorder_bookers-name').val(),
-				'saleman': $('#filterstrjoinsale_men-name').val(),
+				'orderbooker': $('#orderbooker').val(),
+				'saleman': $('#saleman').val(),
 				'discount_total': $('#discount_total').val(),
 				'received_amount': $('#total_received').val(),
-				'received_at': $('#filterdatejoininvoices-created_at').val(),
+				'date': $('#date').val(),
 				'expenses': expenses,
 				'invoices': invoices
 			})
 			.then(d => {
-				console.log(d.data);
-				if(d.data == "success")
-				{
-					reset_form()
-					$(".alert").show().delay(3000).slideUp(500, function() {
-					    $(this).alert('close');
-					}); 
-				}
+				reset_form()
+				$('#msg').html(d.data);
+				$(".alert").delay(2000).slideUp(500, function() { $(this).alert('close')});
+				$('#saleman').empty();
 			})
 			.catch((err) => console.log(err) );
 		});

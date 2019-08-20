@@ -97,13 +97,26 @@ function print_invoices(argument) {
 }
 
 
-    // Stock Functions
+// Stock Functions
 
 add_stock_row = function(){
-    axios.get('/get_stock_row').then(d => $('#rows').append(d.data));
+    axios.get('/get_stock_row').then(d => {
+        $('#rows').append(d.data)
+        jQuery(document).ready(function($) {
+            $('select.product').select2({
+              ajax: {
+                url: '/search2_products',
+                data: function (params) {
+                  var query = { searchString: params.term }
+                  return query;
+                }
+              }
+            });
+        });
+    });
 }
 delRow = function(btn){
-    $(btn).closest('.row').remove();
+    $(btn).closest('tr').remove();
 }
 
 // Invoice Functions
@@ -213,17 +226,17 @@ checkMaxBonus = function(obj){
 
 count_per_unit_purchase = function(obj){
     
-    var total_price = $(obj).closest('.row').find('.total_purchase').val();
-    var qty = $(obj).closest('.row').find('.qty').val();
-    $(obj).closest('.row').find('.unit_purchase').val(div(total_price,qty));
+    var total_price = $(obj).closest('tr').find('.total_purchase').val();
+    var qty = $(obj).closest('tr').find('.qty').val();
+    $(obj).closest('tr').find('.unit_purchase').val(div(total_price,qty));
 
 }
 
 count_total_purchase = function(obj){
     
-    var unit_price = $(obj).closest('.row').find('.unit_purchase').val();
-    var qty = $(obj).closest('.row').find('.qty').val();
-    $(obj).closest('.row').find('.total_purchase').val(mul(unit_price,qty));
+    var unit_price = $(obj).closest('tr').find('.unit_purchase').val();
+    var qty = $(obj).closest('tr').find('.qty').val();
+    $(obj).closest('tr').find('.total_purchase').val(mul(unit_price,qty));
 
 }
 

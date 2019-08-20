@@ -3,12 +3,7 @@
 	@section('title','Create OrderBooker')
 	@section('content')
 
-	<div class="alert alert-success alert-dismissible hide" role="alert">
-	  Order Booker created successfully.
-	  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-	    <span aria-hidden="true">&times;</span>
-	  </button>
-	</div>
+	<div id="msg"></div>
 	<div class="row">
 		<div class="col">
 			<form id="form" action="/orderbooker" method="post">
@@ -18,7 +13,7 @@
 				  </div>
 				  <div class="card-body">
 				  	<div class="row m-0">
-				  		<div class="col-6 my-2">
+				  		<div class="col-md-6 col-sm-12 my-2">
 				  			<div class="input-group input-group-sm">
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text">Name</div>
@@ -26,7 +21,7 @@
 					  			<input type="text" name="name" class="form-control" placeholder="Name" required="required">
 				  			</div>
 				  		</div>
-				  		<div class="col-6 my-2">
+				  		<div class="col-md-6 col-sm-12 my-2">
 				  			<div class="input-group input-group-sm">
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text">Phone</div>
@@ -34,7 +29,7 @@
 					  			<input type="text" name="phone" class="form-control" placeholder="phone no.">
 				  			</div>
 				  		</div>
-				  		<div class="col-6 my-2">
+				  		<div class="col-md-6 col-sm-12 my-2">
 				  			<div class="input-group input-group-sm">
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text">Target</div>
@@ -42,7 +37,7 @@
 					  			<input type="number" name="target" class="form-control" placeholder="Target">
 				  			</div>
 				  		</div>
-				  		<div class="col-6 my-2">
+				  		<div class="col-md-6 col-sm-12 my-2">
 				  			<div class="input-group input-group-sm">
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text">Created On</div>
@@ -63,16 +58,13 @@
 	</div>
 	<script>
 		today_form_date()
-		$('.alert').hide()
 		$('#form').submit(function(e){
 			e.preventDefault()
 			axios.post("/orderbooker", $(this).serialize())
 			.then(d => {
-				console.log(d.data)
-				if(d.data == "success")
-				{
-					$(".alert").show().delay(2000).slideUp(500, function() { $(this).alert('close')});
-				}
+				$('#msg').html(d.data);
+				$(".alert").delay(2000).slideUp(500, function() { $(this).alert('close')});
+				$(this).trigger('reset');
 			})
 			.catch((err) => console.log(err) );
 		})

@@ -3,12 +3,7 @@
 	@section('title','Add Stock')
 	@section('content')
 
-	<div class="alert alert-success alert-dismissible hide" role="alert">
-	  Stock added successfully.
-	  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-	    <span aria-hidden="true">&times;</span>
-	  </button>
-	</div>
+	<div id="msg"></div>
 	<div class="row">
 		<div class="col">
 			<form id="form" action="#">
@@ -18,16 +13,15 @@
 				  </div>
 				  <div class="card-body">
 				  	<div class="row m-0">
-				  		<div class="col p-0">
+				  		<div class="col-lg-6 col-md-12 my-2">
 				  			<div class="input-group input-group-sm">
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text ">Company</div>
 				  			    </div>
-					  			<input type="text" name="company typeahead" id="company" class="form-control form-control-sm" required="required">
+					  			<select name="company_id" id="company" class="company" required></select>
 				  			</div>
 				  		</div>
-				  		<div class="col-1 p-0"></div>
-				  		<div class="col p-0">
+				  		<div class="col-lg-6 col-md-12 my-2">
 				  			<div class="input-group input-group-sm">
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text">Date</div>
@@ -36,12 +30,24 @@
 					  			@csrf
 				  			</div>
 				  		</div>
-				  		<div class="col-1 p-0"></div>
 				  	</div>
 				  	<hr>
-					<div id="rows" class="rows">
-						@include('components.stock_row')
-					</div>
+				  	<table class="table table-sm table-responsive">
+				  		<thead>
+				  			<tr class="small">
+				  				<th>Name</th>
+				  				<th>Qty</th>
+				  				<th>Total Purchase</th>
+				  				<th>Unit Sale</th>
+				  				<th>Unit Purchase</th>
+				  				<th>Expire</th>
+				  				<th>Del</th>
+				  			</tr>
+				  		</thead>
+				  		<tbody id="rows" class="rows stock_rows">
+							@include('components.stock_row')
+				  		</tbody>
+				  	</table>
 				  </div>
 				  <div class="card-footer d-print-none">
 				    <button class="btn btn-success" id="addstock" type="submit"><i class="fa fa-boxes"></i> Add Stock</button>
@@ -53,17 +59,13 @@
 		</div>	
 	</div>
 	<script>
-
-
 		reset_form = function(){
 			$("form").trigger("reset");
+			$('select.company').empty()
+			$('select.product').empty()
 			today_form_date();
 		}
 		reset_form()
-		
-
-		$('.alert').hide();
-
 		$('#form').submit(function(e){
 			e.preventDefault()
 			var data = {};
@@ -73,37 +75,36 @@
 
 				rows.push({'product':$(rowsdata[i]).find('.product').val(),'qty':$(rowsdata[i]).find('.qty').val(),'unit_purchase':$(rowsdata[i]).find('.unit_purchase').val(),'unit_sale':$(rowsdata[i]).find('.unit_sale').val(),'total_purchase':$(rowsdata[i]).find('.total_purchase').val(),'expire':$(rowsdata[i]).find('.expire').val()});
 			}
-			// data['_token'] = $('meta[name="csrf-token"]').attr('content');
-			// data['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content');
-			data['_token'] = $("input[name='_token']").val();
-			data['rows'] = rows;
-			data['company'] = $('#company').val();
-			data['date'] = $('#date').val();
-			console.log(data);
-
-			// $.ajax({
-		 //         type:'POST',
-		 //         url:'/inventory',
-		 //         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-		 //         data: data,
-		 //         success:function(d){
-		 //            console.log(d);
-		 //         }
-		 //      });
 
 			axios.post("/inventory", {'_token' : $("input[name='_token']").val(),'company' : $('#company').val(),'date' : $('#date').val(),'rows': rows} )
 			.then(d => {
-				console.log(d.data);
-				if(d.data == "success")
-				{
-					reset_form()
-					$(".alert").show().delay(3000).slideUp(500, function() {
-					    $(this).alert('close');
-					}); 
-				}
+				$('#msg').html(d.data);
+				$(".alert").delay(2000).slideUp(500, function() { $(this).alert('close')});
+				reset_form()
 			})
 			.catch((err) => console.log(err) );
 		})
+
+		jQuery(document).ready(function($) {
+	        $('select.company').select2({
+	          ajax: {
+	            url: '/search2_companies',
+	            data: function (params) {
+	              var query = { searchString: params.term }
+	              return query;
+	            }
+	          }
+	        });
+	        $('select.product').select2({
+	          ajax: {
+	            url: '/search2_products',
+	            data: function (params) {
+	              var query = { searchString: params.term }
+	              return query;
+	            }
+	          }
+	        });
+	    })
 		
 		
 	</script>

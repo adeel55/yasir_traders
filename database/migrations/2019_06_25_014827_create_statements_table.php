@@ -16,7 +16,7 @@ class CreateStatementsTable extends Migration
         Schema::create('statements', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('customer_id');
-            $table->unsignedBigInteger('invoice_id');
+            $table->unsignedBigInteger('invoice_id')->nullable();
             $table->decimal('debit',15,2)->nullable();
             $table->decimal('credit',15,2)->nullable();
             $table->decimal('balance',15,2)->nullable();

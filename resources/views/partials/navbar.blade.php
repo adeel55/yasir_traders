@@ -18,8 +18,8 @@
                 </div>
 
                 <div class="col-sm-5">
-                    <form action="{{ route('logout') }}" method="post">
-                        <button type="submit" class="btn btn-sm btn-outline-danger float-right mx-1">
+                    <form action="{{ route('logout') }}" method="post" class="float-right">
+                        <button type="submit" class="btn btn-sm btn-outline-danger mx-1">
                             <i class="fa fa-power-off mt-1" style="font-size: 1.2rem"></i>
                         </button>
                         @csrf
