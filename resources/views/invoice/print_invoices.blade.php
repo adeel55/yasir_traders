@@ -55,7 +55,7 @@
 	</div>
 	<div class="row d-print-none">
 		<div class="col p-2">
-			<table id="table" data-url="/invoice" class="table small table-sm table-hover">
+			<table id="table" data-url="/invoice" class="table small table-sm table-responsive table-hover">
 			</table>
 		</div>
 	</div>

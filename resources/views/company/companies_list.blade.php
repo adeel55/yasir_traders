@@ -32,7 +32,7 @@
 	</div>
 	<div class="row">
 		<div class="col">
-			<table id="table" data-url="/company" class="table table-sm small table-hover">
+			<table id="table" data-url="/company" class="table table-sm small table-responsive table-hover">
 			</table>
 		</div>
 	</div>

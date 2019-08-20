@@ -79,13 +79,13 @@ td>.inv-btn:focus{
 	height: calc(1.5em + 0.7rem + 2px) !important;	
 }
 
-.invoice-table tbody>tr>td:nth-child(1){ width: 30% !important; }
-.invoice-table tbody>tr>td:nth-child(2){ width: 8%; }
-.invoice-table tbody>tr>td:nth-child(3){ width: 8%; }
-.invoice-table tbody>tr>td:nth-child(4){ width: 15%; }
-.invoice-table tbody>tr>td:nth-child(5){ width: 10%; }
-.invoice-table tbody>tr>td:nth-child(6){ width: 8%; }
-.invoice-table tbody>tr>td:nth-child(7){ width: 10%; }
+.invoice-table tbody>tr>td:nth-child(1){ min-width: 180px;}
+.invoice-table tbody>tr>td:nth-child(2){ min-width: 70px;}
+.invoice-table tbody>tr>td:nth-child(3){ min-width: 70px;}
+.invoice-table tbody>tr>td:nth-child(4){ min-width: 100px;}
+.invoice-table tbody>tr>td:nth-child(5){ min-width: 80px;}
+.invoice-table tbody>tr>td:nth-child(6){ min-width: 60px;}
+.invoice-table tbody>tr>td:nth-child(7){ min-width: 50px;}
 /*.invoice-table tbody>tr>td:nth-child(8){ width: 6%; }*/
 
 

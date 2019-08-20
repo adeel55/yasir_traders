@@ -53,7 +53,7 @@
 	</div>
 	<div class="row">
 		<div class="col">
-			<table id="table" data-url="/sale_report" class="table small table-sm table-hover">
+			<table id="table" data-url="/sale_report" class="table small table-sm table-responsive table-hover">
 			</table>
 		</div>
 	</div>
