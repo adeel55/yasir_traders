@@ -65,7 +65,7 @@
 				  		</div>
 				  	</div>
 				  	<hr>
-					<table class="table table-sm small table-responsive invoice-table">
+					<table class="table table-sm small table-responsive w-100 d-block d-md-table invoice-table">
 						<thead>
 							<th>Product</th>
 							<th>QTY.</th>

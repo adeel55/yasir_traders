@@ -64,7 +64,7 @@
 	</div>
 	<div class="row">
 		<div class="col p-2">
-			<table id="table" data-url="/invoice" class="table small table-sm table-responsive table-hover">
+			<table id="table" data-url="/invoice" class="table small table-sm table-responsive w-100 d-block d-md-table table-hover">
 			</table>
 		</div>
 	</div>

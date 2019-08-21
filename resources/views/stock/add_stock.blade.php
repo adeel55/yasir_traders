@@ -32,7 +32,7 @@
 				  		</div>
 				  	</div>
 				  	<hr>
-				  	<table class="table table-sm table-responsive">
+				  	<table class="table table-sm table-responsive w-100 d-block d-md-table">
 				  		<thead>
 				  			<tr class="small">
 				  				<th>Name</th>
