@@ -1,21 +1,21 @@
 @extends('layouts.main')
 
-	@section('title','Expense Report')
+	@section('title','Sales List')
 	@section('content')
 
-	<h4 class="text-center"><u>Yasir Traders</u></h4>
+	<div id="msg"></div>
 	<div class="row">
 		<div class="col">
-			<h5>Expenses Report</h5>	
+			<h5>Sales List</h5>	
 		</div>
 	</div>
 	<div class="row filters p-2">
 		<div class="col-lg-4 col-md-6 col-sm-12 p-1 d-print-none">
   			<div class="input-group input-group-sm">
   			    <div class="input-group-prepend">
-  			     	<div class="input-group-text">Sale Man</div>
+  			     	<div class="input-group-text ">Product</div>
   			    </div>
-  			    <select id="saleman" class="filter" onchange="filter()"></select>
+	  			<select id="product" class="filter" onchange="filter()" ></select>
   			</div>
 		</div>
 		<div class="col-lg-4 col-md-6 col-sm-12 p-1 d-print-none">
@@ -23,7 +23,7 @@
   			    <div class="input-group-prepend">
   			     	<div class="input-group-text ">Date</div>
   			    </div>
-	  			<input type="date" id="date" onchange="filter()" class="filter date form-control">
+	  			<input type="date" id="date" oninput="filter()" class="filter date form-control">
   			</div>
 		</div>
 		<div class="col-lg-4 col-md-6 col-sm-12 p-1 d-print-none">
@@ -45,7 +45,7 @@
 	</div>
 	<div class="row">
 		<div class="col">
-			<table id="table" data-url="/expense" class="table small table-sm table-responsive w-100 d-block d-md-table table-hover">
+			<table id="table" data-url="/sale" class="table table-sm small table-responsive w-100 d-block d-md-table table-hover">
 			</table>
 		</div>
 	</div>
@@ -55,21 +55,22 @@
 		</div>
 	</div>
 	<script>
-		// today_form_date()
+		
 		filter()
 
-
-	jQuery(document).ready(function($) {
-		$('#saleman').select2({
+		jQuery(document).ready(function($) {
+		$('#product').select2({
 		  ajax: {
-		    url: '/search2_salemen',
+		    url: '/search2_products',
 		    data: function (params) {
 		      var query = { searchString: params.term }
 		      return query;
 		    }
 		  }
 		})
+
 	});
+
 	</script>
 
 

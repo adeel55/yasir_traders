@@ -79,7 +79,7 @@
 						<tbody id="tbody">
 							@foreach($invoice->sales as $sale)
 
-							<tr>
+							<tr class="tr">
 								<td>
 									<select class="product" onchange="productSelected(this)">
 										<option value="{{ $sale->product->id }}" selected="selected">{{ $sale->product->name }}</option>

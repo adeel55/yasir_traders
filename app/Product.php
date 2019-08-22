@@ -69,9 +69,9 @@ class Product extends Model
         return $this->qty - $this->reserved_qty();
     }
 
-    public function sales()
+    public function sales($req)
     {
-        return $this->hasMany('App\Sale');
+        return $this->hasMany('App\Sale')->when($req->date, function ($q) use ($req) { return $q->whereDate('sales.created_at', $req->date); })->when($req->datefrom, function ($q) use ($req) { return $q->whereDate('sales.created_at','>=', $req->datefrom); })->when($req->dateto, function ($q) use ($req) { return $q->whereDate('sales.created_at','<=', $req->dateto); });
     }
 
     public function putdate()

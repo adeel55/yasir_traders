@@ -63,6 +63,15 @@
                     <li>
                         <a href="/saleman"><i class="menu-icon fa fa-shipping-fast"></i> SaleMen List</a>
                     </li>
+
+
+                    @if(Auth::user()->admin)
+
+                    <li>
+                        <a href="/sale"><i class="menu-icon fa fa-shipping-fast"></i> Sales List</a>
+                    </li>
+                    
+                    @endif
                     
                     <h3 class="menu-title">Accounts</h3><!-- /.menu-title -->
                     

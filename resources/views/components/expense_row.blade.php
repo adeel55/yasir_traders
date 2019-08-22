@@ -6,6 +6,6 @@
 							<input type="text" placeholder="description" class="form-control form-control-sm expense_description" required>
 						</div>
 						<div class="col-1 p-0 d-print-none">
-							<button class="btn btn-danger btn-sm" onclick="delExpenseRow(this)"><i class="fa fa-trash"></i></button>
+							<button class="btn btn-danger btn-sm float-right" onclick="delExpenseRow(this)"><i class="fa fa-trash"></i></button>
 						</div>
 					</div>

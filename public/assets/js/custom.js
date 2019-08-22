@@ -65,6 +65,13 @@ $(document).on('click', '.pagination a', function(event){
 });
     // Filter & Pagination
 
+// SShow Msg
+
+showmsg = function(msg,type){
+    $('#msg').html("<div class=\"alert alert-"+type+" alert-dismissible hide\" role=\"alert\">"+msg+
+    "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div>");
+    $(".alert").delay(2000).slideUp(500, function() { $(this).alert('close')});
+}
 
 
 // Fetch Printable Invoices
@@ -126,35 +133,63 @@ delRow = function(btn){
 productSelected = function(obj){
     axios.get('/get_sale_price?product=' + $(obj).val())
     .then(d => {
-        $(obj).closest('tr').find('.unit_price').val(d.data[0]);
-        $(obj).closest('tr').find('.max_qty').val(d.data[1]);
+        $(obj).closest('.tr').find('.unit_price').val(d.data[0]);
+        $(obj).closest('.tr').find('.max_qty').val(d.data[1]);
     });
 }
 
 
 countTotalPrice = function(obj){
-    var qty = $(obj).closest('tr').find('.qty').val();
-    var unit_price = $(obj).closest('tr').find('.unit_price').val();
-    $(obj).closest('tr').find('.total_price').val(mul(qty,unit_price));
+    var qty = $(obj).closest('.tr').find('.qty').val();
+    var unit_price = $(obj).closest('.tr').find('.unit_price').val();
+    $(obj).closest('.tr').find('.total_price').val(mul(qty,unit_price));
     countDoscountTotal(obj);
     countDiscountAmount(obj);
 }
 
 countDiscountAmount = function(obj){
-    var discount = $(obj).closest('tr').find('.discount').val();
-    var total_price = $(obj).closest('tr').find('.total_price').val();
+    var discount = $(obj).closest('.tr').find('.discount').val();
+    var total_price = $(obj).closest('.tr').find('.total_price').val();
     var discount_amount = mul(div(total_price,100),discount);
-    $(obj).closest('tr').find('.discount_amount').val(discount_amount);
+    $(obj).closest('.tr').find('.discount_amount').val(discount_amount);
 
     countDoscountTotal(obj);
 }
 countDoscountTotal = function(obj){
-    var total_price = $(obj).closest('tr').find('.total_price').val();
-    var discount_amount = $(obj).closest('tr').find('.discount_amount').val();
-    $(obj).closest('tr').find('.discount_total').val(sub(total_price,discount_amount));
+    var total_price = $(obj).closest('.tr').find('.total_price').val();
+    var discount_amount = $(obj).closest('.tr').find('.discount_amount').val();
+    $(obj).closest('.tr').find('.discount_total').val(sub(total_price,discount_amount));
 
     countInvoiceDiscount();
 }
+
+
+checkMaxQty = function(obj){
+    var qty = $(obj).val();
+    var max_qty = $(obj).closest('.tr').find('.max_qty').val();
+    var bonus = $(obj).closest('.tr').find('.bonus').val();
+
+    if(qty>(max_qty-bonus)){
+        var maxval = max_qty-bonus;
+        $(obj).val(maxval);
+        showmsg('Max available qty '+maxval+' reached!','danger');
+    }
+}
+checkMaxBonus = function(obj){
+    var bonus = $(obj).val();
+    var max_qty = $(obj).closest('.tr').find('.max_qty').val();
+    var qty = $(obj).closest('.tr').find('.qty').val();
+
+    if(bonus>(max_qty-qty)){
+        var maxval = max_qty-qty;
+        $(obj).val(maxval);
+        showmsg('Max available qty '+maxval+' reached!','danger');
+    }
+}
+
+
+// Receive Invoices Total
+
 
 countInvoiceDiscount = function(){
     var rows = $('#tbody').children();
@@ -207,22 +242,6 @@ delEditInvoiceRow = function(obj,id){
 }
 
 
-checkMaxQty = function(obj){
-    var qty = $(obj).val();
-    var max_qty = $(obj).closest('tr').find('.max_qty').val();
-    var bonus = $(obj).closest('tr').find('.bonus').val();
-
-    if(qty>(max_qty-bonus)) 
-        $(obj).val(max_qty-bonus);
-}
-checkMaxBonus = function(obj){
-    var bonus = $(obj).val();
-    var max_qty = $(obj).closest('tr').find('.max_qty').val();
-    var qty = $(obj).closest('tr').find('.qty').val();
-
-    if(bonus>(max_qty-qty)) 
-        $(obj).val(max_qty-qty);
-}
 
 count_per_unit_purchase = function(obj){
     

@@ -1,4 +1,4 @@
-<tr>
+<tr class="tr">
 	<td>
 		<select class="product" onchange="productSelected(this)"></select>
 	</td>
@@ -18,7 +18,7 @@
 	<td class="d-print-none">
 		<input type="number" step="any" min="0" name="discount" class="form-control form-control-sm discount" oninput="countDiscountAmount(this)">
 	</td>
-	<td class="d-print-block d-none">
+	<td class="d-none">
 		<input type="number" step="any" min="0" name="discount_amount" value="0" class="form-control form-control-sm discount_amount">
 	</td>
 	<td>

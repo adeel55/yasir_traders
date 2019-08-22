@@ -19,15 +19,27 @@ class SaleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $req)
     {
+        if($req->ajax()){
+
+
+            $q = Sale::query();
+            if($req->has('date')) $q->whereDate('created_at', $req->date);
+            if($req->has('datefrom')) $q->whereDate('created_at','>=', $req->datefrom);
+            if($req->has('dateto')) $q->whereDate('created_at','<=', $req->dateto);
+
+            $sales = $q->orderBy('id','DESC')->paginate(45);
+            if($req->has('product')) {
+                $sales = Product::find($req->product)->sales($req)->paginate(40);
+            }
+
         
+            return view('ajax_tables.sales',compact('sales','req'));
+        }
+        else
+            return view('sale.sales_list');
 
-        $filter = filter($request);
-
-
-        $all = Sale::selectRaw('product_id, products.name as product_name, sum_qty, sum_bonus, avg_unit_price, sum_sales_amount, sum_qty * products.unit_purchase as sum_purchase_amount, sum_sales_amount - (products.unit_purchase * sum_qty) as profit')->from(DB::raw('(select product_id, sum(sales.qty) as sum_qty, sum(sales.bonus) as sum_bonus, AVG(unit_price) avg_unit_price, SUM(discount_total) as sum_sales_amount from sales group by product_id) as groupsales'))->join('products','products.id','product_id')->where($filter)->paginate(20);
-        return request()->json('200',$all);
     }
 
     /**
@@ -59,7 +71,7 @@ class SaleController extends Controller
      */
     public function show(Sale $sale)
     {
-        //
+        return view('sale.view_sale',compact('sale'));
     }
 
     /**
@@ -70,7 +82,7 @@ class SaleController extends Controller
      */
     public function edit(Sale $sale)
     {
-        //
+        return view('sale.edit_sale',compact('sale'));
     }
 
     /**
@@ -82,7 +94,8 @@ class SaleController extends Controller
      */
     public function update(Request $request, Sale $sale)
     {
-        //
+        $sale->update($request->all());
+        return view('components.alert',['msg'=>'Sale Updated Successfully','type'=>'success']);
     }
 
     /**
