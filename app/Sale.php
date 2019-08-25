@@ -28,9 +28,34 @@ class Sale extends Model
     {
     	return $this->belongsTo('App\Product');
     }
-    public function profit($qty, $disc)
+
+    public function tColor()
     {
-        return (($this->product->unit_sale * $qty) - ($this->product->unit_purchase * $qty)) - $disc;
+        if(($this->qty * $this->unit_price) > $this->total_price) return 'text-danger';
+        if(($this->qty * $this->unit_price) < $this->total_price) return 'text-primary';
+    }
+    public function dColor()
+    {
+        if(($this->total_price - $this->product->avg_purchase() * $this->qty) < $this->discount_amount) return 'text-danger';
+    }
+    public function dtColor()
+    {
+        if(($this->qty * $this->unit_price) - $this->discount_amount > $this->discount_total) return 'text-danger';
+        if(($this->qty * $this->unit_price) - $this->discount_amount < $this->discount_total) return 'text-primary';
+    }
+    public function proColor($pro)
+    {
+        if($pro > 0)
+            return 'text-success';
+        else
+            return 'text-danger';
+    }
+    public function udArrow($pro)
+    {
+        if($pro > 0)
+            return "<i class='fa fa-arrow-up'></i>";
+        else
+            return "<i class='fa fa-arrow-down'></i>";
     }
     public function putdate()
     {

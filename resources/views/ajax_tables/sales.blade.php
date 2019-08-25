@@ -24,9 +24,9 @@
 						<td>{{ $it->qty }}</td>
 						<td>{{ $it->bonus }}</td>
 						<td>{{ $it->unit_price }}</td>
-						<td>{{ $it->total_price }}</td>
-						<td>{{ $it->discount_amount }}</td>
-						<td>{{ $it->discount_total }}</td>
+						<td class="{{ $it->tColor() }}">{{ $it->total_price }}</td>
+						<td class="{{ $it->dColor() }}">{{ $it->discount_amount }}</td>
+						<td class="{{ $it->dtColor() }}">{{ $it->discount_total }}</td>
 						<td>{{ $it->showdate() }}</td>
 						<td><a href="/invoice/{{ $it->invoice->id }} "class="btn btn-success btn-sm"><i class="fa fa-file-invoice"></i></a></td>
 						<td class="d-print-none"><a href="/sale/{{ $it->id }}/edit" class="btn btn-sm btn-primary"><i class="fa fa-pencil-alt"></i></a></td>

@@ -15,21 +15,21 @@
 				</thead>
 				<tbody>
 					
-					@forelse($data as $it)
+					@forelse($inventories as $it)
 					<tr>
-						<td>{{ $it->inventory_id }}</td>
-						<td>{{ $it->product }}</td>
+						<td>{{ $it->id }}</td>
+						<td>{{ $it->product->name }}</td>
 						<td>{{ $it->qty }}</td>
-						<td>{{ $it->company }}</td>
+						<td>{{ $it->company->name }}</td>
 						<td>{{ $it->unit_purchase }}</td>
 						<td>{{ $it->unit_sale }}</td>
 						<td>{{ $it->total_purchase }}</td>
 						<td>{{ $it->showdate() }}</td>
 						<td class="d-print-none">
-							<a href="/inventory/{{ $it->inventory_id }}/edit" class="btn btn-sm btn-primary"><i class="fa fa-pencil-alt"></i></a>
+							<a href="/inventory/{{ $it->id }}/edit" class="btn btn-sm btn-primary"><i class="fa fa-pencil-alt"></i></a>
 						</td>
 						<td class="d-print-none">
-							<button class="btn btn-danger btn-sm" onclick="deleteInventory(this,{{ $it->inventory_id }})"><i class="fa fa-trash"></i></button>
+							<button class="btn btn-danger btn-sm" onclick="deleteInventory(this,{{ $it->id }})"><i class="fa fa-trash"></i></button>
 						</td>
 					</tr>
 					@empty
@@ -40,7 +40,7 @@
 				</tbody>
 				<tfoot>
 					<tr>
-						<td colspan="{{$cols}}">{{ $data->links() }}</td>
+						<td colspan="{{$cols}}">{{ $inventories->links() }}</td>
 					</tr>
 				</tfoot>
 				

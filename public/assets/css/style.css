@@ -1175,8 +1175,8 @@ body.open .navbar .navbar-brand.hidden {
   display: block; }
 
 .open aside.left-panel {
-  max-width: 70px;
-  width: 70px; }
+  max-width: 60px;
+  width: 60px; }
   .open aside.left-panel .navbar .navbar-brand {
     display: none; }
     .open aside.left-panel .navbar .navbar-brand.hidden {
@@ -1208,10 +1208,12 @@ body.open .navbar .navbar-brand.hidden {
     .open aside.left-panel .navbar .navbar-nav li a {
       font-size: 0;
       z-index: 0;
+      padding: 0px;
       -webkit-transition:none;
       transition: none; }
       .open aside.left-panel .navbar .navbar-nav li a .menu-icon {
-        font-size: 20px;
+        font-size: 15px;
+        margin: 0px;
         z-index: -1;
         width: inherit; }
       .open aside.left-panel .navbar .navbar-nav li a .menu-title-text {
@@ -2344,7 +2346,7 @@ header .form-inline {
 
 @media (max-width: 1024px) {
   aside.left-panel {
-    padding: 0 20px;
+    padding: 0 12px;
     width: 200px; }
   .navbar .navbar-nav li > a .menu-icon {
     width: 30px; }

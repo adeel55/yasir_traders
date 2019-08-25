@@ -69,7 +69,7 @@
 				  			    <div class="input-group-prepend">
 				  			      <div class="input-group-text">Total Price</div>
 				  			    </div>
-								<input type="number" step="any" min="0" name="total_price" class="form-control total_price" value="{{ $sale->total_price }}" required="required">
+								<input type="number" step="any" min="0" name="total_price" class="form-control total_price" oninput="countDiscountAmount(this)" value="{{ $sale->total_price }}" required="required">
 				  			</div>
 				  		</div>
 				  		<div class="col-md-6 col-sm-12 my-2">

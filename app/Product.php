@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
 use app\Sale;
 
@@ -18,39 +19,32 @@ class Product extends Model
         return $this->belongsTo('App\Company');
     }
 
-    public function findOrSaveProduct($val,$company_id){
-        
-        $pro = Product::firstOrCreate(['company_id' => $company_id,'name' => $val['product']]);
-        $pro->increment('qty',intval($val['qty']));
-
-        // Count Average Unit Purchase
-        $this->avg_sale($pro,$val['unit_sale']);
-
-        // Count Average Unit Sale
-        $this->avg_purchase($pro,$val['unit_purchase']);
-
-        $pro->save();
-        return $pro->id;
-    }
-
-
-
-    public function avg_sale($pro,$unit_sale)
+    public function update_avg_sale($unit_sale)
     {
-        if($pro->unit_sale>0)
-            $pro->update(['unit_sale' => ($pro->unit_purchase+$unit_sale)/2]);
+        if($this->unit_sale>0)
+            $this->update(['unit_sale' => ($this->unit_purchase+$unit_sale)/2]);
         else
-            $pro->update(['unit_sale' => $unit_sale]);
+            $this->update(['unit_sale' => $unit_sale]);
         
     }
 
-    public function avg_purchase($pro,$unit_purchase)
+    public function update_avg_purchase($unit_purchase)
     {
-        if($pro->unit_purchase>0)
-            $pro->update(['unit_purchase' => ($pro->unit_purchase + $unit_purchase)/2]);
+        if($this->unit_purchase>0)
+            $this->update(['unit_purchase' => ($this->unit_purchase + $unit_purchase)/2]);
         else
-            $pro->update(['unit_purchase' => $unit_purchase]);
+            $this->update(['unit_purchase' => $unit_purchase]);
         
+    }
+
+    public function avg_sale()
+    {
+        return round($this->allSales()->avg('unit_price'),2);
+    }
+
+    public function avg_purchase()
+    {
+        return round($this->allInventories()->avg('unit_purchase'),2);
     }
 
     public function reserved_qty()
@@ -71,7 +65,22 @@ class Product extends Model
 
     public function sales($req)
     {
-        return $this->hasMany('App\Sale')->when($req->date, function ($q) use ($req) { return $q->whereDate('sales.created_at', $req->date); })->when($req->datefrom, function ($q) use ($req) { return $q->whereDate('sales.created_at','>=', $req->datefrom); })->when($req->dateto, function ($q) use ($req) { return $q->whereDate('sales.created_at','<=', $req->dateto); });
+        return $this->hasMany('App\Sale')->when($req->date, function ($q) use ($req) { return $q->whereDate('created_at', $req->date); })->when($req->datefrom, function ($q) use ($req) { return $q->whereDate('created_at','>=', $req->datefrom); })->when($req->dateto, function ($q) use ($req) { return $q->whereDate('created_at','<=', $req->dateto); });
+    }
+
+    public function profit($req)
+    {
+        return (($this->avg_sale() - $this->avg_purchase()) * $this->sales($req)->sum('qty')) - $this->sales($req)->sum('discount_amount');
+    }
+
+    public function allSales()
+    {
+        return $this->hasMany('App\Sale');
+    }
+
+    public function allInventories()
+    {
+        return $this->hasMany('App\Inventory');
     }
 
     public function putdate()

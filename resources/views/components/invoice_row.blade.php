@@ -13,7 +13,7 @@
 		<input type="number" step="any" min="0" oninput="countTotalPrice(this)" name="unit_price" class="form-control form-control-sm unit_price" placeholder="unit_price" required="required">
 	</td>
 	<td>
-		<input type="number" step="any" min="0" name="total_price" class="form-control form-control-sm total_price" required="required">
+		<input type="number" step="any" min="0" name="total_price" class="form-control form-control-sm total_price" oninput="countDiscountAmount(this)" required="required">
 	</td>
 	<td class="d-print-none">
 		<input type="number" step="any" min="0" name="discount" class="form-control form-control-sm discount" oninput="countDiscountAmount(this)">

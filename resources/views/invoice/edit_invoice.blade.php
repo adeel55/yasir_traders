@@ -97,7 +97,7 @@
 									<input type="number" step="any" oninput="countTotalPrice(this)" name="unit_price" min="0" class="form-control form-control-sm unit_price" value="{{ $sale->unit_price }}" placeholder="unit_price" required="required">
 								</td>
 								<td>
-									<input type="number" step="any" name="total_price" min="0" class="form-control form-control-sm total_price" value="{{ $sale->total_price }}" required="required">
+									<input type="number" step="any" name="total_price" min="0" class="form-control form-control-sm total_price" value="{{ $sale->total_price }}" oninput="countDiscountAmount(this)" required="required">
 								</td>
 								<td class="d-print-none">
 									<input type="number" step="any" name="discount" min="0" class="form-control form-control-sm discount" value="{{ $sale->discount }}" oninput="countDiscountAmount(this)">

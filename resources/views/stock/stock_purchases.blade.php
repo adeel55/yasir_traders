@@ -21,6 +21,14 @@
 		<div class="col-lg-4 col-md-6 col-sm-12 p-1 d-print-none">
   			<div class="input-group input-group-sm">
   			    <div class="input-group-prepend">
+  			     	<div class="input-group-text">Product</div>
+  			    </div>
+  			    <select id="product" class="filter" onchange="filter()"></select>
+  			</div>
+		</div>
+		<div class="col-lg-4 col-md-6 col-sm-12 p-1 d-print-none">
+  			<div class="input-group input-group-sm">
+  			    <div class="input-group-prepend">
   			     	<div class="input-group-text ">Date</div>
   			    </div>
 	  			<input type="date" id="date" onchange="filter()" class="filter date form-control">
@@ -64,6 +72,15 @@
 		$('#company').select2({
 		  ajax: {
 		    url: '/search2_companies',
+		    data: function (params) {
+		      var query = { searchString: params.term }
+		      return query;
+		    }
+		  }
+		});
+		$('#product').select2({
+		  ajax: {
+		    url: '/search2_products',
 		    data: function (params) {
 		      var query = { searchString: params.term }
 		      return query;

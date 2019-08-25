@@ -14,19 +14,21 @@ class InventoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $req)
     {
-        
-             
         // dd(filter($request));
-        $filter = filter($request);
-        $data = Inventory::join('companies','companies.id','company_id')
-        ->join('products','products.id','product_id')
-        ->select('inventories.id as inventory_id','products.name as product','companies.name as company','inventories.qty','inventories.unit_purchase','inventories.unit_sale','total_purchase','inventories.created_at')->orderBy('inventories.id','DESC')->where($filter)->paginate(40);
-        // dd(json_encode($data));
-        if($request->ajax())
-            return view('ajax_tables.stock_purchases',compact('data'));
-        else
+        if($req->ajax()){
+            $q = Inventory::query();
+            if($req->has('company')) $q->where('company_id',$req->company);
+            if($req->has('product')) $q->where('product_id',$req->product);
+            if($req->has('date')) $q->whereDate('created_at', $req->date);
+            if($req->has('datefrom')) $q->whereDate('created_at','>=', $req->datefrom);
+            if($req->has('dateto')) $q->whereDate('created_at','<=', $req->dateto);
+            $inventories = $q->orderBy('inventories.id','DESC')->paginate(40);
+
+
+            return view('ajax_tables.stock_purchases',compact('inventories'));
+        }else
             return view('stock.stock_purchases');
     }
         /**
@@ -82,7 +84,10 @@ class InventoryController extends Controller
         $date = $request->date;
         foreach ($request->rows as $key => $val) {
 
-            Product::find($val['product'])->increment('qty',$val['qty']);
+            $pro = Product::find($val['product']);
+            $pro->increment('qty',$val['qty']);
+            $pro->update_avg_sale($val['unit_sale']);
+            $pro->update_avg_purchase($val['unit_purchase']);
             $rec = [
                 'company_id' => $request->company,
                 'product_id' => $val['product'],
