@@ -6,7 +6,7 @@
 	<div id="msg"></div>	
 	<div class="row">
 		<div class="col">
-			<h5>Stock Items Purchases List</h5>	
+			<h5>Purchases List</h5>	
 		</div>
 	</div>
 	<div class="row filters p-2">

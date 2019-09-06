@@ -5,7 +5,7 @@
 	@section('content')
 	<div class="row">
 		<div class="col">
-			<h4>Purchases List</h4>	
+			<h4>Stock Items List</h4>	
 		</div>
 	</div>
 	<div class="row filters p-2">

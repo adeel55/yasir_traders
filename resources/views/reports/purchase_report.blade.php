@@ -6,7 +6,7 @@
 	<h4 class="text-center"><u>Yasir Traders</u></h4>	
 	<div class="row">
 		<div class="col">
-			<h5>Products Report</h5>	
+			<h5>Products Purchase Report</h5>	
 		</div>
 	</div>
 	<div class="row filters p-2">

@@ -73,6 +73,6 @@
 						<th colspan="2">Balance: {{ $balance }}</th>
 						<th colspan="2">Expenses: {{ $expenses }}</th>
 						<th colspan="2">Profit: {{ $grand_profit_sum }}</th>
-						<th colspan="3">Net Profit: {{ $grand_profit_sum-$expenses }}</th>
+						<th colspan="3" class="{{ $sale->proColor($grand_profit_sum) }}">Net Profit: {!! $sale->udArrow($grand_profit_sum) !!} {{ $grand_profit_sum-$expenses }}</th>
 					</tr>
 				</tfoot>

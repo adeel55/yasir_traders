@@ -64,7 +64,7 @@ class CompanyController extends Controller
     public function store(Request $request)
     {
         $rec = Company::create($request->all());
-        if($rec) echo "success"; else echo "fail";
+        return view('components.alert',['msg'=>'Company created successfully.','type'=>'success']);
     }
 
     /**
@@ -111,6 +111,6 @@ class CompanyController extends Controller
     public function destroy($id)
     {
         Company::destroy($id);
-        return view('components.alert',['msg'=>'Company deleted!','type'=>'primary']);
+        return view('components.alert',['msg'=>'Company deleted!','type'=>'danger']);
     }
 }

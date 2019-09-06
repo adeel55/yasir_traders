@@ -33,7 +33,7 @@ class Company extends Model
 
     public function group_inventories($req)
     {
-        return $this->hasMany('App\Inventory')->when($req->date, function ($q) use ($req) { return $q->whereDate('inventories.created_at', $req->date); })->when($req->datefrom, function ($q) use ($req) { return $q->whereDate('inventories.created_at','>=', $req->datefrom); })->when($req->dateto, function ($q) use ($req) { return $q->whereDate('inventories.created_at','<=', $req->dateto); })->groupBy('product_id')->join('products','products.id','product_id')->selectRaw('products.name as name, sum(inventories.qty) as qty, avg(inventories.unit_purchase) as unit_purchase, avg(inventories.unit_sale) as unit_sale, (inventories.qty * inventories.unit_purchase) as total_purchase')->get();
+        return $this->hasMany('App\Inventory')->when($req->date, function ($q) use ($req) { return $q->whereDate('inventories.created_at', $req->date); })->when($req->datefrom, function ($q) use ($req) { return $q->whereDate('inventories.created_at','>=', $req->datefrom); })->when($req->dateto, function ($q) use ($req) { return $q->whereDate('inventories.created_at','<=', $req->dateto); })->groupBy('product_id')->join('products','products.id','product_id')->selectRaw('products.name as name, sum(inventories.qty) as new_qty, avg(inventories.unit_purchase) as new_unit_purchase, avg(inventories.unit_sale) as unit_sale, sum(inventories.total_purchase) as new_total_purchase')->get();
     }
 
     public function putdate()

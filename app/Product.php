@@ -63,6 +63,18 @@ class Product extends Model
         return $this->qty - $this->reserved_qty();
     }
 
+    public function total_purchase()
+    {
+        $result = Inventory::selectRaw('unit_purchase * qty as total_purchase')->where('product_id' , $this->id)->sum('total_purchase');
+        die(json_encode($result));
+        // return $result['total_purchases'];
+    }
+
+    public function total_sale()
+    {
+        return Sale::selectRaw('SUM(unit_price)/SUM(qty) as purchase')->where('product_id',$this->id)->purchase;
+    }
+
     public function sales($req)
     {
         return $this->hasMany('App\Sale')->when($req->date, function ($q) use ($req) { return $q->whereDate('created_at', $req->date); })->when($req->datefrom, function ($q) use ($req) { return $q->whereDate('created_at','>=', $req->datefrom); })->when($req->dateto, function ($q) use ($req) { return $q->whereDate('created_at','<=', $req->dateto); });
@@ -70,6 +82,7 @@ class Product extends Model
 
     public function profit($req)
     {
+        // return 
         return (($this->avg_sale() - $this->avg_purchase()) * $this->sales($req)->sum('qty')) - $this->sales($req)->sum('discount_amount');
     }
 

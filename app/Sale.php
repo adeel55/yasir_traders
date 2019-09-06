@@ -53,9 +53,9 @@ class Sale extends Model
     public function udArrow($pro)
     {
         if($pro > 0)
-            return "<i class='fa fa-arrow-up'></i>";
+            return "<i class='fa fa-long-arrow-alt-up'></i>";
         else
-            return "<i class='fa fa-arrow-down'></i>";
+            return "<i class='fa fa-long-arrow-alt-down'></i>";
     }
     public function putdate()
     {

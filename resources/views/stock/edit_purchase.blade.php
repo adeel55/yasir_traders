@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-	@section('title','Add Stock')
+	@section('title','Edit Stock')
 	@section('content')
 
 	<div id="msg"></div>
@@ -9,7 +9,7 @@
 			<form id="form" method="post" action="/inventory/{{ $inventory->id }}">
 				<div class="card">
 				  <div class="card-header">
-					   Add Stock
+					   Edit Stock
 				  </div>
 				  <div class="card-body">
 				  	<div class="row">
@@ -89,8 +89,8 @@
 					</div>
 				  </div>
 				  <div class="card-footer d-print-none">
-				    <button class="btn btn-info" type="button" onclick="window.history.go(-1);"><i class="fa fa-arrow-back"></i> Back</button>
-				    <button class="btn btn-success" id="addstock" type="submit"><i class="fa fa-boxes"></i> Update Stock</button>
+				    <button class="btn btn-info" type="button" onclick="window.history.go(-1);"><i class="fa fa-arrow-left"></i> Back</button>
+				    <button class="btn btn-success" id="addstock" type="submit"><i class="fa fa-arrow-up"></i> Update Purchase</button>
 				    <button class="btn btn-warning" type="button" onclick="window.print()"><i class="fa fa-print"></i> Print</button>
 				  </div>
 				</div>
